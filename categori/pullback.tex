@@ -1,0 +1,119 @@
+\documentclass[./main.tex]{subfiles}
+
+\begin{document}
+
+\section{Pullback}
+
+\begin{theorem}
+  Suppose we have two joined commuting squares like:
+  % https://q.uiver.app/#q=WzAsNixbMCwwLCJMIl0sWzIsMCwiTSJdLFs0LDAsIk4iXSxbMCwyLCJYIl0sWzIsMiwiWSJdLFs0LDIsIloiXSxbMCwzLCJsIl0sWzEsNCwibSJdLFsyLDUsIm4iXSxbMCwxLCJmIl0sWzEsMiwiZyJdLFszLDQsImgiXSxbNCw1LCJqIl1d
+  \[\begin{tikzcd}
+    L && M && N \\
+    \\
+    X && Y && Z
+    \arrow["f", from=1-1, to=1-3]
+    \arrow["l", from=1-1, to=3-1]
+    \arrow["g", from=1-3, to=1-5]
+    \arrow["m", from=1-3, to=3-3]
+    \arrow["n", from=1-5, to=3-5]
+    \arrow["h", from=3-1, to=3-3]
+    \arrow["j", from=3-3, to=3-5]
+  \end{tikzcd}\]
+
+  Then:
+  \begin{enumerate}
+    \item The outer rectangle is a pullback square if two inner squares are pullback squares.
+    \item The inner-left square is a pullback square if the ouer rectangle and the inner-right square are pullback squares.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{enumerate}
+    \item For any $(A, a, b)$ such that $j \circ h \circ a = n \circ b$, then
+          there is a unique $u : A \rightarrow M$ such that $h \circ a = m \circ u$
+          and $b = g \circ u$.
+          Then there is a unique $v : A \rightarrow L$ such that
+          $l \circ a = v$ and $f \circ v = u$, which makes $(A, a, b)$ against to the outer rectangle
+          commutes.
+
+          % https://q.uiver.app/#q=WzAsNyxbMiwyLCJMIl0sWzQsMiwiTSJdLFs2LDIsIk4iXSxbMiw0LCJYIl0sWzQsNCwiWSJdLFs2LDQsIloiXSxbMCwwLCJBIl0sWzAsMywibCJdLFsxLDQsIm0iXSxbMiw1LCJuIl0sWzAsMSwiZiJdLFsxLDIsImciXSxbMyw0LCJoIl0sWzQsNSwiaiJdLFs2LDMsImEiLDAseyJjdXJ2ZSI6M31dLFs2LDIsImIiLDAseyJjdXJ2ZSI6LTR9XSxbNiwxLCJ1IiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzYsMCwidiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+          \[\begin{tikzcd}
+            A \\
+            \\
+            && L && M && N \\
+            \\
+            && X && Y && Z
+            \arrow["v", dashed, from=1-1, to=3-3]
+            \arrow["u", dashed, from=1-1, to=3-5]
+            \arrow["b", curve={height=-24pt}, from=1-1, to=3-7]
+            \arrow["a", curve={height=18pt}, from=1-1, to=5-3]
+            \arrow["f", from=3-3, to=3-5]
+            \arrow["l", from=3-3, to=5-3]
+            \arrow["g", from=3-5, to=3-7]
+            \arrow["m", from=3-5, to=5-5]
+            \arrow["n", from=3-7, to=5-7]
+            \arrow["h", from=5-3, to=5-5]
+            \arrow["j", from=5-5, to=5-7]
+          \end{tikzcd}\]
+    \item For any $(A, a, b)$ such that $h \circ a = m \circ b$, consider the
+          inner-right pullback, then we have a unique $u : A \rightarrow M$
+          such that the diagram commutes:
+          % https://q.uiver.app/#q=WzAsNyxbNCwyLCJNIl0sWzYsMiwiTiJdLFsyLDQsIlgiXSxbNCw0LCJZIl0sWzYsNCwiWiJdLFswLDAsIkEiXSxbMiwyLCJMIixbMCwwLDY4LDFdXSxbMCwzLCJtIl0sWzEsNCwibiJdLFswLDEsImciXSxbMiwzLCJoIl0sWzMsNCwiaiJdLFs1LDAsInUiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbNSwxLCJnIFxcY2lyYyBiIiwwLHsiY3VydmUiOi0zfV0sWzUsMiwiYSIsMCx7ImN1cnZlIjozfV0sWzUsMCwiYiIsMCx7ImN1cnZlIjotM31dLFs2LDIsImwiLDAseyJjb2xvdXIiOlswLDAsNjhdfSxbMCwwLDY4LDFdXSxbNiwwLCJmIiwwLHsiY29sb3VyIjpbMCwwLDY4XX0sWzAsMCw2OCwxXV1d
+          \[\begin{tikzcd}
+            A \\
+            \\
+            && \textcolor{rgb,255:red,173;green,173;blue,173}{L} && M && N \\
+            \\
+            && X && Y && Z
+            \arrow["u", dashed, from=1-1, to=3-5]
+            \arrow["b", curve={height=-18pt}, from=1-1, to=3-5]
+            \arrow["{g \circ b}", curve={height=-18pt}, from=1-1, to=3-7]
+            \arrow["a", curve={height=18pt}, from=1-1, to=5-3]
+            \arrow["f", color={rgb,255:red,173;green,173;blue,173}, from=3-3, to=3-5]
+            \arrow["l", color={rgb,255:red,173;green,173;blue,173}, from=3-3, to=5-3]
+            \arrow["g", from=3-5, to=3-7]
+            \arrow["m", from=3-5, to=5-5]
+            \arrow["n", from=3-7, to=5-7]
+            \arrow["h", from=5-3, to=5-5]
+            \arrow["j", from=5-5, to=5-7]
+          \end{tikzcd}\]
+          However, if we replace $u$ with $b$, we have $g \circ b = g \circ b$ and
+          $h \circ a = m \circ b$, that means $b$ can do $u$'s job, but we know
+          $u$ is unique, so $b = u$.
+          Now consider the outer pullback, we have a unique $v : A \rightarrow L$
+          such that the diagram commutes:
+          % https://q.uiver.app/#q=WzAsNyxbNCwyLCJNIl0sWzYsMiwiTiJdLFsyLDQsIlgiXSxbNCw0LCJZIl0sWzYsNCwiWiJdLFswLDAsIkEiXSxbMiwyLCJMIl0sWzAsMywibSJdLFsxLDQsIm4iXSxbMCwxLCJnIl0sWzIsMywiaCJdLFszLDQsImoiXSxbNSwwLCJ1ID0gYiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs1LDEsImcgXFxjaXJjIGIiLDAseyJjdXJ2ZSI6LTN9XSxbNSwyLCJhIiwwLHsiY3VydmUiOjN9XSxbNiwyLCJsIl0sWzYsMCwiZiJdLFs1LDYsInYiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+          \[\begin{tikzcd}
+            A \\
+            \\
+            && L && M && N \\
+            \\
+            && X && Y && Z
+            \arrow["v", dashed, from=1-1, to=3-3]
+            \arrow["{u = b}", dashed, from=1-1, to=3-5]
+            \arrow["{g \circ b}", curve={height=-18pt}, from=1-1, to=3-7]
+            \arrow["a", curve={height=18pt}, from=1-1, to=5-3]
+            \arrow["f", from=3-3, to=3-5]
+            \arrow["l", from=3-3, to=5-3]
+            \arrow["g", from=3-5, to=3-7]
+            \arrow["m", from=3-5, to=5-5]
+            \arrow["n", from=3-7, to=5-7]
+            \arrow["h", from=5-3, to=5-5]
+            \arrow["j", from=5-5, to=5-7]
+          \end{tikzcd}\]
+          That is, $l \circ v = a$ and $g \circ f \circ v = g \circ b$,
+          we claim that $v$ is the unique factorization from $(A, a, u = b)$ to
+          $(L, l, f)$. It is obvious that $l \circ v = a$, we need to show
+          $f \circ v = u = b$. We may use the trick we just used, 
+          we can see that $g \circ f \circ v = g \circ u$ and 
+          $m \circ f \circ v = h \circ l \circ v = h \circ a$.
+          So $f \circ v$ can do $b$'s job, so $f \circ v = b$.
+
+          For any arrow $w : A \rightarrow L$ such that $l \circ a = w$
+          and $f \circ w = b$, then we have also $g \circ f \circ w = g \circ b$,
+          which implies $w$ is the unique arrow from $A \rightarrow L$ such that
+          the outer diagram commutes, so $w = v$.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

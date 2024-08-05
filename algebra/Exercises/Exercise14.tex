@@ -1,0 +1,228 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{14}
+
+\begin{document}
+
+\setcounter{exercise}{6}
+\begin{exercise}
+  Let $n$ an integer and $p$ a divides $n$ and $p \neq n$.
+  Prove that $\cyc{p}$ is a maximal ideal in $Z_n$ if and only if $p$ is prime.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ Suppose $\cyc{p}$ is a maximal ideal in $Z_n$, if $p$
+      is not prime, then $q$ divides $p$ and $q \neq 1$ and $q \neq p$.
+      We have $\cyc{q}$ is a ideal that properly contains $p$ but is not $Z_n$
+      since $1 \notin \cyc{q}$.
+    \item $(\Leftarrow)$ Suppose $p$ is a prime, and let $R$ a ideal of $Z_n$.
+      If $R$ properly contains $\cyc{p}$, let $q \in R$ but $q \notin \cyc{p}$,
+      then $\gcd(p, q) = 1$ since $p$ is prime, then $1 \in Z_n \rightarrow R = Z_n$.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{8}
+\begin{exercise}
+  Suppose that $R$ is a commutative ring and $a \in R$.
+  If $\0$ is a maximal ideal of $R$, then $aR = \set{ar}{r \in R} = \0$ or $a \in aR$.
+\end{exercise}
+\begin{proof}
+  We need to show that $aR$ is an ideal, it is trivial that $aR$ is a subring.
+  For any $ar \in aR$ and $b \in R$, $(ar)b = a(rb) \in aR$, therefore $aR$ is an ideal.
+  If $aR$ property contains $\0$, then $aR = R$ since $\0$ is maximal.
+\end{proof}
+
+\setcounter{exercise}{13}
+\begin{exercise}
+  If $A$ and $B$ are ideals of a ring $R$, show that the sum of $A$ and $B$,
+  $A + B = \set{a + b}{a \in A, b \in B}$ is also an ideal.
+\end{exercise}
+\begin{proof}
+  ~
+  By ideal-test:
+  \begin{enumerate}
+    \setcounter{enumi}{-1}
+    \item $A + B$ is non-empty, since $A$ and $B$ are non-empty.
+    \item For any $x \ y \in A + B$, $x - y = a_0 + b_0 - a_1 - b_1 = (a_0 - a_1) + (b_0 - b_1) \in A + B$.
+    \item For any $x \in A + B$, $r \in R$, $xr = (a + b)r = ar + br \in A + B$
+  \end{enumerate}
+\end{proof}
+
+\setcounter{exercise}{15}
+\begin{exercise}
+  If $A$ and $B$ are ideals of a ring $R$, show that the product of
+  $A$ and $B$, $AB = \set{a_0b_0 + a_1b_1 + \cdots + a_nb_n}{a_i \in A, b_i \in B, n \text{ is positive integer}}$,
+  is an ideal. (Note that $a_i = a_j$ where $i \neq j$ is possible, same for $b_i$)
+\end{exercise}
+\begin{proof}
+  Trivial, similar to Exercise 14.14.
+\end{proof}
+
+\setcounter{exercise}{17}
+\begin{exercise}
+  Let $A$ and $B$ be ideals of a ring, show that $AB \subseteq A \cap B$.
+\end{exercise}
+\begin{proof}
+  It is trivial, every element in $AB$ is also in $A$, since $A$ ideal,
+  similarly, is also in $B$, since $B$ ideal.
+\end{proof}
+
+\setcounter{exercise}{21}
+\begin{exercise}
+  If $R$ is a finite commutative ring with unity, prove that every prime ideal of
+  $R$ is also a maximal ideal.
+\end{exercise}
+\begin{proof}
+  For any prime ideal $I$ of $R$, we know $R/I$ is an integral ideal,
+  since $R$ is finite, so is $R/I$, then we know $R/I$ is a field.
+  Therefore $I$ is a maximal ideal.
+\end{proof}
+
+\setcounter{exercise}{38}
+\begin{exercise}
+  Prove that the only ideals of a field $F$ are $\0$ and $F$.
+\end{exercise}
+\begin{proof}
+  Suppose $I$ is an ideal of $F$ that contains non-zero elements,
+  otherwise, $I = \0$.
+  Let $a \in I$ where $a$ is non-zero, then $a\inv{a} = 1 \in I$
+  since $I$ is an ideal, then $I = F$ since $1 \in I$.
+\end{proof}
+
+\begin{exercise}
+  Let $R$ a commutative ring with unity, if the only ideals of $R$
+  are $\0$ and $R$, show that $R$ is a field.
+\end{exercise}
+\begin{proof}
+  Since the only ideals of $R$ are $\0$ and $R$, we know $\0$
+  is the maximal ideal of $R$, then $R/\0$ is a field, so is $R$.
+
+  But unfortunately, we can't use ring isomorphism for now.
+\end{proof}
+
+\begin{exercise}
+  Prove that every idempontent ($a^2 = a$) in a commutative ring with
+  unity other than $0$ and $1$ is a zero divisor.
+\end{exercise}
+\begin{proof}
+  For any idempontent $a$, 
+  $a + (1 - a) = 1 \rightarrow a^2 + (1 - a)a = a \rightarrow a + (1 - a)a = a \rightarrow (1 - a)a = 0$.
+  Therefore, $a$ is a zero divisor with $(1 - a)$.
+\end{proof}
+
+\begin{exercise}
+  Show that $\textbf{R}[x]/\cyc{x^2 + 1}$ is a field.
+\end{exercise}
+\begin{proof}
+  We need to show $\cyc{x^2 + 1}$ is maximal in $\textbf{R}[x]$.
+  We denote $\cyc{x^2 + 1}$ by $I$,
+  observe that in $\textbf{R}[x]/I$, 
+  $x^2$ is treated as $-1$ since $x^2 + 1 + I = 0 + I$,
+  therefore any element in $\textbf{R}[x]/I$ has form
+  $ax + b + I$.
+  Let $J$ an ideal that properly contains $I$ and
+  $ax + b$ a non-zero element in $J$,
+  then
+  \begin{align*}
+     & 0 + J \\
+    =& (ax + b)(ax - b) + J \\
+    =& (a^2x^2 - b^2) + J \\
+    =& - a^2 - b^2 + J \quad \text{(since $I \subset J$)} \\
+    =& (- a^2 - b^2)\Bigl( \frac{1}{- a^2 - b^2} \Bigr) + J \\
+    =& 1 + J
+  \end{align*}
+  Therefore $1 \in J$ and $J = \textbf{R}[x]$, which proves that
+  $I = \cyc{x^2 + 1}$ is maximal.
+\end{proof}
+
+\setcounter{exercise}{44}
+\begin{exercise}
+  Let $R$ be the ring of continuous functions from $\textbf{R}$ to $\textbf{R}$.
+  Show that $I = \set{f \in R}{f(0) = 0}$ is maximal ideal of $R$.
+\end{exercise}
+\begin{proof}
+  It is trivial that $I$ is an ideal.
+  Let $J$ an ideal that properly contains $I$, then there is
+  $f \in J$ where $f(0) \neq 0$.
+  Let $g(x) = f(0) - f(x)$, then $g(0) = f(0) - f(0) = 0$ and $g \in J$.
+  Let $h(x) = f(x) + g(x) = f(x) + f(0) - f(x) = f(0)$,
+  then $h(x)$ is a constant function.
+  It is easy to find $\displaystyle \inv{h}(x) = \frac{1}{f(0)}$
+  and show that $\inv{h}(x)h(x) = 1 \in J$.
+  The continuity of $g$ is trivial.
+\end{proof}
+
+\setcounter{exercise}{49}
+\begin{exercise}
+  Let $R$ be a ring and $I$ an ideal of $R$.
+  Prove that $R/I$ is commutative iff $rs - sr \in I$ for all $r \ s \in R$.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ For any $r \ s \in R$,
+      $rs + I = (r + I)(s + I) = (s + I)(r + I) = sr + I$,
+      therefore $rs - sr \in I$.
+    \item $(\Leftarrow)$ For any $r \ s \in R$,
+      $(r + I)(s + I) = rs + I = sr + I = (s + I)(r + I)$,
+      since $rs - sr \in I$ implies $rs + I = sr + I$.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{56}
+\begin{exercise}
+  An integral domain $D$ is called a principal ideal domain, 
+  if every ideal of $D$ has form $\cyc{a} = \set{ar}{r \in D}$ for some $a \in D$.
+  Show that $Z$ is a principal ideal domain.
+\end{exercise}
+\begin{proof}
+  Admit.
+\end{proof}
+
+\setcounter{exercise}{59}
+\begin{exercise}
+  Let $R$ a principal ideal domain, show that every non-trivial prime ideal
+  is maximal.
+\end{exercise}
+\begin{proof}
+  Let $\cyc{p}$ a non-trivial prime ideal, note that $p \neq 0$ since $\cyc{p}$ is non-trivial.
+  Then for any ideal $\cyc{r}$ that properly contains $\cyc{p}$,
+  we can show $r \notin \cyc{p}$, if so, then $\cyc{r}$ is the smallest ideal that contains $r$,
+  but $\cyc{p}$ is smaller and $r \in \cyc{p}$.
+
+  Since $p \in \cyc{r}$, we know there is $k$ such that $rk = p$, note that $k \neq 0$,
+  since $p \neq 0$. Now by $\cyc{p}$ is prime and $r \notin \cyc{p}$, we know $k \in \cyc{p}$
+  and there is $q \in R$ such that $pq = k$, similarly, $q \neq 0$.
+  Then $rkq = pq = k$, by cancellation we know $rq = 1$ and $1 \in \cyc{r}$,
+  therefore $\cyc{r} = R$ and $\cyc{p}$ is maximal.
+\end{proof}
+
+\begin{exercise}
+  Let $R$ a commutative ring and $A \subseteq R$.
+  Show that the annihilator of $A$, $\Ann(A) = \set{r \in R}{ra = 0 \ \forall a \in A}$
+  is an ideal.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{enumerate}
+    \setcounter{enumi}{-1}
+    \item $\Ann(A)$ is non-empty, since $0a = 0$.
+    \item For any $s \ t \in \Ann(A)$ and $a \in A$, $(s - t)a = sa - ta = 0 - 0 = 0$.
+    \item For any $s \in \Ann(A)$, $t \in R$ and $a \in A$, $sta = tsa = t0 = 0$.
+  \end{enumerate}
+\end{proof}
+
+\setcounter{exercise}{80}
+\begin{exercise}
+  Let $R$ a commutative ring with unity and for any $a \in R$, $a^2 = a$.
+  Let $I$ be a prime ideal of $R$, show that $|R/I| = 2$.
+\end{exercise}
+\begin{proof}
+  We know $R/I$ is an integral ideal since $I$ is prime, then
+  for any $a \in R$ but $a \notin I$, $a + I$ is non-zero element of $R/I$,
+  then by $a^2 + I = a + I$, we know $a + I = 1 + I$,
+  therefore $|R/I| = |\{ 0 + I, 1 + I \}| = 2$.
+\end{proof}
+
+\end{document}

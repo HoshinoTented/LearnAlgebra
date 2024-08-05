@@ -1,0 +1,202 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{16}
+
+\begin{document}
+
+\setcounter{exercise}{12}
+\begin{exercise}
+  Let $\phi : R \rightarrow S$ a ring homomorphism, 
+  define $\overline{\phi} : \poly{R} \rightarrow \poly{S}$
+  by $\overline{\phi}(a_nx^n + a_{n - 1}x^{n - 1} + \dots) = \phi(a_n)x^n + \phi(a_{n - 1})x^{n - 1} + \dots$.
+  Show that $\overline{\phi}$ is a ring homomorphism.
+\end{exercise}
+
+\begin{exercise}
+  If $R$ and $S$ are ring isomorphic, then $\poly{R}$ and $\poly{S}$ are ring isomorphic.
+\end{exercise}
+
+\setcounter{exercise}{15}
+\begin{exercise}
+  Let $f(x)$ and $g(x)$ are cubic polynomials with integer coefficients
+  such that $f(a) = g(a)$ for four (distinct) integer values $a$.
+  Prove that $f(x) = g(x)$, Generalize.
+\end{exercise}
+\begin{proof}
+  Consider $h(x) = f(x) - g(x)$, $\deg h(x) \leq 3$, therefore there are at most $3$
+  zeros. However, we found that there are four values $a$ such that $f(a) - g(a) = 0$,
+  so $h(x) = 0 \rightarrow f(x) = g(x)$.
+
+  Moreover, we can show that any polynomials with degree $n$ is determined
+  by $n + 1$ points.
+\end{proof}
+
+\setcounter{exercise}{18}
+\begin{exercise}[Degree Rule]
+  Let $D$ be an integral domain and $f(x) \ g(x) \in \poly{D}$.
+  Prove that $\deg (f(x)g(x)) = \deg f(x) + \deg g(x)$.
+\end{exercise}
+\begin{proof}
+  Let $n = \deg f(x)$ and $m = \deg g(x)$.
+  Degree is determined by the leading term, while the leading term of $f(x)g(x)$
+  is $f_nx^n g_mx^m = f_ng_m x^{n + m}$. $f_ng_m$ will never be $0$, since $D$ is
+  an integral domain.
+\end{proof}
+
+\setcounter{exercise}{31}
+\begin{exercise}
+  Give an example of a polynomial of $\poly{Z_5}$ of positive degree
+  that has the property that $f(a) = 1$ for all $a \in Z_5$.
+\end{exercise}
+\begin{proof}
+  Try $(x - 4)(x - 3)(x - 2)(x - 1)x + 1$, normalized $x^5 + 4x + 1$.
+
+  The Path: I was trying to find it directly, but I failed, cause I assume that
+  its degree is lower than $5$, which is an unappropriate assumption, because
+  $x^5 = x$ is the key of this problem.
+
+  Moreover, consider $f(x) = x^p + (p - 1)x + 1$ for some prime $p$,
+  we have $f(a) = 1$ for all $a \in Z_p$.
+\end{proof}
+
+% And now, I can solve a exercise which I can't before.
+
+% \setcounter{exercise}{29}
+% \begin{exercise}
+%   Let $n > 1$ be a non-prime integer. Show that there is a
+%   polynomial $f(x) \in \poly{Z_n}$ of degree $n - 1$ that has $n$ distinct zeros.
+% \end{exercise}
+% \begin{proof}
+%   Consider $f(x) = (x - (n - 1))(x - (n - 2))\cdots(x - 2)(x - 1)$.
+%   It is easy to see that $\deg f(x) = n - 1$, but we need to show that $f(0) = 0$.
+%   We know the constant term of $f(x)$ is $(- (n - 1))(- (n - 2))\cdots(-2)(-1)$,
+%   because $n$ is non-prime, there are distinct $a \ b \in Z_n$ such that $a \ b$
+% FIXME: a and b may not distinct, consider Z_4 n
+% \end{proof}
+
+\setcounter{exercise}{42}
+\begin{exercise}
+  Let $F$ a field, $f(x)$ and $g(x)$ in $\poly{F}$ and not both zero.
+  If there is no polynomial of positive degree in $\poly{F}$ that divides
+  both $f(x)$ and $g(x)$, prove that there exist polynomials $h(x)$ and $k(x)$
+  in $\poly{F}$ such that $f(x)h(x) + g(x)k(x) = 1$.
+\end{exercise}
+\begin{proof}
+  This problem can be solved by showing $1 \in \cyc{f(x), g(x)}$.
+  Consider the ideal $\cyc{f(x), g(x)}$, we know it is principal ideal so that
+  there is $h(x) \in \poly{F}$ such that $\cyc{h(x)} = \cyc{f(x), g(x)}$. We
+  also know $h(x)$ has the minimum degree in $\cyc{f(x), g(x)}$ and
+  there are $s(x) \ t(x) \in \poly{F}$ such that $h(x)s(x) = f(x)$ and $h(x)t(x) = g(x)$,
+  therefore $h(x)$ has to have degree $0$.
+  So $h(x) = h_0$ and $h_0\inv{h_0} \in \cyc{h(x)}$ since $\cyc{h(x)}$ is an ideal.
+
+  We know every element in $\cyc{f(x), g(x)}$ has form $f(x)h(x) + g(x)k(x)$ for some
+  $h(x) \ k(x) \in \poly{F}$ and $1 \in \cyc{f(x) , g(x)}$.
+\end{proof}
+
+\begin{exercise}
+  Let $F$ a field, $f(x)$ and $g(x)$ in $\poly{F}$ and not both zero.
+  A polynomial $d(x) \in \poly{F}$ is said to be a greatest common divisor
+  of $f(x)$ and $g(x)$ if $d(x)$ divides both $f(x)$ and $g(x)$,
+  and $d(x)$ has maximum degree among all such polynomials.
+  Prove that $\cyc{f(x), g(x)} = \cyc{d(x)}$, and there is a unique monic gcd.
+\end{exercise}
+\begin{proof}
+  Trivial.
+\end{proof}
+
+\setcounter{exercise}{56}
+\begin{exercise}
+  For every prime $p$, show that $x^{p - 1} - 1 = (x - 1)(x - 2)\cdots(x - (p - 2))(x - (p - 1))$
+  in $\poly{Z_p}$.
+\end{exercise}
+\begin{proof}
+  It is easy to see that both side have degree $p - 1$,
+  and for any element $a \in Z_p$, $a$ is a zero of both side, therefore they are equal
+  to each other (See Exercise 16.16).
+\end{proof}
+
+\begin{exercise}[Wilson's Theorem]
+  For every integer $n > 1$, prove that $(n - 1)! = n - 1 \quad (\modu \ n)$
+  iff $n$ is prime.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$
+      Suppose $n$ is not prime and does \textbf{NOT} have form $p^2$ where $p$ is prime,
+      then there is a pair of zero-divisor that makes the left hand side zero.
+      So we suppose $n = p^2$,
+      then the product of all element in $U(p^2) \cup \{ p \}$ is $n - 1$,
+      then $p = (n - 1)\inv{(\text{product of $U(p^2)$})} \in U(p^2)$.
+    \item $(\Leftarrow)$
+      By let $x$ in Exercise 16.57 be $0$, we know $-1 = (-1)^{n - 1} (n - 1)!$,
+      recall that $-1 = n - 1$ in $Z_n$ (even $n$ is not prime)
+      and $a^{n - 1} = 1$ in $U(n)$, since $|U(n)| = n - 1$.
+      So $n - 1 = 1 (n - 1)!$.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{65}
+\begin{exercise}
+  Let $R$ a commutative ring with unity, $I$ is a prime ideal of $R$.
+  Prove that $\poly{I}$ is a prime ideal of $\poly{R}$.
+\end{exercise}
+\begin{proof}
+  For any $f(x) \ g(x) \in \poly{R}$ where $f(x)g(x) \in \poly{I}$,
+  we induction on $(\deg f(x) , \deg g(x))$.
+  \begin{itemize}
+    \item Base (Left): If $\deg f(x) = 0$, since each coefficients are in $I$,
+          we know that either $f_0 \in I$ or $g(x) \in \poly{I}$. If $f(x) = 0$,
+          then trivial.
+    \item Base (Right):   Ditto.
+    \item Induction: Suppose $\deg f(x) = m$ and $\deg g(x) = n$ where $m$ and $n$ are positive.
+          Consider the leading coefficient of $f(x)g(x)$, it is produced by $f_m g_n$,
+          therefore, one of them is in $I$. We may suppose $f_m \in I$, otherwise
+          we just swap them.
+          Then $f(x)g(x) = f_mg(x) + f^\prime(x)g(x)$ (where $f^\prime(x)$ is $f(x)$ without leading coefficient),
+          we know $f_mg(x) \in \poly{I}$ since $f_m \in I$, then by induction hypothesis,
+          we know either $f^\prime(x)$ or $g(x)$ in $\poly{I}$.
+          If $f^\prime(x) \in \poly{I}$, so is $f(x) = f_m x^m + f^\prime(x)$,
+          otherwise, $g(x) \in \poly{I}$.
+  \end{itemize}
+
+  Note that we don't claim which one is in $\poly{I}$ at the beginning, cause we don't have
+  sufficient information.
+\end{proof}
+
+\setcounter{exercise}{69}
+\begin{exercise}
+  Let $F$ a field and let $I = \set{f(x) \in \poly{F}}{\forall a \in F, f(a) = 0}$.
+  Prove that $I$ is an ideal of $\poly{F}$.
+  Prove that $I$ is infinite when $F$ is finite and $I = \0$ when $F$ is infinite.
+  Find a monic polynomial $g(x)$ such that $I = \cyc{g(x)}$ when $F$ is finite.
+\end{exercise}
+\begin{proof}
+  $I$ is an ideal cause:
+  \begin{itemize}
+    \item Non-empty
+    \item For any $f(x) \ g(x) \in I$, $a \in F$, $f(a) + g(a) = 0$.
+    \item For any $f(x) \in I$, $g(x) \in \poly{F}$, $a \in F$, $f(a)g(a) = 0g(a) = 0$
+  \end{itemize}
+
+  Suppose $F$ is finite, then the polynomial $f(x) = (x - a_0)(x - a_1) \cdots$ where $a_i \in F$
+  is in $I$, and for any positive integer $n$, $f(x)x^n \in I$ with degree $\deg f(x) + n$,
+  therefore $I$ is infinite.
+  If $F$ is infinite, then there is no polynomial has infinite zeros except $f(x) = 0$.
+
+  If $F$ is finite, the $f(x)$ above is such monic polynomial.
+\end{proof}
+
+\setcounter{exercise}{74}
+\begin{exercise}
+  Suppose $F$ is a field and there is a ring homomorphism from $Z$ onto $F$.
+  Show that $F$ is isomorphic to $Z_p$ for some prime $p$.
+\end{exercise}
+\begin{proof}
+  Why this exercise here...?
+
+  $Z/\Ker \phi$ has to be a integral domain, therefore $\Ker \phi = \cyc{p}$.
+\end{proof}
+
+\end{document}

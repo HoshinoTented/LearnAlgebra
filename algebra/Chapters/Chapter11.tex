@@ -1,0 +1,165 @@
+\documentclass[14pt]{extarticle}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsthm,amsmath}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{example}{Example}
+\newtheorem{definition}{Definition}[section]
+\setcounter{section}{11}
+
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\join}[3][,]{#2_0 #1 #2_1 #1 \cdots #1 #2_{#3}}
+\newcommand{\Times}[2]{\join[\times]{#1}{#2}}
+\newcommand{\Oplus}[2]{\join[\oplus]{#1}{#2}}
+\newcommand{\normalin}{\triangleleft}
+\newcommand{\1}{\{e\}}
+\newcommand{\set}[2]{\{ \ #1 \ | \ #2 \ \}}
+\newcommand{\cyc}[1]{\langle #1 \rangle}
+
+\DeclareMathOperator{\Abelian}{Abelian}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\modu}{mod}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\lcm}{lcm}
+
+\begin{document}
+
+\begin{lemma}
+  Let $G$ be a finite Abelian group of order $p^nm$ where $p$ is a prime 
+  and $p$ doesn't divide $m$. Then $G = H \times K$ where
+  $H = \{ x \in G \ | \ x^{p^n} = e \}$ and
+  $K = \{ x \in G \ | \ x^m = e \}$.
+  Moreover, $|H| = p^n$.
+\end{lemma}
+\begin{proof}
+  We need to show $H$ and $K$ are subgroups of $G$. Obviously,
+  $H$ and $K$ are non-empty. By two-steps:
+  \begin{enumerate}
+    \item For any $a \ b \in H$, $(ab)^{p^n} = a^{p^n}b^{p^n} = ee = e$
+    \item For any $a \in H$, $(\inv{a})^{p^n} = \inv{(a^{p^n})} = \inv{e} = e$
+  \end{enumerate}
+  Thus $H$ is a subgroup of $G$, similarly, $K$ is a subgroup of $G$.
+  Since $G$ is Abelian, $H$ and $K$ are normal in $G$.
+
+  Then we need to show $H \cap K = \1$. Suppose $g \in G$ such that $g^{p^n} = g^m = e$.
+  Then $|g|$ divides both $p^n$ and $m$. Since $p$ doesn't divide $m$, $\gcd(p^n, m) = 1$,
+  so $g$ has to be $e$.
+
+  Finally, we need to show $G = HK$. It is obviously that $HK \subseteq G$,
+  we focus on $G \subseteq HK$.
+  By $\gcd(p^n, m) = 1$, we know $p^ns + mt = 1$. For any $g \in G$,
+  let $k = g^{p^ns}$ and $h = g\inv{k}$.
+  $k^m = (g^{p^ns})^m = g^{p^nms} = (g^{p^nm})^s = e^s = e$, thus $k \in K$.
+  \begin{align*}
+    h^{p^n} &= (g\inv{k})^{p^n} \\
+    &= g^{p^n}(g^{-p^ns})^{p^n} \\
+    &= g^{p^n - p^nsp^n} \\
+    &= g^{p^n(1 - p^ns)} \\
+    &= g^{p^n mt} \\
+    &= (g^{p^nm})^t \\
+    &= e^t \\
+    &= e
+  \end{align*}
+  Thus $h \in H$, and $hk = g\inv{k}k = g$, $g \in HK$.
+
+  How do I find out $g^{p^ns}$? Well, 
+  we want to prove that $g = hk$ for some $h$ and $k$,
+  and we can use $g^{p^n}$ to remove $h$, but know it is $g^{p^n} = k^{p^n}$,
+  which may not be $k$. We know
+  $\langle k^{p^n} \rangle = \langle k \rangle$ by $\gcd(p^n, |k|) = 1$,
+  so there is a $i$ such that $(k^{p^n})^i = k$. Now look at $p^ns + mt = 1$,
+  we find $p^ns \modu m = 1$, which is what we want, so $(k^{p^n})^s = k$.
+  
+  Since $K$ is a subgroup of $G$, $|K|$ divides $|G| = p^nm$.
+  But $p$ can not divides $|K|$, if it does, there is a element $g$ of order $p$ in $K$
+  since $K$ is Abelian, then $g^m = e$ which implies $p$ divides $m$, 
+  which is unacceptable.
+  Similarly, $|H|$ divides $|G| = p^nm$, let $q$ a prime that divides $m$, $q$ can not divides $|H|$,
+  if it does, there is a element $g$ of order $q$ in $H$ since $K$ is Abelian,
+  then $g^p = e$ which implies $q$ divides $p$,
+  which is unacceptable.
+  So $|K|$ divides $m$ and $|H|$ divides $p^n$,
+  then $|K| \leq m$ and $|H| \leq p^n$, also $|G| = |H||K|$, so $|H| = p^n$ and $|K| = m$.
+\end{proof}
+
+\begin{lemma}
+  Let $G$ be an Abelian group of order $p^n$, where $p$ is prime and $n$ is non-negative.
+  Let $a \in G$ such that $|a|$ is maximum in $G$. Then $G = \cyc{a} \times K$ for some $K$.
+\end{lemma}
+\begin{proof}
+  TODO.
+\end{proof}
+
+\begin{lemma}
+  
+\end{lemma}
+
+\begin{theorem}[Homomorphism respect Internal Direct Product]
+  Let $G = H \times K$, and $\phi : G \rightarrow \overline{G}$ a homomorphism.
+  Prove that $\phi(G) = \phi(H) \times \phi(K)$.
+\end{theorem}
+\begin{proof}
+  Since $H$ and $K$ are normal, so are $\phi(H)$ and $\phi(K)$.
+  Also, $H \cap K = \1$, therefore $\phi(H) \cap \phi(K) = \1$.
+  For any $\phi(g) \in \phi(G)$ for some $g \in G$, we know $g = hk$ for some $h \in H$ and $k \in K$.
+  Then $\phi(g) = \phi(hk) = \phi(h)\phi(k)$, $\phi(G) \subseteq \phi(H)\phi(K)$.
+  Since $\phi(H)$ and $\phi(K)$ are subgroups of $\phi(G)$, therefore $\phi(H)\phi(K) \subseteq \phi(G)$.
+  Thus $\phi(G) = \phi(H)\phi(K)$.
+\end{proof}
+
+\begin{lemma}
+  Let $G$ be a finite Abelian group of order power of $p$.
+  $G = \join[\times]{H}{m - 1} = \join[\times]{K}{n - 1}$
+  where $H$ and $K$ are non-trivial cyclic subgroups.
+  $|H_i| \geq |H_j|$ if $i < j$, same for $K$.
+  Prove that $m = n$ and $|H_i| = |K_i|$ for all $i$.
+\end{lemma}
+This proof is based on the textbook one.
+\begin{proof}
+  TODO: fix gap
+  We induction on $|G|$. If $|G| = 1$, then it is trivial.
+  Suppose $|G| = p^a$, and we consider the following function: $\phi(x) = x^p$.
+  % We observe that $\phi(xy) = (xy)^p = x^p y^p = \phi(x) \phi(y)$,
+  % TODO: this is false because \phi doesn't respect \oplus
+  % thus $\phi$ is a homomorphism. Then $\phi(G) = \phi(\join[\times]{H}{n - 1}) = \phi(H_0) \times \phi(H_1) \times \cdots \times \phi(H_{n - 1})$,
+  % same for $K$. If we restrict $\phi$ to some $H_i$, 
+  % then the kernel of $\phi$ is the elements that $g^p = e$, 
+  % which is exactly the only subgroup of order $p$ of $H_i$.
+  % So each $\phi(H_i)$ are proper subgroups of $H_i$, and $|H_i| = p|\phi(H_i)|$.
+  % We may get some trivial result by $\phi$, so let $m^\prime$ be the maximum number such that
+  % $|H_{n^\prime}| > p$, and $\phi(G) = \phi(\join[\times]{H}{H_{n^\prime}})$, same for $K$ with $n^\prime$.
+  % By induction hypothesis (since $\phi(G)$ get smaller), we know $m^\prime = n^\prime$ and $|\phi(H_i)| = |\phi(K_i)|$ for all $i$.
+  % Therefore $|H_i| = p|\phi(H_i)| = p |\phi(K_i)| = |K_i|$ for all $i \in [ 0 , m^\prime ]$.
+  % Then we need to show $H$ and $K$ has the same amount of subgroups of order $p$,
+  % we know $H$ has $m - m^\prime$ subgroups of order $p$ (the subgroups that produce trivial result by $\phi$),
+  % similarly, $K$ has $n - n^\prime$ subgroups of order $p$.
+  % Since $|H_0||H_1|\cdots|H_{m^\prime}|\cdots|H_{m - 1}| = |H_0||H_1|\cdots|H_{m^\prime}|p^{m - m^\prime} = |G|$,
+  % same for $K$, and we know $|H_i| = |K_i|$ for all $i \in [0 , m^\prime]$, so $p^{m - m^\prime} = p^{n - n^\prime}$,
+  % therefore $m - m^\prime = n - n^\prime$ and then $m = n$.
+\end{proof}
+
+\begin{lemma}[Existence of Subgroups of Abelian Groups]
+  Let $G$ be a finite Abelian group of order $n$, and $m$ be a divisor of $n$.
+  Then there is a subgroup of $G$ of order $m$.
+\end{lemma}
+\begin{proof}
+  This proof is come from textbook.
+  Induction on $n$.
+  \begin{itemize}
+    \item Base: $n = 1$ is trivial.
+    \item Induction: Let $k$ be a prime divisor of $m$, we know there is subgroup
+      $K$ of order $k$ in $G$.
+      Use the induction hypothesis on $G/K$, it is possible because $|G/K| < |G|$.
+      Then we know there is a subgroup $H/K$ of $G/K$ of order $m/k$
+      (by Exercise 10.59), since $m/k$ is
+      a divisor of $|G/K| = n/k$. Since $|H/K| = |H|/|K| = m/k$ and $|K| = k$,
+      it is easy to show $|H| = m$.
+  \end{itemize}
+\end{proof}
+
+\end{document}

@@ -1,0 +1,154 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{18}
+
+\begin{document}
+
+\begin{definition}[Associates, Irreducibles, Primes]
+  Let $a \ b \in D$ where $D$ is an integral domain,
+  $a$ and $b$ are called associates if $a = ub$ where $u$ is a unit of $D$.
+  If $a$ is non-zero and not a unit, and whenever $a = bc$ for some $b \ c \in D$
+  implies $b$ or $c$ is a unit, then $a$ is called irreducible.
+  If $a$ is non-zero and not a unit, and $a \mid bc$ implies $a \mid b$ or $a \mid c$,
+  then $a$ is called a prime.
+\end{definition}
+
+\begin{theorem}
+  \label{Theorem:18.1}
+  In an integral domain, every prime is an irreducible.
+\end{theorem}
+\begin{proof}
+  Let $D$ an integral domain and $p \in D$ a prime. Suppose $p = ab$ for some 
+  $a \ b \in D$, then $p \mid ab$ since $p = 1 ab$, which implies $p \mid a$
+  or $p \mid b$, we may suppose $p \mid a$.
+  Then $a = pc$ for some $c \in D$, therefore $p = pcb$. By cancellation
+  (since we are in an integral domain) we know $1 = cb$, therefore $b$ is a unit
+  and $\inv{b} = c$.
+\end{proof}
+
+\begin{theorem}
+  In a principal ideal domain, an element is irreducible iff it is a prime.
+\end{theorem}
+\begin{proof}
+  Since a principal ideal domain is an integral domain, $(\Leftarrow)$ is trivial.
+
+  $(\Rightarrow)$ Let $P$ a principal ideal domain and $p \in P$, 
+  and suppose $I = \cyc{q}$ an ideal
+  (we know it has form $\cyc{q}$ since we are in a principal ideal domain)
+  such that $\cyc{p} \subseteq \cyc{q}$.
+  Since $p \in \cyc{q}$, we know $p = qr$ for some $r \in P$,
+  according to $p$ is irreducible, we know either $q$ or $r$ is unit.
+  If $q$ is unit, then $\cyc{q} = P$.
+  If $r$ is unit, then $q = p\inv{r}$, therefore $q \in \cyc{p}$ and $\cyc{p} = \cyc{q}$.
+  This shows that $\cyc{p}$ is a maximal ideal, therefore it is a prime ideal,
+  and $\cyc{p}$ is prime ideal implies $p$ is prime.
+\end{proof}
+
+\begin{lemma}
+  \label{Lemma:18.1}
+  In a principal ideal domain, any strictly increasing chain of ideals
+  $I_0 \subset I_1 \subset \dots$ must be finite.
+\end{lemma}
+\begin{proof}
+  This proof comes from textbook.
+
+  Let $D$ be that principal ideal domain and 
+  $I = I_0 \cup I_1 \cup \dots$, 
+  for any element $i \in I$ and $a \in D$, $i$ must be an element of an ideal
+  in the chain, say $I_i$, then $ia \in I_i \subseteq I$.
+  Therefore $I$ is an ideal.
+
+  then $I = \cyc{a}$, and $a$ must belongs
+  to an ideal in the chain, say $I_n$. For any ideal $I_m$ in the chain,
+  we have $I_m \subseteq I_n$ since $a$ divides the "generator" of $I_m$.
+  Therefore $I_n$ is the last member of the chain.
+\end{proof}
+
+\begin{definition}[Unique Factorization Domain]
+  An integral domain $D$ is a unique factorization domain if:
+  \begin{enumerate}
+    \item Every non-zero element of $D$ that is not a unit can be written
+          as a product of irreducibles of $D$.
+    \item The factorization into irreducibles is unique
+          up to \textbf{associates and the order of the factors}.
+  \end{enumerate}
+\end{definition}
+
+Therefore, the factorization $4 = 2 \times 2 = (-2) \times (-2)$ is considered "the same", cause
+$2$ is associated with $-2$ by $2 = (-1) 2$ (or $\cyc{2} = \cyc{-2}$).
+
+\begin{theorem}[PID implies UFD]
+  Every pincipal ideal domain is a unique factorization domain.
+\end{theorem}
+\begin{proof}
+  Let $D$ a principal ideal domain and $a \in D$ a non-zero, non-unit element.
+
+  We first show that for any reducible, there is an irreducible divides it.
+  Suppose $a \in D$ is reducible, then $a = bc$ where $b \ c \in D$ are 
+  non-zero and non-unit. If $b$ or $c$ is irreducible, then trivial.
+  If both $b$ and $c$ are reducible, then $\cyc{a} \subset \cyc{b}$,
+  it is trivial that $\cyc{a} \subseteq \cyc{b}$, if $b \in \cyc{a}$, then
+  $b = ad$, which means $a = bc \rightarrow a = adc$, which implies $c$ is a unit
+  but it isn't. Then we perform this algorithm on $b$, and we have a strictly
+  increasing chain of ideals $\cyc{a} \subset \cyc{b} \subset \dots$.
+  According to the Lemma \ref{Lemma:18.1}, we know the chain is finite,
+  therefore the algorithm must stop at some point.
+  We found that the algorithm only stops when it meets an irreducible,
+  therefore there is a irreducible divides $a$.
+
+  We repeat applying this algorithm to the factor of $a$,
+  the factor of the factor of $a$ and so on, then we have a series $a = p_0 p_1 p_2 \dots$
+  where $p_i$ are irreducibles. If this series is infinite,
+  then $b = p_1 p_2 \cdots$ and $\cyc{a} \subset \cyc{b}$ (properly containing by $p_0$ is not a unit).
+  Therefore, we have a infinite strictly increasing chain $\cyc{p_0 p_1 p_2 \dots} \subset \cyc{p_1 p_2 p_3 \dots} \subset \dots$
+  which is impossible. Therefore $a = \join[]{p}{n}$ where $p_i$ are irreducibles.
+
+  If $a = \join[]{p}{n} = \join[]{q}{m}$, we induction on $n$:
+  \begin{itemize}
+    \item Base: If $a = p_0 = \join[]{q}{m}$, then $p_0$ must divides some $q_i$.
+          Since $q_i$ is irreducible, we know $p_0$ and $q_i$ are associates.
+          Then the product of the remaining irreducibles are a unit by cancellation,
+          which only makes sense when there is no remaining irreducibles.
+          Therefore $0 = m$.
+    \item Induction: If $a = \join[]{p}{n} = \join[]{q}{m}$, then $p_0$
+          must divides some $q_i$ and they are associates, that is, $cp_0 = q_i$, 
+          we may suppose $i = 1$ since an integral domain is commutative, 
+          then by cancellation,
+          we have $(c p_1) p_2 \cdots p_n = q_1 q_2 \cdots p_m$. By induction hypothesis,
+          we know $n = m$, and they are unique up to associates.
+  \end{itemize}
+\end{proof}
+
+\begin{definition}[Euclidean Domain]
+  An integral domain $D$ is called a Euclidean domain if there is a function
+  $d : D^* \rightarrow \N$ (called measure) where $D^*$ is $D$ without $0$,
+  such that:
+  \begin{enumerate}
+    \item $d(a) \leq d(ab)$ for all non-zero $a \ b \in D$.
+    \item For any $a \ b \in D$ and $b \neq 0$, then $a$ can be written in the
+          form of $a = bq + r$ where $q \ r \in D$ and 
+          either $r = 0$ or $d(r) < d(b)$.
+  \end{enumerate}
+\end{definition}
+
+\begin{example}
+  The ring $\Z$ is an Euclidean domain with $d(a) = |a|$.
+\end{example}
+
+\begin{example}
+  For any field $F$, $\poly{F}$ is an Euclidean domain with $d = \deg$
+\end{example}
+
+\begin{theorem}
+  Every Euclidean domain is a principal integral domain.
+\end{theorem}
+\begin{proof}
+  Let $D$ an Euclidean domain and $I$ a non-zero ideal of $D$.
+  Let $b \in I$ with $d(b)$ is minimal, we claim $I = \cyc{b}$.
+  For any element $a$ in $I$, $a$ can be written in the form of $a = bq + r$,
+  if $r = 0$, then $a \in \cyc{b}$; if $r \neq 0$, then $d(r) < d(b)$,
+  since $r \in I$ (cause $a \ b \in I$ and $I$ is an ideal), it contradicts the
+  assumption that $d(b)$ is minimal.
+\end{proof}
+
+\end{document}

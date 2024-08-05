@@ -1,0 +1,167 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{17}
+
+\begin{document}
+
+\begin{definition}[Irreducible Polynomials]
+  Let $D$ an integral domain and $f(x) \in \poly{D}$ where $f(x)$ is 
+  neither zero polynomial nor a unit. We say $f(x)$ is irreducible over $D$,
+  if $f(x) = g(x)h(x)$ where $g(x) \ h(x) \in \poly{D}$, then one of them is unit.
+  A nonzero, nonunit element of $\poly{D}$ is not irreducible over $D$ is called
+  reducible over $D$.
+\end{definition}
+
+\begin{definition}[Content]
+  The content of a non-zero polynomial is the greatest common divisor of the coefficients.
+  A primitive polynomial is an element of $\poly{Z}$ with content $1$.
+\end{definition}
+
+\begin{theorem}[Gauss's Lemma]
+  The product of two primitive polynomials is primitive.
+\end{theorem}
+\begin{proof}
+  This proof comes from textbook.
+
+  Suppose $f(x) = g(x)h(x)$ where $g(x) \ h(x)$ are primitive. If $f(x)$ is not primitive,
+  then we denote $n$ as the content of $f(x)$, then $p$ divides $n$ where $p$ is prime.
+  Consider $\overline{f}(x) \ \overline{g}(x) \ \overline{h}(x)$, which are polynomials
+  with coefficients $\modu p$.
+
+  Then $\overline{f}(x)$ is a zero polynomial in $\poly{Z_p}$ since the content of $f(x)$
+  is dividible by $p$. We know $\poly{Z_p}$ is an integral domain since $Z_p$ is an
+  integral domain, then either $g(x)$ or $h(x)$ is a zero polynomial,
+  which means the content of $g(x)$ or $h(x)$ is dividible by $p$,
+  which contradicts to the assumption that $g(x)$ and $h(x)$ are primitive.
+\end{proof}
+
+\begin{lemma}
+  If $f(x)$ is reducible, then $(n \cdot 1)f(x)$ is reducible where $n$ is a positive integer.
+\end{lemma}
+\begin{proof}
+  Suppose $f(x) = g(x)h(x)$ where both not unit, then $(n \cdot 1)f(x) = (n \cdot 1)g(x)h(x)$.
+  We claim $(n \cdot 1)g(x)$ is not unit. If $(n \cdot 1) g(x)$ is an inverse $\overline{g}$, then
+  $(n \cdot 1) g(x) \overline{g} = g(x) (n \cdot 1) \overline{g} = 1$, therefore $g(x)$ is a unit.
+  (Recall that a polynomial ring is commutative).
+\end{proof}
+
+\begin{theorem}
+  Let $f(x) \in \poly{Z}$, if $f(x)$ is reducible over $Q$, then it is reducible over $Z$.
+\end{theorem}
+\begin{proof}
+  This proof comes from textbook.
+  
+  Suppose $f(x) = g(x)h(x)$ where $g(x) \ h(x) \in \poly{Q}$ and both not unit.
+  We may suppose $f(x)$ is primitive, otherwise by Lemma 17.1, $nf(x)/n$ is reducible where $n$ is the content of $f(x)$.
+  Let $a$ and $b$ are the $\lcm$ of denominators of $g(x)$ and $h(x)$ respectively,
+  then $abf(x) = ag(x)bh(x)$. Furthermore, we may divide $ag(x)$ and $bh(x)$ by their
+  contents, now $abf(x) = cg^\prime(x)dh^\prime(x)$ where $c \ d$ are
+  the contents of $ag(x) \ bh(x)$ respectively.
+  We know $g^\prime(x)$ and $h^\prime(x)$ are primitive, so is $g^\prime(x)h^\prime(x)$.
+  Then the content of right hand side is $cd$ and left hand side is $ab$.
+  Then $f(x) = g^\prime(x)h^\prime(x)$, it is easy to show $g^\prime(x)$ and $h^\prime(x)$
+  is not unit.
+
+  Furthermore, those two polynomials have non-zero degrees, 
+  if $f(x)$ is primitive, and $\deg g^\prime(x) = \deg cg^\prime(x) = \deg ag(x) = \deg g(x)$,
+  which implies $g(x)$ is a unit;
+  if $f(x)$ is not primitive, then $f(x)/n$ can be expressed as two polynomials with non-zero degree,
+  so is $nf(x)/n$.
+\end{proof}
+
+\begin{theorem}
+  Let $p$ a prime and $f(x) \in \poly{Z}$ with $\deg f(x) \geq 1$.
+  Let $\overline{f}(x)$ be the polynomial in $\poly{Z_p}$ obtained
+  from $f(x)$ by reducing all the coefficients of $f(x)$ modulo $p$.
+  If $\overline{f}(x)$ is irreducible over $Z_p$ and $\deg \overline{f}(x) = \deg f(x)$,
+  then $f(x)$ is irreducible over $Q$.
+\end{theorem}
+\begin{proof}
+  This proof comes from textbook.
+
+  Suppose $f(x)$ is reducible over $Q$, then $f(x)$ is reducible over $Z$.
+  Then $f(x) = g(x)h(x)$ where $g(x) \ h(x) \in \poly{Z}$ and both not unit,
+  and $\overline{f}(x) = \overline{g}(x) \overline{h}(x)$. We know $\deg f(x) = \deg \overline{f}(x)$,
+  then $\deg g(x) = \deg \overline{g}(x)$ and $\deg h(x) = \deg \overline{h}(x)$
+  cause reducing coefficients of modulo $p$ doesn't increase the degree.
+  Then we know both $\overline{g}(x)$ and $\overline{h}(x)$ are not unit (cause they have non-zero degree),
+  then $\overline{f}(x)$ is reducible over $Z_p$.
+\end{proof}
+
+\setcounter{theorem}{4}
+\begin{theorem}
+  \label{Theorem:17.5}
+  Let $F$ a field and $p(x) \in \poly{F}$. Then $\cyc{p(x)}$ is a maximal ideal
+  in $\poly{F}$ iff $p(x)$ is irreducible over $F$.
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ If $p(x) = g(x)h(x)$ for some $g(x) \ h(x) \in \poly{F}$,
+          we know $\cyc{p(x)}$ is a prime ideal since it is maximal, then one of
+          $g(x)$ and $h(x)$ is in $\cyc{p(x)}$. We may suppose $g(x) \in \cyc{p(x)}$,
+          then $g(x)$ is either zero or $\deg g(x) \ge \deg p(x)$,
+          but $g(x) \neq 0$ and $\deg g(x) \leq \deg p(x)$ (since $p(x) = g(x)h(x)$), 
+          therefore $\deg g(x) = \deg p(x)$ and then $\deg h(x) = 0$, which implies $h(x)$
+          is a unit.
+    \item $(\Leftarrow)$ Suppose $I$ is an ideal that properly contains $\cyc{p(x)}$,
+          we know $\poly{F}$ is a principal ideal domain.
+          Suppose $I = \cyc{q(x)}$ for some $q(x)$, then we know $p(x)$
+          can be expressed by $q(x)r(x)$ for some $r(x)$ since $p(x) \in \cyc{q(x)}$.
+          Then one of $q(x)$ and $r(x)$ is unit, if $q(x)$ is unit, then $1 \in \cyc{q(x)}$,
+          if $r(x)$ is unit, then $q(x) = p(x)\inv{r}(x)$, which implies $q(x) \in \cyc{p(x)}$,
+          it contradict to the assumption that $I$ properly contains $\cyc{p(x)}$.
+  \end{itemize}
+\end{proof}
+
+\begin{corollary}
+  Let $p(x)$ a irreducible polynomial of $\poly{F}$ and $p(x) \mid a(x)b(x)$.
+  Then $p(x) \mid a(x)$ or $p(x) \mid b(x)$.
+\end{corollary}
+\begin{proof}
+  By Theorem 17.5, we know $\cyc{p(x)}$ is a maximal ideal, therefore it is a
+  prime ideal. The rest of proof is trivial.
+\end{proof}
+
+\begin{corollary}
+  \label{Corollary:17.2}
+  Let $f(x)$ is irreducible polynomial of $\poly{F}$, then $\poly{F}/\cyc{f(x)}$
+  is a field.
+\end{corollary}
+\begin{proof}
+  By Theorem \ref{Theorem:17.5} and Theorem 14.4.
+\end{proof}
+
+\begin{theorem}[Unique Factorization]
+  Every polynomial in $\poly{Z}$ that is not a zero polynomial or a unit
+  in $\poly{Z}$ can be expressed in the form
+  \begin{center}
+    \boxed{b_0 b_1 \dots b_{s - 1} p_0(x) p_1(x) \dots p_{m - 1}(x)}
+  \end{center}
+  where the $b_i$'s are irreducible polynomials of degree 0
+  (In other words, they are primes),
+  and $p_i(x)$'s are irreducible polynomials of positive degree.
+
+  Furthermore, if is can be expressed in two ways, then they have the same $s$ and $m$,
+  and they have the same $b_i$'s and $p_i$'s with $\pm$ if needed.
+  % They may have different sign
+\end{theorem}
+\begin{proof}
+  Let $f(x) \in \poly{Z}$ where $f(x)$ is not a zero polynomial and not
+  a unit in $\poly{Z}$. Induction on the degree of $f(x)$.
+  \begin{itemize}
+    \item Base: we can written $f(x) = f_0$ in the product of primes,
+          and we know that is a unique factorization.
+    \item Ind: We can always express $f(x)$ in form $cg(x)$ where $c$ is the content of $f(x)$
+          when $f(x)$ is not primitive, then $c$ has unique factorization.
+          We need to show that $g(x)$ has unique factorization.
+          If $g(x)$ is irreducible, then we the only factorization of $g(x)$ is itself.
+          If $g(x)$ is reducible, we know there is $p(x) \in \poly{Z}$ such that
+          $p(x) \mid g(x)$ and $p(x)$ is irreducible and primitive.
+          We know $p(x)$ must be contained in every factorization of $g(x)$ 
+          by Corollary 17.1, then by induction hypothesis, $g(x)/p(x)$ has unique factorization
+          and $g(x) = p(x) g(x)/p(x)$.
+  \end{itemize}
+\end{proof}
+
+\end{document}

@@ -1,0 +1,17 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+We know there are $a!$ permutations of $a$ elements,
+we may rethink it in another way. We think $a!$ is the possibilities of the way
+that you pick $a$ elements from $a$ elements.
+Now, we can generailize the first $a$, that is, pick $k$ elements from $n$ elements.
+It's easy to see that it is exactly $n!$ but only first $k$ terms, that is, $\frac{n!}{(n - k)!}$.
+
+If we don't care about the order, we may divide $\frac{n!}{(n - k)!}$ by the
+amount of the permutations of $k$ elements, that is $k!$.
+
+We may denote pick $k$ elements in $n$ elements (without order) by $C^n_k$,
+which is exactly $\frac{n!}{(n - k)! k!}$.
+
+\end{document}

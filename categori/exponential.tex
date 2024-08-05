@@ -1,0 +1,23 @@
+\documentclass[./main.tex]{subfiles}
+
+\begin{document}
+
+\section{Exponential}
+
+\begin{definition}
+  Let $\mathcal{C}$ a category.
+  For any $B, C \in \mathcal{C}$, $(C^B, ev)$ forms an exponential
+  where $C^B \in \mathcal{C}$ and $ev : C^B \times B \rightarrow C$,
+  if for any object $A \in \mathcal{C}$ and $f : A \times B \rightarrow C$,
+  there is a unique $u : A \rightarrow C^B$ such that $f = ev \circ (u \times 1_B)$.
+  In other words, the follow diagram commutes.
+  \begin{center}
+    \begin{tikzcd}
+      A \times B \arrow[dd, dashed, "u \times 1_B"] \arrow[rd, "f"] & \\
+      & C \\
+      C^B \times B \arrow[ru, "ev"] &
+    \end{tikzcd}
+  \end{center}
+\end{definition}
+
+\end{document}

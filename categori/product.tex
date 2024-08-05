@@ -1,0 +1,77 @@
+\documentclass[./main.tex]{subfiles}
+
+\begin{document}
+
+\section{Product}
+
+\begin{definition}[Product]
+  Let $\mathcal{C}$ a category and $A, B \in \mathcal{C}$,
+  $(A \times B, \pi_0, \pi_1)$ forms a product of $A$ and $B$
+  where $A \times B \in \mathcal{C}$, $\pi_0 : A \times B \rightarrow A$ 
+  and $\pi_1 : A \times B \rightarrow B$,
+  if for any $X \in \mathcal{C}$ with $\pi^\prime_0 : X \rightarrow A$ and
+  $\pi^\prime_1 : X \rightarrow B$,
+  there is a unique arrow $u : X \rightarrow A \times B$ such that the following
+  diagram commutes:
+
+  \begin{center}
+    \begin{tikzcd}
+      X 
+      \arrow[rd, dashed, "u"] \arrow[rrd, bend left, "\pi^\prime_1"] 
+      \arrow[ddr, bend right, "\pi^\prime_0"] \\
+      & A \times B \arrow[r, "\pi_1"] \arrow[d, "\pi_0"] & B \\
+      & A
+    \end{tikzcd}
+  \end{center}
+
+  Furthermore, a product of $A$ and $B$ is a limit of diagram:
+  \begin{center}
+    \begin{tikzcd}
+      (A & B)
+    \end{tikzcd}
+  \end{center}
+\end{definition}
+
+One may trying to show that $0 \times X \simeq 0$ by:
+
+\begin{center}
+  \begin{tikzcd}[column sep={2cm, between origins}, row sep={2cm, between origins}]
+    0 \times X
+    \arrow[rd, red, "\pi_0"]
+    \arrow[rrrdd, bend left, red, "\pi_1"]
+    \arrow[dddrr, bend right, "\pi_0"]
+    \\
+    & 0 
+      \arrow[rd, dashed, "!"] 
+      \arrow[rrd, bend left, red, "!"] 
+      \arrow[ddr, bend right,"1_0"] \\
+    & & 0 \times X \arrow[d, "\pi_0"] \arrow[r, "\pi_1"] & X \\
+    & & 0
+  \end{tikzcd}
+\end{center}
+
+However, the red triangle needs not to commutes, that is,
+the arrow $\pi_0$ from $(0 \times X, \pi_0, \pi_1)$ to $(0, 1_0, !)$
+may not exist.
+
+\begin{definition}[Product of Arrow]
+  Suppose $(A \times B, \pi_0, \pi_1)$ and $(C \times D, \pi_2, \pi_3)$ are two product, and
+  $f : A \rightarrow C$, $g : B \rightarrow D$.
+  The product of arrow $f \times g$ is a unique arrow from $A \times B$ to $C \times D$
+  such that the following diagram commutes:
+  % https://q.uiver.app/#q=WzAsNixbMiwwLCJBIFxcdGltZXMgQiJdLFsyLDIsIkMgXFx0aW1lcyBEIl0sWzQsMiwiRCJdLFswLDIsIkMiXSxbMCwwLCJBIl0sWzQsMCwiQiJdLFswLDUsIlxccGlfMSJdLFs1LDIsImciXSxbNCwzLCJmIiwyXSxbMSwzLCJcXHBpXzIiLDJdLFsxLDIsIlxccGlfMyJdLFswLDQsIlxccGlfMCIsMl0sWzAsMSwiZiBcXHRpbWVzIGciLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+  \[\begin{tikzcd}
+	A && {A \times B} && B \\
+	\\
+	C && {C \times D} && D
+	\arrow["f"', from=1-1, to=3-1]
+	\arrow["{\pi_0}"', from=1-3, to=1-1]
+	\arrow["{\pi_1}", from=1-3, to=1-5]
+	\arrow["{f \times g}"{description}, dashed, from=1-3, to=3-3]
+	\arrow["g", from=1-5, to=3-5]
+	\arrow["{\pi_2}"', from=3-3, to=3-1]
+	\arrow["{\pi_3}", from=3-3, to=3-5]
+\end{tikzcd}\]
+\end{definition}
+
+\end{document}

@@ -1,0 +1,231 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{18}
+
+\begin{document}
+
+\begin{exercise}
+  Let $\poly[\sqrt{d}]{Z} = \set{a + b \sqrt{d}}{a \ b \in Z}$,
+  where where $d$ is not $1$ and is not divisible by the square of a prime
+  (Note that $d$ needs not to be positive).
+  The norm of $a + b \sqrt{d} \in \poly[\sqrt{d}]{Z}$ is given by
+  $N(a + b \sqrt{d}) = |a^2 - db^2|$.  
+  Verify the following properties:
+  \begin{enumerate}
+    \item $N(x) = 0$ iff $x = 0$
+    \item $N(xy) = N(x)N(y)$
+    \item $N(x) = 1$ iff $x$ is a unit
+    \item $N(x)$ is prime implies $x$ is irreducible over $\poly[\sqrt{d}]{Z}$
+  \end{enumerate}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{enumerate}
+    \item If $N(x) = 0$, then $a^2 = db^2$, however, 
+          $d$ is not divisible by the square of any prime and $a^2$ is a product
+          of some squares of prime, therefore $a = b = 0$.
+    \item Trivial.
+    \item If $N(a + b \sqrt{d}) = 1$, then $(a + b \sqrt{d})(a - b \sqrt{d}) = \pm 1$.
+          If $a + b \sqrt{d}$ is a unit, then $N(1) = N((a + b \sqrt{d})(s + t \sqrt{d})) = 1$,
+          by property 2, we know $N(a + b \sqrt{d})N(s + t \sqrt{d}) = 1$, which implies
+          $N(a + b \sqrt{d}) = N(s + t \sqrt{d}) = 1$.
+    \item Suppose $x = ab$, then $N(x) = N(ab) = N(a)N(b)$.
+          We know one of $N(a)$ and $N(b)$ is $1$ since $N(x)$ is prime, which implies
+          one of $a$ and $b$ is unit, therefore $x$ is irreducible. 
+  \end{enumerate}
+\end{proof}
+
+\begin{exercise}
+  In an integral domain, show that $a$ and $b$ are associates iff $\cyc{a} = \cyc{b}$.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ If $a = cb$, then $b \in \cyc{a}$. Similarly, $\inv{c}a = b$,
+          therefore $a \in \cyc{b}$.
+    \item $(\Leftarrow)$ If $\cyc{a} = \cyc{b}$, then $b \in \cyc{a}$, which implies $b = ac$ for some $c$.
+          Similarly, $a \in \cyc{b}$, then $a = bd$ for some $d$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Show that the union of a chain $I_0 \subset I_1 \subset \dots$ of ideals of a
+  ring $R$ is an ideal of ring $R$.
+\end{exercise}
+\begin{proof}
+  Let $I = I_0 \cup I_1 \cup \dots$, for any $a \in I$, $a$ must belongs to
+  some $I_i$, then for any $b \in R$, we know $ab \in I_i$ since $I_i$ is an ideal,
+  therefore $ab \in I$ since $I_i \subseteq I$.
+\end{proof}
+
+\begin{exercise}
+  In an integral domain, let $r$ an irreducible and $a$ a unit, show that $ar$ is
+  an irreducible.
+\end{exercise}
+\begin{proof}
+  Let $D$ an integral domain, suppose $ar = st$ for some $s \ t \in D$,
+  then $r = \inv{a}st$. Then we know one of $\inv{a}s$ and $t$ is a unit
+  since $r$ is irreducible.
+  If $\inv{a}s$ is a unit, so is $s$; if $t$ is a unit, so is $t$.
+\end{proof}
+
+\begin{exercise}
+  Let $D$ an integral domain and $a \ b \in D$ where $b \neq 0$.
+  Show that $\cyc{ab} \subset \cyc{b}$ iff $a$ is not a unit.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ If $a$ is a unit, then $b = \inv{a}ab$, which implies $\cyc{b} \subseteq \cyc{ab}$.
+    \item $(\Leftarrow)$ If $\cyc{ab} = \cyc{b}$, then $b \in \cyc{ab}$ and $b = cab$ for some $c \in D$.
+          Then $1 = ca$ by cancellation, which means $a$ is a unit with an inverse $c$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $D$ be an integral domain. Define $a \sim b$ iff $a$ and $b$ are associates.
+  Show that $~$ is an equivalence relation on $D$.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item (Reflexivity) $a \sim a$ by $a = 1a$.
+    \item (Symmetry) If $a \sim b$, then $a = cb$ where $c$ is a unit, then $b = \inv{c}a$, therefore $b \sim a$.
+    \item (Transitivity) If $a \sim b$ and $b \sim c$, then $a = sb$ and $b = tc$, then $a = stc$, therefore $a \sim c$.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{7}
+\begin{exercise}
+  Let $D$ be an Euclidean domain with measure $d$. Prove that
+  $u \in D$ is a unit iff $d(u) = d(1)$.
+\end{exercise}
+\begin{proof}
+  By $d(u) \leq d(u \inv{u}) = d(1)$ (The 1st property of Euclidean domain) and
+  $d(1) \leq d (1u) = d(u)$, we know $d(u) = d(1)$.
+\end{proof}
+
+\begin{exercise}
+  Let $D$ be an Euclidean domain with measure $d$. Prove that
+  if $a$ and $b$ are associates in $D$, then $d(a) = d(b)$.
+\end{exercise}
+\begin{proof}
+  We know $a = cb$, then $d(a) \leq d(\inv{c}a) = d(b)$
+  and $d(b) \leq d(cb) = d(a)$, therefore $d(a) = d(b)$.
+\end{proof}
+
+\begin{exercise}
+  Let $D$ be a principal ideal domain and let $p \in D$.
+  Prove that $\cyc{p}$ is a maximal ideal in $D$ iff $p$ is irreducible.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ If $\cyc{p}$ is maximal, then it is also prime,
+          therefore $p$ is prime, then $p$ is irreducible by Theorem 18.1.
+    \item $(\Leftarrow)$ If $p$ is irreducible, suppose $I$ an ideal that $I \subseteq \cyc{p}$.
+          Since $D$ is a principal ideal domain, we know $I = \cyc{q}$ for some $q \in D$.
+          Then $p = qr$ since $p \in \cyc{q}$, therefore one of $q$ and $r$ is unit.
+          \begin{itemize}
+            \item If $q$ is unit, then $I = D$.
+            \item If $r$ is unit, then $q = \inv{r}p$, therefore $\cyc{p} = \cyc{q} = I$.
+          \end{itemize}
+          Therefore $\cyc{p}$ is a maximal ideal in $D$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $d$ be an integer such that $d < 1$ and it is not divisible by the square of
+  a prime. Prove that the only units of $\poly[\sqrt{d}]{Z}$ are $+1$ and $-1$. 
+\end{exercise}
+\begin{proof}
+  Let $a + b\sqrt{d} \in \poly[\sqrt{d}]{Z}$ a unit, then 
+  $N(a + b \sqrt{d}) = |a^2 - b^2d| = 1$. Note that $d < 1$, therefore $- b^2d \geq 0$,
+  which means $a^2 - b^2d = 1$.
+  \begin{itemize}
+    \item If $a = 0$, then $- b^2d = 1$. We know $b^2 < 1$ by $-d > 1$, which implies $b = 0$,
+          but now $a = b = 0$, and $0 + 0 \sqrt{d}$ cannot be a unit.
+    \item If $a \neq 0$, then $a^2 > 0$, which means $-b^2d \leq 0$. But we know $- b^2d \geq 0$,
+          therefore $-b^2d = 0$ and then $b = 0$, $a^2 = 1$. We can conclude that $a = \pm 1$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $D$ be a principal ideal domain. Show that every proper ideal of $D$
+  is contained in a maximal ideal of $D$.
+\end{exercise}
+\begin{proof}
+  Let $I$ a proper ideal of $D$.
+  If there is no any ideal $D$ that properly contains $I$, then $I$ is a maximal ideal.
+  Let $J$ an proper ideal that properly contains $I$, if $J$ is not a maximal ideal,
+  then find a maximal ideal that containing $J$.
+  This algorithm must stop, otherwise it implies an infinite strictly increasing chain
+  $I \subset J \subset \dots$, which makes nonsense by Lemma 18.1.
+\end{proof}
+
+\setcounter{exercise}{13}
+\begin{exercise}
+  Show that $1 - i$ is irreducible in $\poly[i]{Z}$.
+\end{exercise}
+\begin{proof}
+  Define the norm of $a + bi$ by $N(a + bi) = a^2 + b^2$, then:
+  \begin{itemize}
+    \item $N((a + bi)(c + di)) = N((ac - bd) + (ad + bc)i) = (ac - bd)^2 + (ad + bc)^2 = (ac)^2 - 2abcd + (bd)^2 + (ad)^2 + 2abcd + (bc)^2 = (ac)^2 + (bd)^2 + (ad)^2 + (bc)^2 = (a^2 + b^2)c^2 + (a^2 + b^2)d^2 = (a^2 + b^2)(c^2 + d^2) = N(a + bi)N(c + di)$.
+    \item If $N(a + bi) = a^2 + b^2 = 1$, we know $a^2$ and $b^2$ are nonzero integer,
+          therefore either $a^2 = 1$ or $b^2 = 1$, which means $a + bi$ is one of these:
+          $\pm 1$ and $\pm i$, therefore $a + bi$ is a unit.
+    \item Suppose $1 - i = ab$, then $2 = (1 + 1) = N(1 - i) = N(ab) = N(a)N(b)$.
+          Since $2$ is a prime, then either $N(a) = 2$ or $N(b) = 2$, which implies
+          either $N(b) = 1$ or $N(a) = 1$, therefore $1 - i$ is irreducible.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{18}
+\begin{exercise}
+  Let $p \in Z$ a prime such that $p = a^2 + b^2$ where $a, b \in Z$.
+  Prove that $a + bi$ is irreducible in $\poly[i]{Z}$.
+\end{exercise}
+\begin{proof}
+  According to Exercise 18.14, we know $N(a + bi) = a^2 + b^2 = p$ is a prime,
+  therefore $a + bi$ is irreducible.
+
+  For example, $5$ and $1 + 2i$ (or $2 + 1i$), $2$ and $1 + i$, $17$ and $1 + 4i$.
+\end{proof}
+
+\begin{exercise}
+  Prove that $\poly[\sqrt{-3}]{Z}$ is not a PID.
+\end{exercise}
+\begin{proof}
+  Consider $4 \in \poly[\sqrt{-3}]{Z}$, it is easy to see that
+  $2 * 2 = 4 = (1 + \sqrt{-3})(1 - \sqrt{-3})$.
+  Therefore $\poly[\sqrt{-3}]{Z}$ is not a UFD, then it is not a PID.
+\end{proof}
+
+\setcounter{exercise}{23}
+\begin{exercise}
+  Let $F$ a field, prove that any non-zero prime ideal in $\poly{F}$
+  is also a maximal ideal.
+\end{exercise}
+\begin{proof}
+  We know $\poly{F}$ is a principal ideal domain, therefore any prime ideal in $\poly{F}$
+  has form $\cyc{p}$ and $p$ is a prime.
+  Then $p$ is an irreducible, finally $\cyc{p}$ is maximal by Exercise 18.10.
+\end{proof}
+
+\setcounter{exercise}{36}
+\begin{exercise}
+  An ideal $A$ of a commutative ring $R$ with unity is said to be
+  finitely generated if there exist elements $\join{a}{n} \in A$
+  such that $A = \cyc{\join{a}{n}}$. \par
+  An integral domain $R$ is said to satisfy the ascending chain condition
+  if every strictly increasing chain of ideals
+  $I_0 \subset I_1 \subset \dots$ has a finite length. \par
+  Show that an integral domain $R$ satifies the ascending chain condition
+  iff every ideal of $R$ is finitely generated.
+  Note that this is the generialized version of Lemma 18.1, finitely generate instead of principal ideal.
+\end{exercise}
+\begin{proof}
+  
+\end{proof}
+
+\end{document}

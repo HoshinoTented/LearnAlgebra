@@ -1,0 +1,279 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{17}
+
+\begin{document}
+
+\begin{exercise}
+  Suppose that $D$ is an integral domain and $F$ is a field that containing $D$.
+  If $f(x) \in \poly{D}$ and $f(x)$ is irreducible over $F$
+  but reducible over $D$, what can we say about the factorization of $f(x)$ over $D$.
+\end{exercise}
+\begin{proof}
+  There must be a polynomial of degree $0$ that is not a unit in $D$
+  but a unit in $F$ and that polynomial divides $f(x)$.
+\end{proof}
+
+\setcounter{exercise}{2}
+\begin{exercise}
+  Show that a non-constant polynomial from $\poly{Z}$ that is irreducible
+  over $Z$ is primitive.
+\end{exercise}
+\begin{proof}
+  Let $f(x) \in \poly{Z}$ that is irreducible over $Z$ and non-constant.
+  Let $c$ be the content of $f(x)$.
+  We know $\deg f(x) > 0$ since it is non-constant.
+  If $c$ is not $1$, then by $f(x) = cf(x)/c$, we know $f(x)/c$ is a unit
+  since $f(x)$ is irreducible and $c$ is not a unit. 
+  However, $\deg f(x)/c = \deg f(x) > 0$, that means $f(x)$ is not a unit
+  since $Z$ is an integral domain.
+\end{proof}
+
+\begin{exercise}
+  Let $f(x) \in \poly{Z}$ where the leading coefficient of $f(x)$ is $1$.
+  Let $r$ a rational number and $(x - r)$ divides $f(x)$, 
+  show that $r$ is an integer.
+\end{exercise}
+\begin{proof}
+  We denote $x - r$ by $g(x)$ and $f(x)/g(x)$ by $h(x)$.
+  Suppose $r = \frac{s}{t}$ where $\gcd(s, t) = 1$,
+  and let $q$ be the $\lcm$ of the denominators of the coefficients of $h(x)$.
+  Then both $tg(x)$ and $qh(x)$ are in $\poly{Z}$, and now $tqf(x) = tg(x)qh(x)$.
+  Let $a$ be the content of $tg(x)$ and $b$ be the content of $qh(x)$,
+  we observe that $a$ is $1$ since $\gcd(t, s) = 1$, therefore 
+  $tqf(x) = 1(tg(x)/1) b(qh(x)/b)$.
+  The content of lhs is $tq$ (since the leading coefficient of $f(x)$ is $1$),
+  and the content of rhs is $b$ (since both $(tg(x))/1$ and $(qh(x)/b)$ are primitive,
+  so is their product), so $b = tq$.
+  Since $(qh(x))/b = (qh(x))/(tq) = h(x)/t \in \poly{Z}$, so is $h(x)$, therefore $q$ is $1$.
+  Since both $f(x)$ and $g(x)$ are monic, so is $h(x)$, therefore the content of
+  $qh(x) = h(x)$ is $1$, so $b = 1$, therefore $1 = t$, which implies $r$ is an integer.
+
+  The following proof comes from \href{https://math.stackexchange.com/a/3330480}{MathStackExchange}.
+  Suppose $r = \frac{s}{t}$.
+  Since $x - r$ divides $f(x)$, we know $f(r) = s^nt^{-n} + a_{n - 1}(s^{n - 1}t^{- n + 1}) + \dots + a_0 = 0$.
+  We may mutiply both side by $t^{n - 1}$ so that every term except the leading term
+  is an integer, that is, $t^{n - 1}f(r) = s^n\inv{t} + a_{n - 1}(s^{n - 1}) + a_{n - 2}(s^{n - 2}p) + \dots + a_0p^{n - 1} = 0$.
+  Therefore $s^n\inv{t}$ is an inverse under addition of another integer, 
+  then $s^n\inv{t}$ has to be an integer, then $t = 1$, which implies $r$ is an integer.
+\end{proof}
+
+\begin{mistake}
+  Suppose $f(x) = g(x)h(x)$, where $f(x) \ g(x) \in \poly{Z}$, then
+  $h(x)$ needs not in $\poly{Z}$
+\end{mistake}
+\begin{proof}
+  It is impossible to show that $h(x)$ has to be an element of $\poly{Z}$ by
+  $Z$ is UFD (Theorem 17.6), cause the factorization of $g(x)$ may not be contained
+  in the factorization of $f(x)$ when $h(x)$ is NOT in $\poly{Z}$.
+  Also, dividing the factorization of $h(x)$ from $f(x)$ is actually performed
+  under $Q$, not $Z$ (when $h(x)$ is not in $\poly{Z}$).
+
+  Counterexample: $f(x) = 1 = 2 (1/2)$.
+\end{proof}
+
+\begin{exercise}
+  Let $F$ a field and let $a$ be a nonzero element of $F$.
+  \begin{itemize}
+    \item If $af(x)$ is irreducible over $F$, prove that $f(x)$
+          is irreducible over $F$.
+    \item If $f(ax)$ is irreducible over $F$, prove that $f(x)$
+          is irreducible over $F$.
+    \item If $f(a + x)$ is irreducible over $F$, prove that $f(x)$
+          is irreducible over $F$.
+    \item Use the third property to prove $8x^3 - 6x + 1$ is irreducible
+          over $Q$.
+  \end{itemize}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item Suppose $f(x) = g(x)h(x)$, then $af(x) = ag(x)h(x)$ and we know
+          $ag(x)$ is a unit or $h(x)$ is a unit by $af(x)$ is irreducible.
+    \item Suppose $f(x) = g(x)h(x)$, then by $f(ax) = g(ax)h(ax)$ is irreducible,
+          we may suppose $g(ax)$ is a unit. Then $\deg g(ax) = 0 = \deg g(x)$,
+          therefore $g(ax) = g(x)$ and $g(x)$ is a unit.
+    \item Ditto
+    \item ???
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $F$ a field and $f(x) \in \poly{F}$, let $a$ the leading coefficient
+  of $f(x)$, then $\inv{a}f(x)$ is irreducible implies $f(x)$ is irreducible.
+  Note that $\inv{a}f(x)$ is monic (the leading coefficient is $1$).
+\end{exercise}
+\begin{proof}
+  Suppose $f(x) = g(x)h(x)$, then $\inv{a}f(x) = \inv{a}g(x)h(x)$ and
+  one of $\inv{a}g(x)$ and $h(x)$ is unit, if $h(x)$ is unit, then trivial.
+  If $\inv{a}g(x)$ is unit, then $g(x)$ is unit with inverse $\inv{a}\inv{(\inv{a}g(x))}$.
+\end{proof}
+
+\setcounter{exercise}{9}
+\begin{exercise}
+  Suppose that $f(x) \in \poly{Z_p}$ and $f(x)$ is irreducible
+  over $Z_p$, where $p$ is a prime. If $\deg f(x) = n$, 
+  prove that $\poly{Z_p}/\cyc{f(x)}$ is a field with $p^n$ elements.
+\end{exercise}
+\begin{proof}
+  $\poly{Z_p}/\cyc{f(x)}$ is a field by Corollary 17.2. Every distinct element in $\poly{Z_p}$
+  with degree that below $\deg f(x)$ implies distinct element in $\poly{Z_p}/\cyc{f(x)}$,
+  cause they will never produce an element in $\cyc{f(x)}$, unless they are equal to each other.
+  Therefore $\poly{Z_p}/\cyc{f(x)}$ has the same elements as $\Oplus{(Z_p)}{n - 1}$ 
+  (the coefficients),
+  which is exactly $p^n$.
+\end{proof}
+
+\setcounter{exercise}{17}
+\begin{exercise}
+  Let $f(x) \in \poly{Z_2}$ and $\deg f(x) = 5$. If neither $0$ nor $1$
+  is a zero of $f(x)$. Show that it is sufficient to prove that $f(x)$
+  is irreducible over $Z_2$ by showing $x^2 + x + 1$ is not a factor of $f(x)$.
+\end{exercise}
+\begin{proof}
+  Since $f(x)$ has no zero, we know there is no factor with degree $1$.
+  Since $f(0) = 1$, we know $f_0 = 1$, therefore any factor $g(x)$ of $f(x)$
+  must has the property $g(0) = 1$.
+  Now consider $x^2 + 1$, obviously $1$ is a zero, but $f(x)$ does not have one.
+  For any factor with degree $n > 2$, we know it must have a factor with degree $5 - n \leq 2$.
+  Therefore the last cast is $x^2 + x + 1$, comes from the hypothesis.
+\end{proof}
+
+\begin{exercise}
+  For the field $\poly{Z_7}/I$ where $I = \cyc{x^2 + 2}$. Find the multiplicative
+  orders of $x + I$ and $x + 1 + I$. Find the multiplicative inverse of $x + I$.
+\end{exercise}
+\begin{proof}
+  By Exercise 17.10, we know $|\poly{Z_7}/I| = 7^2 = 49$, therefore the order of the multiplicative
+  group of $\poly{Z_7}$ is $48$.
+  It is easy to see that $x^2 = -2$, and $|-2| = |5| = 6$ since $-2 \in U(7)$,
+  therefore $(x^2)^6 = 1$.
+  Since $|x| \neq 1$, $|x|$ is even (otherwise $x^{|x|}$ would have degree $1$) and $|x| \ge 12$ (otherwise $|-2|$ will no longer $6$),
+  we know that $|x| = 12$.
+  By simply calculate $(x + 1)^4 = 3x$, we see $(x + 1)^{24} = 1$.
+  We need to show that $3, 6, 12$ can not be the order of $x + 1$:
+  \begin{itemize}
+    \item By $(x + 1)^7 = x^7 + 1 = 6x + 1$ (since $\chara \poly{Z_7}/I = 7$),
+          we know $|x + 1| \neq 6$, otherwise $6x + 1 = x + 1$.
+    \item $|x + 1| \neq 12$ by $|(x + 1)^4| = 6 \neq 3$.
+    \item $|x + 1| \neq 3$ since $(x + 1)^4 = 3x$ and $3x \neq x + 1$.
+  \end{itemize}
+
+  It is easy to see that $3x$ is an inverse of $x$ since $-6 = 1$.
+\end{proof}
+
+\begin{exercise}
+  Let $F$ be a field and $f(x) \in \poly{F}$ be reducible over $F$
+  with $\deg f(x) > 1$. Prove that $\poly{F}/\cyc{f(x)}$ is not an integral domain.
+\end{exercise}
+\begin{proof}
+  By Theorem 14.3, we only need to show that $\cyc{f(x)}$ is not a prime ideal.
+  Since $f(x)$ is reducible, we know $f(x) = g(x)h(x)$ and both $g(x)$ and $h(x)$
+  are not unit.
+  We also know that $\deg g(x)$ and $\deg h(x)$ are lower than $\deg f(x)$,
+  therefore both $g(x)$ and $h(x)$ are not in $\cyc{f(x)}$, which implies
+  $\cyc{f(x)}$ is not a prime ideal.
+\end{proof}
+
+\setcounter{exercise}{31}
+\begin{exercise}
+  Let $f(x) \in \poly{Z_p}$ (or any field). Prove that $f(x)$ has no quadratic
+  factor over $Z_p$ if $f(x)$ has no factor of the form $x^2 + ax + b$.
+\end{exercise}
+\begin{proof}
+  For any quadratic factor of $f(x)$, it has the form $ax^2 + bx + c$,
+  then $ax^2 + bx + c = a(x^2 + \inv{a}bx + \inv{a}c)$, which is impossible.
+\end{proof}
+
+\setcounter{exercise}{33}
+\begin{exercise}
+  Given that $\pi$ is not the zero of a nonzero polynomial with rational coefficients,
+  prove that $\pi^2$ cannot be written in the form $a\pi + b$, where $a \ b$ are rational.
+\end{exercise}
+\begin{proof}
+  Consider $f(x) = - x^2 + ax + b$, then $\pi$ is not the zero of $f(x)$,
+  therefore $\pi^2 \neq a\pi + b$.
+\end{proof}
+
+\begin{exercise}[Rational Root Theorem]
+  Let $f(x) = a_nx^n + a_{n - 1}x^{n - 1} + \dots + a_0 \in \poly{Z}$ with degree $n$.
+  If $r$ and $s$ are relatively prime integers and $f(\frac{r}{s}) = 0$,
+  show that $r \mid a_0$ and $s \mid a_n$.
+\end{exercise}
+\begin{proof}
+  We know $(x - \frac{r}{s})$ divides $f(x)$ since $f(\frac{r}{s}) = 0$,
+  so does $sx - r$. Therefore there must be $c \in Z$ such that $sxcx^{n - 1} = a_nx^n$,
+  which implies $sc = a_n$ and then $s \mid a_n$.
+  Similarly, at the final step of division, there is $c \in Z$ such that $rc = a_0$.
+\end{proof}
+
+
+\setcounter{exercise}{37}
+\begin{exercise}
+  If $p$ is a prime, prove that $f(x) = x^{p - 1} - x^{p - 2} + x^{p - 3} - \dots - x + 1$
+  is irreducible over $Q$.
+\end{exercise}
+\begin{proof}
+  If $p = 2$, then $x + 1$ is irreducible over $Q$.
+  If $p \neq 2$, then $p$ is an odd integer, we need to show that 
+  $f(- x) = x^{p - 1} - (- x^{p - 2}) + x^{p - 3} - \dots - (- x) + 1$
+  is irreducible over $Q$.
+  It follows that the $p$th Cyclotomic Polynomial is irreducible over $Q$
+  when $p$ is a prime. (Corollary of Theorem 17.4, I am sorry that it is not in my note)
+\end{proof}
+
+\begin{exercise}
+  Let $F$ be a field and let $p(x) \in \poly{F}$ be irreducible over $F$.
+  If $E$ a field and $F \subseteq E$ and $a \in E$ such that $p(a) = 0$.
+  Show that the mapping $\phi(f(x)) = f(a) : \poly{F} \rightarrow E$
+  is a ring homomorphism with kernel $\cyc{p(x)}$.
+\end{exercise}
+\begin{proof}
+  It is easy to see that $\phi(f(x) + g(x)) = f(a) + g(a) = \phi(f(x)) + \phi(g(x))$
+  and $\phi(f(x)g(x)) = f(a)g(a) = \phi(f(x))\phi(g(x))$.
+
+  We first show that $\deg p(x)$ is minimal such that $p(a) = 0$.
+  Let $f(x) \in \poly{F}$ a non-zero element with minimal degree such that $f(a) = 0$,
+  then we know $p(x) = f(x)q(x) + r(x)$ where $r(x) = 0$ or $\deg r(x) < \deg f(x)$.
+  Then $p(a) = f(a)q(a) + r(a)$ which is $0 = 0 + r(a)$, therefore $r(a) = 0$
+  and then $r(x) = 0$, otherwise it contradicts to the assumption that $\deg f(x)$
+  is minimal such that $f(a) = 0$.
+  Then $p(x) = f(x)q(x)$, since $p(x)$ is irreducible over $F$, and $f(x)$ is not a unit
+  (since $f(x) \neq 0$ and $f(a) = 0$), therefore $q(x)$ is a unit,
+  and then $\deg f(x) = \deg p(x)$.
+
+  For any $f(x) \in \poly{F}$ such that $f(a) = 0$, we have $f(x) = p(x)q(x) + r(x)$,
+  since $\deg p(x)$ is minimal such that $p(a) = 0$, we know $r(x) = 0$,
+  therefore $p(x)$ divides $f(x)$, which means $f(x) \in \cyc{p(x)}$.
+
+  The Path: I was trying to show that $p(x)$ divides $f(x)$ where $f(a) = 0$,
+  but there is an annoying remainder, so I trying to show that $\deg p(x)$ is minimal
+  by supposing a $g(x) \in \poly{F}$ such that $\deg g(x) \le \deg p(x)$ and $g(a) = 0$.
+  However, it is not enough, there is still a remainder, but I found that supposing
+  $\deg g(x)$ is minimal such that $g(a) = 0$ may solve this problem.
+  That is why I don't like LEM.
+\end{proof}
+
+\setcounter{exercise}{40}
+\begin{exercise}
+  Let $F$ be a field and let $p(x) \in \poly{F}$ such that $p(x)$ is irreducible over $F$.
+  Show that $\set{a + \cyc{p(x)}}{a \in F}$ is a subfield of $\poly{F}/\cyc{p(x)}$
+  that is isomorphic to $F$.
+  For any $a + \cyc{p(x)}$ and $b + \cyc{p(x)}$, if $a + \cyc{p(x)} = b + \cyc{p(x)}$,
+  then $a - b \in \cyc{p(x)}$, which means $\cyc{p(x)} = \poly{F}$ since $a - b \in F$ is a unit
+  unless $a = b$. Therefore $a = b$, and it is isomorphic to $F$ (bijective), therefore
+  it is a field, and a subfield of $\poly{F}/\cyc{p(x)}$.
+\end{exercise}
+
+\setcounter{exercise}{42}
+\begin{exercise}
+  The polynomial $2x^2 + 4$ is irreducible over $Q$ but reducible over $Z$.
+  State a condition on $f(x)$ that makes the converse of Theorem 17.2 true.
+\end{exercise}
+\begin{proof}
+  $f(x)$ is primitive. Then whenever $f(x)$ is reducible, it must be the
+  product of two non-constant polynomial (otherwise $f(x)$ is no longer primitive),
+  therefore it is reducible over $Q$.
+\end{proof}
+
+\end{document}

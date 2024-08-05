@@ -1,0 +1,503 @@
+\documentclass[14pt]{extarticle}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsthm,amsmath,amssymb}
+\usepackage{hyperref}
+
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem*{lemma}{Lemma}
+\setcounter{section}{10}
+
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\join}[3][,]{#2_0 #1 #2_1 #1 \cdots #1 #2_{#3}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\normalin}{\triangleleft}
+\newcommand{\1}{\{ e \}}
+\newcommand{\set}[2]{\{ \ #1 \ | \ #2 \ \}}
+\newcommand{\cyc}[1]{\langle #1 \rangle}
+
+\DeclareMathOperator{\Abelian}{Abelian}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\modu}{mod}
+\DeclareMathOperator{\id}{id}
+
+\begin{document}
+
+\setcounter{exercise}{6}
+\begin{exercise}
+  Let $\phi : G \rightarrow H$ and $\sigma : H \rightarrow K$ are homomorphisms.
+  Show that $\sigma \phi : G \rightarrow K$ is homomorphism.
+  What relationship between $\Ker \phi$ and $\Ker \sigma \phi$?
+  If $\phi$ and $\sigma$ are onto and $G$ is finite, 
+  describe $[ \Ker \sigma \phi : \Ker \phi ]$ in terms of $|H|$ and $|K|$.
+\end{exercise}
+\begin{proof}
+  For any $a \ b \in G$, we have $\sigma\phi(ab) = \sigma(\phi(ab)) = \sigma(\phi(a)\phi(b)) = \sigma(\phi(a)) \sigma(\phi(b)) = \sigma\phi(a) \sigma\phi(b)$.
+
+  $\Ker \phi \subseteq \Ker \sigma \phi$. 
+  For any $x \in \Ker \phi$, $\sigma\phi(x) = \sigma(e) = e$.
+
+  Since $\phi$ and $\sigma$ are onto, so is $\sigma\phi$.
+  Thus $\phi(G) = H$ and $\sigma\phi(G) = K$.
+  Then 
+  by $\displaystyle \frac{|G|}{|\Ker \phi|} = |\phi(G)| = |H|$ 
+  and $\displaystyle \frac{|G|}{|\Ker \sigma \phi|} = |\sigma \phi(G)| = |K|$
+  we know $\displaystyle |\Ker \phi| = \frac{|G|}{|H|}$
+  and $\displaystyle |\Ker \sigma \phi| = \frac{|G|}{|K|}$.
+  Then 
+  $\displaystyle [ \Ker \sigma \phi : \Ker \phi ] = \frac{|\Ker \sigma \phi|}{|\Ker \phi|} = \frac{|G|}{|K|} \frac{|H|}{|G|} = \frac{|H|}{|K|}$.
+\end{proof}
+
+{
+\newcommand{\sgn}{\mathrm{sgn}}
+  
+\begin{exercise}
+  \label{exc:10.8}
+  Let $G$ be a group of permutations. For each $\sigma \in G$, define:
+  \[
+    \sgn(\sigma) = \begin{cases}
+      +1 & \quad \text{if } \sigma \text{ is even permutation} \\
+      -1 & \quad \text{if } \sigma \text{ is odd permutation}
+    \end{cases}
+  \]
+  Prove that $\sgn$ is a homomorphism from $G$ to $\{ +1 , -1 \}$ under multiplication.
+  What is the kernel of $\sgn$?
+  And why this conclude that $A_n$ is a normal subgroup of $S_n$ of index $2$ for $n > 1$?
+\end{exercise}
+\begin{proof}
+  For any $\alpha \ \beta \in G$, if they are all even permutations or odd permutations,
+  then $\sgn(\alpha \beta) = \sgn(\alpha) \sgn(\beta) = +1$.
+  If one of them is even permutation and another one is odd permutation,
+  $\sgn(\alpha \beta) = \sgn(\alpha) \sgn(\beta) = -1$.
+
+  Note that the identity of $\{ +1 , -1 \}$ under multiplication is $+1$,
+  so the kernel of $\sgn$ is the set of even permutations in $G$.
+  Take $G = S_n$, it is easy to show that $\Ker \sgn = A_n$.
+  Thus $A_n$ is a normal subgroup.
+  Then by $S_n/A_n \approx \sgn(S_n)$ 
+  we get $\displaystyle \frac{|S_n|}{|A_n|} = |\sgn(S_n)|$.
+  It is easy to show $|\sgn(S_n)| = 2$ when $n > 1$.
+  Thus the index of $A_n$ is $2$.
+\end{proof}
+
+\setcounter{section}{5}
+\setcounter{exercise}{26}
+
+\begin{exercise}
+  Using \textnormal{Exercise \ref{exc:10.8}} to show the following theorem:
+  Let $H$ be a subgroup of $S_n$ where $n > 1$, 
+  either every element of $H$ is an even permutation or
+  exactly half of the elements of $H$ are even permutations.
+\end{exercise}
+\begin{proof}
+  If there is no odd permutation in $H$, $H$ consists of even permutations.
+  So we suppose $\alpha \in H$ such that $\alpha$ is odd permutation.
+  Using Exercise \ref{exc:10.8}, we take $G = H$. 
+  $\Ker \sgn$ is the set of all even permutations in $H$ 
+  where the index of $\Ker \sgn$ is $2$. Thus, half of $H$ are even permutations.
+\end{proof}
+
+\setcounter{section}{10}
+\setcounter{exercise}{8}
+}
+
+\begin{exercise}
+  Prove that the mapping from $G \oplus H$ to $G$ 
+  given by $(g , h) \mapsto g$ is a homomorphism.
+  What is the kernel?
+\end{exercise}
+\begin{proof}
+  It is trivial that it is a homomorphism.
+  The kernel is $\{ e \} \oplus H$.
+\end{proof}
+
+\begin{exercise}
+  Let $G$ be a subgroup of $D_n$. Define:
+  \[
+    \phi(x) = \begin{cases}
+      +1 & \quad \textnormal{if } x \textnormal{ is a rotation} \\
+      -1 & \quad \textnormal{if } x \textnormal{ is a reflection}
+    \end{cases}
+  \]
+  Prove that $\phi$ is a homomorphism from $G$ to $\{ +1 , -1 \}$ under multiplication.
+  What is the kernel? And use this to show that either 
+  every element of $G$ is rotation, or
+  exactly half element of $G$ is rotation.
+\end{exercise}
+\begin{proof}
+  It is easy to show that $\phi$ is a homomorphism.
+  Note that the identity of codomain is $+1$, 
+  so $\Ker \phi$ is the set of rotations of $G$.
+
+  If there is no reflection in $G$, then $G$ consists of rotations.
+  So we suppose $F \in G$ is a reflection.
+  By $G/\Ker\phi \approx \phi(G)$
+  we know $\displaystyle \frac{|G|}{|\Ker \phi|} = |\phi(G)|$.
+  It is easy to show $|\phi(G)| = 2$.
+  Thus the order of $\Ker \phi$, the number of rotations of $G$ is exactly $\displaystyle \frac{|G|}{2}$.
+\end{proof}
+
+\begin{exercise}
+  Prove that $(Z \oplus Z)/(\langle a \rangle \oplus \langle b \rangle)$
+  is isomorphic to $Z_a \oplus Z_b$.
+\end{exercise}
+\begin{proof}
+  We claim the following function is a homomorphism:
+  \begin{center}
+    \boxed{\phi((x , y)) = (x \ \modu \ a , y \ \modu \ b) : Z \oplus Z \rightarrow Z_a \oplus Z_b}
+  \end{center}
+  It is trivial that $\phi$ is a homomorphism.
+  Then for any $(x , y) \in Z \oplus Z$, $\phi((x , y)) = (0 , 0)$
+  says $x \in \langle a \rangle$ and $y \in \langle b \rangle$.
+  Thus $(x , y) \in \langle a \rangle \oplus \langle b \rangle$.
+  So $\Ker \phi = \langle a \rangle \oplus \langle b \rangle$.
+  And obviously, $\phi(Z \oplus Z) = Z_a \oplus Z_b$, 
+  by First Isomorphism Theorem,
+  $(Z \oplus Z)/(\langle a \rangle \oplus \langle b \rangle) \approx Z_a \oplus Z_b$.
+\end{proof}
+
+\begin{exercise}
+  \label{exc:10.12}
+  Suppose $k$ is a divisor of $n$. Prove that $Z_n / \langle k \rangle \approx Z_k$.
+\end{exercise}
+\begin{proof}
+  Since $k$ divides $n$, we write $n = kq$.
+  Consider the function $\phi(x) = qx : Z_n \rightarrow Z_n$.
+  For any $a \ b \in Z_n$:
+
+  \begin{align*}
+    \phi(a + b) &= q(a + b) \\
+    &= qa + qb \\
+    &= \phi(a) \phi(b)
+  \end{align*}
+
+  We next show that $\langle k \rangle$ is the kernel of $\phi$.
+  For any $kd \in Z_n$, $\phi(kd) = qkd = nd = 0$.
+  And for any $x \in Z_n$, if $\phi(x) = 0$, $qx = 0$, 
+  then $n = kq$ divides $qx$, say $qx = kqq^\prime$, 
+  then by cancellation, $x = kq^\prime \in \langle k \rangle$.
+
+  Since $n = kq$, $|\langle k \rangle| = |\langle \frac{n}{q} \rangle| = q$.
+  Then by $\displaystyle \frac{|Z_n|}{|\langle k \rangle|} = |\phi(Z_n)|$
+  we know $|\phi(Z_n)| = \frac{n}{q} = k$.
+  And $\phi(Z_n)$ is cyclic since $Z_n$ is cyclic.
+  Thus $\phi(Z_n) \approx Z_k$.
+\end{proof}
+
+\begin{exercise}
+  Prove that $(A \oplus B)/(A \oplus \1) \approx B$.
+\end{exercise}
+\begin{proof}
+  Consider the function $\phi((a , b)) = b$ from $A \oplus B$ to $B$.
+  It is trivial that $\phi$ is homomorphism.
+  $A \oplus \1 = \Ker \phi$ and
+  $\phi(A \oplus B) = B$.
+\end{proof}
+
+\setcounter{exercise}{21}
+\begin{exercise}
+  Let $\phi : G \rightarrow \overline{G}$ is a homomorphism and $\phi$ is onto,
+  where $G$ is a finite group.
+  For any element $g \in \overline{G}$, prove that $G$ has an element of order $|g|$.
+\end{exercise}
+\begin{proof}
+  Since $\phi$ is onto, $\phi(G) = \overline{G}$,
+  then $G / \Ker \phi \approx \overline{G}$.
+  For any element of $g \in \overline{G}$,
+  there is an element of order $|g|$ in $G / \Ker \phi$.
+  Then by Lemma 9.1, $G$ also has an element of order $|g|$.
+\end{proof}
+
+\setcounter{exercise}{28}
+\begin{exercise}
+  Suppose that $\phi$ is a homomorphism from finite $G$ onto $Z_{10}$.
+  Prove that $G$ has normal subgroups of index $2$ and $5$.
+\end{exercise}
+\begin{proof}
+  By Exercise \ref{exc:10.12}, there is a homomorphism 
+  $f$ from $Z_{10}$ onto $Z_2$ and
+  $g$ from $Z_{10}$ onto $Z_5$.
+
+  Thus, $\Ker f \phi$ is a normal subgroup of $G$ of index $2$
+  and $\Ker g \phi$ is a normal subgroup of $G$ of index $5$.
+\end{proof}
+
+\setcounter{exercise}{47}
+\begin{exercise}[$\star$]
+  Let $\phi$ a homomorphism from $G$ to some group,
+  where $G = \cyc{S}$ and $\cyc{S} = \set{s_0^{d_0} s_1^{d_1} \cdots s_n^{d_n}}{s_i \in S, d_i \in \Z}$.
+  Prove that $\phi(G) = \cyc{\phi(S)}$.
+\end{exercise}
+\begin{proof}
+  For any $\phi(x) \in \phi(G)$, since $G$ is generated by $S$:
+  \begin{align*}
+    \phi(x) &= \phi(s_0^{d_0} s_1^{d_1} \cdots s_n^{d_n}) \\
+            &= \phi(s_0^{d_0}) \phi(s_1^{d_1}) \cdots \phi(s_n^{d_n}) \\
+            &= \phi(s_0)^{d_0} \phi(s_1)^{d_1} \cdots \phi(s_n)^{d_n}
+  \end{align*}
+  where $\phi(s_i) \in \phi(S)$,
+  thus $\phi(x) \in \cyc{\phi(S)}$.
+
+  And for any $x \in \cyc{\phi(S)} = \set{t_0^{d_0} t_1^{d_1} \cdots t_m^{d_m}}{t_i \in \phi(S), d_i \in \Z}$, 
+  since it is generated by $\phi(S)$:
+  \begin{align*}
+    x &= t_0^{d_0} t_1^{d_1} \cdots t_m^{d_m} \\
+      &= \phi(s_0)^{d_0} \phi(s_1)^{d_1} \cdots \phi(s_m)^{d_m} \\
+      &= \phi(s_0^{d_0}) \phi(s_1^{d_1}) \cdots \phi(s_m^{d_m}) \\
+      &= \phi(s_0^{d_0} s_1^{d_1} \cdots s_m^{d_m}) \\
+  \end{align*}
+  where $s_0^{d_0} s_1^{d_1} \cdots s_m^{d_m} \in \cyc{S} = G$, $\phi(s_0^{d_0} s_1^{d_1} \cdots s_m^{d_m}) \in \phi(G)$.
+\end{proof}
+
+\begin{exercise}[Second Isomorphism Theorem]
+  If $K \leq G$ and $N \normalin G$, show that $K/(K \cap N) \approx KN/N$.
+\end{exercise}
+\begin{proof}
+  Let $\phi(k) = kN$ a mapping from $K$ to $KN/N$.
+  For any $a \ b \in K$, $\phi(ab) = abN = aNbN = \phi(a)\phi(b)$,
+  thus $\phi$ is a homomorphism.
+
+  For any $k \in K$, if $k \in N$, $\phi(k) = N$, thus $\Ker \phi = K \cap N$.
+
+  For any $aN \in KN/N$ where $a \in KN$, thus $a = kn$ for some $k \in K$ and $n \in N$.
+  Then $aN = (kn)N = kNnN$, since $n \in N$, so $kNnN = kN$ and $aN = kN$.
+  Then $\phi(k) = kN = aN$, $\phi$ is onto.
+
+  By $K / \Ker \phi \approx \phi(K)$ we get $K / (K \cap N) \approx KN/N$.
+\end{proof}
+
+\begin{exercise}[Third Isomorphism Theorem]
+  Let $M$ and $N$ are normal subgroups of $G$, and $N \leq M$.
+  Prove that $(G/N)/(M/N) \approx G/M$.
+\end{exercise}
+\begin{proof}
+  Consider $\phi(gN) = gM$ from $G/N$ to $G/M$.
+  We need to show that it \textbf{is} a function.
+  For any $aN \ bN \in G/N$ where $aN = bN$,
+  then $\inv{a}b \in N$, thus $\inv{a}b \in M$ since $N \leq M$.
+  Then $aM = bM$ and $\phi(aN) = \phi(bN)$.
+
+  For any $mN \in M/N$ where $m \in M$, $\phi(mN) = mM = M$ since $m \in M$.
+  Thus $M/N \subseteq \Ker \phi$. 
+  For any $gN \in G/N$ such that $\phi(gN) = M$, then $gM = M$ and $g \in M$,
+  therefore $gN \in M/N$. Thus $\Ker \phi \subseteq M/N$.
+
+  For any $gM \in G/M$, we have $\phi(gN) = gM$, therefore $\phi$ is onto.
+  And by First Isomorphism Theorem, $(G/N) / \Ker \phi = (G/N)/(M/N) \approx \phi(G/N) = G/M$.
+\end{proof}
+
+\setcounter{exercise}{58}
+\begin{exercise}
+  Using \textnormal{Lemma 10.17} to answer the following question:
+  Let $N$ be a normal subgroup of $G$, 
+  show that every subgroup of $G/N$ 
+  has form (is isomorphic to)
+  $H/N$, where $H \leq G$.
+\end{exercise}
+\begin{proof}
+  We have natural mapping $\gamma(g) = gN$.
+  Let $\overline{H}$ a subgroup of $G/N$,
+  and let $H = \inv{\gamma}(\overline{H})$.
+  By Lemma 10.17, $H$ is a subgroup of $G$.
+  Since $\inv{\gamma}(e) = \Ker \gamma$
+  and $e \in \overline{H}$,
+  then $\Ker \gamma = N \subseteq \inv{\gamma}(\overline{H}) = H$.
+
+  Now let $\psi(h) = \gamma(h)$ a homomorphism from $H$ to $G/N$.
+  Since $H/N \approx \psi(H) = \gamma(H) = \gamma(\inv{\gamma}(\overline{H})) = \overline{H}$.
+  We conclude that every subgroup $\overline{H}$ has form $H/N$.
+\end{proof}
+
+\begin{exercise}
+  Let $S = \cyc{a}$, $\phi$ and $\psi$ are homomorphism
+  from $S$ to some group, show that if $\phi(a) = \psi(a)$,
+  $\phi = \psi$.
+\end{exercise}
+\begin{proof}
+  For any $a^k \in S$,
+  $\phi(a^k) = \phi(a)^k = \psi(a)^k = \psi(a^k)$.
+\end{proof}
+
+\begin{exercise}
+  Using First Isomorphism Theorem to prove the theorem in Chapter 9:
+  For any group $G$, $G/Z(G) \approx \Inn(G)$
+\end{exercise}
+\begin{proof}
+  Let $\phi(g) = \phi_g$ a mapping from $G$ to $\Inn(G)$,
+  where $\phi_g(x) = gx\inv{g}$ is inner isomorphism.
+
+  For any $a \ b \in G$, $\phi(ab) = \phi_{ab} = \phi_a \circ \phi_b = \phi(a) \circ \phi(b)$.
+  Thus $\phi$ is a homomorphism.
+
+  For any $g \in Z(G)$, $\forall x \in G, \phi(g)(x) = \phi_g(x) = gx\inv{g} = xg\inv{g} = x$
+  tells us $\phi(g) = \phi_g = \phi_e$.
+  And for any $g \in G$ where $\phi(g) = \phi_g = \phi(e) = \phi_e$,
+  then $\forall x \in G, \phi_g(x) = \phi_e(x) \rightarrow gx\inv{g} = x$
+  therefore $gx = xg$, this tells us $g \in Z(G)$.
+  Thus the kernel of $\phi$ is $Z(G)$.
+
+  For any $\phi_g \in \Inn(G)$ for some $g$, $\phi(g) = \phi_g$,
+  thus $\phi$ is onto.
+
+  And by First Isomorphism Theorem, $G / \Ker \phi = G / Z(G) \approx \phi(G) = \Inn(G)$.
+\end{proof}
+
+\setcounter{exercise}{65}
+\begin{exercise}
+  If $H$ and $K$ are normal subgroups of $G$ and $H \cap K = \1$.
+  Prove that $G$ is isomorphic to some subgroup of $G/H \oplus G/K$.
+\end{exercise}
+\begin{proof}
+  Consider the mapping $\phi(g) = (gH, gK)$ from $G$ to $G/H \oplus G/K$.
+  It is obviously a homomorphism by $\forall a \ b \in G, abH = aHbH$.
+
+  For any $g \in \Ker \phi$, $\phi(g) = (H, K)$ implies $g \in H$ and $g \in K$,
+  thus $g \in H \cap K$, but the only element in $H \cap K$ is $e$, 
+  thus $g = e$. Then $\Ker \phi \subseteq \1$, 
+  and $\1 \subseteq \Ker \phi$ since $\Ker \phi$ is a subgroup.
+
+  Thus $G / \Ker \phi = G / \1 \approx G \approx \phi(G)$
+  where $\phi(G)$ is a subgroup of $G/H \oplus G/K$.
+\end{proof}
+
+\stepcounter{exercise}{69}
+\begin{exercise}
+  If $G$ is a non-Abelian group of order $55$. 
+  Prove that $G$ has exactly $11$ subgroups of order $5$,
+  and they have form $a^iKa^{-1}$ for $i = 0, 1, \dots, 10$
+  for some element $a$ in $G$ and some subgroup $K$ of $G$.
+\end{exercise}
+\begin{proof}
+  If $G$ has no element of order $11$, 
+  then $G$ has to have $54$ non-identity elements of order $5$.
+  But $|\phi(5)| = 4$ doesn't divides $54$ ($\phi$ is Eular's totient function),
+  thus $G$ has at least one element of order $11$.
+  Suppose $H$ and $K$ are subgroups of $G$ of order $11$,
+  then $\displaystyle |HK| = \frac{|H||K|}{|H \cap K|} = \frac{11 \times 11}{1} = 121$.
+  But $HK \subseteq G$ where $|G| = 55$.
+  Thus $G$ has only one subgroup of order $11$, 
+  and $G$ has at least one element of order $5$.
+
+  We denote the subgroup of $G$ of order $11$ as $H$,
+  and a subgroup of $G$ of order $5$ as $K$.
+
+  Let $\phi(k) = ak\inv{a}$ (and forget the last $\phi$ we use) from $K$ to $G$, where $a \in H$.
+  It is obviously a homomorphism.
+
+  We will show that $\phi \neq \id$. Suppose $\forall k \in K, \phi(k) = ak\inv{a} = k$.
+  Then $a \in C(k)$.
+  Obviously, $K \subseteq C(k)$ since $K$ is Abelian.
+  If $a \in C(k)$, then $H \subseteq C(k)$ 
+  since $a$ is the generator of $H$.
+  Then $HK \subseteq C(k)$ 
+  where $\displaystyle |HK| = \frac{|H||K|}{|H \cap K|} = \frac{11 \times 5}{1} = 55$.
+  Thus $C(k) = G$, therefore $k \in Z(G)$, and $\cyc{k} = K \subseteq Z(G)$.
+  But now the index of $K$ is prime, which indicates $G$ is Abelian.
+  So $\phi \neq id$.
+  Then by $\phi^{11}(k) = a^{11}ka^{-11} = eke = k$, $|\phi| = 11$.
+
+  For any $i \ j \in Z_{11}$, $s \ t \in K$, and suppose $i \neq j$, $s$ and $t$ are non-identity and $\phi^i(s) = \phi^j(t)$.
+  Then $\phi^{i - j}(s) = t$, therefore $\phi^{i - j}(K) = K$ since $s$ and $t$ are generators of $K$,
+  which means $a^{i - j} \in N(K)$, therefore $H \subseteq N(K)$ 
+  since $a^{i - j}$ generates $H$.
+  Obviously, $K \subseteq N(K)$, thus $N(K) = G$ since $HK \subseteq N(K)$ and $|HK| = 55$.
+  And by $|\phi| = 11$, $H \nsubseteq C(K)$ unless $|\phi| = 1$.
+  By $K \subseteq C(K)$ (since $K$ is Abelian), $|C(K)|$ divides $55$
+  and $H \nsubseteq C(K)$, we know $|C(K)| = 5$ therefore $C(K) = K$.
+  Then by N/C Theorem, $N(K)/C(K) \approx \textnormal{a subgroup of } \Aut(K)$,
+  where the order of left hand side is $\frac{|G|}{|K|} = 11$
+  and the order of right hand side is $|\Aut(K)| = |\Aut(Z_5)| = |U(5)| = 4$.
+  $11$ doesn't divides $4$, thus $N(K)/C(K)$ can not isomorphic to a subgroup of $\Aut(K)$.
+  If $s$ is identity, then $\phi^i(s) = e$, therefore $t$ has to be $e$,
+  since the kernel of $\phi^j = \1$.
+  So the intersection of the image of $\phi^i$ and $\phi^j$ is $\1$.
+
+  Finally, the image of each $\phi^i$ corresponds a subgroup of $G$,
+  and they are distinct. Also, they have form $a^iKa^{-i}$ for $i \in Z_{11}$.
+
+  Then $G$ has at least $11 \times 4$ elements of order $5$,
+  $10$ elements of order $11$, $1$ element of order $1$,
+  where $44 + 10 + 1 = 55$. Thus $G$ has exactly $11$ subgroups of order $5$.
+\end{proof}
+
+\setcounter{exercise}{73}
+\begin{exercise}
+  If $m$ and $n$ are positive integers, prove that the mapping
+  $\phi(x) = x \modu n$ from $Z_m$ to $Z_n$ is a homomorphism
+  if and only if $n$ divides $m$.
+\end{exercise}
+\begin{proof}
+  Suppose $\phi$ is a homomorphism, then
+  divide $m$ by $n$, we get $m = nq + r$ where $0 \le r < n$.
+  If $n$ doesn't divide $m$, that is, $r \neq 0$,
+  then $\phi(m) = \phi(nq + r) = q\phi(n) + \phi(r) = \phi(r) = r \modu n$.
+  Since $r < n$, therefore $r \modu n = r$. But $r \neq 0$ and $\phi(m) = \phi(0) = 0$.
+  Thus $n$ has to divide $m$.
+
+  Suppose $n$ divides $m$, then $m = nq$.
+  For any $x \ y \in Z_m$,
+  $\phi(x + y) = (x + y \modu m) \modu n = (x + y \modu nq) \modu n$.
+  Divide $x + y$ by $nq$, we get $x + y = (nq)p + s$,
+  then divide $s$ by $n$, we get $s = nr + t$,
+  then $x + y = nqp + nr + t$. Therefore:
+  \begin{align*}
+     & (x + y \modu nq) \modu n \\
+    =& (nqp + nr + t \modu nq) \modu n \\
+    =& nr + t \modu n \\
+    =& t
+  \end{align*}
+  where
+  \begin{align*}
+     & x + y \modu n \\
+    =& nqp + nr + t \modu n \\
+    =& t
+  \end{align*}
+  Then $\phi(x + y) = x + y \modu n = ((x \modu n) + (y \modu n)) \modu n = \phi(x) + \phi(y)$.
+\end{proof}
+
+\begin{lemma}
+  Let $H$ a normal subgroup of $G$, and let $\overline{G}$ be any group.
+  the number of isomorphisms between $G/H$ and $\overline{G}$
+  is equal to
+  the number of homomorphism from $G$ onto $\overline{G}$ where the kernel is $H$.
+\end{lemma}
+\begin{proof}
+  The mapping $f$ given by $\phi \mapsto (gH \mapsto \phi(g))$
+  from ($\Sigma [ \phi \in G \rightarrow \overline{G} ] \Ker \phi = H $) 
+  to $G/H \approx \overline{G}$ ($gH \mapsto \phi(g)$ is a isomorphism by First Isomorphism Theorem) 
+  is bijective:
+  \begin{itemize}
+    \item One-to-one: For any $\phi \ \psi : G \rightarrow \overline{G}$, 
+      if $f(\phi) = f(\psi)$, then for any $g \in G$:
+      \begin{align*}
+        f(\phi)(gH) &= f(\psi)(gH) \\
+        \phi(g) &= \psi(g)
+      \end{align*}
+      which implies $\phi = \psi$
+    \item Onto: For any $g : G/H \approx \overline{G}$, consider the homomorphism 
+      $\phi(a) = g(aH)$, for any $aH \in G/H$,
+      $f(\phi)(aH) = \phi(a) = g(aH)$, thus $f(\phi) = g$.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{75}
+\begin{exercise}
+  Let $p$ be a prime. Determine the number of homomorphisms from $Z_p \oplus Z_p$ to $Z_p$.
+\end{exercise}
+\begin{proof}
+  For any homomorphism that maps to $Z_p$, the image of it can be $\1$ or $Z_p$,
+  we focus on the later one.
+
+  For each subgroup $H$ of $Z_p \oplus Z_p$ of order $p$,
+  we have $|(Z_p \oplus Z_p) / H \approx Z_p| = |Z_p \approx Z_p| = |Aut(Z_p)| = |U(p)| = \phi(p) = p - 1$
+  homomorphisms from $Z_p \oplus Z_p$ onto $Z_p$ where the kernel is $H$.
+
+  And $Z_p \oplus Z_p$ has $\displaystyle \frac{p^2 - 1}{p - 1} = (p + 1)$
+  subgroups of order $p$.
+  Thus there are $(p + 1)(p - 1) + 1 = p^2 - 1 + 1 = p^2$ homomorphisms from $Z_p \oplus Z_p$ to $Z_p$.
+\end{proof}
+
+\end{document}

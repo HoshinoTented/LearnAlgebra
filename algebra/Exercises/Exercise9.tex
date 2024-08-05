@@ -1,0 +1,520 @@
+\documentclass[14pt]{extarticle}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsthm,amsmath,amssymb}
+
+\newtheorem{exercise}{Exercise}[section]
+\setcounter{section}{9}
+
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\join}[3][,]{#2_0 #1 #2_1 #1 \cdots #1 #2_{#3}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\normalin}{\triangleleft}
+\newcommand{\1}{\{ e \}}
+\DeclareMathOperator{\Abelian}{Abelian}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Aut}{Aut}
+
+\begin{document}
+
+\setcounter{exercise}{8}
+\begin{exercise}
+  Let $H \leq G$, the index of $H$ is $2$. Show that $H$ is normal.
+\end{exercise}
+\begin{proof}
+  Since $[G:H] = 2$, $G = H \cup gH = H \cup Hg$ where $g \notin H$.
+  Also $H \cap gH = H \cap Hg = \varnothing$. Removing $H$ from $G$ we get
+  $gH = Hg$.
+
+  Informally, $gH$ and $Hg$ are the another half part of $G$.
+\end{proof}
+
+\setcounter{exercise}{10}
+\begin{exercise}
+  Prove that a quotient group of a cyclic group is cyclic.
+\end{exercise}
+\begin{proof}
+  For any cyclic group $G$ and normal subgroup $H$,
+  let $G = \langle g \rangle$ and $H = \langle g^n \rangle$ for some minimum $n \in \N$.
+  We claim $G/H \approx Z_n$ or $G/H \approx G$ if $n = 0$ which is trivial.
+
+  We claim:
+  {
+    \newcommand{\gH}{\langle gH \rangle}
+    \newcommand{\GH}{G/H}
+
+    \begin{center}
+      \boxed{\gH = \GH}
+    \end{center}
+
+
+    Every element in $\gH$ is a coset of $H$, thus $\gH \subseteq \GH$.
+
+    Any element in $\GH$ has form $hH$ where $h \in G$, therefore $h = g^s$ for some $s$.
+    Then $hH = g^sH \in \langle gH \rangle$.
+
+    We claim $| gH | = n$.
+    $(gH)^n = g^nH$ where $g^n \in H$, so $g^nH = H$.
+    Suppose $0 < m < n, g^mH = H$. Then $g^m \in H$ and $g^{\gcd(m, n)} \in H$
+    where $\gcd(m, n) \le m$ and $\gcd(m, n)$ divides $n$.
+    But this contradict our assumption that $n$ is minimum such that $\langle g^n \rangle = H$,
+    because $\langle g^{\gcd(m, n)} \rangle = H$.
+
+    Thus, $\gH$ is cylic and order $n$, which is isomorphic to $Z_n$
+  }
+\end{proof}
+
+\begin{exercise}
+  Prove that a quotient group of an Abelian group is abelian.
+\end{exercise}
+\begin{proof}
+  For any Abelian group $G$ and normal subgroup $H$. For all $aH$ and $bH$ in $G/H$
+  where $a \ b \in G$.
+  $(aH)(bH) = abH = baH = (bH)(aH)$.
+\end{proof}
+
+\setcounter{exercise}{20}
+
+\begin{exercise}
+  For any Abelian group $G$ of order $\join[]{p}{n - 1}$ where $p_i$ are distinct primes.
+  Shows that $G$ is cyclic.
+\end{exercise}
+\begin{proof}
+  Since $|G| = \join[]{p}{n - 1}$, there are elements of each prime orders, say,
+  $|g_0| = p_0, |g_1| = p_1 \cdots$.
+  We claim $G = \langle g_0 \rangle \times \langle g_1 \rangle \times \cdots \times \langle g_{n - 1} \rangle$.
+  
+  They are all normal because $G$ is Abelian, so the first property satisfied.
+  Let $H = (\langle g_0 \rangle \langle g_1 \rangle \cdots \langle g_{i - 1} \rangle) \cap \langle g_i \rangle$
+  for some $i$.
+  $H$ must be the subgroup of both $\langle g_0 \rangle \langle g_1 \rangle \cdots \langle g_{i - 1} \rangle$ and $\langle g_i \rangle$,
+  therefore, $|H|$ divides $\join[]{p}{i - 1}$ and $p_i$. But all $p$'s are distinct prime, so $|H|$ must be $1$,
+  thus $H = \{ e \}$.
+  Then, since the product of two Abelian subgroups is also a subgroup, and the property we just proved,
+  it is easy to show $G = \langle g_0 \rangle \langle g_1 \rangle \cdots \langle g_{n - 1} \rangle$
+  by $\displaystyle \forall H \ K \leq G, |HK| = \frac{|H||K|}{|H \cap K|}$
+
+  So $G$ is the internal direct product of $\langle g_0 \rangle \times \langle g_1 \rangle \times \cdots \times \langle g_{n - 1} \rangle$,
+  which is isomorphic to $G^\prime = \langle g_0 \rangle \oplus \langle g_1 \rangle \oplus \cdots \oplus \langle g_{n - 1} \rangle$.
+  And the order of $\langle g_i \rangle$ are relative primes, so $G^\prime$ is cyclic, so is $G$.
+\end{proof}
+
+\setcounter{exercise}{40}
+\begin{exercise}
+  Let $H$ be proper subgroup of $Q$, the group of rational numbers under addition.
+  Show that $H$ is infinite index.
+\end{exercise}
+\begin{proof}
+  Since $Q$ Abelian, we need to show $Q/H$ is infinite.
+  Suppose $|Q/H|$ is some finite $n$, let $aH \in Q/H$ and $aH \neq H$,
+  then $(aH)^n = (na)H = H$.
+  But we found that $(\frac{a}{n})H \in Q/H$ since it is a coset of $H$,
+  but $((\frac{a}{n})H)^n = aH$ which is not identity, contradict the fact that
+  $\forall aH \in G/H , (aH)^n = H$
+
+  Another solution: $\forall x \in Q$, we have $xH \in Q/H$, if $|Q/H| = n$,
+  then $(xH)^n = nxH = H \rightarrow nx \in H$. Consider $f(x) = nx : Q \rightarrow Q$,
+  it is surjection, thus $Q \subseteq H$.
+
+  In fact, these solutions are the same, proving $f$ is surjection is exactly finding $f(x/n) = x$,
+  which we done in the first proof.
+\end{proof}
+
+\setcounter{exercise}{46}
+\begin{exercise}
+  Show that $D_{13}$ is isomorphic to $\Inn(D_{13})$. Moreover,
+  show that any group $G$ where $Z(G) = \{ e \}$, is isomorphic to $\Inn(G)$
+\end{exercise}
+\begin{proof}
+  By Theorem 9.4, $G/Z(G) \approx \Inn(G)$.
+  Since $Z(G) = \{ e \}$, $G/Z(G) = G/\{ e \} \approx G$, thus $G \approx \Inn(G)$.
+\end{proof}
+
+\setcounter{exercise}{56}
+\begin{exercise}
+  Show that the intersection of two normal subgroups of $G$ is also a normal subgroup of $G$.
+\end{exercise}
+\begin{proof}
+  Let $H \normalin G$ and $K \normalin G$, we need to show $(H \cap K) \normalin G$,
+  or equivalently, $\forall g \in G, g(H \cap K)\inv{g} \subseteq (H \cap K)$.
+
+  For any $h \in H \cap K$, since $H$ is normal, there is a $h^\prime$ 
+  such that $gh\inv{g} = h^\prime g \inv{g}$. Similarly, there is a $h^{\prime\prime}$
+  such that $gh\inv{g} = h^{\prime\prime} g \inv{g}$. By cancellation, 
+  $h^\prime \in H = h^{\prime\prime} \in K$, thus $h^\prime = h^{\prime\prime} \in H \cap K$,
+  $gh\inv{g} = h^\prime g \inv{g} = h^\prime \in H \cap K$.
+
+  Moreover, we can proof that for $n$ normal subgroups of $G$, the intersection of
+  those subgroups is also a normal subgroup of $G$.
+
+  We induction on $n$:
+
+  \begin{itemize}
+    \item Base: The intersection of 1 normal subgroup is itself, and it is a normal subgroup of $G$.
+    \item Induction: We have the following induction hypothesis:
+      \begin{center}
+        \fbox{The intersection of $n - 1$ normal subgroups is a normal subgroup of $G$}
+      \end{center}
+      And we need to show:
+      \begin{center}
+        \fbox{The intersection of $n$ normal subgroups is a normal subgroup of $G$}
+      \end{center}
+
+      Let $H$ be the intersection of $n - 1$ normal subgroups, and we know it is normal in $G$.
+      Let $K$ be the $n$th normal subgroup, we already prove that $H \cap K$ is also a normal subgroup of $G$.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{58}
+\begin{exercise}
+  Let $N \normalin G$ and $N$ is cyclic. Show that any subgroup of $N$ is normal in $G$.
+\end{exercise}
+\begin{proof}
+  Suppose $M = \langle n^k \rangle$ is a subgroup of $N$, then $M$ is cyclic.
+  For any $g \in G$, $n^{ks} \in M$, $g n^{ks} \inv{g} = (g n^s \inv{g})^k$.
+  By $N$ is normal, $g n^s \inv{g} = n^t$ for some $n^t \in N$.
+  Then $(g n^s \inv{g})^k = (n^t)^k = n^{tk} = (n^k)^t \in M$
+\end{proof}
+
+\setcounter{exercise}{60}
+\begin{exercise}
+  Let $H \normalin G$ and $G$ a finite group. Let $x \in G$ and $|x|$ is coprime to $|G/H|$.
+  Show that $x \in H$.
+\end{exercise}
+\begin{proof}
+  Let $xH \in G/H$, since $G$ finite, so is $G/H$. So we suppose the order of $|xH|$ is $n$.
+  If $n$ doesn't divide $|x|$, then $|x| = nq + r$.
+  We have $(xH)^{|x|} = (xH)^{nq + r} = (xH)^r = H$ where $r < n$, which contradict $|xH| = n$.
+  So $n$ has to divide $|x|$, but $n$ also divides $|G/H|$ and we know $|x|$ is coprime to $|G/H|$.
+  Thus $n$ has to be $1$, which implies $xH = H \rightarrow x \in H$.
+\end{proof}
+
+\begin{exercise}
+  Let $G$ be a group of order $pm$ where $p$ is prime, $p > m$.
+  If $H$ is a subgroup of $G$ of order p, prove that $H$ is normal.
+\end{exercise}
+\begin{proof}
+  We first show $H$ is the only subgroup of $G$ of order $p$.
+  Let $K$ be another subgroup of $G$ of order $p$.
+  Since $H \neq K$, we have $H \cap K = \{ e \}$.
+  Then $\displaystyle |HK| = \frac{|H||K|}{|H \cap K|} = p^2$ where $HK \subseteq G$.
+  But $p^2 > pm$ since $p > m$.
+
+  For any $x \in G$, $\phi_x$ sends $H$ to a subgroup of order $p$ in $G$,
+  but we already prove that $H$ is the only subgroup of $G$, thus,
+  for any $h \in H$, $\phi_x(h) = xh\inv{x} \in H$.
+\end{proof}
+
+\begin{exercise}
+  If a group of order $24$ has more than one subgroups of order 3. 
+  Show that none of them is normal.
+\end{exercise}
+\begin{proof}
+  Suppose $H \normalin G$, $K$ is a distinct subgroup of $G$, and $|H| = |K| = 3$.
+  By the example of Theorem 9.1, $HK$ is a subgroup of $G$.
+  But now $\displaystyle |HK| = \frac{|H||K|}{|H \cap K|}$,
+  since $H \neq K$ and $|H| = |K| = 3$, $|H \cap K| = 1$ and $|HK| = 3 * 3 = 9$.
+  Now, $|HK|$ must divides $|G| = 24$ which doesn't.
+\end{proof}
+
+\setcounter{exercise}{65}
+\begin{exercise}
+  Suppose $G$ has a subgroup of order $n$. 
+  Prove that the intersection of all subgroups of order $n$ of $G$
+  is normal in $G$.
+\end{exercise}
+\begin{proof}
+  We need to show: Let $\phi : G \rightarrow G$ an isomorphism,
+  $H$ be the intersection of all subgroups of $G$ of order $n$,
+  shows that $\phi(H) = \{ \ \phi(h) \ | \ h \in H \ \}$ 
+  is the intersection of all subgroups of $\overline{G}$ of order $n$ .
+
+  Let $H = \join[\cap]{H}{m}$,
+  then $\phi(H) = \phi(\join[\cap]{H}{m}) =\text{(since $\phi$ is injective) } \phi(H_0) \cap \phi(H_1) \cap \cdots \cap \phi(H_m)$.
+  Let $K$ be a subgroup of $\overline{G}$ of order $n$.
+  Since $\phi$ is an isomorphism, there is a $H_i$ such that $\phi(H_i) = K$.
+  Thus, $\phi(H)$ is the intersection of all subgroups of $\overline{G}$ of order $n$.
+
+  Now, taking automorphism $\phi_g(h) = gh\inv{g}$, 
+  we can prove $\phi_g(H) = H$,
+  then $\forall g \in G, gh\inv{g} \in \phi_g(H) = H$ which implies normal.
+\end{proof}
+
+\begin{exercise}
+  If $G$ is non-Abelian, show that $Aut(G)$ is not cyclic.
+\end{exercise}
+\begin{proof}
+  We consider the converse of our goal:
+  \begin{center}
+    \fbox{If $Aut(G)$ is cyclic, show that $G$ is Abelian.}
+  \end{center}
+
+  For any $a \ b \in G$, consider the automorphisms $T_{ab}(g) = abg$.
+  $T_{ab}(g) = (ab)g = a(bg) = T_a(T_b(g))$. 
+  Since $Aut(G)$ is cyclic and $T_a$ , $T_b$ are automorphisms, 
+  we can write $T_a$ and $T_b$ in $\phi^i$ and $\phi^j$ for some $i$ and $j$
+  where $Aut(G) = \langle \phi \rangle$.
+  Then $T_{ab}(g) = T_a(T_b(g)) = \phi^i(\phi^j(g)) = \phi^{i + j}(g) = \phi^{j + i}(g) = \phi^j(\phi^i(g)) = T_b(T_a(g)) = T_{ba}(g)$.
+  We take $g = e$, $T_{ab}(e) = T_{ba}(e) \rightarrow ab = ba$.
+\end{proof}
+
+\begin{exercise}
+  Let $|G| = p^n m$ where $p$ is prime and $p$ is coprime to $m$.
+  Suppose $H$ is a normal subgroup of $G$ of order $p^n$,
+  if $K$ is a subgroup of $G$ of order $p^k$, show that $K \subseteq H$.
+\end{exercise}
+\begin{proof}
+  Since $H$ is normal, $\displaystyle |G/H| = \frac{|G|}{|H|} = m$.
+  For any $a \in K$, $(aH)^{p^k} = a^{p^k}H = eH = H$,
+  we know $|aH|$ divides $p^k$.
+  Also, since $aH \in G/H$, $|aH|$ divides $|G/H| = m$.
+  Thus $|aH|$ divides $p^k$ and $m$. By $p$ is coprime to $m$ and $p$ is prime,
+  we know $p^k$ is also coprime to $m$, so $|aH| = 1 \rightarrow a \in H$.
+\end{proof}
+
+\setcounter{exercise}{70}
+\begin{exercise}
+  If $|G| = 30$ and $|Z(G)| = 3$, which group is $G/Z(G)$ isomorphic to?
+  What about $|Z(G)| = 5$? 
+  What about $|G| = 2pq$ where $p$ and $q$ are distinct odd primes?
+\end{exercise}
+\begin{proof}
+  First, we know the group of order $2p$ where $p$ is prime is isomorphic to
+  $Z_{2p}$ or $D_p$.
+
+  For $|G/Z(G)| = 30/3 = 10$. 
+  Suppose $G/Z(G)$ is cyclic,
+  by Theorem 9.3, $G$ is Abelian, but then $|G = Z(G)| = 30$.
+  So $G/Z(G)$ can not be cyclic, thus $G/Z(G)$ is isomorphic to $D_3$
+  Similarly, $G/Z(G)$ is isomorphic to $D_5$ if $|Z(G)| = 5$.
+
+  Moreover, suppose $|G| = 2pq$ and $|Z(G)| = p$.
+  If $G/Z(G)$ is cyclic, then $|Z(G)| = 2pq$ which is not cool.
+  So $G/Z(G)$ is isomorphic to $D_q$.
+\end{proof}
+
+\begin{exercise}
+  If $H \normalin G$ and $|H| = 2$, prove that $H \subseteq Z(G)$.
+\end{exercise}
+\begin{proof}
+  Since $|H| = 2$, we suppose the only non-identity element in $H$ is $h$.
+  For any $g \in G$, $gh \in gH$, since $H$ is normal,
+  we know there is an $h^\prime$ such that $gh = h^\prime g$.
+  Suppose $h^\prime = e$, then $gh = g$ give us $h = e$ which contradicts our assumption.
+  So $h^\prime$ has to be $h$, then $gh = hg$, $h \in Z(G)$.
+\end{proof}
+
+\setcounter{exercise}{73}
+\begin{exercise}
+  Let $H \normalin G$ and the index of $H = 2$.
+  Show that $H$ contains all the elements of odd order.
+\end{exercise}
+\begin{proof}
+  Suppose $g \in G$ is odd order. Then by $(gH)^|g| = H$ we know $|gH|$ divides $|g|$
+  where $|gH|$ might be $1$ or $2$.
+  Since $|g|$ is odd, so the only choice is $|gH| = 1 \rightarrow gH = H \rightarrow g \in H$.
+\end{proof}
+
+\setcounter{exercise}{76}
+\begin{exercise}
+  Show that $A_5$ has no normal subgroup of order $12$.
+\end{exercise}
+\begin{proof}
+  Suppose $H \normalin A_5$ and $|H| = 12$. Then $|A_5/H| = 5$.
+\end{proof}
+
+\setcounter{exercise}{80}
+\begin{exercise}
+  Let $g \in G$ and $H \normalin G$, if $|g| is coprime to |H|$, show that $|gH| = |g|$.
+\end{exercise}
+\begin{proof}
+  Suppose $|gH| = n$, then $g^n \in H$.
+  Let $|g^n| = m$ which divides $|H|$,
+  then $(g^n)^m = e$ and $|g|$ divides $nm$.
+  Since $|g|$ is coprime to $|H|$ and $m$ divides $H$,
+  $|g|$ is coprime to $|m|$, so $|g|$ divides $n$.
+
+  Another solution: Since $g^n \in \langle g \rangle$, $|g^n|$ divides $|g|$.
+  Also, by $g^n \in H$, $|g^n|$ divides $|H|$. Then by $|g|$ is coprime to $|H|$,
+  $|g^n| = 1 \rightarrow g^n = e$, Then $|g|$ divides $|n|$.
+\end{proof}
+
+\setcounter{exercise}{83}
+\begin{exercise}
+  For any $n \geq 3$, prove that 
+  $D_{2n}$ can be expressed as an internal direct product of
+  $D_n$ and a subgroup of order $2$
+  iff
+  $n$ is odd.
+\end{exercise}
+\begin{proof}
+  Suppose $D_{2n} = D_n \times H$ for some normal subgroup $H$ of order $2$.
+  Since $|H| = 2$, $H \subseteq Z(D_{2n})$,
+  we know $Z(D_{2n}) = \{ R_0 , R_{180} \}$,
+  thus $H = Z(D_{2n})$.
+  If $n$ is even, $R_{180} \in D_n$, and $R_{180} \in H$ since $H = Z(D_{2n})$.
+  $D_n \cap H \neq \{ e \}$ which contradicts the requirement of internal direct product.
+
+  If $n$ is odd, we claim $D_{2n} = D_n \times \{ R_0 , R_{180} \}$.
+  It is easy to show $\{ R_0 , R_{180} \}$ is normal, so we focus on $D_n$.
+  Let $a \in D_{2n}$ and $b \in D_n$, we need to show $ab\inv{a} \in D_n$.
+  \begin{itemize}
+    \item $a$ and $b$ are rotations, $ab\inv{a} = a\inv{a}b = b \in D_n$.
+    \item $a$ is reflection and $b$ is rotation, then $ab$ is reflection, \\
+      $(ab)\inv{a} = (\inv{b}\inv{a})\inv{a} = \inv{b} \in D_n$.
+    \item $a$ is rotation and $b$ is reflection, then $ab$ is reflection, \\
+      $(ab)\inv{a} = \inv{b}\inv{a}\inv{a}$, we need to show $a^{-2} \in D_n$.
+      Let $Z_{2n}$ the rotations of $D_{2n}$ and $Z_n$ the rotations of $D_n$,
+      since $Z_{2n}$ is Abelian (or the index of $Z_n$ is $2$), $Z_n \normalin Z_{2n}$, $\displaystyle |Z_{2n}/Z_n| = \frac{2n}{n} = 2$
+      Then $(\inv{a}Z_n)^2 = a^{-2}Z_n = Z_n$ which implies $a^{-2} \in Z_n$.
+
+      Thus, by $\inv{b} \in D_n$ and $\inv{a}\inv{a} \in D_n$, $\inv{b}\inv{a}\inv{a} \in D_n$.
+    \item $a$ and $b$ are reflections, let $H \in D_n$ and $H$ is reflection.
+      Then we can write $a$ and $b$ in $RH$ and $R^\prime H$ for some $R$ and $R^\prime$ which are rotations.
+      Then
+      \begin{align*}
+        ab\inv{a} &= RH R^\prime H \inv{(RH)} \\
+                  &= RH R^\prime H H \inv{R} && \text{($a$ is reflection)} \\
+                  &= RH R^\prime \inv{R} \\
+                  &= R (H R^\prime) \inv{R}
+      \end{align*}
+      where $H \in D_n$ and $R^\prime \in D_n$, this is the last case we just proved.
+  \end{itemize}
+  Then $\forall a \in D_{2n}, aD_n\inv{a} \subseteq D_n \rightarrow D_n \normalin D_{2n}$.
+
+  And, I just realized that the index of $D_n$ is $2$, then $D_n \normalin D_{2n}$.
+  LOL.
+
+  Since $n$ is odd, $R_{180} \notin D_n$, $D_n \cap \{ R_0 , R_{180} \} = \{ R_0 \}$. \\
+  $\displaystyle |D_n \{ R_0 , R_{180} \}| = \frac{|D_n| |\{ R_0 , R_{180} \}|}{|D_n \cap \{ R_0 , R_{180} \}|} = (2n) \times 2 = |D_{2n}|$,
+  thus $D_n \{ R_0 , R_{180} \} = D_{2n}$.
+\end{proof}
+
+\begin{exercise}
+  Suppose $G$ is an Abelian group and $\join[,]{H}{k - 1}$ are
+  subgroups of $G$ such that for any $g \in G$ is uniquely expressible
+  in the form $\join[]{h}{k - 1}$ where $h_i \in H_i$.
+  Prove that $G = \join[\times]{H}{k - 1}$.
+\end{exercise}
+\begin{proof}
+  It is trivial that $H_i$ are normal and the product of them is exactly $G$.
+  We need to show $\forall i, (\join[]{H}{i}) \cap H_{i + 1} = \1$.
+  Suppose $g \in (\join[]{H}{i}) \cap H_{i + 1}$ and $g \neq e$.
+  Then $g$ can be expressed in form $\join[]{h}{i}$ and $h_{i + 1}$
+  which contradict the assumption.
+\end{proof}
+
+\begin{exercise}[Normalizer]
+  Let $G$ be a group and $H$ be a subgroup of $G$.
+  Define $N(H) = \{ x \in G \ | \ xH\inv{x} = H \}$.
+  Prove that $N(H)$ is a subgroup of $G$.
+\end{exercise}
+\begin{proof}
+  By two-steps:
+  \begin{itemize}
+    \item $e \in N(H)$ since $H = H$.
+    \item For any $a \ b \in N(H)$, $abH\inv{ab} = abH\inv{b}\inv{a} = aH\inv{a} = H$.
+    \item For any $a \in N(H)$, $H = \inv{a}aH\inv{a}a = \inv{a}Ha$.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{88}
+\begin{exercise}
+  Let $G$ be a group of order $pm$ where $p$ is prime and $p$ is coprime to $m$.
+  Suppose $G$ has a normal subgroup of $p$, show that it is the only subgroup of order $p$.
+\end{exercise}
+\begin{proof}
+  Let $H \normalin G$ and $|H| = p$, if $K \leq G$, $|K| = p$ and $H \neq K$.
+  Then $HK$ is a subgroup of $G$ since $H$ is normal.
+  It is easy to show $H \cap K = \1$ since they are order $p$.
+  Thus $|HK| = |H||K| = p^2$, and since $HK$ is a subgroup of $G$, $|HK|$ divides $G$,
+  that is, $p^2$ divides $pm$, which implies $p$ divides $m$, but $p$ is coprime to $m$.
+\end{proof}
+
+\begin{exercise}
+  For any group $G$, show that $\Inn(G) \normalin \Aut(G)$.
+\end{exercise}
+\begin{proof}
+  Let $\phi \in \Aut(G)$ and $\phi_g \in \Inn(G)$ for some $g \in G$.
+  \begin{align*}
+     & (\phi \phi_g \inv{\phi})(x) \\
+    =& \phi(\phi_g(\inv{\phi}(x))) \\
+    =& \phi(g\inv{\phi}(x)\inv{g}) \\
+    =& \phi(g) \phi(\inv{\phi}(x)) \phi(\inv{g}) \\
+    =& \phi(g) x \inv{\phi(g)} \\
+    =& \phi_{\phi(g)} \in \Inn(G)
+  \end{align*}
+\end{proof}
+
+\begin{exercise}
+  Let $G$ be an Abelian group of order $2^n$ where $n$ is positive integer.
+  If $G$ has exactly one element of order $2$, show that $G$ is cyclic.
+\end{exercise}
+\begin{proof}
+  Induction on $n$. If $n = 1$, $|G| = 2$, it is obviously that $G$ is cyclic.
+  So we focus on induction step.
+
+  Let $g \in G$ be the element of order $2$, $H = \langle g \rangle$.
+  Since $G$ is Abelian, $G/H$ is also Abelian.
+  So there is an element $aH$ of order $2$ in $G/H$.
+  We will prove that it is the unique element of order 2.
+
+  Suppose $bH \in G/H$ and $|bH| = 2$.
+  Since $(aH)^2 = H$, we know $a^2 \in H$.
+  If $a^2 = e$, then $|a| = 1 \text{ or } 2$, both cases indicate that $a \in H \rightarrow |aH| = 1$,
+  so $a^2 = g$. Similarly, $b^2 = g$. Then $a = g\inv{a}$ and $b = g\inv{b}$. 
+  By $\inv{a}b = a\inv{g}g\inv{b} = a\inv{b}$,
+  we know $(\inv{a}b)^2 = \inv{a}ba\inv{b} = \inv{a}ab\inv{b} = e$, that is,
+  $|\inv{a}b| = 1 \text{ or } 2 \rightarrow \inv{a}b \in H \rightarrow aH = bH$.
+
+  Since $G$ is Abelian, so is $G/H$, and $|G/H| = 2^{n - 1}$ where $n - 1$ is positive since $n > 1$.
+  And we proved $G/H$ has exactly one element of order $2$, by induction hypothesis, $G/H$ is cyclic.
+
+  Consider $aH \in G/H$ that $|aH| = 2^{n - 1}$. Then $a^{2^{n - 1}} \in H$.
+  If $a^{2^{n - 1}} = e$, $(a^{2^{n - 2}})^2 = a^{2^{n - 2} \times 2} = a^{2^{n - 1}} = e$.
+  This implies $|a^{2^{n - 2}}| = 1 \text{ or } 2$, both cases indicate that $(aH)^{2^{n - 2}} = H$
+  which contradicts $|aH| = 2^{n - 1}$. 
+  Thus $a^{2^{n - 1}} = g$ 
+  and $a^{2^n} = a^{2^{n - 1} \times 2} = (a^{2^{n - 1}})^2 = g^2 = e$.
+  Since $|aH| = 2^{n - 1}$ implies $|a| \ge 2^{n - 1}$ and we proved that $|a| \neq 2^{n - 1}$,
+  $|a| = 2^n$, $G$ is cyclic.
+
+  We can generalize the induction step
+  and show that $G$ is cyclic 
+  if $G$ has exactly $\phi(p) = p - 1$ element of order $p$ where $p$ is prime.
+\end{proof}
+
+\begin{exercise}
+  Let $G$ be finite Abelian group of order $mn$, where $m$ is coprime to $n$.
+  Define $G^d = \{ x \in G \ | \ x^d = e \}$, show that $G = G^m \times G^n$.
+\end{exercise}
+\begin{proof}
+  We first show $G^m$ and $G^n$ are subgroups.
+  By two-steps:
+  \begin{itemize}
+    \item $e \in G^m$
+    \item $\forall x \ y \in G^m$, $(xy)^m = x^my^m = e$
+    \item $\forall x \in G^m$, $(\inv{x})^m = x^{-m} = \inv{(x^m)} = e$
+  \end{itemize}
+  Same for $G^n$.
+
+  Then we show $G^m$ and $G^n$ are normal.
+  For any $g \in G$, $x \in G^m$.
+  $(gx\inv{g})^m = gx^m\inv{g} = ge\inv{g} = e \rightarrow gx\inv{g} \in G^m$, same for $G^n$.
+
+  Then we show $G^m \cap G^n = \{ e \}$.
+  Let $g \in G$ and $g^m = g^n = e$, then $|g|$ divides $m$ and $n$, 
+  since $m$ is coprime to $n$, $|g| = 1 \rightarrow g = e$.
+
+  Finally we show that $G = G^mG^n$.
+  For any $g \in G$, $|g| = d$. $d$ must divides $mn$.
+  Let $s = \gcd(m, d)$ and $t = \gcd(n, d)$. 
+  In other words, we separate $d$ into two parts:
+  the factors of $m$ and the factors of $n$.
+  Then $g^d = g^{st} = g^sg^t$ where 
+  $(g^s)^n = e$ since $t$ divides $n$,
+  and $(g^t)^m = e$ since $s$ divides $m$.
+  Then $g^sg^t = e \rightarrow g \in G^mG^n$. Thus $G \subseteq G^mG^n$.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,167 @@
+\documentclass[14pt]{extarticle}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsthm,amsmath,amssymb}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem*{example}{Example}
+\newtheorem{exercise}{Exercise}[section]
+\setcounter{section}{11}
+
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\join}[3][,]{#2_0 #1 #2_1 #1 \cdots #1 #2_{#3}}
+\newcommand{\Times}[2]{\join[\times]{#1}{#2}}
+\newcommand{\Oplus}[2]{\join[\oplus]{#1}{#2}}
+\newcommand{\normalin}{\triangleleft}
+\newcommand{\1}{\{e\}}
+\newcommand{\set}[2]{\{ \ #1 \ | \ #2 \ \}}
+\newcommand{\cyc}[1]{\langle #1 \rangle}
+
+\DeclareMathOperator{\Abelian}{Abelian}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\modu}{mod}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\lcm}{lcm}
+
+\begin{document}
+
+\setcounter{exercise}{10}
+\begin{exercise}
+  Prove that any finite Abelian group $G$ can be expressed as the external direct product 
+  of cyclic group of order $\join{n}{t - 1}$,
+  where $n_{i - 1}$ divides $n_i$ for all $i \in [ 1 , t - 1 ]$.
+\end{exercise}
+\begin{proof}
+  induction on $t$.
+  \begin{itemize}
+    \item Base: $t = 0$, trivial.
+    \item Induction: Since $G$ can be (uniquely, up to isomorphism) expressed as the external direct product of
+      cyclic groups of prime powered. Let $S$ be the set of those cyclic groups, $P$ and $Q$ are empty sets.
+      First, take $H \in S$ which is isomorphic to $Z_{p^n}$ for some prime $p$ and postive $n$.
+      % 将最大的，order 为 p 的幂的群加入 R.
+      Then put the group which is isomorphic to $Z_{p^m}$ where $m$ is maximum to $P$,
+      and move other groups which has form $Z_{p^i}$ from $S$ to $Q$.
+      Repeat this procedure untile $S$ is empty.
+      
+      For any distinct $H \ K \in P$, $|H|$ is relative prime to $|K|$, since they 
+      have form $Z_{p^i}$ with different $p$.
+      Therefore, the product of elements in $P$ form a large cyclic group $R$.
+      And the product of $Q$ form a finite Abelian group, by induction hypothesis,
+      it can be expressed as $\join[\oplus]{K}{m}$, and they satisfy the property we want to prove.
+
+      The last thing is proving $|K_0|$ divides $|R|$.
+      We now consider the worse situation, $K_0$ is the product of $Q$,
+      then elements of $Q$ are relative prime to each other, thus, for any prime $p$,
+      $Q$ has at most one element of order power of $p$.
+      For any $H \in Q$,
+      $H$ has form $p^i$ and $H \in S$, then $|H|$ divides $|R|$ due to the
+      way we construct $R$. So $|K_0|$ divides $|R|$.
+      If $K_0$ is not the product of $Q$, then $|K_0|$ divides the order of the product of $Q$,
+      therefore $|K_0|$ divides $|R|$.
+  \end{itemize}
+\end{proof}
+
+{
+\newcommand{\Z}[1]{Z_{2^{i_0}} \oplus Z_{2^{i_1}} \oplus \cdots \oplus Z_{2^{i_#1}}}
+
+\begin{exercise}
+  Prove that an Abelian group of order $2^n \ (n \geq 1)$ 
+  must have an odd number of elements of order $2$.
+\end{exercise}
+\begin{proof}
+  Let $G$ be such group, and $G$ can be expressed as 
+  $\Z{n} \ (\text{where } n \in \mathbb{N})$.
+  For any element in $\Z{n}$, each component of it is either
+  an element of order $2$ in corresponding cyclic group or identity (we can do this because $2$ is prime),
+  therefore we can express it as an binary string, and the number of strings is $2^n$.
+  But we counted string that is all $0$ (all identity) which is order $1$, so
+  the number of elements of order $2$ in $\Z{n}$ is $2^n - 1$, which is odd.
+\end{proof}
+}
+
+\begin{exercise}
+  Suppose $G$ is a finite Abelian group. Prove that
+  $G$ has order $p^n$ where $p$ is prime iff 
+  the order of every element of $G$ is power of $p$.
+\end{exercise}
+\begin{proof}
+  $(\Rightarrow)$ $G$ can be expressed as the external direct product
+  of cyclic groups of order power of $p$, then for any element $g \in G$,
+  $g$ can be expressed as $(\join{g}{n})$, and $|g| = \lcm(\join{g}{n})$.
+  Since $g_i$ is in a group of order power of $p$, so does $g_i$, therefore
+  $\lcm(\join{g}{n}) = \max(\join{g}{n})$, which is power of $p$.
+
+  $(\Leftarrow)$ Since $G$ is finite Abelian group, it can be expressed as
+  a external direct product of cyclic groups, say $\join[\oplus]{G}{n}$.
+  Since every element of $G$ is power of $p$, so are the generators of $G_i$,
+  therefore $|G_i|$ is power of $p$, then $|G|$ is power of $p$.
+\end{proof}
+
+\setcounter{exercise}{41}
+\begin{exercise}
+  For any Abelian group $G$ of order $p^n$, where $p$ is prime.
+  Prove that $G$ is cyclic iff $G$ has exactly $\phi(p)$ elements of order $p$.
+\end{exercise}
+\begin{proof}
+  The $\Rightarrow$ direction is obviously, we focus on the $\Leftarrow$.
+  Suppose $G$ is \textbf{NOT} cyclic, then $G$ can be expressed as 
+  the direct product of more than
+  one cyclic groups of order power of $p$. Now $G$ has more than $\phi(p)$ elements
+  of order $p$, which contradict our hypothesis.
+\end{proof}
+
+\setcounter{exercise}{44}
+\begin{exercise}
+  The exponent of a finite group $G$ is the smallest integer $n$
+  such that $x^n = e$ for all $x \in G$.
+  Prove that if $G$ is finite and Abelian, then the exponent of $G$
+  is the largest order of any element in $G$.
+\end{exercise}
+\begin{proof}
+  We know $G$ can be write as a direct product of cyclic groups,
+  say $G = \Oplus{G}{n}$. Induction on $n$.
+  \begin{itemize}
+    \item Base: Obviously, the largest order of any element in $G = G_0$ 
+      is the exponent of $G$, which is $|G_0|$ (recall that $G_0$ is cyclic).
+    \item Induction: Suppose the exponent of $\Oplus{G}{n - 1}$ is 
+      the largest order of any element in $G$, 
+      denote one such element by $(\join{g}{n - 1})$,
+      and let $g_n$ be the element of largest order in $G_n$.
+      We claim $|g| = |(\join{g}{n})|$ is
+      the exponent of $\Oplus{G}{n}$.
+
+      For any element in $\Oplus{G}{n}$, it can be wrote in $(\join{h}{n})$.
+      Then $(h_i)^{|g|} = e$ for any $i < n$, since $|(\join{g}{n - 1})|$ divides $|g|$
+      and $|(\join{g}{n - 1})|$ is the exponent of $\Oplus{G}{n - 1}$.
+      Also $(h_n)^{|g|} = e$ since $h_n$ divides $g_n$ and $g_n$ divides $|g|$.
+      Therefore $h^{|g|} = e$.
+
+      It is easy to show $|g|$ is largest in $G$, 
+      let $n$ the largest order of elements in $G$,
+      then $|g| \leq n$, by $h^{|g|} = e$ we know $|g| \geq n$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  If $H$ is a subgroup of a finite Abelian group of even order,
+  and $H$ contains all elements in $G$ of even order, prove that $H = G$.
+\end{exercise}
+\begin{proof}
+  Consider the internal direct product form of $G$,
+  since $|H|$ is even, so is $|G|$.
+  So there is at least one cyclic subgroup of even order in the direct product form $G$,
+  we denote the generator of it by $h$.
+  For any cyclic subgroup of even order in the direct product form of $G$,
+  the order of their generators are even, therefore they are all in $H$.
+  Now we consider the cyclic subgroups of odd order, denote the generator by $k$.
+  Then $|hk|$ is even, $hk \in H$, and cancel $h$ from $hk$, we know $k \in H$.
+  Therefore, all cyclic subgroups in the internal direct product are subgroups of $H$,
+  $H = G$.
+\end{proof}
+
+\end{document}
