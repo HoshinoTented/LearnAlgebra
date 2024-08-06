@@ -116,4 +116,125 @@
   \end{enumerate}
 \end{proof}
 
+\begin{theorem}
+  A pullback square for the corner $D_1 \rightarrow V \leftarrow D_2$
+  is a product of $D_1 \rightarrow V$ and $V \leftarrow D_2$
+  in the slice category $\mathcal{C}/V$.
+\end{theorem}
+\begin{proof}
+  Suppose $(L, f, g)$ is the pullback of such corner, then we first
+  need to show that there is an arrow $l : L \rightarrow V$ such that
+  $s \circ f = l$ (therefore a morphism from $(L, l)$ to $(D_1, s)$) and
+  $t \circ g = l$ (a morphism from $(L, l)$ to $(D_2, t)$).
+
+  Since $(L, f, g)$ makes the pullback square commutes, we know $s \circ f = t \circ g$,
+  therefore we let $l = s \circ f$ (or equivalently $t \circ g$).
+
+  We need to show that $((L, l), f, g)$ forms a product of $(D_1, s)$ and $(D_2, t)$,
+  consider any $((A, a), b, c)$ where $a : A \rightarrow V$ such that
+  $s \circ b = a$ and $t \circ c = a$. Just like $l$ for $L$,
+  $a$ is redundant, so we may omit it. Now, the diagram looks like:
+  % https://q.uiver.app/#q=WzAsNSxbNCw0LCJWIl0sWzIsNCwiRF8xIl0sWzQsMiwiRF8yIl0sWzIsMiwiTCJdLFswLDAsIkEiXSxbMSwwLCJzIl0sWzIsMCwidCJdLFszLDEsImYiLDJdLFszLDIsImciXSxbNCwxLCJiIiwyLHsiY3VydmUiOjN9XSxbNCwyLCJjIiwwLHsiY3VydmUiOi0zfV0sWzQsMywiIXUiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMywwLCJsIiwxLHsiY29sb3VyIjpbMCwwLDY0XX0sWzAsMCw2NCwxXV0sWzQsMCwiYSIsMCx7ImN1cnZlIjotMywiY29sb3VyIjpbMCwwLDY0XX0sWzAsMCw2NCwxXV1d
+  \[\begin{tikzcd}
+    A \\
+    \\
+    && L && {D_2} \\
+    \\
+    && {D_1} && V
+    \arrow["{!u}"{description}, dashed, from=1-1, to=3-3]
+    \arrow["c", curve={height=-18pt}, from=1-1, to=3-5]
+    \arrow["b"', curve={height=18pt}, from=1-1, to=5-3]
+    \arrow["a", color={rgb,255:red,163;green,163;blue,163}, curve={height=-18pt}, from=1-1, to=5-5]
+    \arrow["g", from=3-3, to=3-5]
+    \arrow["f"', from=3-3, to=5-3]
+    \arrow["l"{description}, color={rgb,255:red,163;green,163;blue,163}, from=3-3, to=5-5]
+    \arrow["t", from=3-5, to=5-5]
+    \arrow["s", from=5-3, to=5-5]
+  \end{tikzcd}\]
+
+  Since $(L, f, g)$ is a pullback, we know there is a unique $u : A \rightarrow L$
+  such that two triangle commutes. However, we must first show that $u$ is
+  an arrow from $(A, a)$ to $(L, l)$, that is, $l \circ u = a$.
+  It is easy to see that $l \circ u = s \circ f \circ u = s \circ b = a$.
+\end{proof}
+
+\begin{theorem}
+  if a category has all binary products and all equalizers for every pair of parallel
+  arrows, then it has a pullback for any corners.
+\end{theorem}
+\begin{proof}
+  Suppose $X \rightarrow Z \leftarrow Y$ a corner, then consider the product $X \times Y$:
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIFxcdGltZXMgWSJdLFswLDIsIlgiXSxbMiwwLCJZIl0sWzIsMiwiWiIsWzAsMCw2NCwxXV0sWzAsMSwiXFxwaV8wIiwyXSxbMCwyLCJcXHBpXzEiXSxbMSwzLCJzIiwwLHsiY29sb3VyIjpbMCwwLDY0XX0sWzAsMCw2NCwxXV0sWzIsMywidCIsMix7ImNvbG91ciI6WzAsMCw2NF19LFswLDAsNjQsMV1dXQ==
+  \[\begin{tikzcd}
+    {X \times Y} && Y \\
+    \\
+    X && \textcolor{rgb,255:red,163;green,163;blue,163}{Z}
+    \arrow["{\pi_1}", from=1-1, to=1-3]
+    \arrow["{\pi_0}"', from=1-1, to=3-1]
+    \arrow["t"', color={rgb,255:red,163;green,163;blue,163}, from=1-3, to=3-3]
+    \arrow["s", color={rgb,255:red,163;green,163;blue,163}, from=3-1, to=3-3]
+  \end{tikzcd}\]
+
+  Now, consider the equalizer for the parallel arrows $t \circ \pi_1$ and
+  $s \circ \pi_0$:
+  % https://q.uiver.app/#q=WzAsMyxbMiwwLCJYIFxcdGltZXMgWSJdLFs0LDAsIloiXSxbMCwwLCJFIl0sWzAsMSwidCBcXGNpcmMgXFxwaV8xIiwyLHsib2Zmc2V0IjoxfV0sWzAsMSwicyBcXGNpcmMgXFxwaV8wIiwwLHsib2Zmc2V0IjotMX1dLFsyLDAsImUiXV0=
+  \[\begin{tikzcd}
+    E && {X \times Y} && Z
+    \arrow["e", from=1-1, to=1-3]
+    \arrow["{t \circ \pi_1}"', shift right, from=1-3, to=1-5]
+    \arrow["{s \circ \pi_0}", shift left, from=1-3, to=1-5]
+  \end{tikzcd}\]
+  We claim $(E, \pi_0 \circ e, \pi_1 \circ e)$ is a pullback of such corner.
+  For any $(F, f, g)$ such that the outer diagram commutes:
+
+  % https://q.uiver.app/#q=WzAsNixbMywzLCJYIFxcdGltZXMgWSIsWzAsMCw2NCwxXV0sWzIsNCwiWCJdLFs0LDIsIlkiXSxbNCw0LCJaIl0sWzIsMiwiRSJdLFswLDAsIkYiXSxbMCwxLCJcXHBpXzAiLDIseyJjb2xvdXIiOlswLDAsNjRdfSxbMCwwLDY0LDFdXSxbMCwyLCJcXHBpXzEiLDAseyJjb2xvdXIiOlswLDAsNjRdfSxbMCwwLDY0LDFdXSxbMSwzLCJzIl0sWzIsMywidCIsMl0sWzQsMiwiXFxwaV8xIFxcY2lyYyBlIl0sWzQsMSwiXFxwaV8wIFxcY2lyYyBlIiwyXSxbNCwwLCJlIiwxLHsiY29sb3VyIjpbMCwwLDY0XSwic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fSxbMCwwLDY0LDFdXSxbNSwyLCJiIiwwLHsiY3VydmUiOi0zfV0sWzUsMSwiYSIsMix7ImN1cnZlIjozfV1d
+  \[\begin{tikzcd}
+    F \\
+    \\
+    && E && Y \\
+    &&& \textcolor{rgb,255:red,163;green,163;blue,163}{X \times Y} \\
+    && X && Z
+    \arrow["b", curve={height=-18pt}, from=1-1, to=3-5]
+    \arrow["a"', curve={height=18pt}, from=1-1, to=5-3]
+    \arrow["{\pi_1 \circ e}", from=3-3, to=3-5]
+    \arrow["e"{description}, color={rgb,255:red,163;green,163;blue,163}, dashed, from=3-3, to=4-4]
+    \arrow["{\pi_0 \circ e}"', from=3-3, to=5-3]
+    \arrow["t"', from=3-5, to=5-5]
+    \arrow["{\pi_1}", color={rgb,255:red,163;green,163;blue,163}, from=4-4, to=3-5]
+    \arrow["{\pi_0}"', color={rgb,255:red,163;green,163;blue,163}, from=4-4, to=5-3]
+    \arrow["s", from=5-3, to=5-5]
+  \end{tikzcd}\]
+
+  it is easy to see that there is a unique arrow $u : F \rightarrow X \times Y$
+  such that $\pi_0 \circ u = a$ and $\pi_1 \circ u = b$ since $X \times Y$
+  is a product. Then there is another unique arrow $v : F \rightarrow E$
+  such that $e \circ v = u$ since $E$ is a equalizer.
+  % https://q.uiver.app/#q=WzAsNixbMywzLCJYIFxcdGltZXMgWSIsWzAsMCw2NCwxXV0sWzIsNCwiWCJdLFs0LDIsIlkiXSxbNCw0LCJaIl0sWzIsMiwiRSJdLFswLDAsIkYiXSxbMCwxLCJcXHBpXzAiLDIseyJjb2xvdXIiOlswLDAsNjRdfSxbMCwwLDY0LDFdXSxbMCwyLCJcXHBpXzEiLDAseyJjb2xvdXIiOlswLDAsNjRdfSxbMCwwLDY0LDFdXSxbMSwzLCJzIl0sWzIsMywidCIsMl0sWzQsMiwiXFxwaV8xIFxcY2lyYyBlIl0sWzQsMSwiXFxwaV8wIFxcY2lyYyBlIiwyXSxbNCwwLCJlIiwxLHsiY29sb3VyIjpbMCwwLDY0XSwic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fSxbMCwwLDY0LDFdXSxbNSwyLCJiIiwwLHsiY3VydmUiOi0zfV0sWzUsMSwiYSIsMix7ImN1cnZlIjozfV0sWzUsNCwidiIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs1LDAsInUiLDEseyJjdXJ2ZSI6LTMsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+  \[\begin{tikzcd}
+    F \\
+    \\
+    && E && Y \\
+    &&& \textcolor{rgb,255:red,163;green,163;blue,163}{X \times Y} \\
+    && X && Z
+    \arrow["v", dashed, from=1-1, to=3-3]
+    \arrow["b", curve={height=-18pt}, from=1-1, to=3-5]
+    \arrow["u"{description}, curve={height=-18pt}, dashed, from=1-1, to=4-4]
+    \arrow["a"', curve={height=18pt}, from=1-1, to=5-3]
+    \arrow["{\pi_1 \circ e}", from=3-3, to=3-5]
+    \arrow["e"{description}, color={rgb,255:red,163;green,163;blue,163}, dashed, from=3-3, to=4-4]
+    \arrow["{\pi_0 \circ e}"', from=3-3, to=5-3]
+    \arrow["t"', from=3-5, to=5-5]
+    \arrow["{\pi_1}", color={rgb,255:red,163;green,163;blue,163}, from=4-4, to=3-5]
+    \arrow["{\pi_0}"', color={rgb,255:red,163;green,163;blue,163}, from=4-4, to=5-3]
+    \arrow["s", from=5-3, to=5-5]
+  \end{tikzcd}\]
+
+  Obviously, (commute) $\pi_0 \circ e \circ v = \pi_0 \circ u = a$ and $\pi_1 \circ e \circ v = \pi_1 \circ u = b$.
+  (unique) If an arrow $w : F \rightarrow E$ can do the job, then $e \circ w : F \rightarrow X \times Y$
+  is another factorization from $F$ to the product $X \times Y$, so $e \circ w = u$,
+  but that means $w$ is also a factorization from $F$ to the equalizer $E$, which means $v = w$.
+
+  So $(E, \pi_0 \circ e, \pi_1 \circ e)$ is a pullback of such corner.
+\end{proof}
+
 \end{document}
