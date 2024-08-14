@@ -3,8 +3,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{xeCJK}
 \usepackage{amsthm, amsmath, amssymb}
-\usepackage{tikz-cd}
-\usepackage{quiver}
+\usepackage{mathrsfs}
 \usepackage{braket}
 
 \usepackage{subfiles}
@@ -12,11 +11,14 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{definition}{Definition}[section]
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem*{example}{Example}
+
+\newcommand{\inv}[1]{#1^{-1}}
 
 \begin{document}
 
-\subfile{product.tex}
-\subfile{exponential.tex}
-\subfile{pullback.tex}
+\subfile{./C5.tex}
+\subfile{./C6.tex}
 
 \end{document}

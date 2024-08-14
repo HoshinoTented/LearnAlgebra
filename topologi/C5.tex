@@ -1,0 +1,167 @@
+\documentclass[./main.tex]{subfiles}
+
+\begin{document}
+
+\section{Constructions}
+
+\begin{definition}[Induced]
+  Let $A$ a subset of a topological space $\mathcal{Y}$. Then
+  \begin{itemize}
+    \item all subsets $V \subseteq A$ such that $V = A \cap W$ for some open $W$ in $\mathcal{Y}$
+  \end{itemize}
+  forms a topology on $A$. This topology is called induced topology on $A$.
+\end{definition}
+\begin{proof}
+  Obviously, $\varnothing = A \cap \varnothing$ and $A = A \cap A$.
+
+  For any open set $V_0 = A \cap W_0$ and $V_1 = A \cap W_1$,
+  then it is easy to see that $V_0 \cup V_1 = (A \cap W_0) \cup (A \cap W_1) = A \cup (W_0 \cap W_1)$,
+  therefore for a collection $\{V_\alpha\}$ of open sets in $A$, $\bigcup_\alpha V_\alpha = A \cap (\bigcup_\alpha W_\alpha)$,
+  and we know $\bigcup_\alpha W_\alpha$ is still a open set in $\mathcal{Y}$, so is $\bigcup_\alpha V_\alpha$.
+
+  For any open set $V_0 = A \cap W_0$ and $V_1 = A \cap W_1$,
+  we have $V_0 \cap V_1 = (A \cap W_0) \cap (A \cap W_1) = (A \cap W_0) \cap W_1 = A \cap (W_0 \cap W_1)$,
+  so $V_0 \cap V_1$ is also a open set in $A$.
+\end{proof}
+
+\begin{definition}[Embedding]
+  A map $f : \mathcal{X} \rightarrow \mathcal{Y}$ is called embedding if $f$ defines
+  a homeomorphism from $\mathcal{X}$ to the subspace $f(\mathcal{X})$ in $\mathcal{Y}$.
+\end{definition}
+
+\begin{definition}[Product]
+  Let $\mathcal{X}$ and $\mathcal{Y}$ are topology spaces, the product of
+  $\mathcal{X}$ and $\mathcal{Y}$, $\mathcal{X} \times \mathcal{Y}$ is a topology
+  space, which open set is a union of the product of open sets in $\mathcal{X}$ and $\mathcal{Y}$,
+  that is, $\bigcup_i V_i \times W_i$ where $V_i$ is an open set of $\mathcal{X}$ 
+  and $W_i$ is an open set of $\mathcal{Y}$ 
+  (It won't work if the open set is \textit{just} a product of open sets from both space).
+\end{definition}
+\begin{proof}
+  We need to show that $\mathcal{X} \times \mathcal{Y}$ is a topology space.
+  \begin{enumerate}
+    \item $\mathcal{X} \times \mathcal{Y}$ is an open set since both $\mathcal{X}$ and $\mathcal{Y}$ are open set,
+          similarly, $\varnothing$ is an open set in $\mathcal{X} \times \mathcal{Y}$.
+    \item Trivial.
+    \item \[
+          \bigcup_{a, b} (V_a \cap V_b) \times (W_a \cap W_b)
+          \]
+  \end{enumerate}
+\end{proof}
+
+\begin{exercise}
+  Let $\mathscr{B}$ be a collection of open sets in a topological
+  space $\mathcal{X}$. Show that $\mathscr{B}$ is base in $\mathcal{X}$
+  iff for any point $x \in \mathcal{X}$ and any neighborhood $N$,
+  there is $B \in \mathscr{B}$ such that $x \in B \subseteq N$.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ We know $N$ can be expressed as a union of
+          some open sets in $\mathscr{B}$, that is, $N = B_0 \cup B_1 \cup \dots$.
+          Then there is $B_i$ such that $x \in B_i$, and we know $B_i \subseteq N$,
+          so $x \in B_i \subseteq N$.
+    \item $(\Leftarrow)$ For any open set $A$, consider any point $x \in A$,
+          we know $A$ is a neighborhood of $x$, so there is $B_x \in \mathscr{B}$
+          such that $x \in B_x \subseteq A$. Then $\bigcup_{x \in A}B_x$
+          is a subset of $A$, but note that $x \in B_x$, so 
+          $\bigcup_{x \in A}B_x$ contains all points of $A$,
+          so $\bigcup_{x \in A}B_x = A$.
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}
+  Let $\mathscr{B}$ be a set of subsets in some set $\mathcal{X}$.
+  Show that $\mathscr{B}$ is a base of some topology on $\mathcal{X}$ iff
+  it satisfies the following conditions:
+  \begin{enumerate}
+    \item $\mathscr{B}$ coverse $\mathcal{X}$, that is, for any $x \in \mathcal{X}$,
+          there is $B \in \mathscr{B}$ such that $x \in B$.
+    \item For any $B_1, B_2\in \mathscr{B}$, $x \in B_1 \cap B_2$, then there exists
+          a set $B \in \mathscr{B}$ such that $x \in B \subseteq B_1 \cap B_2$.
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  $(\Rightarrow)$ Trivial by the previous exercise. \par
+  $(\Leftarrow)$ Let $\mathscr{O}$ the set of all unions of sets of $\mathscr{B}$.
+  We claim $\mathscr{O}$ is a topology on $\mathcal{X}$.
+  First, $\emptyset \in \mathscr{O}$ since it is the result of union of no set.
+  And $\mathcal{X} \in \mathscr{O}$ since $\mathscr{B}$ covers $\mathcal{X}$.
+  Obviously, the union of any sets of $\mathscr{O}$ is in $\mathscr{O}$.
+
+  Let $O_0, O_1 \in \mathscr{O}$, then $O_0 = \bigcup_i B_i$ and $O_1 = \bigcup_j B_j$.
+  For any $x \in O_0 \cap O_1$, we have $x \in B_x \subseteq O_0 \cap O_1$ where $B_x \in \mathscr{O}$
+  by $(2)$.
+  Then $O_0 \cap O_1 = \bigcup_x = B_x$, therefore $O_0 \cap O_1 \in \mathscr{O}$
+  cause it is a union of some set $B_x$.
+\end{proof}
+
+\begin{definition}[Prebase]
+  Suppose $\mathscr{P}$ is a collection of subsets in $\mathcal{X}$ that covers the whole space.
+  Show that the set of all finite intersections of sets in $\mathscr{P}$ is a base for \textit{some}
+  topology on $\mathcal{X}$.
+\end{definition}
+\begin{proof}
+  We denote all finite intersections of sets in $\mathscr{P}$ as $P$,
+  then $\mathscr{P} \subseteq P$ since $\forall S \in P, S \cap S = S$.
+  So $P$ covers $\mathcal{X}$. For any $B_0, B_1 \in P$ and $x \in B_0 \cap B_1$,
+  it is obvious that $x \in B_0 \cap B_1 \subseteq B_0 \cap B_1 \in P$.
+  So $\mathscr{P}$ is a base for some topology on $\mathcal{X}$ by the previous theorem.
+\end{proof}
+
+\begin{theorem}
+  Let $\mathscr{P}$ be a prebase for the topology on $\mathcal{Y}$. Show that
+  a map $f : \mathcal{X} \rightarrow \mathcal{Y}$ is continuous iff
+  $\inv{f}(P)$ is open for any $P \in \mathscr{P}$.
+\end{theorem}
+\begin{proof}
+  $(\Rightarrow)$ Obviously, every set in $\mathscr{P}$ is open. \par
+  $(\Leftarrow)$ For any open set in $\mathcal{Y}$, it is a union of sets in
+  $\mathscr{P}$, that is, $\bigcup_i P_i$. Then $\inv{f}(\bigcup_i P_i) = \bigcup_i \inv{f}(P_i)$
+  which is a union of open sets, so it is also open.
+\end{proof}
+
+\begin{theorem}
+  For any map $f : \mathcal{X} \rightarrow \mathcal{Y}$, the map
+  $F : \mathcal{X} \rightarrow \mathcal{X} \times \mathcal{Y}$ given by
+  $F(x) = (x, f(x))$. Show that $f(x)$ is continuous iff $F$
+  is an embedding.
+\end{theorem}
+\begin{proof}
+  $(\Rightarrow)$ We first show that $F : \mathcal{X} \rightarrow F(\mathcal{X})$ is continuous.
+  For any open set $G$ in the induced topology on $F(\mathcal{X})$,
+  it has form $F(\mathcal{X}) \cap (\bigcup_\alpha V_\alpha \times W_\alpha)$,
+  where $(\bigcup_\alpha V_\alpha \times W_\alpha)$ is the open set in $\mathcal{X} \times \mathcal{Y}$.
+  Clearly, $\inv{F}(G) = G.0 = \set{ x \mid \forall (x, y) \in G} = X \cap (\bigcup_\alpha V_\alpha)$,
+  so it is an open set in $\mathcal{X}$.
+  % The following is a stupid and massive proof of previous goal:
+  % Then $\inv{F}(G) = \set{ x \mid \forall (x, y) \in G, x \in \inv{f}(y) }$.
+  % We first consider $G.0 = \set{ x.0 | \forall x \in G }$, which is exactly 
+  % $\mathcal{X} \cap (\bigcup_\alpha V_\alpha)$, similarly
+  % $G.1 = f(\mathcal{X}) \cap (\bigcup_\alpha W_\alpha)$ and
+  % $\inv{F}(G) = G.0 \cap \inv{f}(G.1)$.
+  % Clearly $G.0$ is open in $\mathcal{X}$, and $\inv{f}(G.1) = \inv{f}(f(\mathcal{X}) \cap (\bigcup_\alpha W_\alpha))$ is in fact $\inv{f}(\bigcup_\alpha W_\alpha)$,
+  % while $\bigcup_\alpha W_\alpha$ is open in $\mathcal{Y}$, so $\inv{f}(\bigcup_\alpha W_\alpha)$ is open in $\mathcal{X}$,
+  % therefore $\inv{F}(G)$ is open in $\mathcal{X}$ cause it is an intersection of two open sets.
+  It is easy to see $\inv{F} : F(\mathcal{X}) \rightarrow \mathcal{X}$ given by $\inv{F}(x, y) = x$ is
+  the inverse of $F$, we need to show that it is continuous, or in other words,
+  show that $F$ sends open to open.
+  For any open set $V \subseteq \mathcal{X}$, $F(V) = F(\mathcal{X}) \cap (V \times \mathcal{Y})$,
+  which is open in $F(\mathcal{X})$.
+  So $F$ is an embedding. \par
+  $(\Leftarrow)$ For any open set $G$ in $\mathcal{Y}$, we have $H = F(\mathcal{X}) \cap (\mathcal{X} \times G)$
+  is open in the induced topology on $F(\mathcal{X})$, then $\inv{F}(H)$ is open in $\mathcal{X}$.
+  We claim $\inv{f}(G) = \inv{F}(H)$. 
+  \begin{itemize}
+    \item $(\supseteq)$ For any $x \in \inv{F}(H)$,
+    we know $f(x) \in f(\mathcal{X}) \cap G$ since $F(x) = (x, f(x)) \in H$, so $x \in \inv{f}(G)$
+    since $f(x) \in G$. 
+    \item $(\subseteq)$ For any $x \in \inv{f}(G)$, we know $f(x) \in G$,
+    so $(x, f(x)) \in H$ since $x \in \mathcal{X} \cap \mathcal{X}$ and $f(x) \in f(\mathcal{X}) \cap G$,
+    so $x \in \inv{F}(H)$. 
+  \end{itemize}
+  Therefore $f$ is continuous.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,19 @@
+\documentclass[./main.tex]{subfiles}
+
+\begin{document}
+
+\section{Compactness}
+
+\begin{exercise}
+  Let $\{V_\alpha\}$ be an open cover of a topological space $\mathcal{X}$.
+  Show that $W \subseteq \mathcal{X}$ is open iff $W \cap V_\alpha$ is open for any
+  $V_\alpha \in \{V_\alpha\}$.
+\end{exercise}
+\begin{proof}
+  $(\Rightarrow)$ is trivial. \par
+  $(\Leftarrow)$ For any point $x \in W$, we have $x \in V_x$ since $\{V_\alpha\}$ is open cover.
+  Consider $\bigcup_{x \in W} (W \cap V_x)$, it is a union of open sets, and it is a subset of $W$,
+  and it contains all points of $W$, so $W$ is open.
+\end{proof}
+
+\end{document}

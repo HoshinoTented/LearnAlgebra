@@ -56,4 +56,37 @@ This chapter established the set theory of hoshino version.
   So $S$ has a smallest element.
 \end{proof}
 
+\begin{theorem}
+  Let $S$ a set and $S_i$ a collection of set, and $C_i = S \setminus S_i$ a collection of
+  complements. Then
+  \[
+  \bigcup C_i = \bigcup (S \setminus S_i) = S \setminus (\bigcap S_i)
+  \]
+\end{theorem}
+\begin{proof}
+  $(\supseteq)$ For any element $x \in \bigcup C_i$, we know $x$ must belongs to some $C_\alpha$,
+  therefore $x \notin S \setminus C_\alpha = S_\alpha$, so $x \notin \bigcap S_i$,
+  therefore $x \in S \setminus (\bigcap S_i)$.
+
+  $(\subseteq)$ For any element $x \in S \setminus (\bigcap S_i)$, we know $x \in S$
+  but $s \notin \bigcap S_i$, therefore, $x$ must not belongs to some $S_\alpha$,
+  therefore $x \in S \setminus S_\alpha = C_\alpha$, so $x \in \bigcup C_i$.
+\end{proof}
+
+\begin{theorem}
+  Let $S$ a set and $S_i$ a collection of set, and $C_i = S \setminus S_i$ a collection of complements.
+  Then
+  \[
+  \bigcap C_i = \bigcap (S \setminus S_i) = S \setminus (\bigcup S_i)
+  \]
+\end{theorem}
+\begin{proof}
+  $(\supseteq)$ For any element $x \in \bigcap C_i$, we know $x$ belongs to all $C_i$,
+  for any $S_i = S \setminus C_i$, $x \notin S_i$, so $x \notin \bigcup S_i$,
+  therefore $s \in S \setminus (\bigcup S_i)$.
+  $(\subseteq)$ For any element $x \in S \setminus (\bigcup S_i)$, we know $x \in S$
+  but $x \notin \bigcup S_i$, so none of them contains $x$, therefore every $S \setminus S_i$ contains $x$,
+  that is, $x \in \bigcap (S \setminus S_i) = \bigcap C_i$. 
+\end{proof}
+
 \end{document}

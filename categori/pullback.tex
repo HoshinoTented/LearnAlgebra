@@ -237,4 +237,88 @@
   So $(E, \pi_0 \circ e, \pi_1 \circ e)$ is a pullback of such corner.
 \end{proof}
 
+\begin{theorem}
+  If a category has a terminal object and has a pullback for every corner,
+  then it has all binary product.
+\end{theorem}
+
+\begin{theorem}
+  If a category has a terminal object and has a pullback for every corner,
+  then it has a equalizer for every parallel arrwos.
+\end{theorem}
+\begin{proof}
+  Suppose $s, t : X \rightarrow Y$ are parallel arrows, then the following
+  diagram commutes:
+  % https://q.uiver.app/#q=WzAsNCxbMiwyLCJZIFxcdGltZXMgWSJdLFs0LDIsIlkiXSxbMiw0LCJZIl0sWzAsMCwiWCJdLFswLDIsIlxccGlfMCIsMl0sWzAsMSwiXFxwaV8xIl0sWzMsMCwiXFxsYW5nbGUgcywgdCBcXHJhbmdsZSIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFszLDIsInMiLDIseyJjdXJ2ZSI6M31dLFszLDEsInQiLDAseyJjdXJ2ZSI6LTN9XV0=
+  \[\begin{tikzcd}
+    X \\
+    \\
+    && {Y \times Y} && Y \\
+    \\
+    && Y
+    \arrow["{\langle s, t \rangle}"{description}, dashed, from=1-1, to=3-3]
+    \arrow["t", curve={height=-18pt}, from=1-1, to=3-5]
+    \arrow["s"', curve={height=18pt}, from=1-1, to=5-3]
+    \arrow["{\pi_1}", from=3-3, to=3-5]
+    \arrow["{\pi_0}"', from=3-3, to=5-3]
+  \end{tikzcd}\]
+
+  Note that we have $Y \times Y$ since this category has all binary products.
+  Then consider this corner:
+  % https://q.uiver.app/#q=WzAsMyxbMCwyLCJYIl0sWzIsMiwiWSBcXHRpbWVzIFkiXSxbMiwwLCJZIl0sWzAsMSwiXFxsYW5nbGUgcywgdCBcXHJhbmdsZSJdLFsyLDEsIlxcbGFuZ2xlIDFfWSwgMV9ZXFxyYW5nbGUiLDJdXQ==
+  \[\begin{tikzcd}
+    && Y \\
+    \\
+    X && {Y \times Y}
+    \arrow["{\langle 1_Y, 1_Y\rangle}"', from=1-3, to=3-3]
+    \arrow["{\langle s, t \rangle}", from=3-1, to=3-3]
+  \end{tikzcd}\]
+
+  We have an object $E$, $e : E \rightarrow X$ and $f : E \rightarrow Y$
+  such that the square commutes:
+  % https://q.uiver.app/#q=WzAsNCxbMCwyLCJYIl0sWzIsMiwiWSBcXHRpbWVzIFkiXSxbMiwwLCJZIl0sWzAsMCwiRSJdLFswLDEsIlxcbGFuZ2xlIHMsIHQgXFxyYW5nbGUiXSxbMiwxLCJcXGxhbmdsZSAxX1ksIDFfWVxccmFuZ2xlIiwyXSxbMywwLCJlIiwyXSxbMywyLCJmIl1d
+  \[\begin{tikzcd}
+    E && Y \\
+    \\
+    X && {Y \times Y}
+    \arrow["f", from=1-1, to=1-3]
+    \arrow["e"', from=1-1, to=3-1]
+    \arrow["{\langle 1_Y, 1_Y\rangle}"', from=1-3, to=3-3]
+    \arrow["{\langle s, t \rangle}", from=3-1, to=3-3]
+  \end{tikzcd}\]
+
+  \textit{(Proof comes from textbook until here)}
+
+  We can see that $\pi_0 \circ \braket{s, t} \circ e = s \circ e$
+  while $\pi_0 \circ \braket{1_Y, 1_Y} \circ f = 1_Y \circ f = f$,
+  therefore $s \circ e = f$,
+  similarly $t \circ e = f$, so $s \circ e = t \circ e$.
+  We claim $E$ is the equalizer for the parallel arrows $s, t : X \rightarrow Y$.
+  For any $(F, e^\prime)$ such that $s \circ e^\prime = t \circ e^\prime$,
+  then we have a unique arrow $u : F \rightarrow E$ such that this diagram commutes:
+  % https://q.uiver.app/#q=WzAsNSxbMiw0LCJYIl0sWzQsNCwiWSBcXHRpbWVzIFkiXSxbNCwyLCJZIl0sWzIsMiwiRSJdLFswLDAsIkYiXSxbMCwxLCJcXGxhbmdsZSBzLCB0IFxccmFuZ2xlIl0sWzIsMSwiXFxsYW5nbGUgMV9ZLCAxX1lcXHJhbmdsZSIsMl0sWzMsMCwiZSIsMl0sWzMsMiwiZiJdLFs0LDMsInUiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbNCwwLCJlXlxccHJpbWUiLDIseyJjdXJ2ZSI6M31dLFs0LDIsInMgXFxjaXJjIGVeXFxwcmltZSA9IHQgXFxjaXJjIGVeXFxwcmltZSIsMCx7ImN1cnZlIjotM31dXQ==
+  \[\begin{tikzcd}
+    F \\
+    \\
+    && E && Y \\
+    \\
+    && X && {Y \times Y}
+    \arrow["u", dashed, from=1-1, to=3-3]
+    \arrow["{s \circ e^\prime = t \circ e^\prime}", curve={height=-18pt}, from=1-1, to=3-5]
+    \arrow["{e^\prime}"', curve={height=18pt}, from=1-1, to=5-3]
+    \arrow["f", from=3-3, to=3-5]
+    \arrow["e"', from=3-3, to=5-3]
+    \arrow["{\langle 1_Y, 1_Y\rangle}"', from=3-5, to=5-5]
+    \arrow["{\langle s, t \rangle}", from=5-3, to=5-5]
+  \end{tikzcd}\]
+
+  where $e \circ u = e^\prime$.
+  Suppose $v : F \rightarrow E$ where $e \circ v = e^\prime$,
+  then $f \circ v = s \circ e \circ v = s \circ e^\prime$.
+\end{proof}
+
+\[
+\bigl\vert - |x - z|_X + |y - z|_X \bigr\vert_\mathbb{text} \geq \epsilon
+\]
+
 \end{document}
