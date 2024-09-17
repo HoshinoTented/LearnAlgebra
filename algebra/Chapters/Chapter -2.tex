@@ -89,4 +89,27 @@ This chapter established the set theory of hoshino version.
   that is, $x \in \bigcap (S \setminus S_i) = \bigcap C_i$. 
 \end{proof}
 
+\begin{theorem}
+  Suppose $f : A \rightarrow B$, then for any $V, W \subseteq A$
+  we have:
+  \begin{itemize}
+    \item $f(V \cap W) \subseteq f(V) \cap f(W)$
+    \item $f(V \cup W) = f(V) \cup f(W)$
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item For any $x \in f(V \cap W)$, we there is $y \in V \cap W$ such that $f(y) = x$,
+          then $x \in f(V)$ since $y \in V$ and $x \in f(W)$ since $y \in W$.
+    \item $(\supseteq)$ For any $x \in f(V) \cup f(W)$, we know $x \in f(V)$ or $x \in f(W)$,
+          we may suppose $x \in f(V)$. Then there is $y \in V$ such that $f(y) = x$,
+          therefore $x \in f(V \cup W)$ since $y \in V \cup W$.
+
+          $(\subseteq)$ For any $x \in f(V) \cup f(W)$, we may suppose $x \in f(V)$.
+          Then there is $a \in V$ such that $f(a) = x$, then $a \in V \cup W$ and
+          $x \in f(V \cup W)$.
+  \end{itemize}
+\end{proof}
+
 \end{document}

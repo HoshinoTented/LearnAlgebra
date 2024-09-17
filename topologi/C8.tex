@@ -1,0 +1,120 @@
+\documentclass[./main.tex]{subfiles}
+
+\begin{document}
+
+\section{Hausdorff spaces}
+
+\begin{definition}
+  A topological space $\mathcal{X}$ is called Hausdorff,
+  if for each pair of distinct points $x, y \in \mathcal{X}$
+  there are disjoint neighborhoods $x \in V$ and $y \in W$.
+\end{definition}
+
+\begin{theorem}
+  Show that any converging sequence in a Hausdorff space has a unique limit.
+\end{theorem}
+\begin{proof}
+  Suppose a sequence $x_n$ converage to $x$ and $y$,
+  then there are disjoint neighborhoods $x \in V$ and $y \in W$.
+  Since $x$ is the limit of $x_n$, so there is $i$ such that for any neighborhood
+  of $x$, $x_j$ is in that neighborhood for any $j > i$.
+  Similar to $y$, but $V$ and $W$ are disjoint, and $V$ contains infinite points
+  of $x_n$ from some $i$, therefore $W$ contains finite points of $x_n$,
+  which is unacceptible.
+\end{proof}
+
+\begin{theorem}
+  Show that a topological space $\mathcal{X}$ is Hausdorff
+  iff the diagonal
+  \[
+  \Delta = \set{(x, x) \in \mathcal{X} \times \mathcal{X}}
+  \]
+  is a closed set in the product space $\mathcal{X} \times \mathcal{X}$
+\end{theorem}
+\begin{proof}
+  % Consider the union of $V \times W$ where $V$ and $W$ are disjoint neiborhoods
+  % for some distinct $x, y \in \mathcal{X}$, then we can show that the union
+  % is a open set in $\mathcal{X} \times \mathcal{X}$
+  % and the complement is exactly $\Delta$.
+
+  $(\Rightarrow)$ The set $S = \bigcup_{x, y \in \mathcal{X}, x \neq y} V_{(x, y)} \times W_{(x, y)}$
+  is an open set in $\mathcal{X} \times \mathcal{X}$ where $V_{(x, y)}$ and $W_{(x, y)}$
+  are disjoint neighborhoods of $x$ and $y$, respectively. It is easy to see that
+  $(x, x) \notin S$ for any $x \in \mathcal{X}$, otherwise $(x, x)$ must belongs to
+  some $V_{(x, x)} \times W_{(x, x)}$ while $V_{(x, x)}$ and $W_{(x, x)}$ are disjoint
+  and $x \in V_{(x, x)} \cap W_{(x, x)}$. Also, there is no point that is not in $S$
+  beside the point in $\Delta$. So $\Delta$ is the complement of $S$,
+  and $S$ is open, so $\Delta$ is closed.
+  
+  $(\Leftarrow)$ For any distinct $x, y \in \mathcal{X}$, we have $(x, y) \in \Delta^C$.
+  We know $\Delta^C$ is a union of products of open sets in $\mathcal{X}$,
+  so we may suppose $x \in V$ and $y \in W$ where $V$ and $W$ are open sets in $\mathcal{X}$.
+  Suppose $z \in V \cap W$, then $(z, z) \in \Delta^C$ and then $(z, z) \notin \Delta$,
+  which is unacceptible.
+\end{proof}
+
+\begin{corollary}
+  Any one-point set in a Hausdorff space is closed.
+\end{corollary}
+\begin{proof}
+  For any Hausdorff space $\mathcal{X}$ and $p \in \mathcal{X}$,
+  for any $y \in \mathcal{X}$ that $x \neq y$, we have a pair of disjoint neighborhood
+  $V_y$ of $x$ and $W_y$ of $y$. Consider the union of these $W_y$,
+  obviously it is an open set that contains every point in $\mathcal{X}$ beside $x$,
+  so the one-point set $\{ x \}$ is closed.
+\end{proof}
+
+\begin{corollary}
+  Any subspace of Hausdorff space is Hausdorff.
+\end{corollary}
+\begin{proof}
+  Suppose $\mathcal{X}$ is Hausdorff and $S \subseteq \mathcal{X}$ a subspace.
+  Consider $x, y \in S$ where $x \neq y$, we know there are disjoint neighborhood 
+  $V$ and $W$ such that $V \cap W = \varnothing$, then $(V \cap S) \cap (W \cap S) = \varnothing$
+  where $V \cap S$ and $W \cap S$ are open set in $S$ and $x \in V \cap S$ and $y \in W \cap S$.
+\end{proof}
+
+\begin{theorem}
+  \label{theorem:1.3}
+  Let $\mathcal{X}$ be a Hausdorff space and $K \subseteq \mathcal{X}$ be a compact subset.
+  Then for any $y \notin K$, there are open sets $K \subseteq V$ and $y \in W$
+  such that $V \cap W = \varnothing$.
+\end{theorem}
+\begin{proof}
+  For any point $z \in K$, we have disjoint neighborhoods $y \in W_z$ and $z \in V_z$,
+  consider the union of $V_z$, obviously it is an open cover on $K$, so there is
+  a finite subcover $\{ V_{z_\alpha} \}$, then we consider the intersection of the corresponding
+  $W_{z_\alpha}$, that is, $\bigcap_\alpha W_{z_\alpha}$, we can do this intersection
+  cause the subcover is finite.
+  Then let $V = \bigcup_\alpha V_{z_\alpha}$ and $W = \bigcap_\alpha W_{z_\alpha}$,
+  obviously $V \cap W = \varnothing$.
+\end{proof}
+
+\begin{theorem}
+  Any compact subset of Hausdorff is closed.
+\end{theorem}
+\begin{proof}
+  Suppose $\mathcal{X}$ is Hausdorff and $K \subseteq \mathcal{X}$ a compact subset.
+  For any $y \notin K$, we have $K \subseteq V_y$ and $y \in W_y$ such that $V_y \cap W_y = \varnothing$.
+  Consider the union of these $W_y$, we can see that it is an open set and contains every point
+  in $\mathcal{X} \setminus K$.
+\end{proof}
+
+\begin{theorem}
+  Let $\mathcal{X}$ be a Hausdorff space and $K, L \subseteq \mathcal{X}$ be
+  two compact subsets that $K \cap L = \varnothing$.
+  Show that there are open sets $K \subseteq V$ and $L \subseteq W$ such that
+  $V \cap W = \varnothing$
+\end{theorem}
+\begin{proof}
+  For any $l \in L$, we have $K \subseteq V_l$ and $l \in W_l$ where
+  $V_l \cap W_l = \varnothing$ by Theorem \ref{theorem:1.3}.
+  Consider the union of these $W_l$, it is an open cover on $L$, therefore there is
+  a finite subcover $\{ W_{l_\alpha} \}$. Then we can take the intersection of
+  the corresponding $V_l$, that is, $V = \bigcap_\alpha V_{l_\alpha}$,
+  and the union of the subcover $W = \bigcup_\alpha W_{l_\alpha}$.
+  They are disjoint, otherwise there is $x \in V_{l_\alpha}$ and $x \in W_{l_\alpha}$ for some $\alpha$,
+  which contradict to the property from Theorem \ref{theorem:1.3}.
+\end{proof}
+
+\end{document}

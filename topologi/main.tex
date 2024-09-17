@@ -5,6 +5,7 @@
 \usepackage{amsthm, amsmath, amssymb}
 \usepackage{mathrsfs}
 \usepackage{braket}
+\usepackage{quiver}
 
 \usepackage{subfiles}
 
@@ -13,12 +14,18 @@
 \newtheorem{definition}{Definition}[section]
 \newtheorem{exercise}{Exercise}[section]
 \newtheorem*{example}{Example}
+\newtheorem*{corollary}{Corollary}
 
 \newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\iset}[3][\alpha]{\{ #3_{#1} \}_{#1 \in #2}}
 
 \begin{document}
 
 \subfile{./C5.tex}
 \subfile{./C6.tex}
+\subfile{./C8.tex}
+\subfile{./C9.tex}
+\subfile{./C10.tex}
+\subfile{./C11.tex}
 
 \end{document}

@@ -1,0 +1,186 @@
+\documentclass[./main.tex]{subfiles}
+
+\begin{document}
+
+\section{More Constructions}
+
+\begin{definition}[Initial Topology]
+  Let $f : \mathcal{X} \rightarrow \mathcal{Y}$ a mapping between two sets
+  and $\mathcal{Y}$ is equipped with a topology.
+  Then we declare that $V \subseteq \mathcal{X}$ is open
+  if there is an open set $W \subseteq \mathcal{Y}$
+  such that $V = \inv{f}(W)$. This topology is called initial topology.
+\end{definition}
+\begin{proof}
+  We need to show that it forms a topology.
+  \begin{itemize}
+    \item $\varnothing = \inv{f}(\varnothing)$ and $\mathcal{X} = \inv{f}(\mathcal{Y})$.
+    \item For a collection of open set $\{ V_\alpha \}$,
+          we claim $\bigcup_\alpha V_\alpha = \inv{f}(\bigcup_\alpha W_\alpha)$.
+          For any $x \in \bigcup_\alpha V_\alpha$, it must belongs to some $V_\alpha$,
+          therefore $x \in \inv{f}(W_\alpha) \subseteq \inv{f}(\bigcup_\alpha W_\alpha)$.
+          For any $x \in \inv{f}(\bigcup_\alpha W_\alpha)$, we know $f(x)$ must belongs
+          to some $W_\alpha$, so $x \in \inv{f}(W_\alpha) \subseteq \inv{f}(\bigcup_\alpha W_\alpha)$.
+    \item For two open sets $V_0, V_1 \subseteq \mathcal{X}$, we claim $V_0 \cap V_1 = \inv{f}(W_0 \cap W_1)$.
+          For any $x \in V_0 \cap V_1$, then $f(x) \in W_0$ and $f(x) \in W_1$, so $x \in \inv{f}(W_0 \cap W_1)$.
+          For any $x \in \inv{f}(W_0 \cap W_1)$, we know $f(x) \in W_0 \cap W_1$, therefore $x \in \inv{f}(W_0) = V_0$
+          and $x \in \inv{f}(W_1) = V_1$, so $x \in V_0 \cap V_1$.
+  \end{itemize}
+\end{proof}
+
+\begin{definition}[Final Topology]
+  Let $f : \mathcal{X} \rightarrow \mathcal{Y}$ a mapping between two sets
+  and $\mathcal{X}$ is equipped with a topology.
+  Then we declare that $W \subseteq \mathcal{Y}$ is open
+  if there is an open set $V \subseteq \mathcal{X}$
+  such that $V = \inv{f}(W)$. This topology is called final topology
+\end{definition}
+\begin{proof}
+  Similar to the proof of initial topology.
+\end{proof}
+
+We can see that the induced topology makes the mapping open.
+
+\begin{theorem}
+  Let $f : \mathcal{X} \rightarrow \mathcal{Y}$ be a continuous mapping between
+  topological spaces, then:
+  \begin{itemize}
+    \item The initial topology on $\mathcal{X}$ is weaker than its own topology.
+    \item The final topology on $\mathcal{Y}$ is stronger than its own topology. 
+  \end{itemize}
+  Recall that $V$ is weaker than $W$ if any open set under $V$ is also an open set under $W$.
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item For any open sets $V$ in initial topology of $\mathcal{X}$, we know there is
+          $W \subseteq \mathcal{Y}$ such that $V = \inv{f}(W)$. Then $V$ is
+          an open set in the original topology cause $f$ is continuous.
+    \item For any open sets $W$ in the original topology of $\mathcal{Y}$,
+          we know there is $V \subseteq \mathcal{X}$ such that $V = \inv{f}(W)$
+          since $f$ is continuous, then $W$ is an open set in final topology of $\mathcal{Y}$.
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}
+  Let $g : \mathcal{X} \rightarrow \mathcal{Y}$ be a continuous map.
+  \begin{itemize}
+    \item Suppose $\mathcal{X}$ is equipped with the initial topology induced by $g$. Show that
+          a map $f : \mathcal{W} \rightarrow \mathcal{X}$ is continuous iff
+          $g \circ f : \mathcal{W} \rightarrow \mathcal{Y}$ is continuous.
+    \item Suppose $\mathcal{Y}$ is equipped with the final topology induced by $g$. Show that
+          a map $h : \mathcal{Y} \rightarrow \mathcal{Z}$ is continuous iff
+          $h \circ g : \mathcal{X} \rightarrow \mathcal{Z}$ is continuous.
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+  $(\Rightarrow)$s are trivial, we focus on $(\Leftarrow)$s.
+  \begin{itemize}
+    \item For any open set $W \subseteq \mathcal{Y}$, 
+          there is an open set $V \subseteq \mathcal{W}$ such that $V = \inv{(g \circ f)}(W)$
+          and $S \subseteq \mathcal{X}$ such that $S = \inv{g}(W)$.
+          Then $V = \inv{(g \circ f)}(W) = (\inv{f} \circ \inv{g})(W) = \inv{f}(\inv{g}(W)) = \inv{f}(S)$.
+          Also, every open set in $\mathcal{X}$ is induced by an open sets in $\mathcal{Y}$, so
+          we proved that the inverse image of every open sets in $\mathcal{X}$ is also open in $\mathcal{W}$,
+          that is, $f$ is continuous.
+    \item For any open set $W \subseteq \mathcal{Z}$,
+          there is an open set $V \subseteq \mathcal{X}$ such that $V = \inv{(h \circ g)}(W)$.
+          Then $V = \inv{(h \circ g)}(W) = \inv{g}(\inv{h}(W))$, and we know $\inv{h}(W)$ is open
+          cause $\mathcal{Y}$ is the final topology induced by $g$, so there must be
+          an open set which inverse image of $g$ is $V$, and $\inv{h}(W)$ can do the job.
+          So $\inv{h}(W)$ is an open set, therefore $h$ is continuous.
+  \end{itemize}
+\end{proof}
+
+\begin{definition}[Quotient Topology]
+  Let $~$ be an equivalence relation on a topology space $\mathcal{X}$.
+  The set $[x] = \set{ y \in \mathcal{X} | x \sim y }$ is called the equivalence
+  class of $x$. Then the final topology on $\mathcal{X}/\sim$ induced by $f(x) = [x]$ is called
+  quotient topology. The set $\mathcal{X}/\sim$ equipped with a quotient topology is called quotient space.
+\end{definition}
+
+\begin{theorem}
+  Let $f : \mathcal{K} \rightarrow \mathcal{Y}$ be a continuous map. Suppose
+  $\mathcal{K}$ is compact and $\mathcal{Y}$ is Hausdorff, show that
+  $f$ is closed.
+\end{theorem}
+\begin{proof}
+  For any closed set $S$ in $\mathcal{K}$, we know $S$ is compact since $\mathcal{K}$
+  is compact, then $f(S)$ is also compact in $\mathcal{Y}$ cause $f$ is continuous.
+  Then $f(S)$ is closed cause $\mathcal{Y}$ is Hausdorff.
+\end{proof}
+
+\begin{definition}
+  Let $\mathcal{X}$ be a topological space and $G$ be a group.
+  Suppose $- \cdot - : G \times \mathcal{X} \rightarrow \mathcal{X}$ is a mapping
+  such that:
+  \begin{enumerate}
+    \item For any $x \in \mathcal{X}$, $1 \cdot x = x$. $1$ is the identity of $G$.
+    \item For any $g, h \in G$ and $x \in \mathcal{X}$, $g \cdot (h \cdot x) = (g \cdot h) \cdot x$.
+    \item For any $g \in \mathcal{G}$, the map $x \mapsto g \cdot x$ is continuous.
+  \end{enumerate}
+
+  Then we say $G$ acts on $\mathcal{X}$, or $\mathcal{X}$ is a $G$-space.
+  In this case, the set $G \cdot x = \set{ g \cdot x | \forall g \in G }$
+  is called the $G$-orbit of $x$.
+\end{definition}
+
+\begin{theorem}
+  \label{theorem:1.4}
+  Suppose that a group $G$ acts on a topological space $\mathcal{X}$.
+  Show that for any $g \in G$, the map $x \mapsto g \cdot x$ defines a homeomorphism
+  $\mathcal{X} \rightarrow \mathcal{X}$.
+\end{theorem}
+\begin{proof}
+  We first show that $f(x) = g \cdot x$ is bijective. 
+  (Injective) If $f(a) = f(b)$ for some $a, b \in \mathcal{X}$, then $g \cdot a = g \cdot b$
+  and then $\inv{g} \cdot g \cdot a = \inv{g} \cdot g \cdot b$, which is eventually
+  $a = b$.
+  (Surjective) For any $x \in \mathcal{X}$, we have $\inv{g} \cdot x \in \mathcal{X}$
+  that $f(\inv{g} \cdot x) = g \cdot \inv{g} \cdot x = x$.
+  By definition, we know $f$ is continuous, we need to show that $\inv{f}$ is continuous.
+  It is easy to see that $\inv{f}(x) = \inv{g} \cdot x$, which is continuous by definition.
+  So $f$ is a homeomorphism.
+\end{proof}
+
+\begin{definition}
+  Suppose that a group $G$ acts on a topological space $\mathcal{X}$.
+  Define $x \sim y$ if there is $g \in G$ such that $y = g \cdot x$.
+  We can show that $\sim$ is an equivalence relation, and $\mathcal{X}/\sim$
+  can be also denoted by $\mathcal{X}/G$.
+  Note that $[x] = G \cdot x$, the orbit of $x$, therefore $\mathcal{X}/G$
+  is also called orbit space.
+\end{definition}
+\begin{proof}
+  We will show that $\sim$ is an equivalence relation.
+  \begin{itemize}
+    \item (Reflexivity) $x = 1 \cdot x$
+    \item (Symmetry) If $x \sim y$, then $y = g \cdot x$, we have $x = \inv{g} \cdot g \cdot x = \inv{g} \cdot y$,
+          that is, $y \sim x$.
+    \item (Transitivity) if $x \sim y$ and $y \sim z$, then $y = g \cdot x$ and $z = h \cdot y$,
+          we have $z = (h \cdot g) \cdot x$, that is, $z \sim x$.
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}
+  Suppose a group $G$ acts on a topological space $\mathcal{X}$,
+  and $f : \mathcal{X} \rightarrow \mathcal{X}/G$ is the quotient map.
+  \begin{itemize}
+    \item Show that $f$ is open.
+    \item Show that $f$ is closed if $G$ is finite.
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item We can see that $\inv{f}(f(V))$ for any open set $V$
+          is the set that contains points that equivalence to the points in $V$,
+          that is, $G \cdot V$, it is easy to see that $G \cdot V = \bigcup_{g \in G} g \cdot V$
+          is open set, since every $g \cdot V$ is open while $g \cdot -$ is a homeomorphism by Theorem \ref{theorem:1.4}.
+          Therefore, $f(V)$ has to be open cause $\inv{f}(f(V))$ is open.
+    \item Similar to the previous answer, the finite condition is used when we
+          are trying to obtain a union of some closed sets.
+  \end{itemize}
+\end{proof}
+
+\end{document}

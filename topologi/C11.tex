@@ -1,0 +1,157 @@
+\documentclass[./main.tex]{subfiles}
+
+\begin{document}
+
+\section{Path-connected spaces}
+
+\begin{definition}
+  Let $\mathcal{X}$ be a topological space.
+  A continuous map $f : [0, 1] \rightarrow \mathcal{X}$
+  is called path. If $f(0) = x$ and $f(1) = y$, we say
+  $f$ is a path from $x$ to $y$.
+\end{definition}
+
+\begin{definition}
+  A space $\mathcal{X}$ is called path-connected if it is nonempty
+  and any two points in $\mathcal{X}$ can be connected by a path.
+\end{definition}
+
+\begin{theorem}
+  Any path-connected space is connected.
+\end{theorem}
+\begin{proof}
+  Suppose $\mathcal{X}$ a path-connected space, take $x \in \mathcal{X}$.
+  Then we consider all path from $x$ to $y$ for all $y \in \mathcal{X}$,
+  we can see that all these path is connected cause $[0, 1]$ is connected.
+  Then:
+  \[
+  \bigcup_{y \in \mathcal{X}} f_y([0, 1])
+  \]
+  is connected cause every $f_y([0, 1])$ (the path from $x$ to $y$) is connected,
+  and these path contain $x$.
+\end{proof}
+
+\begin{definition}
+  Given a path $f : [0, 1] \rightarrow \mathcal{X}$, one can consider
+  the time-reversed path $\bar{f}$:
+  \[
+  \bar{f}(t) = f(1 - t)
+  \]
+  Note that $\bar{f}$ is continuous cause $f$ is continuous.
+\end{definition}
+
+\begin{definition}
+  let $f$ and $g$ be paths in the topological space $\mathcal{X}$.
+  If $f(1) = g(0)$, we can join these two paths into one $h : [0, 1] \rightarrow \mathcal{X}$:
+  \[
+  h(t) = 
+  \begin{cases}
+  f(2t) \quad \text{if } t \leq \frac{1}{2} \\
+  g(2t - 1) \quad \text{if } t \geq \frac{1}{2}
+  \end{cases}
+  \]
+\end{definition}
+
+\begin{theorem}
+  Show that $\sim$ is equivalence relation: $x \sim y$ iff there is
+  a path from $x$ to $y$.
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item (Reflexivity) Obviously, there is a path from $x$ to $x$.
+    \item (Symmetry) Consider the time-reversed path.
+    \item (Transitivity) Consider the concatenation of paths.
+  \end{itemize}
+\end{proof}
+
+The equivalence class of point $x$ for the equivalence relation $\sim$
+is called path-connected component of $x$.
+
+\begin{theorem}
+  Show that the product of path-connected space is path-connected.
+\end{theorem}
+\begin{proof}
+  Suppose $\mathcal{X}$ and $\mathcal{Y}$ are path-connected spaces,
+  for any $(a, b), (c, d) \in \mathcal{X} \times \mathcal{Y}$, we
+  know there are paths $a \xrightarrow{f} c$ and $b \xrightarrow{g} d$.
+  We claim $h(t) = (f(t), g(t))$ is a path from $(a, b)$ to $(c, d)$.
+  We need to show that $h$ is continuous.
+  For any open sets $\bigcup_\alpha V_\alpha \times W_\alpha$ in $\mathcal{X} \times \mathcal{Y}$
+  for every $\alpha$, we claim $\inv{h}(V_\alpha \times W_\alpha) = \inv{f}(V_\alpha) \cap \inv{g}(W_\alpha)$.
+  
+  $(\subseteq)$ For any $i \in [0, 1]$ such that $h(i) \in V_\alpha \times W_\alpha$,
+  we know $f(i) \in V_\alpha$ and $g(i) \in W_\alpha$, therefore $i \in \inv{f}(V_\alpha) \cap \inv{g}(W_\alpha)$.
+
+  $(\supseteq)$ For any $i \in \inv{f}(V_\alpha) \cap \inv{g}(W_\alpha)$, we know
+  $h(i) = (f(i), g(i)) \in V_\alpha \times W_\alpha$ cause $f(i) \in V_\alpha$
+  and $g(i) \in W_\alpha$, therefore $i \in \inv{h}(V_\alpha \times W_\alpha)$.
+
+  We can see that $\inv{h}(V_\alpha \times W_\alpha)$ is open cause $f$ and $g$ are continuous.
+  Then we claim $\inv{h}(\bigcup V_\alpha \times W_\alpha) = \bigcup \inv{h}(V_\alpha \times W_\alpha)$.
+  
+  $(\subseteq)$ For any $i \in [0, 1]$ such that $h(i) \in \bigcup V_\alpha \times W_\alpha$,
+  we know $h(i) \in V_\alpha \times W_\alpha$ for some $\alpha$, therefore 
+  $i \in \inv{h}(V_\alpha \times W_\alpha)$.
+
+  $(\supseteq)$ For any $i \in \bigcup \inv{h}(V_\alpha \times W_\alpha)$, we know
+  $i \in \inv{h}(V_\alpha \times W_\alpha)$ for some $\alpha$, therefore 
+  $h(i) \in V_\alpha \times W_\alpha \subseteq \bigcup V_\alpha \times W_\alpha$.
+
+  Therefore the inverse image of some open sets in $\mathcal{X} \times \mathcal{Y}$ is open,
+  cause it is a union of some open sets, then $h$ is continuous.
+\end{proof}
+
+Hey, we are trying to obtain an arrow $h : [0, 1] \rightarrow \mathcal{X} \times \mathcal{Y}$
+from $f : [0, 1] \rightarrow \mathcal{X}$ and $g : [0, 1] \rightarrow \mathcal{Y}$,
+it is similar to the unique morphism in the product diagram!
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJbMCwgMV0iXSxbMiwyLCJcXG1hdGhjYWx7WH0gXFx0aW1lcyBcXG1hdGhjYWx7WX0iXSxbNCwyLCJcXG1hdGhjYWx7WX0iXSxbMiw0LCJcXG1hdGhjYWx7WH0iXSxbMSwzLCJcXHBpXzAiLDJdLFsxLDIsIlxccGlfMSJdLFswLDMsImYiLDIseyJjdXJ2ZSI6M31dLFswLDIsImciLDAseyJjdXJ2ZSI6LTN9XSxbMCwxLCIhdSIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+\[\begin{tikzcd}
+	{[0, 1]} \\
+	\\
+	&& {\mathcal{X} \times \mathcal{Y}} && {\mathcal{Y}} \\
+	\\
+	&& {\mathcal{X}}
+	\arrow["{!u}"{description}, dashed, from=1-1, to=3-3]
+	\arrow["g", curve={height=-18pt}, from=1-1, to=3-5]
+	\arrow["f"', curve={height=18pt}, from=1-1, to=5-3]
+	\arrow["{\pi_1}", from=3-3, to=3-5]
+	\arrow["{\pi_0}"', from=3-3, to=5-3]
+\end{tikzcd}\]
+
+(Although we didn't show that the product of topological spaces is really a categorical product)
+
+\begin{exercise}
+  Show that the product of topological spaces is a categorical product.
+\end{exercise}
+\begin{proof}
+  Consider the topological product equipped with natural projections.
+  Suppose $\mathcal{Z}$ a topological space and $f : \mathcal{Z} \rightarrow \mathcal{X}$,
+  $g : \mathcal{Z} \rightarrow \mathcal{Y}$ are continuous maps,
+  then we claim $u : \mathcal{Z} \rightarrow \mathcal{X} \times \mathcal{Y}$
+  given by $u(z) = (f(z), g(z))$ is continuous.
+  For any open sets in $\mathcal{X} \times \mathcal{Y}$, it has form
+  $\bigcup_\alpha V_\alpha \times W_\alpha$ where $V_\alpha$ and $W_\alpha$
+  are open sets in $\mathcal{X}$ and $\mathcal{Y}$, respectively.
+  For each $\alpha$, we claim $\inv{u}(V_\alpha \times W_\alpha) = \inv{f}(V_\alpha) \cap \inv{g}(W_\alpha)$.
+  \begin{itemize}
+    \item $(\subseteq)$ For any $z \in \inv{u}(V_\alpha \times W_\alpha)$, we know
+          $u(z) = (f(z), g(z)) \in V_\alpha \times W_\alpha$, therefore 
+          $z \in \inv{f}(V_\alpha)$ and $z \in \inv{g}(W_\alpha)$.
+    \item $(\supseteq)$ For any $z \in \inv{f}(V_\alpha) \cap \inv{g}(W_\alpha)$,
+          $u(z) = (f(z), g(z)) \in V_\alpha \times W_\alpha$ since $f(z) \in V_\alpha$ and $g(z) \in W_\alpha$,
+          therefore $z \in \inv{u}(V_\alpha \times W_\alpha)$.
+  \end{itemize}
+  Note that $\inv{u}(V_\alpha \times W_\alpha)$ is open cause it is the intersection of two
+  open sets.
+
+  It is easy to show that $\inv{u}(\bigcup_\alpha V_\alpha \times W_\alpha) = \bigcup_\alpha \inv{u}(V_\alpha \times W_\alpha)$,
+  then $\inv{u}(\bigcup_\alpha V_\alpha \times W_\alpha)$ is open cause it is the union
+  of open sets. So $u$ is continuous.
+
+  $u \circ \pi_0 = f$ and $u \circ \pi_1 = g$ are trivial, $u$ is unique
+  cause $\mathcal{X} \times \mathcal{Y}$ is product in $\mathbf{Set}$.
+\end{proof}
+
+\end{document}

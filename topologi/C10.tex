@@ -1,0 +1,117 @@
+\documentclass[./main.tex]{subfiles}
+
+\begin{document}
+
+\section{Connected Spaces}
+
+\begin{definition}
+  A subset of a topological space is called \textit{clopen} if it is
+  open and closed.
+\end{definition}
+
+\begin{definition}
+  A topological space $\mathcal{X}$ is called connected
+  if it has exactly two clopen sets: $\varnothing$ and $\mathcal{X}$.
+\end{definition}
+
+Note that the empty space $\varnothing$ is not connected.
+
+A subset of topological space is called connected or disconnected
+if so is the corresponding subspace.
+
+\begin{definition}
+  A subset $S$ of a topological space is called disconnected
+  if it is empty or there are two open sets $V$ and $W$ such that:
+  \begin{itemize}
+    \item $(V \cap S) \cap (W \cap S) = V \cap W \cap S = \varnothing$
+    \item $V \cap S \neq \varnothing$ and $W \cap S \neq \varnothing$
+    \item $V \cap W \cap S = S$ (or equivalently, $S \subseteq V \cap W$)
+  \end{itemize}
+
+  Otherwise, we say $S$ is connected.
+\end{definition}
+
+\begin{theorem}
+  Let $f : \mathcal{X} \rightarrow \mathcal{Y}$ be a continuous map
+  between topological spaces. Show that $f$ preserves connectness.
+\end{theorem}
+
+\begin{theorem}
+  Suppose $\mathcal{X}$ is a connected space, show that the quotient space $\mathcal{X}/\sim$
+  is connected for any equivalence relation $\sim$ on $\mathcal{X}$.
+\end{theorem}
+\begin{proof}
+  Consider the quotient map $f : \mathcal{X} \rightarrow \mathcal{X}/\sim$ which is onto,
+  then $f(\mathcal{X})$ is connected since $\mathcal{X}$ is connected.
+\end{proof}
+
+\begin{theorem}
+  Suppose $\{ A_\alpha \}_{\alpha \in \mathcal{I}}$ is a collection of connected
+  subsets of a topological space. Suppose that $\bigcap_\alpha A_\alpha \neq \varnothing$,
+  show that $A = \bigcup_\alpha A_\alpha$ is connected.
+\end{theorem}
+\begin{proof}
+  Suppose $A$ is disconnected, then there are two splitting $V$ and $W$.
+  We take $p \in \bigcap_\alpha A_\alpha \neq \varnothing$, since $A \subseteq V \cup W$,
+  then $p \in V \cup W$, we may suppose $p \in V$.
+  Then for any $\alpha$, we have $V \cap A_\alpha \neq \varnothing$ cuase $p \in V \cap A_\alpha$,
+  therefore $W \cap A_\alpha = \varnothing$, otherwise $A_\alpha$ is no longer connected.
+\end{proof}
+
+\begin{theorem}
+  Let $A$ be a connected set in a topological space. Suppose $A \subseteq B \subseteq \bar{A}$,
+  show that $B$ is connected.
+\end{theorem}
+\begin{proof}
+  Suppose $B$ is disconnected and $V, W$ is a splitting of $B$.
+  We may suppose $A \subseteq V$, otherwise $V, W$ also splits $A$.
+  Then $W \subseteq \partial A$ while $W$ is open, which means there is
+  a smaller close set $\bar{A} \setminus W$ that contains $A$, which is unacceptible.
+\end{proof}
+
+\begin{definition}
+  Suppose $\mathcal{X}$ a topological space and $x \in \mathcal{X}$, the intersection
+  of all clopen neighborhoods of $x$ is called connected component of $x$.
+  Note that the space $\mathcal{X}$ is connected iff $\mathcal{X}$ is a connected component
+  of some point in $\mathcal{X}$.
+\end{definition}
+
+\begin{theorem}
+  Show that any connected component is closed.
+  Show that connected component is not necessary open.
+\end{theorem}
+\begin{proof}
+  The intersection of closed sets is closed.
+  However, the infinite intersection of open sets is not necessary open.
+\end{proof}
+
+\begin{lemma}
+  Any connected component is connected.
+\end{lemma}
+\begin{proof}
+  Suppose $X$ is a connected component of point $x$ and $V, W$ are splitting of $X$.
+  We may suppose $x \in V$, then $V$ is a clopen neighborhood of $x$
+  and $X \subseteq V$, so $W = \varnothing$, which contradicts to the assumption that
+  $W$ is splitting.
+\end{proof}
+
+\begin{lemma}
+  Suppose $V$ is a connected component. Show that for any $y \in V$,
+  $V$ is the connected component of $y$.
+\end{lemma}
+\begin{proof}
+  Suppose $y \in W$ is the connected component of $y$, then $V \subseteq W$
+  cause every clopen neighborhood of $x$ is also a clopen neighborhood of $y$.
+  Suppose there is a clopen neighborhood of $y$ that makes $W$ a proper subset of $V$,
+  then this clopen neighborhood forms a splitting on $V$ while $V$ is connected.
+\end{proof}
+
+\begin{theorem}
+  Show that two connected components either coincide or disjoint.
+\end{theorem}
+\begin{proof}
+  If two connected components is not disjoint, then any point in the intersection of them
+  will have the same connected component.
+\end{proof}
+
+\end{document}

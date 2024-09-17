@@ -16,4 +16,214 @@
   and it contains all points of $W$, so $W$ is open.
 \end{proof}
 
+\begin{theorem}
+  Show that a space $\mathcal{X}$ is compact iff for any collection of closed sets
+  $\{Q_\alpha\}$ in $\mathcal{X}$ such that
+  \[
+  \bigcap_\alpha Q_\alpha = \varnothing
+  \]
+  Then there is a finite subset of $\{Q_\alpha\}$ such that
+  \[
+  Q_0 \cap Q_1 \cap \dots \cap Q_n = \varnothing
+  \]
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ For any collection of closed set $\{Q_\alpha\}$ in $\mathcal{X}$
+      such that $\bigcap_\alpha Q_\alpha = \varnothing$, we can see
+      $\{ \mathcal{X} \setminus Q_\alpha \}$ is a collection of open set and
+      $\bigcup_\alpha (\mathcal{X} \setminus Q_\alpha) = \mathcal{X} \setminus (\bigcap_\alpha Q_\alpha) = \mathcal{X} \setminus \varnothing = \mathcal{X}$,
+      therefore the collection of complements $\{\mathcal{X} \setminus Q_\alpha \}$ is an open cover of $\mathcal{X}$.
+      So there is a finite subset of $\{ \mathcal{X} \setminus Q_\alpha \}$ that
+      also open covers $\mathcal{X}$. Then it is also a finite subset of $\{ Q_\alpha \}$
+      since $\mathcal{X} = \bigcup_i (\mathcal{X} \setminus Q_i) = \mathcal{X} \setminus (\bigcap_i Q_i)$
+      and $Q_i \subseteq \mathcal{X}$ implies $\bigcap_i Q_i = \varnothing$.
+    \item $(\Leftarrow)$ For any open cover $\{ V_\alpha \}$ of $\mathcal{X}$,
+      consider the collection of complements $\{ \mathcal{X} \setminus V_\alpha \}$,
+      we have $\bigcap_\alpha (\mathcal{X} \setminus V_\alpha) = \mathcal{X} \setminus (\bigcup_\alpha V_\alpha) = \varnothing$.
+      So there is a finite subset $\{ \mathcal{X} \setminus V_i \}$ such that
+      $\varnothing = \bigcap_i (\mathcal{X} \setminus V_i) = \mathcal{X} \setminus (\bigcup_i V_i)$,
+      therefore $\bigcup_i V_i = \mathcal{X}$, the space $\mathcal{X}$ is compact.
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}
+  Let $Q_0 \supseteq Q_1 \supseteq \dots$ be a nested sequence of closed
+  nonempty sets in a compact space $\mathcal{K}$. Show that there is a point
+  $q \in \mathcal{K}$ such that $\forall i, q \in Q_i$.
+\end{theorem}
+\begin{proof}
+  If there is no such point, we know $\bigcap_i Q_i = \varnothing$,
+  which means there is a finite subsequence such that $\bigcap_j Q_j = \varnothing$.
+  Since the sequence $Q_i$ is a nested sequence of nonempty sets, so $\bigcap_j Q_j$
+  must equal to some "smallest" $Q_j$, but that means this $Q_j$ is empty set,
+  which contradicts to the assumption.
+\end{proof}
+
+\begin{theorem}
+  Let $f : \mathcal{X} \rightarrow \mathcal{Y}$ be a continuous mapping
+  between topological spaces and $\mathcal{K}$ is a compact subset in $\mathcal{X}$.
+  Show that $\mathcal{Q} = f(\mathcal{K})$ is also compact in $\mathcal{Y}$.
+  That is, continuous mapping preserve compactness.
+\end{theorem}
+\begin{proof}
+  For any open cover $\{V_\alpha\}$ of $f(\mathcal{K})$, then the inverse images of 
+  $\{V_\alpha\}$ cover
+  are also open since $f$ is continous, and also an open cover of $\mathcal{K}$
+  since they cover $f(\mathcal{K})$. So there is a finite subset of open cover
+  such that covers $\mathcal{K}$, then map those cover by $f$, we get
+  a finite subset of open cover of $\{V_\alpha\}$
+\end{proof}
+
+\begin{theorem}
+  Any closed set in a compact space is also compact.
+\end{theorem}
+\begin{proof}
+  This proof comes from textbook.\par
+  Suppose $\mathcal{X}$ a compact space and $\mathcal{Q}$ a closed set in it.
+  Consider any open cover $\{ V_\alpha \}$ of $\mathcal{Q}$ and
+  the complement $\mathcal{C} = \mathcal{X} \setminus \mathcal{Q}$.
+  Obviously, $\mathcal{C}$ is open, and $\{ \mathcal{C} \} \cup \{ V_\alpha \}$
+  is an open cover of $\mathcal{X}$, therefore there is a finite open cover on
+  $\mathcal{X}$, that open cover may or may not contains $\mathcal{W}$, but we 
+  can always add $\mathcal{W}$ to it, and it is still a finite subcover.
+  Since the finite subcover $\{ \mathcal{W}, V_{\alpha_0}, \dots, V_{\alpha_n} \}$
+  covers $\mathcal{X}$, then it also covers $\mathcal{Q}$,
+  and we can see that $\mathcal{W}$ contributes nothing for $\mathcal{Q}$,
+  so it is safe to remove it, and $\{ V_{\alpha_i} \}$ is still a finite
+  open cover on $\mathcal{Q}$.
+
+  Furthermore, the proposition can be \textit{iff}, since
+  the whole space is a closed set. If any closed set in that space is
+  compact, then the whole space is also compact.
+\end{proof}
+
+\begin{definition}
+  Let $\{ V_\alpha \}$ and $\{ W_\beta \}$ be two covers of a topological space
+  $\mathcal{X}$. We say $\{ V_\alpha \}$ is inscried in $\{ W_\beta \}$
+  if for any $\alpha$, there is $\beta$ such that $V_\alpha \subseteq W_\beta$
+\end{definition}
+
+\begin{theorem}
+  A space $\mathcal{X}$ is compact iff for any cover $\{ V_\alpha \}$ of $\mathcal{X}$,
+  there is a finite cover such that inscried in $\{ V_\alpha \}$.
+\end{theorem}
+\begin{proof}
+  $(\Rightarrow)$ For any cover on $\mathcal{X}$, there is a finite subcover on $\mathcal{X}$,
+  and the finite subcover is an inscried in itself.\par
+  $(\Leftarrow)$ For any finite subcover $\{ W_\beta \}$ on $\mathcal{X}$ that is inscried in $\{ V_\alpha \}$,
+  since for any $W_\beta$ there is a $V_\alpha$ such that $W_\beta \subseteq V_\alpha$,
+  we may collect these $V_\alpha$ and they form a cover on $\mathcal{X}$.
+\end{proof}
+
+\begin{theorem}
+  Suppose $\mathcal{X}$ and $\mathcal{Y}$ are compact topological spaces,
+  show that the product $\mathcal{X} \times \mathcal{Y}$ is also compact.
+\end{theorem}
+\begin{proof}
+
+\end{proof}
+
+\begin{theorem}
+  Suppose that a product space $\mathcal{X} \times \mathcal{Y}$ is nonempty and compact.
+  Show that $\mathcal{X}$ and $\mathcal{Y}$ are compact.
+\end{theorem}
+\begin{proof}
+  For any open cover $\iset{\mathcal{I}}{V}$ on $\mathcal{X}$,
+  consider the open cover $\{ V_\alpha \times \mathcal{Y} \}_{\alpha \in \mathcal{I}}$
+  on $\mathcal{X} \times \mathcal{Y}$,
+  there is a finite subcover
+  $\{ V_\alpha \times \mathcal{Y} \}_{\alpha \in \mathcal{J}}$.
+  For any $x \in \mathcal{X}$, take $y \in \mathcal{Y}$ (it is possible cause $\mathcal{X} \times \mathcal{Y}$ is nonempty),
+  we have $(x, y) \in V_\alpha \times \mathcal{Y}$ for some $\alpha$,
+  so $\iset{\mathcal{J}}{V}$ is a open cover on $\mathcal{X}$.
+\end{proof}
+
+\begin{definition}
+  A topological space $\mathcal{X}$ is called sequentially compact if any
+  point sequence in $\mathcal{X}$ has a converging subsequence.
+\end{definition}
+
+\begin{theorem}
+  A metric space $\mathcal{M}$ is comapct implies it is sequentially compact.
+\end{theorem}
+\begin{proof}
+  Recall that if a sequence $x_n$ converage to some point $p$, then
+  for any $\epsilon$, $B(p, \epsilon)$ contains infinite points in $x_n$.
+  % We can always choose a smaller $\epsilon$ and it will contains at least one
+  % point in $x_n$, so there are infinite points of $x_n$ in $B(p, \epsilon)$.
+
+  If any subsequence in $x_n$ is not converging, then for any point $p \in \mathcal{M}$,
+  there is $\epsilon$ such that $B(p, \epsilon)$ contains finite points in $x_n$.
+  Consider the collection of $B(p, \epsilon)$ for every $p \in \mathcal{M}$
+  is a cover on $\mathcal{M}$, then we have a finite subcover on $\mathcal{M}$,
+  but then the subcover contains finite points in $\mathcal{M}$
+  while $x_n$ is infinite.
+\end{proof}
+
+\begin{theorem}
+  Show that the product of two sequentially compact spaces is sequentially compact.
+\end{theorem}
+\begin{proof}
+  TODO
+\end{proof}
+
+\begin{definition}
+  A sequence $x_n$ of points in a metric space is called Cauchy if for any
+  $\epsilon > 0$ there is $n$ such that $|x_i - x_j| < \epsilon$ for all $i, j > n$.
+\end{definition}
+
+\begin{theorem}
+  Any converging sequence in a metric space is Cauchy.
+\end{theorem}
+\begin{proof}
+  For any converging sequence, the distance between points becomes smaller and smaller,
+  so for any $\epsilon$, there is $n$ such that $|x_i - x_j| < \epsilon$ for all $i, j > n$.
+\end{proof}
+
+\begin{definition}
+  A metric space $\mathcal{M}$ is called complete if any Cauchy sequence in $\mathcal{M}$ converage to a point in $\mathcal{M}$.
+\end{definition}
+
+\begin{theorem}
+  Show that any compact metric space $\mathcal{M}$ is complete.
+\end{theorem}
+\begin{proof}
+  For any Cauchy sequence $x_n$, suppose it is not converage, that is, for any
+  $p \in \mathcal{M}$, there is $\epsilon$ such that $B(p, \epsilon)$ contains
+  finite points of $x_n$. Consider the cover $\{ B(p, \epsilon) \}$ for all $p \in \mathcal{M}$
+  and corresponding $\epsilon$ on $\mathcal{M}$, we know there is a finite subcover on
+  $\mathcal{M}$ since $\mathcal{M}$ is compact. Then these finite subcover contains
+  all points in $x_n$ cause it covers $\mathcal{M}$, and it contains finite points in $x_n$
+  cause each $B(p, \epsilon)$ contains finite points in $x_n$, therefore the sequence $x_n$ 
+  is finite, which is unacceptible.
+\end{proof}
+
+\begin{definition}
+  Let $\mathcal{M}$ be a metric space. A subset $A \subseteq \mathcal{M}$
+  is called $\epsilon$-net of $\mathcal{M}$ if for any $p \in \mathcal{M}$,
+  there is $a \in A$ such that $|p - a|_\mathcal{M} < \epsilon$ 
+  (or equivalently, $p \in B(a, \epsilon)$).
+\end{definition}
+
+\begin{theorem}
+  Let $\mathcal{M}$ be a sequentially compact metric space, then for any $\epsilon > 0$,
+  there is a finite $\epsilon$-net of $\mathcal{M}$.
+\end{theorem}
+\begin{proof}
+  This proof comes from textbook.\par
+  We may trying to construct an $\epsilon$-net of $\mathcal{M}$.
+  We pick a point in $\mathcal{M}$ randomly, say $x_0 \in \mathcal{M}$,
+  then we pick another point $x_1 \in \mathcal{M}$ such that $x_1 \notin B(x_0, \epsilon)$,
+  and then we pick $x_2 \in \mathcal{M}$ such that $x_2 \notin B(x_0, \epsilon)$ and $x_2 \notin B(x_1, \epsilon)$,
+  for any $i$, we pick $x_i \in \mathcal{M}$ such that $x_i \notin B(x_j, \epsilon)$ for any $j < i$.
+  If at some point, we can't pick any $x_i$ that satisfies the requirement, then
+  $\{ x_0, x_1, \dots, x_{i - 1} \}$ is an $\epsilon$-net of $\mathcal{M}$.
+  If this procedure cannot stop, then we get a sequence $x_i$ where their
+  distance are always greater than $\epsilon$. Since $\mathcal{M}$ is sequentially compact,
+  so there is a converging subsequence, however, the distance of points in the subsequence 
+  can not below $\epsilon$, so it can't be converging.
+\end{proof}
+
 \end{document}
