@@ -1,0 +1,230 @@
+\documentclass[./main.tex]{subfiles}
+
+\begin{document}
+
+\section{Yoneda}
+
+This chapter combines arguments from some books:
+\begin{itemize}
+  \item The Dao of FP
+  \item The Joy of Abstraction
+\end{itemize}
+
+\begin{definition}
+  $H_x = \mathcal{C}(-, x)$ and $H^x = \mathcal{C}(x, -)$.
+\end{definition}
+
+Take $H^x$ as an example, it sends $\mathcal{C}$ to $\mathbf{Set}$, the interesting part
+is the mapping on morphism. For any morphism $f : a \rightarrow b$ of $\mathcal{C}$,
+$H^f$ must be a mapping $\mathcal{C}(x, a) \rightarrow \mathcal{C}(x, b)$,
+we can see that $g \mapsto f \circ g$ would be a choice.
+
+We have to show that it satifies the functoriality:
+\begin{itemize}
+  \item $H^{id_a}(g) = id_a \circ g = g$
+  \item $H^{f \circ g}(h) = (f \circ g) \circ h = f \circ (g \circ h) = H^f (g \circ h) = H^f (H^g (h)) = (H^f \circ H^g) (h)$.
+\end{itemize}
+
+Similar to $H_x$, the only difference is that $H_x$ is a contrafunctor.
+
+Suppose $f : a \rightarrow b$ an isomorphism, we can see that $H^x$ gives
+an isomorphism between two hom-sets: $\mathcal{C}(x, a)$ and $\mathcal{C}(x, b)$.
+
+Furthermore, we can no more fix $x$, that is, make $H_{\bullet}$ (or $H^\bullet$) a functor
+from $\mathcal{C}$ to $[\mathcal{C}^{op}, \textbf{Set}]$, a functor to a functor!
+
+The problem we need to solve is that what should $H_\bullet$ do on a morphism $f : a \rightarrow b$.
+Since $H_\bullet$ produce a functor, $H_f$ must produce a natural transformation
+between $H_a$ and $H_b$. Suppose $x, y \in \mathcal{C}$ and $g : x \rightarrow y$,
+note that $H_a$ and $H_b$ are contrafunctor, so we need to reverse the arrows!
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJIX2EoeSkiXSxbMywwLCJIX2EoeCkiXSxbMCwzLCJIX2IoeSkiXSxbMywzLCJIX2IoeCkiXSxbMCwxLCJIX2EoZykiXSxbMCwyLCIoSF9mKV95IiwyXSxbMSwzLCIoSF9mKV94Il0sWzIsMywiKEhfYSkoZykiLDJdXQ==
+\[\begin{tikzcd}
+	{H_a(y)} &&& {H_a(x)} \\
+	\\
+	\\
+	{H_b(y)} &&& {H_b(x)}
+	\arrow["{H_a(g)}", from=1-1, to=1-4]
+	\arrow["{(H_f)_y}"', from=1-1, to=4-1]
+	\arrow["{(H_f)_x}", from=1-4, to=4-4]
+	\arrow["{(H_b)(g)}"', from=4-1, to=4-4]
+\end{tikzcd}\]
+
+and we can unfold the definitions
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7Q30oeSwgYSkiXSxbMywwLCJcXG1hdGhjYWx7Q30oeCwgYSkiXSxbMCwzLCJcXG1hdGhjYWx7Q30oeSwgYikiXSxbMywzLCJcXG1hdGhjYWx7Q30oeCwgYikiXSxbMCwxLCJcXG1hdGhjYWx7Q30oZywgYSkiXSxbMCwyLCIoSF9mKV95IiwyXSxbMSwzLCIoSF9mKV94Il0sWzIsMywiXFxtYXRoY2Fse0N9KGcsIGIpIiwyXV0=
+\[\begin{tikzcd}
+	{\mathcal{C}(y, a)} &&& {\mathcal{C}(x, a)} \\
+	\\
+	\\
+	{\mathcal{C}(y, b)} &&& {\mathcal{C}(x, b)}
+	\arrow["{\mathcal{C}(g, a)}", from=1-1, to=1-4]
+	\arrow["{(H_f)_y}"', from=1-1, to=4-1]
+	\arrow["{(H_f)_x}", from=1-4, to=4-4]
+	\arrow["{\mathcal{C}(g, b)}"', from=4-1, to=4-4]
+\end{tikzcd}\]
+
+and suppose $s \in \mathcal{C}(y, a)$, we know the top-right corner
+would be $s \circ g$ since $\mathcal{C}(g, a) = - \circ g$ (same to $\mathcal{C}(g, b)$).
+In order to construct an
+arrow in $\mathcal{C}(y, b)$, we can pre-compose the arrow $f : a \rightarrow b$.
+Then the bottom-left corner would be $f \circ s$, and the bottom-right corner
+would be $(f \circ s) \circ g$ (by left-bottom path) and $f \circ (s \circ g)$ (by top-right path),
+which is exactly the same!
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJzIl0sWzMsMCwicyBcXGNpcmMgZyJdLFswLDMsImYgXFxjaXJjIHMiXSxbMywzLCIoZiBcXGNpcmMgcykgXFxjaXJjIGcgPSBmIFxcY2lyYyAocyBcXGNpcmMgZykiXSxbMCwxLCItIFxcY2lyYyBnIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFswLDIsImYgXFxjaXJjIC0iLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzEsMywiZiBcXGNpcmMgLSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMiwzLCItIFxcY2lyYyBnIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dXQ==
+\[\begin{tikzcd}
+	s &&& {s \circ g} \\
+	\\
+	\\
+	{f \circ s} &&& {(f \circ s) \circ g = f \circ (s \circ g)}
+	\arrow["{- \circ g}", maps to, from=1-1, to=1-4]
+	\arrow["{f \circ -}"', maps to, from=1-1, to=4-1]
+	\arrow["{f \circ -}", maps to, from=1-4, to=4-4]
+	\arrow["{- \circ g}"', maps to, from=4-1, to=4-4]
+\end{tikzcd}\]
+
+Note that the condition here $(f \circ -) \circ (- \circ g) = (- \circ g) \circ (f \circ -)$
+is the naturality condition which is mentioned in $\textit{The Dao of FP}$.
+A bijection between two hom-sets $\alpha_x = \mathcal{C}(x, a) \rightarrow \mathcal{C}(x, b)$
+that satifies the naturality condition $\alpha_y \circ (- \circ g) = (- \circ g) \circ \alpha_x$
+can retrieve the isomorphism between $a$ and $b$. This will be unsurprised
+if we notice that such bijection with naturality condition
+forms a natural transformation, then we can retrieve
+the morphism (not isomorphism yet) from it.
+The morphism becomes iso- when we know $H_\bullet$ is full and faithful
+(see below and chapter \textit{functor}),
+
+
+\begin{definition}
+  $H_\bullet$ is called Yoneda embedding.
+\end{definition}
+
+\begin{theorem}
+  Shows $H_\bullet$ is an embedding by showing it is full and faithful.
+\end{theorem}
+\begin{proof}
+  (Full) For any $a, b \in \mathcal{C}$, suppose $\alpha : [\mathcal{C}^{op}, \textbf{Set}](H_a, H_b)$
+  a morphism (natural transformation).
+  Use the Yoneda trick, we have $\alpha_a : \mathcal{C}(a, a) \rightarrow \mathcal{C}(a, b)$
+  and then $\alpha_a(id_a) : \mathcal{C}(a, b)$.
+  As we see the definition of $H_\bullet$ on morphism, we should expect that
+  $\alpha$ has form $f \circ -$ for some $f : a \rightarrow b$. But how coincident,
+  we have a morphism $\alpha_a(id_a) : \mathcal{C}(a, b)$. So we claim
+  $H_{\alpha_a(id_a)} = \alpha$.
+  (In the other hand, if $\alpha$ has form $f \circ -$, then $\alpha_a(id_a) = f \circ id_a = f$).
+  For any $x \in \mathcal{C}$, we need to show $(H_{\alpha_a(id_a)})_x = \alpha_x : \mathcal{C}(x, a) \rightarrow \mathcal{C}(x, b)$.
+  So we suppose $g \in \mathcal{C}(x, a)$, then the following diagram commutes
+  since $\alpha$ is natural:
+
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7Q30oYSwgYSkiXSxbMywwLCJcXG1hdGhjYWx7Q30oeCwgYSkiXSxbMCwzLCJcXG1hdGhjYWx7Q30oYSwgYikiXSxbMywzLCJcXG1hdGhjYWx7Q30oeCwgYikiXSxbMCwxLCItIFxcY2lyYyBnIl0sWzAsMiwiXFxhbHBoYV9hIiwyXSxbMSwzLCJcXGFscGhhX3giXSxbMiwzLCItIFxcY2lyYyBnIiwyXV0=
+  \[\begin{tikzcd}
+	{\mathcal{C}(a, a)} &&& {\mathcal{C}(x, a)} \\
+	\\
+	\\
+	{\mathcal{C}(a, b)} &&& {\mathcal{C}(x, b)}
+	\arrow["{- \circ g}", from=1-1, to=1-4]
+	\arrow["{\alpha_a}"', from=1-1, to=4-1]
+	\arrow["{\alpha_x}", from=1-4, to=4-4]
+	\arrow["{- \circ g}"', from=4-1, to=4-4]
+  \end{tikzcd}\]
+  Then
+  % https://q.uiver.app/#q=WzAsNCxbMCwwLCJpZF9hIl0sWzMsMCwiaWRfYSBcXGNpcmMgZyA9IGciXSxbMCwzLCJcXGFscGhhX2EoaWRfYSkiXSxbMywzLCJcXGFscGhhX2EoaWRfYSkgXFxjaXJjIGcgPSBcXGFscGhhX3goZykiXSxbMCwxLCItIFxcY2lyYyBnIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFswLDIsIlxcYWxwaGFfYSIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMSwzLCJcXGFscGhhX3giLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzIsMywiLSBcXGNpcmMgZyIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XV0=
+  \[\begin{tikzcd}
+	{id_a} &&& {id_a \circ g = g} \\
+	\\
+	\\
+	{\alpha_a(id_a)} &&& {\alpha_a(id_a) \circ g = \alpha_x(g)}
+	\arrow["{- \circ g}", maps to, from=1-1, to=1-4]
+	\arrow["{\alpha_a}"', maps to, from=1-1, to=4-1]
+	\arrow["{\alpha_x}", maps to, from=1-4, to=4-4]
+	\arrow["{- \circ g}"', maps to, from=4-1, to=4-4]
+  \end{tikzcd}\]
+  is a proof of $H_{\alpha_a(id_a)}(g) = \alpha_a(id_a) \circ g = \alpha_x(g)$.
+
+  (Faithful) Suppose $f \circ - H_f = H_g = g \circ -$, then $f = f \circ id_a = H_f(id_a) = H_g(od_a) = g \circ id_a = g$.
+\end{proof}
+
+As we see in the proof of $H_\bullet$ is a full functor, the natural transformation
+$\alpha$ at some $x$ (therefore any $x \in \mathcal{C}$) is completely determined by the value $\alpha_a(id_a)$,
+cause for any $g$, we have $\alpha_a(id_a) \circ g = \alpha_x(g)$.
+
+We may rename $H_b$ with $F$, then
+
+% https://q.uiver.app/#q=WzAsOCxbMSwxLCJpZF9hIl0sWzQsMSwiaWRfYSBcXGNpcmMgZyA9IGciXSxbMSw0LCJcXGFscGhhX2EoaWRfYSkiXSxbNCw0LCIoRmcpKFxcYWxwaGFfYShpZF9hKSkgPSBcXGFscGhhX3goZykiXSxbMCwwLCJcXG1hdGhjYWx7Q30oYSwgYSkiXSxbNSwwLCJcXG1hdGhjYWx7Q30oeCwgYSkiXSxbMCw1LCJGIGEiXSxbNSw1LCJGeCJdLFswLDEsIi0gXFxjaXJjIGciLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzAsMiwiXFxhbHBoYV9hIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFsxLDMsIlxcYWxwaGFfeCIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMiwzLCJGZyIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbNCw1LCJcXG1hdGhjYWx7Q30oZywgYSkiXSxbNSw3LCJcXGFscGhhX3giXSxbNiw3LCJGZyIsMl0sWzQsNiwiXFxhbHBoYV9hIiwyXV0=
+\[\begin{tikzcd}
+	{\mathcal{C}(a, a)} &&&&& {\mathcal{C}(x, a)} \\
+	& {id_a} &&& {id_a \circ g = g} \\
+	\\
+	\\
+	& {\alpha_a(id_a)} &&& {(Fg)(\alpha_a(id_a)) = \alpha_x(g)} \\
+	{F a} &&&&& Fx
+	\arrow["{\mathcal{C}(g, a)}", from=1-1, to=1-6]
+	\arrow["{\alpha_a}"', from=1-1, to=6-1]
+	\arrow["{\alpha_x}", from=1-6, to=6-6]
+	\arrow["{- \circ g}", maps to, from=2-2, to=2-5]
+	\arrow["{\alpha_a}"', maps to, from=2-2, to=5-2]
+	\arrow["{\alpha_x}", maps to, from=2-5, to=5-5]
+	\arrow["Fg"', maps to, from=5-2, to=5-5]
+	\arrow["Fg"', from=6-1, to=6-6]
+\end{tikzcd}\]
+
+It seems that $H_b$ can be replaced with any functor in $[\mathcal{C}^{op}, \textbf{Set}]$,
+furthermore, the natural transformation is still determined by $\alpha_a(id_a)$
+(and $\alpha_a(id_a)$ is determined by $\alpha$, trivial though, but it implies that there is a precisely corresponding).
+
+\begin{theorem}[Yoneda Lemma]
+  Show that the natural transformation between $H_a$ and any functor $F \in [\mathcal{C}^{op}, \textbf{Set}]$
+  correspond precisely to the elements of $Fa$. In other words,
+  \[
+  [\mathcal{C}^{op}, \textbf{Set}](H_a, F) \cong Fa
+  \]
+\end{theorem}
+\begin{proof}
+  The arrow $f : [\mathcal{C}^{op}, \textbf{Set}](H_a, F) \rightarrow Fa$ is obvious
+  by the Yoneda trick.
+
+  \[
+  \alpha \mapsto \alpha_a(id_a) : [\mathcal{C}^{op}, \textbf{Set}](H_a, F) \rightarrow Fa
+  \]
+  
+  For any $x \in Fa$, as we see before, we may expect there is a natural transformation $\alpha$
+  such that $\alpha_a (id_a) = x$, then the action on other objects is completely
+  determined by $\alpha_a(id_a)$ as we see before. 
+
+  \[
+  x, g \mapsto (Fg)(x) : Fa \rightarrow [\mathcal{C}^{op}, \textbf{Set}](H_a, F)
+  \]
+
+  Note that $(F(id_a)) (x) = id_{Fa} (x) = x$.
+
+  We need to show that they are inverse to each other.
+  For any natural transformation $\alpha$:
+  % https://q.uiver.app/#q=WzAsNixbMCwwLCJbXFxtYXRoY2Fse0N9XntvcH0sIFxcdGV4dGJme1NldH1dKEhfYSwgRikiXSxbMiwwLCJGYSJdLFs0LDAsIltcXG1hdGhjYWx7Q31ee29wfSwgXFx0ZXh0YmZ7U2V0fV0oSF9hLCBGKSJdLFswLDEsIlxcYWxwaGEiXSxbMiwxLCJcXGFscGhhX2EoaWRfYSkiXSxbNCwxLCIoRi0pKFxcYWxwaGFfYShpZF9hKSkiXSxbMCwxLCJmIl0sWzEsMiwiZl57LTF9Il0sWzMsNCwiLV9hKGlkX2EpIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFs0LDUsIihGLSkoLSkiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV1d
+\[\begin{tikzcd}
+	{[\mathcal{C}^{op}, \textbf{Set}](H_a, F)} && Fa && {[\mathcal{C}^{op}, \textbf{Set}](H_a, F)} \\
+	\alpha && {\alpha_a(id_a)} && {(F-)(\alpha_a(id_a))}
+	\arrow["f", from=1-1, to=1-3]
+	\arrow["{f^{-1}}", from=1-3, to=1-5]
+	\arrow["{-_a(id_a)}", maps to, from=2-1, to=2-3]
+	\arrow["{(F-)(-)}", maps to, from=2-3, to=2-5]
+\end{tikzcd}\]
+
+And we can see $(Fg)(\alpha_a(id_a)) = \alpha_x(g)$ for any $x \in \mathcal{C}$ and $g \in \mathcal{C}(x, a)$
+by the same way as the proof which shows $H_\bullet$ is a full functor.
+
+In another direction, we get:
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJGYSJdLFsyLDAsIltcXG1hdGhjYWx7Q31ee29wfSwgXFx0ZXh0YmZ7U2V0fV0oSF9hLCBGKSJdLFs0LDAsIkZhIl0sWzAsMSwieCJdLFsyLDEsIihGLSkoeCkiXSxbNCwxLCJGKGlkX2EpKHgpIl0sWzAsMSwiZl57LTF9Il0sWzEsMiwiZiJdLFszLDQsIihGLSkoLSkiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzQsNSwiLV9hKGlkX2EpIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dXQ==
+\[\begin{tikzcd}
+	Fa && {[\mathcal{C}^{op}, \textbf{Set}](H_a, F)} && Fa \\
+	x && {(F-)(x)} && {F(id_a)(x)}
+	\arrow["{f^{-1}}", from=1-1, to=1-3]
+	\arrow["f", from=1-3, to=1-5]
+	\arrow["{(F-)(-)}", maps to, from=2-1, to=2-3]
+	\arrow["{-_a(id_a)}", maps to, from=2-3, to=2-5]
+\end{tikzcd}\]
+
+It is obvious that $F(id_a)x = id_{Fa} x = x$.
+\end{proof}
+
+\end{document}

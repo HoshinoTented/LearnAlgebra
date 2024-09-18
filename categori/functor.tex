@@ -1,0 +1,45 @@
+\documentclass[./main.tex]{subfiles}
+
+\begin{document}
+
+\section{Functors}
+
+\begin{definition}[Full]
+  A functor $F : \mathcal{C} \rightarrow \mathcal{D}$ is called full, if for any $a, b \in \mathcal{C}$, the
+  mapping on morphism $F : \mathcal{C}(a, b) \rightarrow \mathcal{D}(Fa, Fb)$ is surjective.
+\end{definition}
+
+\begin{definition}[Faithful]
+  A functor $F : \mathcal{C} \rightarrow \mathcal{D}$ is called faithful, if for any $a, b \in \mathcal{C}$, the
+  mapping on morphism $F : \mathcal{C}(a, b) \rightarrow \mathcal{D}(Fa, Fb)$ is injective.
+\end{definition}
+
+\begin{definition}[Essentially Full]
+  A functor $F : \mathcal{C} \rightarrow \mathcal{D}$ is called Essentially full, if for any $a \in \mathcal{C}$, the
+  mapping on object $F : \mathcal{C} \rightarrow \mathcal{D}$ is surjective.
+\end{definition}
+
+\begin{theorem}
+  Suppose $F : \mathcal{C} \rightarrow \mathcal{D}$ a functor,
+  and $f : a \rightarrow b$ a morphism in $\mathcal{C}$.
+  Then $f$ is an isomorphism iff $Ff$ is an isomorphism.
+\end{theorem}
+\begin{proof}
+  $(\Rightarrow)$ We claim $F(\inv{f}) : Fb \rightarrow Fa$ is an inverse,
+  we can see that $F(\inv{f} \circ f) = F(id_a) = id_{Fa}$ and $F(f \circ \inv{f}) = F(id_b) = id_{Fb}$.
+
+  $(\Leftarrow)$ Suppose $Fg$ is the inverse of $Ff$, and we can retrieve $g$ from $Fg$
+  cause $F$ is full faithful. Then $F(g \circ f) = Fg \circ Ff = id_{Fa} = F(id_a)$
+  therefore $g \circ f = id_a$ since $F$ is full faithful, similar to $F(f \circ g)$,
+  so $f$ is indeed an isomorphism.
+\end{proof}
+
+\begin{corollary}
+  Suppose $F : \mathcal{C} \rightarrow \mathcal{D}$ is full and faithful, 
+  show that $F$ is injective on object.
+\end{corollary}
+\begin{proof}
+  Trivial by previous theorem.
+\end{proof}
+
+\end{document}
