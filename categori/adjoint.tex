@@ -12,12 +12,14 @@
   \]
 \end{theorem}
 \begin{proof}
+  The idea comes from \textit{The Dao of FP} and nlab.
+  
   We may consider the cone with singleton set as vertex:
-% https://q.uiver.app/#q=WzAsNCxbMCw0LCJcXG1hdGhjYWx7Q30oWSwgXFxtYXRoY2Fse0R9X2kpIl0sWzIsNCwiXFxtYXRoY2Fse0N9KFksIFxcbWF0aGNhbHtEfV9qKSJdLFsxLDIsIlxcdGV4dHtMaW19IChcXG1hdGhjYWx7Q30oWSwgXFxtYXRoY2Fse0R9X1xcYnVsbGV0KSkiXSxbMSwwLCIxIl0sWzMsMiwidSJdLFszLDAsIlxcdGV4dHtjb25zdH1fe3BfaX0iLDIseyJjdXJ2ZSI6M31dLFszLDEsIlxcdGV4dHtjb25zdH1fe3Bfan0iLDAseyJjdXJ2ZSI6LTN9XSxbMiwwXSxbMiwxXSxbMCwxLCJcXG1hdGhjYWx7Q30oWSwgXFxtYXRoY2Fse0R9X2YpIl1d
+% https://q.uiver.app/#q=WzAsNCxbMCw0LCJcXG1hdGhjYWx7Q30oWSwgXFxtYXRoY2Fse0R9X2kpIl0sWzIsNCwiXFxtYXRoY2Fse0N9KFksIFxcbWF0aGNhbHtEfV9qKSJdLFsxLDIsIlxcdGV4dHtMaW19IChcXG1hdGhjYWx7Q30oWSwgXFxtYXRoY2Fse0R9Xy0pKSJdLFsxLDAsIjEiXSxbMywyLCJ1Il0sWzMsMCwiXFx0ZXh0e2NvbnN0fV97cF9pfSIsMix7ImN1cnZlIjozfV0sWzMsMSwiXFx0ZXh0e2NvbnN0fV97cF9qfSIsMCx7ImN1cnZlIjotM31dLFsyLDBdLFsyLDFdLFswLDEsIlxcbWF0aGNhbHtDfShZLCBcXG1hdGhjYWx7RH1fZikiXV0=
 \[\begin{tikzcd}
 	& 1 \\
 	\\
-	& {\text{Lim} (\mathcal{C}(Y, \mathcal{D}_\bullet))} \\
+	& {\text{Lim} (\mathcal{C}(Y, \mathcal{D}_-))} \\
 	\\
 	{\mathcal{C}(Y, \mathcal{D}_i)} && {\mathcal{C}(Y, \mathcal{D}_j)}
 	\arrow["u", from=1-2, to=3-2]
@@ -84,7 +86,7 @@
     [\mathcal{J}, \CSet](\Delta_1, F) \cong [\mathcal{J}, \mathcal{C}](\Delta_Y, D)
   \]
 
-  While the later one is isomorphic to the limit of $\mathcal{J}_\bullet$:
+  While the later one is naturally isomorphic to the limit of $\mathcal{J}_\bullet$:
   \[
     [\mathcal{J}, \mathcal{C}](\Delta_Y, D) \cong \mathcal{C}(Y, \Limit D)
   \]
@@ -104,5 +106,10 @@
     \end{gathered}
   \]
 \end{proof}
+
+Dually, we also have:
+\[
+  \Limit (\mathcal{C}(\mathcal{D}_-, Y)) \cong \mathcal{C}(\CoLimit \mathcal{D}, Y)
+\]
 
 \end{document}
