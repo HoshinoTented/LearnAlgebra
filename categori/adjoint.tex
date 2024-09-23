@@ -30,29 +30,25 @@
 
   where $\text{const}_{p_i}$ is the function that takes a morphism $p_i \in \mathcal{C}(Y, \mathcal{D}_i)$.
 
-  We know there is a one-to-one corresponding between $u$ and the pair of
+  We know there is a one-to-one corresponding between $u$ and the pair
   $\langle \text{const}_{p_i} , \text{const}_{p_j} \rangle$:
-
   \[
     [\mathcal{J}, \CSet](\Delta_1, \mathcal{C}(Y, \mathcal{D}_-)) \cong \CSet(1, \Limit (\mathcal{C}(Y, \mathcal{D}_-)))
   \]
 
   or we can simplify the equation by defining $F_j = \mathcal{C}(Y, \mathcal{D}_-) : \mathcal{J} \rightarrow \CSet$.
-
   \[
     [\mathcal{J}, \CSet](\Delta_1, F) \cong \CSet(1, \Limit F)
   \]
 
   We may recall that the hom-set maps out from $1$ is isomorphic to the target,
   that is:
-
   \[
     \CSet(1, \Limit F) \cong \Limit F
   \]
 
   Similarly, the cone with $1$ as vertex is a pair of selection of $\mathcal{C}(Y, \mathcal{D}_i)$,
   it forms a cone with $Y$ as vertex:
-
 % https://q.uiver.app/#q=WzAsMyxbMCw0LCJcXG1hdGhjYWx7RH1faSJdLFs0LDQsIlxcbWF0aGNhbHtEfV9qIl0sWzIsMCwiWSJdLFsyLDAsInBfaSIsMix7ImN1cnZlIjozfV0sWzIsMSwicF9qIiwwLHsiY3VydmUiOi0zfV0sWzAsMSwiXFxtYXRoY2Fse0R9X2YiXV0=
 \[\begin{tikzcd}
 	&& Y \\
@@ -66,7 +62,6 @@
 \end{tikzcd}\]
 
   the diagram is indeed commutes since 
-
 % https://q.uiver.app/#q=WzAsNyxbMCwyLCJcXG1hdGhjYWx7Q30oWSwgXFxtYXRoY2Fse0R9X2kpIl0sWzIsMiwiXFxtYXRoY2Fse0N9KFksIFxcbWF0aGNhbHtEfV9qKSJdLFsxLDAsIjEiXSxbMywxLCJcXFJpZ2h0YXJyb3ciXSxbNSwwLCIxIl0sWzQsMiwicF9pIl0sWzYsMiwicF9qIl0sWzIsMCwiXFx0ZXh0e2NvbnN0fV97cF9pfSIsMix7ImN1cnZlIjoyfV0sWzAsMSwiXFxtYXRoY2Fse0N9KFksIFxcbWF0aGNhbHtEfV9mKSJdLFsyLDEsIlxcdGV4dHtjb25zdH1fe3Bfan0iLDAseyJjdXJ2ZSI6LTJ9XSxbNSw2LCJcXG1hdGhjYWx7RF9mfSBcXGNpcmMgLSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbNCw1LCJcXHRleHR7Y29uc3R9X3twX2l9IiwyLHsiY3VydmUiOjIsInN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbNCw2LCJcXHRleHR7Y29uc3R9X3twX2p9IiwwLHsiY3VydmUiOi0yLCJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV1d
 \[\begin{tikzcd}
 	& 1 &&&& 1 \\
@@ -85,19 +80,16 @@
 
   Then the cone of $\mathcal{C}(Y, \mathcal{D}_-)$ with vertex $1$,
   is isomorphic to the cone of $\mathcal{D}_-$ with vertex $Y$:
-
   \[
     [\mathcal{J}, \CSet](\Delta_1, F) \cong [\mathcal{J}, \mathcal{C}](\Delta_Y, D)
   \]
 
   While the later one is isomorphic to the limit of $\mathcal{J}_\bullet$:
-
   \[
-    [\mathcal{J}, \mathcal{C}](\Delta_Y, D) \cong \mathcal{C}(x, \Limit D)
+    [\mathcal{J}, \mathcal{C}](\Delta_Y, D) \cong \mathcal{C}(Y, \Limit D)
   \]
 
   Finally, we have:
-
   \[
     \begin{gathered}
       \Limit F \\
@@ -108,7 +100,7 @@
       \cong \\ 
       \relax [\mathcal{J}, \mathcal{C}](\Delta_Y, D) \\
       \cong \\
-      \mathcal{C}(x, \Limit D)
+      \mathcal{C}(Y, \Limit D)
     \end{gathered}
   \]
 \end{proof}
