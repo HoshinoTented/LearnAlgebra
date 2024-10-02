@@ -3,6 +3,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{xeCJK}
 \usepackage{amsthm, amsmath, amssymb}
+\usepackage{hyperref}
 \usepackage{tikz-cd}
 \usepackage{quiver}
 \usepackage{braket}
@@ -13,8 +14,11 @@
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{definition}{Definition}[section]
 \newtheorem{corollary}{Corollary}[section]
+\newtheorem{intuitive}{Intuitive}[section]
 
 \newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\daofp}{\textit{The Dao of FP}}
+
 \DeclareMathOperator{\Limit}{Lim}
 \DeclareMathOperator{\CoLimit}{Colim}
 \DeclareMathOperator{\CSet}{\mathbf{Set}}
@@ -24,6 +28,7 @@
 \subfile{product.tex}
 \subfile{exponential.tex}
 \subfile{pullback.tex}
+\subfile{fiber.tex}
 \subfile{functor.tex}
 \subfile{yoneda.tex}
 \subfile{adjoint.tex}

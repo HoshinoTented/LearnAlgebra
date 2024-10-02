@@ -1,0 +1,197 @@
+\documentclass[./main.tex]{subfiles}
+
+\begin{document}
+
+\section{Fiber and Fibration}
+
+I am trying to understand fiber, fibration and pullback with my stupid brain.
+
+\subsection{Fiber}
+
+I will use "intuitive" rather than "definition" cause I really don't
+understand fiber.
+
+\begin{intuitive}[Fiber]
+  Suppose we are in a space (i.e. $\CSet$), and a mapping $f : A \rightarrow B$,
+  then for some point $b \in B$, the inverse image of $b$, which is exactly $\inv{f}(b)$,
+  is called a fiber.
+\end{intuitive}
+
+We can treat a product as a pullback with apex $1$, the terminal object:
+
+% https://q.uiver.app/#q=WzAsNSxbMiwyLCJBIFxcdGltZXMgQiJdLFs0LDIsIkIiXSxbMiw0LCJBIl0sWzQsNCwiMSJdLFswLDAsIkMiXSxbMCwyLCJcXHBpXzAiLDJdLFswLDEsIlxccGlfMSJdLFsxLDMsIiEiXSxbMiwzLCIhIiwyXSxbNCwwLCIhdSIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs0LDEsImciLDAseyJjdXJ2ZSI6LTN9XSxbNCwyLCJmIiwyLHsiY3VydmUiOjN9XV0=
+\[\begin{tikzcd}
+	C \\
+	\\
+	&& {A \times B} && B \\
+	\\
+	&& A && 1
+	\arrow["{!u}"{description}, dashed, from=1-1, to=3-3]
+	\arrow["g", curve={height=-18pt}, from=1-1, to=3-5]
+	\arrow["f"', curve={height=18pt}, from=1-1, to=5-3]
+	\arrow["{\pi_1}", from=3-3, to=3-5]
+	\arrow["{\pi_0}"', from=3-3, to=5-3]
+	\arrow["{!}", from=3-5, to=5-5]
+	\arrow["{!}"', from=5-3, to=5-5]
+\end{tikzcd}\]
+
+We can treat $A$ as the fiber against to the only point in $1$, same for $B$.
+Now, what if we replace $1$ with something else?
+
+% https://q.uiver.app/#q=WzAsNSxbMiwyLCJBIFxcdGltZXNfSSBCIl0sWzQsMiwiQiJdLFsyLDQsIkEiXSxbNCw0LCJJIl0sWzAsMCwiQyJdLFswLDIsIlxccGlfMCIsMl0sWzAsMSwiXFxwaV8xIl0sWzEsMywidCJdLFsyLDMsInMiLDJdLFs0LDAsIiF1IiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzQsMSwiZyIsMCx7ImN1cnZlIjotM31dLFs0LDIsImYiLDIseyJjdXJ2ZSI6M31dXQ==
+\[\begin{tikzcd}
+	C \\
+	\\
+	&& {A \times_I B} && B \\
+	\\
+	&& A && I
+	\arrow["{!u}"{description}, dashed, from=1-1, to=3-3]
+	\arrow["g", curve={height=-18pt}, from=1-1, to=3-5]
+	\arrow["f"', curve={height=18pt}, from=1-1, to=5-3]
+	\arrow["{\pi_1}", from=3-3, to=3-5]
+	\arrow["{\pi_0}"', from=3-3, to=5-3]
+	\arrow["t", from=3-5, to=5-5]
+	\arrow["s"', from=5-3, to=5-5]
+\end{tikzcd}\]
+
+For every point $i \in I$, we have fiber $A_i \subseteq A$ and $B_i \subseteq B$,
+which can form a product $A_i \times B_i$. We may sum all these products, and finally
+get $A \times_I B$, this is why the pullback is sometimes called \textit{fiber product}.
+
+We can also pick certain fiber from this pullback:
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHZhcnBoaSJdLFsyLDAsIkEiXSxbMCwyLCIxIl0sWzIsMiwiQiJdLFswLDIsIiEiLDJdLFswLDEsImkiXSxbMSwzLCJmIl0sWzIsMywieCIsMl1d
+\[\begin{tikzcd}
+	\varphi && A \\
+	\\
+	1 && B
+	\arrow["i", from=1-1, to=1-3]
+	\arrow["{!}"', from=1-1, to=3-1]
+	\arrow["f", from=1-3, to=3-3]
+	\arrow["x"', from=3-1, to=3-3]
+\end{tikzcd}\]
+
+The morphism $x : 1 \rightarrow B$ is a global element, which "pick" an element
+of $B$, then $i$ must maps $\varphi$ to the fiber of $f$ over point $x$,
+which should be a injection.
+
+The collection of fiber (the source of the morphism/the domain of the function) is called \textit{fiber bundle}.
+
+\subsection{Fibration}
+
+Some intuitive comes from
+\href{https://guest0x0.xyz/family-and-fibration/family-and-fibration.pdf}{this article}.
+
+\begin{intuitive}
+  A fibration works like an indexed family (i.e. a function $I \rightarrow A$),
+  but do it in fiber way (i.e. a function $A \rightarrow I$).
+\end{intuitive}
+
+\subsection{Base-change Functor}
+
+~
+
+These section is related to \daofp
+
+We can also treat the morphism on right-hand side as a fibration, and the
+bottom-left corner a base (the target of a fibration):
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCI/Il0sWzIsMCwiRSJdLFswLDIsIkEiXSxbMiwyLCJCIl0sWzAsMiwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzAsMSwiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsMywicCJdLFsyLDMsImYiLDJdXQ==
+\[\begin{tikzcd}
+	{?} && E \\
+	\\
+	A && B
+	\arrow[dashed, from=1-1, to=1-3]
+	\arrow[dashed, from=1-1, to=3-1]
+	\arrow["p", from=1-3, to=3-3]
+	\arrow["f"', from=3-1, to=3-3]
+\end{tikzcd}\]
+
+Then we can treat $E \xrightarrow{p} B$ as an object in the slice category $\mathcal{C}/B$,
+similarly, the left-hand side morphism an object in $\mathcal{C}/A$.
+Then we can define a base-change functor $f^* : \mathcal{C}/B \rightarrow \mathcal{C}/A$
+such that:
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJmXiogRSJdLFsyLDAsIkUiXSxbMCwyLCJBIl0sWzIsMiwiQiJdLFswLDIsImZeKiBwIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzAsMSwiZyIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsxLDMsInAiXSxbMiwzLCJmIiwyXV0=
+\[\begin{tikzcd}
+	{f^* E} && E \\
+	\\
+	A && B
+	\arrow["g", dashed, from=1-1, to=1-3]
+	\arrow["{f^* p}"', dashed, from=1-1, to=3-1]
+	\arrow["p", from=1-3, to=3-3]
+	\arrow["f"', from=3-1, to=3-3]
+\end{tikzcd}\]
+a pullback.
+
+We denote $f^* E$ as the source of $f^* p$, it doesn't mean that $f^*$ accept a object in $\mathcal{C}$.
+
+We need to define the action of base-change functor on the morphism of $\mathcal{C}/B$:
+
+% https://q.uiver.app/#q=WzAsNixbMiwwLCJmXiogRSJdLFs0LDAsIkUiXSxbMiwyLCJBIl0sWzQsMiwiQiJdLFs2LDAsIkVeXFxwcmltZSJdLFswLDAsImZeKkVeXFxwcmltZSJdLFswLDIsImZeKiBwIiwyXSxbMCwxLCJnIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsMywicCJdLFsyLDMsImYiLDJdLFs0LDMsInBeXFxwcmltZSJdLFsxLDQsImUiLDFdLFs1LDIsImYqIHBeXFxwcmltZSIsMl0sWzAsNSwiPyIsMV0sWzUsNCwiZ15cXHByaW1lIiwwLHsiY3VydmUiOi0zLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+\[\begin{tikzcd}
+	{f^*E^\prime} && {f^* E} && E && {E^\prime} \\
+	\\
+	&& A && B
+	\arrow["{g^\prime}", curve={height=-18pt}, dashed, from=1-1, to=1-7]
+	\arrow["{f* p^\prime}"', from=1-1, to=3-3]
+	\arrow["{?}"{description}, from=1-3, to=1-1]
+	\arrow["g"{description}, dashed, from=1-3, to=1-5]
+	\arrow["{f^* p}"', from=1-3, to=3-3]
+	\arrow["e"{description}, from=1-5, to=1-7]
+	\arrow["p", from=1-5, to=3-5]
+	\arrow["{p^\prime}", from=1-7, to=3-5]
+	\arrow["f"', from=3-3, to=3-5]
+\end{tikzcd}\]
+Two commute triangles are the morphisms in $\mathcal{C}/A$ and $\mathcal{C}/B$.
+
+Since $f^* E^\prime$ is a pullback of $A \xrightarrow{B} \xleftarrow{E^\prime}$,
+it tips us that we can find the commute square below to get the morphism we want:
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJmXiogRSJdLFswLDIsIkEiXSxbMiwyLCJCIl0sWzIsMCwiRV5cXHByaW1lIl0sWzAsMV0sWzEsMiwiZiIsMl0sWzMsMiwicF5cXHByaW1lIl0sWzAsM11d
+\[\begin{tikzcd}
+	{f^* E} && {E^\prime} \\
+	\\
+	A && B
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-1, to=3-1]
+	\arrow["{p^\prime}", from=1-3, to=3-3]
+	\arrow["f"', from=3-1, to=3-3]
+\end{tikzcd}\]
+
+If we look the last diagram carefully, we can find this square commutes:
+
+% https://q.uiver.app/#q=WzAsNSxbMCwwLCJmXiogRSJdLFsyLDAsIkUiXSxbMCwyLCJBIl0sWzIsMiwiQiJdLFs0LDAsIkVeXFxwcmltZSJdLFswLDIsImZeKiBwIiwyXSxbMCwxLCJnIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsMywicCIsMCx7ImNvbG91ciI6WzAsMCw2NF19LFswLDAsNjQsMV1dLFsyLDMsImYiLDJdLFs0LDMsInBeXFxwcmltZSJdLFsxLDQsImUiLDFdXQ==
+\[\begin{tikzcd}
+	{f^* E} && E && {E^\prime} \\
+	\\
+	A && B
+	\arrow["g"{description}, dashed, from=1-1, to=1-3]
+	\arrow["{f^* p}"', from=1-1, to=3-1]
+	\arrow["e"{description}, from=1-3, to=1-5]
+	\arrow["p", color={rgb,255:red,163;green,163;blue,163}, from=1-3, to=3-3]
+	\arrow["{p^\prime}", from=1-5, to=3-3]
+	\arrow["f"', from=3-1, to=3-3]
+\end{tikzcd}\]
+
+therefore
+
+% https://q.uiver.app/#q=WzAsNSxbMCwwLCJmXiogRSJdLFsyLDQsIkEiXSxbNCw0LCJCIl0sWzQsMiwiRV5cXHByaW1lIl0sWzIsMiwiZipFXlxccHJpbWUiXSxbMCwxLCJmXiogcCIsMCx7ImN1cnZlIjozfV0sWzEsMiwiZiIsMl0sWzMsMiwicF5cXHByaW1lIl0sWzAsMywiZSBcXGNpcmMgZyIsMCx7ImN1cnZlIjotM31dLFs0LDMsImdeXFxwcmltZSJdLFs0LDEsImZeKiBwXlxccHJpbWUiLDJdLFswLDQsImZeKiBlIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+\[\begin{tikzcd}
+	{f^* E} \\
+	\\
+	&& {f*E^\prime} && {E^\prime} \\
+	\\
+	&& A && B
+	\arrow["{f^* e}"{description}, dashed, from=1-1, to=3-3]
+	\arrow["{e \circ g}", curve={height=-18pt}, from=1-1, to=3-5]
+	\arrow["{f^* p}", curve={height=18pt}, from=1-1, to=5-3]
+	\arrow["{g^\prime}", from=3-3, to=3-5]
+	\arrow["{f^* p^\prime}"', from=3-3, to=5-3]
+	\arrow["{p^\prime}", from=3-5, to=5-5]
+	\arrow["f"', from=5-3, to=5-5]
+\end{tikzcd}\]
+
+The functoriality follows the fact that $f^* e$ is unique that makes the diagram commutes.
+
+\end{document}
