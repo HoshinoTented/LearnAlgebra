@@ -20,4 +20,92 @@
   \end{center}
 \end{definition}
 
+Suppose we are in $\CSet$, we know for any function $f : A \rightarrow B$,
+there is an element in some set that represents this function.
+In programming perspect, we know it is an element of type $A \rightarrow B$.
+What if we generialize it to other category?
+In order to represent an element of some set/type/object, we can use global element,
+that is, a morphism from terminal object. We denote the object that represents
+the morphisms from $a$ to $b$ by $b^a$, then a morphism $f : a \rightarrow b$
+should be represented by $g : 1 \rightarrow b^a$. Furthermore,
+we can apply the function to some argument, that is, $\epsilon : b^a \times a \rightarrow b$,
+we should require such $g$ respects this behaviour, and we get this diagram commutes:
+
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCIxIFxcdGltZXMgYSJdLFsyLDIsImIiXSxbMCwyLCJiXmEgXFx0aW1lcyBhIl0sWzAsMSwiZiJdLFsyLDEsIlxcZXBzaWxvbiIsMl0sWzAsMiwiXFxsYW5nbGUgZywgXFxtYXRocm17aWR9X2FcXHJhbmdsZSIsMl1d
+\[\begin{tikzcd}
+	{1 \times a} \\
+	\\
+	{b^a \times a} && b
+	\arrow["{\langle g, \mathrm{id}_a\rangle}"', from=1-1, to=3-1]
+	\arrow["f", from=1-1, to=3-3]
+	\arrow["\epsilon"', from=3-1, to=3-3]
+\end{tikzcd}\]
+
+It says, if we take an element $g$ that represents $f$,
+then we can apply $g$ to for any "element" of $a$, it should behave like
+we apply $f$ to that "element" of $a$.
+
+We may loose the requirement that $1$ exists, we can use any object $c$:
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJjIFxcdGltZXMgYSJdLFsyLDIsImIiXSxbMCwyLCJiXmEgXFx0aW1lcyBhIl0sWzAsMSwiZiJdLFsyLDEsIlxcZXBzaWxvbiIsMl0sWzAsMiwiXFxsYW5nbGUgZywgXFxtYXRocm17aWR9X2FcXHJhbmdsZSIsMl1d
+\[\begin{tikzcd}
+	{c \times a} \\
+	\\
+	{b^a \times a} && b
+	\arrow["{\langle g, \mathrm{id}_a\rangle}"', from=1-1, to=3-1]
+	\arrow["f", from=1-1, to=3-3]
+	\arrow["\epsilon"', from=3-1, to=3-3]
+\end{tikzcd}\]
+The morphism $g$ corresponds to the \textit{currying} in programming.
+
+Then we can choose some elements of $a$ and $c$:
+% https://q.uiver.app/#q=WzAsNCxbMCwyLCJjIFxcdGltZXMgYSJdLFsyLDQsImIiXSxbMCw0LCJiXmEgXFx0aW1lcyBhIl0sWzAsMCwiMSBcXHRpbWVzIDEiXSxbMCwxLCJmIl0sWzIsMSwiXFxlcHNpbG9uIiwyXSxbMCwyLCJcXGxhbmdsZSBnLCBcXG1hdGhybXtpZH1fYVxccmFuZ2xlIiwyXSxbMywwLCJcXGxhbmdsZSBpLCBqIFxccmFuZ2xlIiwyXSxbMywxLCJrIiwwLHsiY3VydmUiOi0zfV1d
+\[\begin{tikzcd}
+	{1 \times 1} \\
+	\\
+	{c \times a} \\
+	\\
+	{b^a \times a} && b
+	\arrow["{\langle i, j \rangle}"', from=1-1, to=3-1]
+	\arrow["k", curve={height=-18pt}, from=1-1, to=5-3]
+	\arrow["{\langle g, \mathrm{id}_a\rangle}"', from=3-1, to=5-1]
+	\arrow["f", from=3-1, to=5-3]
+	\arrow["\epsilon"', from=5-1, to=5-3]
+\end{tikzcd}\]
+The diagram says: For a function object $g \circ i$, apply it to element $j$ by $\epsilon$,
+should equivalent to we apply $f$ to them, and the result is the element $k$:
+\begin{align*}
+   & \epsilon \circ \langle g \circ i, j \rangle && \text{(applying through function object)}\\
+  =& f \circ \langle i , j \rangle               && \text{(applying directly)} \\
+  =& k                                           && \text{(the result)}
+\end{align*}
+
+Furthermore, we can observe that the morphism $f$ and the "curring" morphism $g$
+is one-one corresponding. It notices us that there is a underlying adjunction:
+\[
+  \mathcal{C}(c \times a, b) \cong \mathcal{C}(c, b^a)
+\]
+It would be more clear if we rewrite them:
+\[
+  \begin{gathered}
+    L_a c = c \times a \\
+    R_a b = b^a \\
+    \mathcal{C}(L_a c, b) \cong \mathcal{C}(c, R_a b)
+  \end{gathered}
+\]
+
+But we need to show that they are functors. $L_a$ is a functor cause $- \times -$ is a functor
+(see chapter product). For any morphism $h : s \rightarrow t$, we need to provide
+a morphism $h^a : s^a \rightarrow t^a$, one reasonable choice is:
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJzXmEgXFx0aW1lcyBhIl0sWzIsMiwidCJdLFswLDIsInReYSBcXHRpbWVzIGEiXSxbMiwwLCJzIl0sWzIsMSwiXFxlcHNpbG9uX3QiLDJdLFswLDIsIlxcbGFuZ2xlIGheYSwgXFxtYXRocm17aWR9X2FcXHJhbmdsZSIsMl0sWzMsMSwiZiJdLFswLDMsIlxcZXBzaWxvbl9zIl1d
+\[\begin{tikzcd}
+	{s^a \times a} && s \\
+	\\
+	{t^a \times a} && t
+	\arrow["{\epsilon_s}", from=1-1, to=1-3]
+	\arrow["{\langle h^a, \mathrm{id}_a\rangle}"', from=1-1, to=3-1]
+	\arrow["h", from=1-3, to=3-3]
+	\arrow["{\epsilon_t}"', from=3-1, to=3-3]
+\end{tikzcd}\]
+It is easy to check the functoriality by the uniqueness of $h^a$.
+  
 \end{document}

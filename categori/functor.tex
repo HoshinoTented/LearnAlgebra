@@ -42,4 +42,181 @@
   Trivial by previous theorem.
 \end{proof}
 
+Note that a commuting diagram applied to a functor is still commutes, due
+to the functoriality:
+% https://q.uiver.app/#q=WzAsOSxbMCwwLCJhIl0sWzIsMCwiYiJdLFswLDIsImMiXSxbMiwyLCJkIl0sWzMsMSwiXFxSaWdodGFycm93Il0sWzQsMCwiRmEiXSxbNiwwLCJGYiJdLFs0LDIsIkZjIl0sWzYsMiwiRmQiXSxbMCwxLCJmIl0sWzIsMywiZyIsMl0sWzEsMywiaiJdLFswLDIsImkiLDJdLFs1LDYsIkZmIl0sWzUsNywiRmkiLDJdLFs3LDgsIkZnIiwyXSxbNiw4LCJGaiJdXQ==
+\[\begin{tikzcd}
+	a && b && Fa && Fb \\
+	&&& \Rightarrow \\
+	c && d && Fc && Fd
+	\arrow["f", from=1-1, to=1-3]
+	\arrow["i"', from=1-1, to=3-1]
+	\arrow["j", from=1-3, to=3-3]
+	\arrow["Ff", from=1-5, to=1-7]
+	\arrow["Fi"', from=1-5, to=3-5]
+	\arrow["Fj", from=1-7, to=3-7]
+	\arrow["g"', from=3-1, to=3-3]
+	\arrow["Fg"', from=3-5, to=3-7]
+\end{tikzcd}\]
+
+\begin{definition}[Natural Transform]
+  Suppose $F, G : \mathcal{C} \rightarrow \mathcal{D}$ are functors,
+  then $\alpha : F \Rightarrow G$ is called a natural transform from $F$ to $G$,
+  if:
+  \begin{itemize}
+    \item For any $x \in \mathcal{C}$, $\alpha_x : Fx \rightarrow Gx$ a morphism in $\mathcal{D}$.
+    \item Furthermore, for any morphism $f : x \rightarrow y$ in $\mathcal{C}$, the following square commutes:
+          % https://q.uiver.app/#q=WzAsNCxbMCwwLCJGeCJdLFsyLDAsIkZ5Il0sWzAsMiwiR3giXSxbMiwyLCJHeSJdLFswLDEsIkZmIl0sWzIsMywiR2YiXSxbMCwyLCJcXGFscGhhX3giLDFdLFsxLDMsIlxcYWxwaGFfeSIsMV1d
+          \[\begin{tikzcd}
+            Fx && Fy \\
+            \\
+            Gx && Gy
+            \arrow["Ff", from=1-1, to=1-3]
+            \arrow["{\alpha_x}"{description}, from=1-1, to=3-1]
+            \arrow["{\alpha_y}"{description}, from=1-3, to=3-3]
+            \arrow["Gf", from=3-1, to=3-3]
+          \end{tikzcd}\]
+  \end{itemize}
+\end{definition}
+
+The one of composition of two natural transforms is vertical composition:
+% https://q.uiver.app/#q=WzAsMixbMCwwLCJcXG1hdGhjYWx7Q30iXSxbMywwLCJcXG1hdGhjYWx7RH0iXSxbMCwxLCJGIiwwLHsiY3VydmUiOi01fV0sWzAsMSwiRyIsMl0sWzAsMSwiSCIsMix7Im9mZnNldCI6LTEsImN1cnZlIjo1fV0sWzIsMywiXFxhbHBoYSIsMCx7InNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0IjoyMH19XSxbMyw0LCJcXGJldGEiLDAseyJzaG9ydGVuIjp7InNvdXJjZSI6NDAsInRhcmdldCI6MjB9fV1d
+\[\begin{tikzcd}
+	{\mathcal{C}} &&& {\mathcal{D}}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-30pt}, from=1-1, to=1-4]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "G"', from=1-1, to=1-4]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "H"', shift left, curve={height=30pt}, from=1-1, to=1-4]
+	\arrow["\alpha", shorten <=4pt, shorten >=4pt, Rightarrow, from=0, to=1]
+	\arrow["\beta", shorten <=7pt, shorten >=4pt, Rightarrow, from=1, to=2]
+\end{tikzcd}\]
+which is indeed a natural transform cause:
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJGeCJdLFsyLDAsIkZ5Il0sWzAsMiwiR3giXSxbMiwyLCJHeSJdLFswLDQsIkh4Il0sWzIsNCwiSHkiXSxbMCwyLCJcXGFscGhhX3giLDJdLFsyLDQsIlxcYmV0YV94IiwyXSxbMCw0LCIoXFxiZXRhIFxcY2lyYyBcXGFscGhhKV94IiwyLHsiY3VydmUiOjMsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFsxLDMsIlxcYWxwaGFfeSJdLFszLDUsIlxcYmV0YV95Il0sWzIsMywiR2YiLDFdLFs0LDUsIkhmIiwxXSxbMCwxLCJGZiIsMV0sWzEsNSwiKFxcYmV0YSBcXGNpcmMgXFxhbHBoYSlfeSIsMCx7ImN1cnZlIjotMywic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+\[\begin{tikzcd}
+	Fx && Fy \\
+	\\
+	Gx && Gy \\
+	\\
+	Hx && Hy
+	\arrow["Ff"{description}, from=1-1, to=1-3]
+	\arrow["{\alpha_x}"', from=1-1, to=3-1]
+	\arrow["{(\beta \circ \alpha)_x}"', curve={height=18pt}, dashed, from=1-1, to=5-1]
+	\arrow["{\alpha_y}", from=1-3, to=3-3]
+	\arrow["{(\beta \circ \alpha)_y}", curve={height=-18pt}, dashed, from=1-3, to=5-3]
+	\arrow["Gf"{description}, from=3-1, to=3-3]
+	\arrow["{\beta_x}"', from=3-1, to=5-1]
+	\arrow["{\beta_y}", from=3-3, to=5-3]
+	\arrow["Hf"{description}, from=5-1, to=5-3]
+\end{tikzcd}\]
+the outer diagram commutes.
+
+There is another way to compose two natural transforms, the horizontal composition:
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWx7Q30iXSxbMiwwLCJcXG1hdGhjYWx7RH0iXSxbNCwwLCJcXG1hdGhjYWx7RX0iXSxbMCwxLCJGIiwwLHsiY3VydmUiOi0zfV0sWzAsMSwiRl5cXHByaW1lIiwyLHsiY3VydmUiOjN9XSxbMSwyLCJHIiwwLHsiY3VydmUiOi0zfV0sWzEsMiwiR15cXHByaW1lIiwyLHsiY3VydmUiOjN9XSxbMyw0LCJcXGFscGhhIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dLFs1LDYsIlxcYmV0YSIsMCx7InNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0IjoyMH19XV0=
+\[\begin{tikzcd}
+	{\mathcal{C}} && {\mathcal{D}} && {\mathcal{E}}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-18pt}, from=1-1, to=1-3]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{F^\prime}"', curve={height=18pt}, from=1-1, to=1-3]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "G", curve={height=-18pt}, from=1-3, to=1-5]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "{G^\prime}"', curve={height=18pt}, from=1-3, to=1-5]
+	\arrow["\alpha", shorten <=5pt, shorten >=5pt, Rightarrow, from=0, to=1]
+	\arrow["\beta", shorten <=5pt, shorten >=5pt, Rightarrow, from=2, to=3]
+\end{tikzcd}\]
+
+We would expect that there is a natural transform $\beta \cdot \alpha : G \circ F \Rightarrow G^\prime \circ F^\prime$,
+but how? Firstly, we have the following diagram commutes cause $\alpha$ is a natural transform:
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJGeCJdLFsyLDAsIkZ5Il0sWzAsMiwiRl5cXHByaW1lIHgiXSxbMiwyLCJGXlxccHJpbWUgeSJdLFswLDEsIkZmIl0sWzIsMywiRl5cXHByaW1lIGYiXSxbMCwyLCJcXGFscGhhX3giLDFdLFsxLDMsIlxcYWxwaGFfeSIsMV1d
+\[\begin{tikzcd}
+	Fx && Fy \\
+	\\
+	{F^\prime x} && {F^\prime y}
+	\arrow["Ff", from=1-1, to=1-3]
+	\arrow["{\alpha_x}"{description}, from=1-1, to=3-1]
+	\arrow["{\alpha_y}"{description}, from=1-3, to=3-3]
+	\arrow["{F^\prime f}", from=3-1, to=3-3]
+\end{tikzcd}\]
+Then we apply it to the functor $G$.
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJHKEZ4KSJdLFsyLDAsIkcoRnkpIl0sWzAsMiwiRyhGXlxccHJpbWUgeCkiXSxbMiwyLCJHKEZeXFxwcmltZSB5KSJdLFswLDEsIkcoRmYpIl0sWzIsMywiRyhGXlxccHJpbWUgZikiXSxbMCwyLCJHKFxcYWxwaGFfeCkiLDFdLFsxLDMsIkcoXFxhbHBoYV95KSIsMV1d
+\[\begin{tikzcd}
+	{G(Fx)} && {G(Fy)} \\
+	\\
+	{G(F^\prime x)} && {G(F^\prime y)}
+	\arrow["{G(Ff)}", from=1-1, to=1-3]
+	\arrow["{G(\alpha_x)}"{description}, from=1-1, to=3-1]
+	\arrow["{G(\alpha_y)}"{description}, from=1-3, to=3-3]
+	\arrow["{G(F^\prime f)}", from=3-1, to=3-3]
+\end{tikzcd}\]
+It is similar to what we want, beside the bottom arrow, it is time to use $\beta$.
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJHKEZ4KSJdLFsyLDAsIkcoRnkpIl0sWzAsMiwiRyhGXlxccHJpbWUgeCkiXSxbMiwyLCJHKEZeXFxwcmltZSB5KSJdLFswLDQsIkdeXFxwcmltZShGXlxccHJpbWUgeCkiXSxbMiw0LCJHXlxccHJpbWUoRl5cXHByaW1lIHkpIl0sWzAsMSwiRyhGZikiXSxbMiwzLCJHKEZeXFxwcmltZSBmKSJdLFswLDIsIkcoXFxhbHBoYV94KSIsMV0sWzEsMywiRyhcXGFscGhhX3kpIiwxXSxbMiw0LCJcXGJldGFfe0ZeXFxwcmltZSB4fSIsMV0sWzMsNSwiXFxiZXRhX3tGXlxccHJpbWUgeX0iLDFdLFs0LDUsIkdeXFxwcmltZShGXlxccHJpbWUgZikiXV0=
+\[\begin{tikzcd}
+	{G(Fx)} && {G(Fy)} \\
+	\\
+	{G(F^\prime x)} && {G(F^\prime y)} \\
+	\\
+	{G^\prime(F^\prime x)} && {G^\prime(F^\prime y)}
+	\arrow["{G(Ff)}", from=1-1, to=1-3]
+	\arrow["{G(\alpha_x)}"{description}, from=1-1, to=3-1]
+	\arrow["{G(\alpha_y)}"{description}, from=1-3, to=3-3]
+	\arrow["{G(F^\prime f)}", from=3-1, to=3-3]
+	\arrow["{\beta_{F^\prime x}}"{description}, from=3-1, to=5-1]
+	\arrow["{\beta_{F^\prime y}}"{description}, from=3-3, to=5-3]
+	\arrow["{G^\prime(F^\prime f)}", from=5-1, to=5-3]
+\end{tikzcd}\]
+And the $\beta_{F^\prime -} \circ G(\alpha_-)$ is the definition of $\beta \cdot \alpha$.
+
+Also, if one of the natural transform is the identity transform, say $id_{G} \cdot \alpha$,
+then it can be denoted by $G \cdot \alpha$.
+Notice that $G \cdot \alpha$ has type $G \circ F \Rightarrow G \circ F^\prime$,
+which "modifies" only one side.
+
+You can see that the horizontal composition is much different from vertical composition,
+the former one is much like a product of morphism (if you treat $\circ$ as some kind of product):
+\[
+  \begin{gathered}
+    \alpha : F \Rightarrow F^\prime \\
+    \beta : G \Rightarrow G^\prime \\
+    \beta \cdot \alpha : F \circ G \Rightarrow F^\prime \circ G^\prime
+  \end{gathered}
+\]
+While the later one is much like a composition of morphism:
+\[
+  \begin{gathered}
+    \alpha : F \Rightarrow G \\
+    \beta : G \Rightarrow H \\
+    \beta \circ \alpha : F \Rightarrow H
+  \end{gathered}
+\]
+
+It looks like we can write horizontal composition in vertical composition of
+two horizontal compositions:
+% https://q.uiver.app/#q=WzAsNyxbMCwwLCJcXG1hdGhjYWx7Q30iXSxbMiwwLCJcXG1hdGhjYWx7RH0iXSxbNCwwLCJcXG1hdGhjYWx7RX0iXSxbNSwwLCJcXHRleHR7YW5kfSJdLFs2LDAsIlxcbWF0aGNhbHtDfSJdLFs4LDAsIlxcbWF0aGNhbHtEfSJdLFsxMCwwLCJcXG1hdGhjYWx7RX0iXSxbMSwyLCJHIiwwLHsiY3VydmUiOi0zfV0sWzAsMSwiRiIsMCx7ImN1cnZlIjotM31dLFswLDEsIkZeXFxwcmltZSIsMix7ImN1cnZlIjozfV0sWzQsNSwiRl5cXHByaW1lIiwwLHsiY3VydmUiOjN9XSxbNSw2LCJHIiwwLHsiY3VydmUiOi0zfV0sWzUsNiwiR15cXHByaW1lIiwyLHsiY3VydmUiOjN9XSxbOCw5LCJcXGFscGhhIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dLFsxMSwxMiwiXFxiZXRhIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dXQ==
+\[\begin{tikzcd}
+	{\mathcal{C}} && {\mathcal{D}} && {\mathcal{E}} & {\text{and}} & {\mathcal{C}} && {\mathcal{D}} && {\mathcal{E}}
+	\arrow[""{name=0, anchor=center, inner sep=0}, "F", curve={height=-18pt}, from=1-1, to=1-3]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{F^\prime}"', curve={height=18pt}, from=1-1, to=1-3]
+	\arrow["G", curve={height=-18pt}, from=1-3, to=1-5]
+	\arrow["{F^\prime}", curve={height=18pt}, from=1-7, to=1-9]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "G", curve={height=-18pt}, from=1-9, to=1-11]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "{G^\prime}"', curve={height=18pt}, from=1-9, to=1-11]
+	\arrow["\alpha", shorten <=5pt, shorten >=5pt, Rightarrow, from=0, to=1]
+	\arrow["\beta", shorten <=5pt, shorten >=5pt, Rightarrow, from=2, to=3]
+\end{tikzcd}\]
+
+In symbol, it is $G(\alpha_-)$ (the former one) and $\beta_{F^\prime -}$ (the later one),
+and finally $\beta_{F^\prime -} \circ G(\alpha_-)$, which is exactly the horizontal composition $\beta \cdot \alpha$.
+Similarly, we might suppose there is another definition of horizontal composition: $G^\prime(\alpha_-) \circ \beta_{F-}$
+which is the vertical composition of:
+% https://q.uiver.app/#q=WzAsNyxbMCwwLCJcXG1hdGhjYWx7Q30iXSxbMiwwLCJcXG1hdGhjYWx7RH0iXSxbNCwwLCJcXG1hdGhjYWx7RX0iXSxbNSwwLCJcXHRleHR7YW5kfSJdLFs2LDAsIlxcbWF0aGNhbHtDfSJdLFs4LDAsIlxcbWF0aGNhbHtEfSJdLFsxMCwwLCJcXG1hdGhjYWx7RX0iXSxbMSwyLCJHXlxccHJpbWUiLDIseyJjdXJ2ZSI6M31dLFswLDEsIkYiLDAseyJjdXJ2ZSI6LTN9XSxbNCw1LCJGXlxccHJpbWUiLDIseyJjdXJ2ZSI6M31dLFs1LDYsIkdeXFxwcmltZSIsMix7ImN1cnZlIjozfV0sWzEsMiwiRyIsMCx7ImN1cnZlIjotM31dLFs0LDUsIkYiLDAseyJjdXJ2ZSI6LTN9XSxbMTEsNywiXFxiZXRhIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dLFsxMiw5LCJcXGFscGhhIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dXQ==
+\[\begin{tikzcd}
+	{\mathcal{C}} && {\mathcal{D}} && {\mathcal{E}} & {\text{and}} & {\mathcal{C}} && {\mathcal{D}} && {\mathcal{E}}
+	\arrow["F", curve={height=-18pt}, from=1-1, to=1-3]
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{G^\prime}"', curve={height=18pt}, from=1-3, to=1-5]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "G", curve={height=-18pt}, from=1-3, to=1-5]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "{F^\prime}"', curve={height=18pt}, from=1-7, to=1-9]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "F", curve={height=-18pt}, from=1-7, to=1-9]
+	\arrow["{G^\prime}"', curve={height=18pt}, from=1-9, to=1-11]
+	\arrow["\beta", shorten <=5pt, shorten >=5pt, Rightarrow, from=1, to=0]
+	\arrow["\alpha", shorten <=5pt, shorten >=5pt, Rightarrow, from=3, to=2]
+\end{tikzcd}\]
+
+The corresponding diagram would be: apply the naturality diagram of $\alpha$ to $G^\prime$,
+then put $\beta$ above it.
 \end{document}

@@ -112,4 +112,82 @@ Dually, we also have:
   \Limit (\mathcal{C}(\mathcal{D}_-, Y)) \cong \mathcal{C}(\CoLimit \mathcal{D}, Y)
 \]
 
+\subsection{Unit and Counit}
+
+Suppose $L \dashv R$, that is, for any $a \in \mathcal{D}$ and $b \in \mathcal{C}$, we have:
+\[
+  \mathcal{C}(La, b) \cong \mathcal{D}(a, Rb)
+\]
+If you keep Yoneda trick in mind, you may trying to replace $b$ by $La$ or $a$ by $Rb$,
+which produce two morphism:
+\[
+  \begin{gathered}
+    \eta _a : a \rightarrow R(La) \\
+    \epsilon _b : L(Rb) \rightarrow b
+  \end{gathered}
+\]
+or we can regard them as natural transformations:
+\[
+  \begin{gathered}
+    \eta : \mathrm{Id} \rightarrow R \circ L \\
+    \epsilon : L \circ R \rightarrow \mathrm{Id}
+  \end{gathered}
+\]
+
+\subsection{Back to Adjoint}
+
+What condition those unit and counit should hold such that we can construct a adjoint back?
+Let's see how we can construct a adjoint from unit and counit, suppose $f : La \rightarrow b$ a morphism,
+we need to provide a morphism $a \rightarrow Rb$. One obvious way is:
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJhIl0sWzIsMCwiUkxhIl0sWzQsMCwiUmIiXSxbMCwxLCJcXGV0YV9hIl0sWzEsMiwiUmYiXV0=
+\[\begin{tikzcd}
+	a && RLa && Rb
+	\arrow["{\eta_a}", from=1-1, to=1-3]
+	\arrow["Rf", from=1-3, to=1-5]
+\end{tikzcd}\]
+Similarly, for given $g : a \rightarrow Rb$, we have:
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJMYSJdLFsyLDAsIkxSYiJdLFs0LDAsImIiXSxbMCwxLCJMZyJdLFsxLDIsIlxcZXBzaWxvbl9iIl1d
+\[\begin{tikzcd}
+	La && LRb && b
+	\arrow["Lg", from=1-1, to=1-3]
+	\arrow["{\epsilon_b}", from=1-3, to=1-5]
+\end{tikzcd}\]
+Since the adjoint is an isomorphism between hom-set, so if we send the morphism we mapped from $f$ back to $\mathcal{C}(La, b)$,
+it should still be $f$:
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJMYSJdLFsyLDAsImIiXSxbMCwyLCJMKFJMYSkiXSxbMiwyLCJMKFJiKSJdLFswLDEsImYiXSxbMCwyLCJMKFxcZXRhX2EpIiwyXSxbMywxLCJcXGVwc2lsb25fYiIsMl0sWzIsMywiTFJmIiwyXV0=
+\[\begin{tikzcd}
+	La && b \\
+	\\
+	{L(RLa)} && {L(Rb)}
+	\arrow["f", from=1-1, to=1-3]
+	\arrow["{L(\eta_a)}"', from=1-1, to=3-1]
+	\arrow["LRf"', from=3-1, to=3-3]
+	\arrow["{\epsilon_b}"', from=3-3, to=1-3]
+\end{tikzcd}\]
+or in symbol:
+\[
+  \epsilon_b \circ LRf \circ L\eta_a = f
+\]
+Since $\epsilon$ is a natural transformation, we have this diagram commutes:
+% https://q.uiver.app/#q=WzAsNSxbMCwwLCJMUihMYSkiXSxbMiwwLCJMUihiKSJdLFsyLDIsImIiXSxbMiw0XSxbMCwyLCJMYSJdLFsxLDIsIlxcZXBzaWxvbl9iIl0sWzAsMSwiTFIoZikiXSxbMCw0LCJcXGVwc2lsb25fe0xhfSIsMl0sWzQsMiwiZiIsMl1d
+\[\begin{tikzcd}
+	{LR(La)} && {LR(b)} \\
+	\\
+	La && b \\
+	\\
+	&& {}
+	\arrow["{LR(f)}", from=1-1, to=1-3]
+	\arrow["{\epsilon_{La}}"', from=1-1, to=3-1]
+	\arrow["{\epsilon_b}", from=1-3, to=3-3]
+	\arrow["f"', from=3-1, to=3-3]
+\end{tikzcd}\]
+Then we can rewrite the equation:
+\[
+  f \circ \epsilon_{La} \circ L\eta_a = f
+\]
+or
+\[
+  f \circ (\epsilon \cdot L)_a \circ (L \cdot \eta)_a = f
+\]
+
 \end{document}
