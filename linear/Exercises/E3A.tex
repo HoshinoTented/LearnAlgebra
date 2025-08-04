@@ -1,0 +1,41 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{3}
+
+\begin{document}
+
+\begin{exercise}
+  Suppose $\V$ is a finite vector space, Show that the only two ideal of
+  $\LT(\V)$ is $\0$ and $\LT(\V)$.
+  A subspace $\mathcal{E}$ of $\LT(\V)$ is called an ideal, 
+  if $TE \in \mathcal{E}$ and $ET \in \mathcal{E}$ 
+  for any $T \in \LT(\V)$ and $E \in \mathcal{E}$.
+\end{exercise}
+\begin{proof}
+  We will use the concept Matrix.
+  Suppose $\lambda_0v_0 + \cdots + \lambda_nv_v$ the basis of $V$.
+  We want to construct $T_i$ that $T(\lambda_0v_0 + \cdots + \lambda_nv_n) = \lambda_iv_i$ for all $0 \le i < n$,
+  which is a matrix with all zero but $1$ at $i, i$.
+
+  For any matrix, we can always select a non-zero value at $a, b$ and place it at $i, b$,
+  this can be done by left multiply a matrix with $1$ at $i, a$
+  (this produce a vector at line $i$ with values from line $a$),
+  then right multiply a matrix with $1$ at $i, b$
+  (this produce a vector at column $b$ with values from line $i$).
+
+  Also, we can always select a non-zero value at $a, b$ and place it at $a, i$,
+  this can be done by right multiply a matrix with $1$ at $b, i$,
+  then left multiply a matrix with $1$ at $a, i$.
+
+  By combining these two operations, we ca select a non-zero value at $a, b$ and place it at $i, i$.
+  Now, consider any non-zero $E \in \mathcal{E}$, we can construct a
+  matrix with non-zero value at $i, i$ for every $0 \le i < \dim V$. These matrix
+  are in $\mathcal{E}$ since $\mathcal{E}$ is an ideal, then we can multiply an apropriate scalar
+  to them so that they are matrices with $1$ at $i, i$. By adds up these matrices, we get $I$,
+  we know $I \in \mathcal{E}$ since $\mathcal{E}$ is a vector space, and now all $T \in \LT(V)$
+  is also in $\mathcal{E}$ since $\mathcal{E}$ is an ideal, then $\mathcal{E} = \LT(V)$.
+
+  The only exception is $\mathcal{E} = \0$, in this case we can't pick any non-zero element.
+\end{proof}
+
+\end{document}

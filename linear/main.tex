@@ -1,0 +1,53 @@
+\documentclass[14pt]{extarticle}
+
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsthm,amsmath,amssymb}
+\usepackage{varioref}
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\usepackage{subfiles}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem*{mistake}{Mistake}
+\newtheorem*{example}{Example}
+\setcounter{section}{0}
+
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\join}[3][,]{#2_0 #1 \cdots #1 #2_{#3}}
+\newcommand{\Times}[2]{\join[\times]{#1}{#2}}
+\newcommand{\Oplus}[2]{\join[\oplus]{#1}{#2}}
+\newcommand{\normalin}{\triangleleft}
+\newcommand{\1}{\{e\}}
+\newcommand{\0}{\{0\}}
+\newcommand{\set}[2]{\{ \ #1 \ | \ #2 \ \}}
+\newcommand{\cyc}[1]{\langle #1 \rangle}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\poly}[2][x]{#2[#1]}
+
+% Vector Spaces
+\newcommand{\U}{\mathnormal{V}}
+\newcommand{\V}{\mathnormal{V}}
+\newcommand{\W}{\mathnormal{V}}
+
+% Linear Transformations
+\newcommand{\LT}{\mathcal{L}}
+
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\spanv}{span}
+\DeclareMathOperator{\nullv}{null}
+\DeclareMathOperator{\rangev}{range}
+
+\begin{document}
+
+\subfile{./Chapters/C3.tex}
+\subfile{./Exercises/E3A.tex}
+
+\end{document}

@@ -1,0 +1,81 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{3}
+
+\begin{document}
+
+\setcounter{definition}{10}
+\begin{definition}
+  For any $T \in \LT(V, W)$, set $\nullv T = \set{v}{Tv = 0}$ is called the \textbf{null space} of $T$.
+\end{definition}
+
+This is also called the \textbf{kernal} of $T$ in algebra.
+
+\setcounter{theorem}{12}
+\begin{theorem}
+  For any $T \in \LT(V, W)$, $\nullv T$ is a subspace of $V$.
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item We have $0 \in \nullv T$ since $T0 = 0$, which is the property of linear transformation.
+    \item For any $a, b \in \nullv T$, we have $0 = Ta + Tb = T(a + b)$, so $a + b \in \nullv T$.
+    \item For any $Ta \in \nullv T$ and $\lambda \in F$, we have $\lambda Ta = T (\lambda a)$, so $\lambda a \in \nullv T$.
+  \end{itemize}
+\end{proof}
+
+
+\setcounter{definition}{14}
+\begin{definition}
+  For any $T \in \LT(V, W)$, set $\rangev T = T(V) = \set{Tv}{v \in V}$ is called the \textbf{range} of $T$.
+\end{definition}
+
+This is also called the \textbf{image} of $T$ in math.
+
+\setcounter{theorem}{17}
+\begin{theorem}
+  For any $T \in \LT(V, W)$, $\rangev T$ is a subsapce of $W$.
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item We have $T(0) = 0 \in \rangev T$.
+    \item For any $Ta, Tb \in \rangev T$, $Ta + Tb = T(a + b) \in \rangev T$.
+    \item For any $Ta \in \rangev T$ and $\lambda \in F$, $\lambda Ta = T(\lambda a) \in \rangev T$.
+  \end{itemize}
+\end{proof}
+
+\setcounter{theorem}{20}
+\begin{theorem}
+  Suppose $V$ is finite and $T \in \LT(V, W)$, then $\rangev T$ is finite, and
+  \[
+  \dim V = \dim \nullv T + \dim \rangev T
+  \]
+\end{theorem}
+\begin{proof}
+  Consider the basis $\join{v}{k}$ of $\nullv T$, and the basis $\join{v}{n}$ of $V$ that expand from $\join{v}{k}$.
+  We will show that $T(v_{k + 1}) , \cdots , T(v_n)$ is the basis of $\rangev T$.
+
+  We first show that $T(v_{k + 1}) , \cdots , T(v_n)$ is linear irrelavent. If it is linear irrelavent,
+  then
+
+  \begin{align*}
+     & \lambda_1 T(v_{k + 1}) + \cdots + \lambda_i T(v_{k + i}) \\
+    =& T(\lambda_1 v_{k + 1} + \cdots + \lambda_i T(v_{k + i})) \\
+    =& 0
+  \end{align*}
+
+  That means a linear combation of $v_{k + i}$ is in $\nullv T$, which is $\spanv(\join{v}{k})$,
+  therefore the basis $\join{v}{n}$ is linear relavent.
+
+  Then we show that $T(v_{k + 1}) , \cdots , T(v_n)$ spans $\rangev T$. For any $Tv \in \rangev T$,
+  there must be $v \in V$ such that $Tv = Tv$, then $v$ can be written in form of the linear combination
+  of $\join{v}{n}$, and then $Tv = T(\lambda_0v_0 + \cdots + \lambda_nv_n)$.
+  We can drop all terms with $v_i$ where $i \le k$, since they are in $\nullv T$,
+  so $Tv$ is now represent by a linear combination of $T(v_{k + i})$ for all $0 < i \le n - k$,
+  therefore, it is a basis of $\rangev T$ and $\dim \rangev T$ is finite.
+
+  Finally, $\dim V = \dim \nullv T + \dim \rangev T$.
+\end{proof}
+
+\end{document}
