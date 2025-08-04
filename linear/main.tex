@@ -13,6 +13,7 @@
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{definition}{Definition}[section]
 \newtheorem{exercise}{Exercise}[section]
+\newtheorem*{exercise*}{Exercise}
 \newtheorem{corollary}{Corollary}[section]
 \newtheorem*{mistake}{Mistake}
 \newtheorem*{example}{Example}
@@ -20,6 +21,7 @@
 
 \newcommand{\inv}[1]{#1^{-1}}
 \newcommand{\join}[3][,]{#2_0 #1 \cdots #1 #2_{#3}}
+\newcommand{\joinp}[4][,]{#2_0 #3_0 #1 \cdots #1 #2_{#4} #3_{#4}}
 \newcommand{\Times}[2]{\join[\times]{#1}{#2}}
 \newcommand{\Oplus}[2]{\join[\oplus]{#1}{#2}}
 \newcommand{\normalin}{\triangleleft}
@@ -49,5 +51,6 @@
 
 \subfile{./Chapters/C3.tex}
 \subfile{./Exercises/E3A.tex}
+\subfile{./Exercises/E3B.tex}
 
 \end{document}

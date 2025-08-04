@@ -1,0 +1,105 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{3}
+
+\begin{document}
+
+\setcounter{exercise}{6}
+\begin{exercise}
+  Suppose vector space $V$ and $W$ are finite $(2 \le \dim V \le \dim W)$,
+  show that $\set{T \in \LT(V, W)}{T \text{ is not injective}}$ is not a subspace.
+\end{exercise}
+\begin{proof}
+  Consider the basis $\join[+]{v}{(\dim V - 1)} \in V$,
+  and $T(\join[+]{v}{(\dim V - 1)}) = (0 + \join[+]{1}{(\dim V - 1)})$
+  and $T^\prime(\join[+]{v}{(\dim V - 1)}) = (v_0 +  0 + \cdots + v_{(\dim V - 1)})$.
+  Then
+  $(T + T^\prime)(\lambda_0v_0 + \lambda_1v_1 + \cdots + \lambda_{(\dim V - 1)}v_{(\dim V - 1)}) = \lambda_0v_0 + \lambda_1v_1 + \cdots + 2\lambda_{(\dim V - 1)}v_{(\dim V - 1)}$,
+  which is obviously injective.
+\end{proof}
+
+\setcounter{exercise}{10}
+\begin{exercise}
+  Suppose $V$ is finite and $T \in \LT(V, W)$, show that there is a subspace $U \subset V$ such that:
+  \[
+  U \cap \nullv T = \0 \quad \text{and} \quad \rangev T = \set{Tu}{u \in U}
+  \]
+\end{exercise}
+\begin{proof}
+  This is similar to the \textit{isomorphism theorems} about groups!
+  This can be done by the similar way we used in proving $\dim V = \dim \nullv T + \dim \rangev T$.
+\end{proof}
+
+The next two exercises remind me the categorical injective and surjective, let try them first!
+
+\begin{exercise*}
+  For any $F \in \LT(V, W)$, $F$ is injective $\iff$ for any $S, T \in \LT(U, V)$, $FS = FT$ implies $S = T$.
+\end{exercise*}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ For any $S, T \in \LT(V, W)$ that $FS = FT$, then for any $u \in U$,
+          we have $F(Su) = F(Tu)$, since $F$ is injective, we know $Su = Tu$, so $S = T$.
+    \item $(\Leftarrow)$ For any $v, w \in V$ such that $Fv = Fw$. Consider
+          \begin{align*}
+            S(\lambda) &= \lambda v \\
+            T(\lambda) &= \lambda w
+          \end{align*}
+          in $\LT(\mathbb{R}, V)$.
+          Then for any $\lambda \in \mathbb{R}$, we have $FS\lambda = \lambda FS1 = \lambda Fv = \lambda Fw = \lambda FT1 = FT\lambda$.
+          so $FS = FT$ then $S = T$, which means $v = S1 = T1 = w$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise*}
+  Suppose $W$ is finite, then for any $F \in \LT(V, W)$, $F$ is surjective $\iff$ for any $S, T \in \LT(W, U)$, $SF = TF$ implies $S = T$.
+\end{exercise*}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ For any $S, T \in \LT(W, U)$ such that $SF = TF$. For any $w \in W$,
+          there is $v \in V$ such that $Fv = w$ since $F$ is surjective. Then we have
+          $SFv = TFv$ so $Sw = S(Fv) = T(Fv) = Tw$ then $S = T$.
+    \item $(\Leftarrow)$ Consider
+          \[
+          S = I \quad \text{and} \quad T(\lambda_0w_0 + \cdots + \lambda_n w_n) = \lambda_0w_0 + \cdots + \lambda_kw_k
+          \]
+          where $\join{w}{k}$ is the basis of $\rangev F$ and
+          $\join{w}{n}$ is the basis of $W$ that expand from $\join{w}{k}$.
+
+          It is easy to show that $T$ is a linear transformation. Then for any $v \in V$, we have
+          $TFv = Fv$ (since $T$ acts like identity transformation on $\rangev F$) and $SFv = Fv$,
+          so $S = T$ by the property of $F$. Since $\rangev S = W$, so is $\rangev T$, that means
+          $\join{w}{k}$ spans $W$, so $k = n$, which means $\rangev F = W$, therefore $F$ is surjective.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{18}
+\begin{exercise}
+  Suppose $W$ is finite, then for any $T \in \LT(V, W)$,
+  show that $T$ is injective $\iff$ there is $S \in \LT(W, V)$ such that $ST = I$.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ Consider the basis $\join{v}{n}$ of $V$, then $Tv_0, \cdots, Tv_n$
+          is a basis of $\rangev T$ since $T$ is injective. We denote $Tv_i$ as $w_i$
+          and $\join{w}{m}$ as the basis of $W$ which expand from $\join{w}{n}$.
+          Define $S(\joinp[+]{\lambda}{w}{m}) = \joinp[+]{\lambda}{w}{n}$, and then for any
+          $v \in V$, $ST(\joinp[+]{\lambda}{v}{n}) = S(\lambda_0w_0 + \cdots + \lambda_nw_n) = \joinp[+]{\lambda}{v}{n}$,
+          so $ST = I$.
+    \item $(\Leftarrow)$ Suppose $A, B \in \LT(U, V)$, such that $TA = TB$, we will show that $A = B$.
+          $STA = IA = A$ and $STB = IB = B$ and $STA = STB$ since $TA = TB$.
+          Then we know $T$ is a monomorphism, and then $T$ is injective.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Suppose $W$ is finite, then for any $T \in \LT(V, W)$,
+  show that $T$ is surjective $\iff$ there is $S \in \LT(W, V)$ such that $TS = I$.
+\end{exercise}
+\begin{proof}
+   
+\end{proof}
+
+\end{document}
