@@ -102,4 +102,226 @@ The next two exercises remind me the categorical injective and surjective, let t
    
 \end{proof}
 
+\begin{exercise}
+  Suppose $V$ is finite, $T \in \LT(V, W)$, $U \subseteq W$ a subspace.
+  Show that the inverse image of $U$: $\set{v \in V}{Tv \in U}$ is
+  a subspace of $V$, and
+  \[
+  \dim \set{v \in V}{Tv \in U} = \dim \nullv T + \dim (U \cap \rangev T)
+  \]
+\end{exercise}
+\begin{proof}
+  The second part is quite easy,
+  we can restrict the domain of $T$ to $\set{v \in V}{Tv \in U}$, 
+  say $T' \in \LT(\set{v \in V}{Tv \in U}, W)$,
+  so that it is in form $\dim \set{v \in V}{Tv \in U} = \dim \nullv T' + \dim \rangev T'$.
+  Obviously $\rangev T' = U \cap \rangev T$ and $\nullv T' = \nullv T$.
+
+  We will now show that $\set{v \in V}{Tv \in U}$ is a subspace of $V$.
+  \begin{itemize}
+    \item $T0 \in U$.
+    \item For any $v, w \in V$ such that $Tv, Tw \in U$, we have $T(v + w) = Tv + Tw \in U$.
+    \item For any $v \in V$ such that $Tv \in U$ and $\lambda \in F$, we  have $T(\lambda v) = \lambda Tv \in U$.
+  \end{itemize}
+  Therefore it is a subspace.
+\end{proof}
+
+\begin{exercise}
+  Suppose $U$ and $V$ are finite, $S \in \LT(V, W)$ and $T \in \LT(U, V)$, show that
+  \[
+  \dim \nullv ST \le \dim \nullv S + \dim \nullv T
+  \]
+\end{exercise}
+\begin{proof}
+  Consider the inverse image of $\nullv S$ on $T$: $K = \set{v \in V}{Tv \in \nullv S}$,
+  which dimension: $\dim K = \dim \nullv T + \dim (\nullv S \cap \rangev T)$, where $\dim (\nullv S \cap \rangev T)$
+  caps at $\dim \nullv S$.
+
+  We know show that $\nullv ST = \nullv K$. For any $STv = 0$, we know $S(Tv) = 0$,
+  so $Tv \in K$, therefore $\nullv ST \subseteq \nullv K$; For any $Tv \in \nullv S$,
+  that means $S(Tv) = 0$, therefore $v \in \nullv ST$, therefore $\nullv ST \supseteq \nullv K$,
+  and $\nullv ST = \nullv K$.
+\end{proof}
+
+\setcounter{exercise}{24}
+\begin{exercise}
+  Suppose $V$ is finite, $S, T \in \LT(V, W)$. Show that 
+  $\nullv S \subseteq \nullv T$ $\iff$ there is $E \in \LT(W)$ such that $T = ES$.
+\end{exercise}
+\begin{proof}
+  We define $E(S(v)) = Tv$ for any $v \in V$, so that $E \in \LT(\rangev S, W)$.
+  We first show that $E$ is a mapping, and also a linear transformation.
+
+  Suppose $Sv, Sw \in W$ such that $Sv = Sw$, we need to show that $E(Sv) = E(Sw)$,
+  or normalized $Tv = Tw$.
+  We know $v - w \in \nullv S$ since $Sv = Sw$, so $v - w \in \nullv T$
+  since $\nullv S \subseteq \nullv T$, therefore $T(v - w) = 0$, and then $Tv = Tw$, so $E$ is a mapping.
+
+  Now we show that $E$ is a linear transformation.
+  \begin{itemize}
+    \item For any $Sv, Sw \in \rangev S$, $E(Sv) + E(Sw) = Tv + Tw = T(v + w) = E(S(v + w)) = E(Sv + Sw)$.
+    \item For any $Sv \in \rangev S$ and $\lambda \in F$, $\lambda E(Sv) = \lambda Tv = T(\lambda v) = E(S(\lambda v) = E(\lambda Sv))$.
+  \end{itemize}
+  therefore $E$ is a linear transformation.
+
+  Now we can expand the domain of $E$ to $W$ such that $E'v = Ev$ for any $v \in \rangev S$
+  (this is proven in previous exercise). For any $v \in V$, we have $ESv = E(Sv) = Tv$,
+  there fore $T = ES$.
+
+  For another direction, for any $v \in \nullv S$, we have $ESv = E0 = 0 = Tv$, so $v \in \nullv T$.
+\end{proof}
+
+\begin{exercise}
+  Suppose $V$ is finite, $S, T \in \LT(V, W)$. Show that
+  $\rangev S \subseteq \rangev T$ $\iff$ there is $E \in \LT(V)$ such that $S = TE$.
+\end{exercise}
+\begin{proof}
+  Consider the inverse image of $\rangev S$ with basis $\join{w}{n}$,
+  say $\join{v}{n}$,
+  it is easy to show $\join{v}{n}$ is linear irrelavent.
+  Then $E(v) = \joinp[+]{\lambda}{v}{n}$ where $Sv = \joinp[+]{\lambda}{w}{n}$.
+\end{proof}
+
+\begin{exercise}
+  Suppose $P \in \LT(V)$ and $P^2 = P$, show that $V = \nullv P \oplus \rangev P$.
+\end{exercise}
+\begin{proof}
+  Such element is called \textit{idempotent} in algebra.
+
+  We will show $\nullv P \oplus \rangev P$ by showing $\nullv P \cap \rangev P = \0$.
+  For any $v \in \nullv P \cap \rangev P$, we know there is $w \in V$ such that $Pw = v$
+  since $v \in rangev P$, then $P^2(v) = P(Pv) = P0 = 0$ since $v \in \nullv P$
+  and $P^2(v) = P(Pv) = Pw$, so $Pw = 0$ while $Pw = v$ therefore $v = 0$.
+
+  Then we have $\dim V = \dim \nullv P + \dim \rangev P$ and $\dim (\nullv P \oplus \rangev P) = \dim \nullv P + \dim \rangev P - \dim \0$,
+  so $V = \nullv P \oplus \rangev P$.
+\end{proof}
+
+\begin{exercise}
+  Suppose $D \in \LT(\mathcal{P}(\mathbb{R}))$ such that for any non-constant polynomial
+  $p \in \mathcal{P}(\mathbb{R})$, $\deg (Dp) = \deg p - 1$. Show that $D$ is surjective.
+\end{exercise}
+\begin{proof}
+  We induction on $n$, starts from $1$, to show that
+  $D(\mathcal{P}_n(\mathbb{R})) = \mathcal{P}_{n - 1}(\mathbb{R})$.
+
+  \begin{itemize}
+    \item Base: for any $p \in \mathcal{P}(\mathbb{R})$ where $\deg p = 1$, we know $\deg Dp = 0$,
+          so $D(\mathcal{P}_1(\mathbb{R}))$ is a non-zero subspace of $\mathcal{P}_0(\mathbb{R})$,
+          which is $\mathcal{P}_0(\mathbb{R})$.
+    \item Induction: We have induction hypothesis: For any $i \le n$, we have $D(\mathcal{P}_i(\mathbb{R})) = \mathcal{P}_{i - 1}(\mathbb{R})$.
+          We want to show that $D(\mathcal{P}_{n + 1}(\mathbb{R})) = \mathcal{P}_{n}(\mathbb{R})$.
+          For any $p \in \mathcal{P}(\mathbb{R})$ with $\deg p = n + 1$, we can write $p$ in form
+          of $p = \lambda x^{n + 1} + r$ where $\deg r \le n$,
+          then $Dp = D(\lambda x^{n + 1} + r) = D(\lambda x^{n + 1}) + Dr$ where $\deg D(\lambda x^{n + 1}) = n$ and $\deg Dr \le n - 1$.
+          So $D(\mathcal{P}_{n + 1}(\mathbb{R})) = \mathcal{P}_n(\mathbb{R})$ since:
+          $\mathcal{P}_n(\mathbb{R}) \subseteq D(\mathcal{P}_{n + 1}(\mathbb{R}))$ and $D(\lambda x^{n + 1}) \in D(\mathcal{P}_{n + 1}(\mathbb{R}))$,
+          it is sufficient to span $\mathcal{P}_n(\mathbb{R})$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  For any $p \in \mathcal{P}(\mathbb{R})$, show that there is $q \in \mathcal{P}(\mathbb{R})$ such that $5q^{\prime\prime} + 3q^\prime = p$.
+\end{exercise}
+\begin{proof}
+  We can rewrite the goal as $5DDq + 3Dq = p$ where $D(p) = p^\prime$,
+  then $5DDq + 3Dq = D(5Dq) + D(3q) = D(5Dq + 3q) = p$. We know $D$ is surjective
+  by the previous exercise, the goal is now showing that $5Dq + 3q = r$ where $Dr = p$.
+  Then we continue rewrite the goal $5Dq + 3q = (5D)q + (3I)q = (5D + 3I)q = r$,
+  we will show that $5D + 3I$ is surjective, we use the same method in previous exercise.
+
+  We denote $5D + 3I$ by $F$, and induction on $n \in \mathbb{N}$ to show that
+  $F(\mathcal{P}_n(\mathbb{R})) = \mathcal{P}_n(\mathbb{R})$.
+  \begin{itemize}
+    \item Base: We should show that $F(\mathcal{P}_0(\mathbb{R})) = \mathcal{P}_0(\mathbb{R})$,
+          for any $p \in \mathcal{P}_0(\mathbb{R})$, we have $Fp = 5Dp + 3p$, where $Dp = 0$ since $\deg p = 0$,
+          so $Fp = 3p$, which means we have $1 \in F(\mathcal{P}_0(\mathbb{R}))$ since $p$ is literally a number and $\frac{1}{3p}Fp = 1$.
+    \item Induction: We have induction hypothesis: $F(\mathcal{P}_n(\mathbb{R})) = \mathcal{P}_n(\mathbb{R})$,
+          and we want to show $F(\mathcal{P}_{n + 1}(\mathbb{R})) = \mathcal{P}_{n + 1}(\mathbb{R})$.
+
+          For any $p \in \mathcal{P}_{n + 1}(\mathbb{R})$, we have $Fp = 5Dp + 3p$
+          where $\deg 5Dp = n$ and $\deg 3p = n + 1$, then we can eliminate $5Dp$ and
+          every term in $p$ with degree less then $n + 1$ since $\mathcal{P}_n(\mathbb{R}) \subseteq \rangev F$,
+          then we get $z^{n + 1}$, thus $F(\mathcal{P}_{n + 1}(\mathbb{R})) = \mathcal{P}_{n + 1}(\mathbb{R})$.
+  \end{itemize}
+
+  Therefore there is $q$ such that $(5D + 3I)q = r$ since $5D + 3I$ is surjective.
+
+  Another solution from internet: Define $Tq = 5q^{\prime\prime} + 3q^\prime$, we can see
+  for any $q \in \mathcal{P}(\mathbb{R})$ we have $\deg Tq = \deg q - 1$,
+  so $T$ is surjective. Then there is $q$ such that $Tq = 5q^{\prime\prime} + 3q^\prime = p$.
+\end{proof}
+
+\begin{exercise}
+  Suppose $\varphi \in \LT(V, F)$ not zero, and $u \in V$ that $u \notin \nullv \varphi$,
+  show that $V = \nullv \varphi \oplus \set{au}{a \in F}$.
+\end{exercise}
+\begin{proof}
+  We can see $\varphi$ is surjective since $\varphi u \neq 0$, then for any $i \in F$,
+  we have $(i\inv{(\varphi u)}) \varphi u = i$.
+
+  For any $v \in V$, since $\varphi$ is surjective (in a particular way), so we have $a \varphi u$ such that
+  $a \varphi u = \varphi v$, then $\varphi (au - v) = 0$ so $au - v \in \nullv \varphi$.
+  That means $(-1) (au - v) + au = v$ where $(-1) (au - v) \in \nullv \varphi$ and $au \in \set{au}{a \in F}$,
+  so $V = \nullv \varphi + \set{au}{a \in F}$.
+
+  Then $\nullv \varphi \oplus \set{au}{a \in F}$ since $u \notin \nullv \varphi$.
+\end{proof}
+
+\begin{exercise}
+  Suppose $V$ is finite ($\dim V > 1$), show that if $\varphi : \LT(V) \rightarrow F$
+  is a linear mapping with property $\varphi(ST) = \varphi(S)\varphi(T)$ for any
+  $S, T \in \LT(V)$, show that $\varphi = 0$.
+\end{exercise}
+\begin{proof}
+  Consider $\nullv \varphi$, since $\dim V > 1$ while $\dim F = 1$, so $\varphi$
+  cannot be injective, therefore $\nullv \varphi \neq \0$.
+
+  For any non-zero $S \in \nullv \varphi$ and $T \in \LT(V)$, 
+  we have $\varphi(ST) = \varphi(S) \varphi(T) = 0 = \varphi(T) \varphi(S) = \varphi(TS)$
+  since $S \in \nullv \varphi$, thus $ST \in \nullv \varphi$. We show that
+  $\nullv \varphi$ is an ideal of $\LT(V)$, recall that the property of $\LT(V)$,
+  the only ideal of $\LT(V)$ is $\0$ and $LT(V)$, so $\nullv \varphi = \LT(V)$,
+  which means $\varphi = 0$.
+\end{proof}
+
+\begin{exercise}
+  Let $V, W$ are vector spaces and $T \in \LT(V, W)$, define $T_C : V_C \rightarrow W_C$:
+  \[
+  T_C(u + iv) = Tu + iTv
+  \]
+  for any $u, v \in V$.
+
+  \begin{enumerate}
+    \item Show that $T_C$ is a (complex) linear mapping from $V_C$ to $W_C$.
+    \item Show that $T_C$ is injective $\iff$ $T$ is injective.
+    \item Show that $\rangev T_C = W_C \iff \rangev T = W$.
+  \end{enumerate}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{enumerate}
+    \item For any $u, v, s, t \in V$ $\lambda \in \mathbb{C}$, we have 
+          \begin{align*}
+             & T((u + iv) + (s + it)) \\
+            =& T(u + s + i(v + t)) \\
+            =& T(u + s) + iT(v + t) \\
+            =& Tu + Ts + iTv + iTt \\
+            =& T(u + iv) + T(s + it)
+          \end{align*}
+          and
+          \begin{align*}
+             & \lambda T(u + iv) \\
+            =& \lambda (Tu + iTv) \\
+            =& \lambda Tu + \lambda iTv \\
+            =& T(\lambda u) + iT(\lambda v) \\
+            =& T(\lambda u + i (\lambda v)) \\
+            =& T(\lambda u + i \lambda v) \\
+            =& T(\lambda (u + iv))
+          \end{align*}
+  \end{enumerate}
+
+  I believe these are trivial, so the future me should be able to prove these without any effort.
+\end{proof}
+
 \end{document}
