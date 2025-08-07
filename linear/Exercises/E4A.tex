@@ -1,0 +1,111 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{3}
+
+\begin{document}
+
+\setcounter{exercise}{3}
+\begin{exercise}
+  Suppose $D(p) = p^\prime : \LT(\Poly[_3]) \rightarrow \LT(\Poly[_2])$.
+  Find a basis of $\LT(\Poly[_3])$ and a basis of $\LT(\Poly[_2])$, such that
+  $\M(D)$ about these basis is:
+  \[
+    \begin{bmatrix}
+      1 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 0 \\
+    \end{bmatrix}
+  \]
+\end{exercise}
+\begin{proof}
+  Consider $x, x^2, x^3, 1$ the basis of $\Poly[_3]$ and $1, x, 2x^2$.
+\end{proof}
+
+\begin{exercise}
+  Suppose $V$ and $W$ are finite and $T \in \LT(V, W)$. Show that there are basis of $V$ and $W$ respectively,
+  such that $\M(T, \text{those basis})$ is all zero except $1$ at $k, k \quad (1 \le k \le \dim \rangev T)$.
+\end{exercise}
+\begin{proof}
+  Consider the basis $\join{w}{k - 1}$ of $\rangev T$ and the basis $\join{w}{m - 1}$
+  of $W$ which expands from $\join{w}{k - 1}$. Then there must be $\join{v}{k - 1}$
+  such that $Tv_i = w_i$ for all $0 \le i < k$, we know $\join{v}{k - 1}$ is linear independent
+  since $\join{w}{k - 1}$ is linear independent, so we can expand it to a basis of $V$,
+  say $\join{v}{n - 1}$.
+
+  We claim that $\M(T, \join{v}{n - 1}, \join{w}{m - 1})$ is a matrix
+  with all zero but $1$ at $k, k \quad (1 \le k < \rangev T)$. For any
+  $\joinp[+]{\lambda}{v}{n - 1} \in V$,
+  we have $T(\joinp[+]{\lambda}{v}{n - 1}) = \joinp[+]{\lambda}{w}{k - 1}$,
+  note that all $v_i$ where $i \ge k$ disappear, since they maps to $0$. Therefore
+  $\M(T)$ is all zero but $1$ at $k, k$ (since $\lambda_iw_i$ in the last equation).
+\end{proof}
+
+\begin{exercise}
+  Show that $-^T : F^{m, n} \rightarrow F^{n, m}$ is a linear mapping.
+\end{exercise}
+\begin{proof}
+  Trivial, sorry.
+\end{proof}
+
+\begin{exercise}
+  Show that $(AB)^T = B^TA^T$.
+\end{exercise}
+\begin{proof}
+  % Suppose $e$ is an expression about $i$ and $j$, we define $e^T$ is an expression
+  % that replace $i$, $j$ in $e$ with $j$, $i$, respectively.
+  Suppose $A$ is a $m \times n$ matrix and $B$ is a $n \times p$ matrix,
+  then for any $i \in [1, m]$ and $j \in [1, p]$, we have
+  $(AB)^T_{i, j} = (AB)_{j, i} = \displaystyle \sum_{r = 1}^{n}A_{j, r}B_{r, i} = \sum_{r = 1}^{n}B^T_{i, r}A^T_{r, j} = (B^TA^T)_{i, j}$.
+\end{proof}
+
+\begin{exercise}
+  Let $A$ a $m \times n$ matrix, show that the rank of $A$ is $1$ $\iff$
+  there is $\join{c}{m - 1} \in F^m$ and $\join{d}{n - 1} \in F^n$
+  such that $A_{j, k} = c_jd_k$ for all $j = 0, \dots, m - 1$ and $k = 0, \dots, n - 1$.
+\end{exercise}
+\begin{proof}
+  The right hand side is actually the external product of vectors, that is $vw^T$.
+
+  $(\Rightarrow)$ is easy since we can use the theorem that any $m \times n$ matrix $A$ can be expressed
+  by $CR$ where $C$ is a $m \times r$ matrix, $R$ is a $r \times n$ matrix, $r$ is the rank of $A$.
+  In this case, $r = 1$, so $C$ and $R$ are just vectors.
+
+  $(\Leftarrow)$ is also easy since other column is a scalar multiple of the first column,
+  therefore the rank of $A$ is $1$.
+\end{proof}
+
+\begin{exercise}
+  Let $T \in \LT(V)$, $\join{u}{n - 1}$ and $\join{v}{n - 1}$ are the bases of $V$,
+  show that the following statements are equivalent:
+  \begin{enumerate}
+    \item $T$ is injective
+    \item The columns of $\M(T)$ is linear independent
+    \item The columns of $\M(T)$ spans $F^{n, 1}$
+    \item The lines of $\M(T)$ is linear independent
+    \item The lines of $\M(T)$ spans $F^{1, n}$
+  \end{enumerate}
+\end{exercise}
+\begin{proof}
+  (2), (3) are obviously equivalent and (4), (5) too.
+
+  Although I want to make an arrow loop, but the arrow between (1) and (4), (5) is
+  too hard, so I will show that (1) $\iff$ (2), (3) and (2), (3) $\iff$ (4), (5).
+
+  \begin{itemize}
+    \item $(\Rightarrow)$ Let $\joinp[+]{\lambda}{w}{n - 1} = [ 0, \dots, 0 ]$,
+          then $T(\joinp[+]{\lambda}{u}{n - 1}) = 0$, so $\lambda_i$
+          are $0$ since $T$ is injective, which means $\nullv T = \0$.
+
+          $(\Leftarrow)$ For any $T(\joinp[+]{\lambda}{u}{n - 1}) = 0$,
+          we have the linear combination of $v_i$ is $0$
+          where the coefficients come from $\joinp[+]{\lambda}{w}{n - 1}$
+          ($w_i$ are the columns of $\M(T)$),
+          therefore the coefficients are all $0$ since $v_i$ is linear independent,
+          thus $\joinp[+]{\lambda}{w}{n - 1} = 0$,
+          which means $\lambda_i$ are all $0$ since $w_i$ is linear independent.
+    \item For any matrix, its line rank is equal to its column rank, so
+          columns independent $\iff$ lines independent.
+  \end{itemize}
+\end{proof}
+
+\end{document}

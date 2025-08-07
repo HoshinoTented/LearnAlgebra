@@ -8,7 +8,7 @@
   Suppose $\V$ is a finite vector space, Show that the only two ideal of
   $\LT(\V)$ is $\0$ and $\LT(\V)$.
   A subspace $\mathcal{E}$ of $\LT(\V)$ is called an ideal, 
-  if $TE \in \mathcal{E}$ and $ET \in \mathcal{E}$ 
+  if $TE \in \mathcal{E}$ and $ET \in \mathcal{E}$
   for any $T \in \LT(\V)$ and $E \in \mathcal{E}$.
 \end{exercise}
 \begin{proof}
@@ -36,6 +36,35 @@
   is also in $\mathcal{E}$ since $\mathcal{E}$ is an ideal, then $\mathcal{E} = \LT(V)$.
 
   The only exception is $\mathcal{E} = \0$, in this case we can't pick any non-zero element.
+
+  Another solution, hope this one is more simple.
+
+  Suppose $\mathcal{E}$ an ideal of $\LT(V)$ and non-zero, non-surjective $E \in \mathcal{E}$.
+  Let $\join{v}{k - 1}$ a basis of $\nullv E$ and $v_k, \cdots, v_{k + n}$ such that $Tv_{k + i}$
+  is a basis of $\rangev E$, then we have $n \neq 0$ and $k \neq 0$.
+
+  Define $A$ a linear transformation which maps $v_i$ to $v_{k + i}$ for $0 \le i < \min\{k, n\}$ and maps others to $0$,
+  then $\dim \rangev EA = \min\{k, n\}$.
+
+  Expand the basis $w_i = Ev_{k + i}$ of $\rangev E$ to a basis of $V$, say $\join{w}{m - 1}$, define $B$
+  maps $Ev_{k + i}$ to $w_{\min\{k, n\} + i}$, we always have enough $w_{\min\{k, n\} + i}$ since
+  $m - 1 = \dim V = \dim \nullv E + \dim \rangev E$ while $\min{k, n} \le \dim \nullv E$,
+  then $\dim \rangev BE = \rangev E$ since we just re-map the $\rangev E$.
+  
+  Now consider $S = EA + BE$, we have $Sv_i = EAv_i = Ev_{k + i} = w_i \in \rangev E$ for all $0 \le i < \min\{k, n\}$
+  and $Sv_{\min\{k, n\} + i} = BEv_{\min\{k, n\} + i} = w_{\min\{k, n\} + i} \in \rangev BE$ for all $0 \le i < \dim \rangev E$.
+  We can see $\rangev EA \cap \rangev BE = \0$ and $\dim \rangev (EA + BE) = \rangev E + \min\{k, n\}$,
+  where $k = \nullv E$ and $n = \rangev E$, the range of $EA + BE$ gets larger and $EA + BE \in \mathcal{E}$
+  since $EA, BE \in \mathcal{E}$, if $k > n$ (this is the only case that $EA + BE$ is not surjective),
+  then we continue this process with $E = EA + BE$, the procedure will finally terminate
+  since $\LT(V)$ is finite (cause $V$ is finite).
+
+  Now we show that any $\mathcal{E}$ with non-zero, non-surjective $E \in \mathcal{E}$ implies a surjective (thus injective and invertible) $T \in \mathcal{E}$.
+
+  For any ideal with an invertible element $E \in \mathcal{E}$, we have $\inv{E}E = I \in \mathcal{E}$,
+  which causes $\mathcal{E} = \LT(V)$ since $IT = T$ for all $T \in \LT(V)$.
+
+  Therefore, only $\0$ and $\LT(V)$ are ideals of $\LT(V)$.
 \end{proof}
 
 \end{document}
