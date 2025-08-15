@@ -163,4 +163,251 @@
   \end{itemize}
 \end{proof}
 
+\begin{exercise}
+  Let $V$ finite and $U, W \subseteq V$ are subspaces. Show that:
+  \begin{itemize}
+    \item $(U + W)^0 = U^0 \cap W^0$
+    \item $(U \cap W)^0 = U^0 + W^0$
+  \end{itemize}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item For any $\varphi \in (U + W)^0$ we have $U + W \subseteq \nullv \varphi$, 
+          then $U \subseteq U + W \subseteq \nullv \varphi$ and $W \subseteq U + W$,
+          therefore $\varphi \in U^0 \cap W^0$.
+          
+          For any $\varphi \in U^0 \cap W^0$, we have $U \subseteq \nullv \varphi$ and $W \subseteq \nullv \varphi$.
+          For any $u + w \in U + W$, we have $\varphi(u + w) = \varphi(u) + \varphi(w) = 0 + 0 = 0$,
+          therefore $U + W \subseteq \nullv \varphi$, thus $\varphi \in (U + W)^0$.
+    \item For any $su + tw \in U^0 + W^0$, for any $v \in U \cap W$, we have $su(v) + tw(v) = s0 + t0$
+          since $v \in U$ and $v \in W$. Therefore we have an injective map (also linear, this map just produce what it receive)
+          from $U^0 + W^0$ to $(U \cap W)^0$.
+          We have:
+          \begin{align*}
+             & \dim (U^0 + W^0) \\
+            =& \dim U^0 + \dim W^0  - \dim (U^0 \cap W^0) \\
+            =& \dim V - \dim U + \dim V - \dim W - \dim (U + W)^0 \\
+            =& \dim V - \dim U + \dim V - \dim W - (\dim V - \dim (U + W)) \\
+            =& \dim V - \dim U - \dim W + (\dim U + \dim W - \dim (U \cap W)) \\
+            =& \dim V - \dim (U \cap W) \\
+            =& \dim (U \cap W)^0
+          \end{align*}
+          therefore $(U \cap W)^0 = U^0 + W^0$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $V$ finite and $\join{\varphi}{m - 1} \in V^\prime$. Show that the following sets are equal to each others:
+  \begin{itemize}
+    \item $\spanv(\join{\varphi}{m - 1})$
+    \item $((\nullv \varphi_0) \cap \cdots \cap (\nullv \varphi_{m - 1}))^0$
+    \item $\set{\varphi \in V^\prime}{(\nullv \varphi_0) \cap \cdots \cap (\nullv \varphi_{m - 1}) \subseteq \nullv \varphi}$
+  \end{itemize}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $((\nullv \varphi_0) \cap \cdots \cap (\nullv \varphi_{m - 1}))^0 = (\nullv \varphi_0)^0 + \cdots + (\nullv \varphi_{m - 1})^0$,
+          then $\spanv(\varphi_i) \subseteq (\nullv \varphi_i)^0$ therefore $\spanv(\join{\varphi}{m - 1}) \subseteq ((\nullv \varphi_0) \cap \cdots \cap (\nullv \varphi_{m - 1}))^0$.
+          
+          For any $\varphi \in \spanv(\join{\varphi}{m - 1})$, we have $\varphi(v) = \varphi_0(v) + \cdots + \varphi_{m - 1}(v) = 0 + \cdots + 0 = 0$
+          for any $v \in (\nullv \varphi_0) \cap \cdots \cap (\nullv \varphi_{m - 1})$, therefore $\varphi \in ((\nullv \varphi_0) \cap \cdots \cap (\nullv \varphi_{m - 1}))^0$.
+    \item Last two sets are definitional equal.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{23}
+\begin{exercise}
+  Let $V$ finite and $\join{v}{m - 1} \in V$. \\
+  Define $\Gamma(\varphi) = (\varphi(v_0), \cdots \varphi(v_{m - 1})) : V^\prime \rightarrow F^m$,
+  show that:
+  \begin{itemize}
+    \item $\join{v}{m - 1}$ spans $V$ $\iff$ $\Gamma$ is injective.
+    \item $\join{v}{m - 1}$ is linear independent $\iff$ $\Gamma$ is surjective.
+  \end{itemize}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ Suppose $\Gamma(\alpha) = \Gamma(\beta)$ , then for all $v \in V$ can be factorized into $\joinp[+]{\lambda}{v}{m - 1}$,
+          then $\alpha(v) = \alpha(\joinp[+]{\lambda}{v}{m - 1}) = \beta(\joinp[+]{\lambda}{v}{m - 1}) = \beta(v)$
+          since $\Gamma(\alpha) = \Gamma(\beta)$ and $\alpha$ and $\beta$ are linear map,
+          thus $\alpha = \beta$.
+
+          $(\Rightarrow)$ We first make $\join{v}{m - 1}$ linear independent, say $\join{v}{k - 1}$,
+          then for any $w \in V$ such that $\join{v}{k - 1}, w$ is linear independent,
+          then we have its dual basis $\join{\varphi}{k - 1}, \psi$.
+          Consider $\Gamma(\psi)$, by definition, we know $\Gamma(\psi) = (\psi(v_0), \cdots) = (0, \cdots)$
+          then $\psi = 0$ since $\Gamma$ is injective, which contradicts our assumption.
+          Therefore $\join{v}{k - 1}$ spans $V$.
+    \item $(\Rightarrow)$ Consider the dual basis of $\join{v}{m - 1}$, then $\Gamma$ is surjective
+          since we have the standard basis of $F^m$.
+
+          $(\Leftarrow)$ $\Gamma$ is surjective implies we have $\join{\varphi}{m - 1}$
+          such that $\Gamma(\varphi_i) = (\cdots, 1, \cdots)$,
+          which means $\join{v}{m - 1}$ is linear independent.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $V$ finite and $\join{\varphi}{m - 1} \in V^\prime$. \\
+  Define $\Gamma(v) = (\varphi_0(v), \cdots, \varphi_{m - 1}(v)) : V \rightarrow F^m$.
+  Show that
+  \begin{itemize}
+    \item $\join{\varphi}{m - 1}$ spans $V^\prime$ $\iff$ $\Gamma$ is injective
+    \item $\join{\varphi}{m - 1}$ is linear independent $\iff$ $\Gamma$ is surjective
+  \end{itemize}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ Suppose $\Gamma(v) = \Gamma(w)$, then $\varphi_i(v) = \varphi_i(w)$,
+          which means $\varphi_i(v - w) = 0$ for all $i$. If $v - w \neq 0$, then $((\nullv \varphi_0) \cap \cdots \cap (\nullv \varphi_{m - 1}))^0 \neq \0$,
+          thus $\join{\varphi}{m - 1}$ doesn't span $V^\prime$.
+
+          $(\Leftarrow)$ $(\nullv \varphi_0) \cap \cdots \cap (\nullv \varphi_{m - 1}) = \0$ since $\Gamma$ is injective.
+          therefore $\spanv(\join{\varphi}{m - 1}) = ((\nullv \varphi_0) \cap \cdots \cap (\nullv \varphi_{m - 1}))^0 = (\0)^0 = V^\prime$
+    \item $(\Rightarrow)$ We may treat $\Gamma$ as the following matrix:
+          \[
+          \begin{bmatrix}
+            \quad \varphi_0 \quad \\
+            \vdots \\
+            \varphi_{m - 1}
+          \end{bmatrix}
+          \]
+          which line rank is $m$ since $\join{\varphi}{m - 1}$ is linear independent,
+          therefore its column rank is $m$, thus $\dim \rangev \Gamma = m = \dim F^m$, then $\Gamma$ is surjective.
+
+          $(\Leftarrow)$ It seems the proof of $(\Rightarrow)$ also works here.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $V$ finite, and $\Omega \subseteq V^\prime$ a subspace. Show that
+  \[
+  \Omega = \set{v \in V}{\varphi(v) = 0 \quad \forall \varphi \in \Omega}^0
+  \]
+\end{exercise}
+\begin{proof}
+  This construction looks like an inverse of $-^0$.
+
+  We may rewrite the equation to $\Omega = (\displaystyle \bigcap_{\varphi \in \Omega} \nullv \varphi)^0$,
+  then $\Omega = \spanv(\varphi) \forall \varphi \in \Omega$, which is trivial.
+\end{proof}
+
+\setcounter{exercise}{27}
+\begin{exercise}
+  Let $V$ finite and $\join{\varphi}{m - 1}$ is linear independent. Show that
+  \[
+  \dim ((\nullv \varphi_0) \cap \cdots \cap (\nullv \varphi_{m - 1})) = \dim V - m
+  \]
+\end{exercise}
+\begin{proof}
+  \begin{align*}
+    m & = \dim \spanv(\join{\varphi}{m - 1}) \\
+      & = \dim ((\nullv \varphi_0) \cap \cdots \cap (\nullv \varphi_{m - 1}))^0 \\
+      & = \dim V - \dim ((\nullv \varphi_0) \cap \cdots \cap (\nullv \varphi_{m - 1}))
+  \end{align*}
+\end{proof}
+
+\setcounter{exercise}{29}
+\begin{exercise}
+  Let $V$ finite and $\join{\varphi}{m - 1}$ a basis of $V^\prime$. Show that
+  there is a basis of $V$ which dual basis is $\join{\varphi}{m - 1}$.
+\end{exercise}
+\begin{proof}
+  Since $\join{\varphi}{m - 1}$ spans $V^\prime$ and linear independent, we know $\Gamma$
+  is both injective and surjective. Consider $\join{v}{m - 1}$ such that $\Gamma(v_i) = (\cdots, 0, 1, 0, \cdots)$.
+  We claim $\join{v}{m - 1}$ is a basis of $V$ and which dual basis if $\join{\varphi}{m - 1}$.
+
+  The second part is trivial by the way construct them.
+  For the first part, $\join{v}{m - 1}$ is linear independent since $(\cdots, 0, 1, 0 \cdots)$ is
+  linear independent, and $\join{v}{m - 1}$ spans $V$ since $\dim V = \dim V^\prime = m$.
+\end{proof}
+
+\begin{exercise}
+  Let $U \subseteq V$ a subspace and $i(u) = u : U \rightarrow V$. Then $i^\prime \in \LT(V^\prime, U^\prime)$,
+  show that:
+  \begin{enumerate}
+    \item $\nullv i^\prime = U^0$
+    \item $\rangev i^\prime = U^\prime$ if $V$ is finite
+    \item $\tilde{i^\prime}$ is an isomorphism between $V^\prime / U^0$ and $U^\prime$ if $V$ is finite
+  \end{enumerate}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item For any $\varphi \in \nullv i^\prime$, $\varphi \circ i = 0$, therefore $\rangev i = U \subseteq \nullv \varphi$,
+          thus $\varphi \in U^0$.
+
+          For any $\varphi \in U^0$, $\varphi \circ i = 0$ since $\rangev i = U \subseteq \nullv \varphi$.
+    \item Suppose $V$ is finite, then $i^\prime$ is surjective since $i^\prime$ is injective, therefore $\rangev i^\prime = U^\prime$.
+    \item $\tilde{i^\prime}(\varphi + U^0) = i^\prime(\varphi)$ is surjective since $i^\prime$ is surjective.
+          Then $\dim (V^\prime / U^0) = \dim V^\prime - \dim U^0 = \dim V - (\dim V - \dim U) = \dim U = \dim U^\prime$,
+          therefore $\tilde{i^\prime}$ is an isomorphism.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  We denote $V^{\prime\prime}$ as the \textbf{double dual space of} $V$, defined by $V^{\prime\prime} = (V^\prime)^\prime$.
+  Define $\Lambda(v)(\varphi) = \varphi(v) : V \rightarrow V^{\prime\prime}$
+
+  Show that:
+  \begin{enumerate}
+    \item $\Lambda \in \LT(V, V^{\prime\prime})$
+    \item Let $V \in \LT(V)$, then $T^{\prime\prime} \circ \Lambda = \Lambda \circ T$ where $T^{\prime\prime} = (T^\prime)^\prime$.
+    \item $\Lambda$ is an isomorphism if $V$ is finite.
+  \end{enumerate}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item For any $v, w \in V$ and $\lambda \in F$, we have $(\Lambda(v) + \Lambda(w))(\varphi) = \Lambda(v)(\varphi) + \Lambda(w)(\varphi) = \varphi(v) + \varphi(w) = \varphi(v + w) = \Lambda(v + w)(\varphi)$
+          and $(\lambda \Lambda(v))(\varphi) = \lambda (\Lambda(v)(\varphi)) = \lambda (\varphi(v)) = \varphi(\lambda v) = \Lambda(\lambda v)(\varphi)$.
+    \item For any $v \in V$, 
+          \begin{align*}
+             & (T^{\prime\prime} \circ \Lambda)(v)(\varphi) \\
+            =& (T^{\prime\prime} (\Lambda (v)))(\varphi) \\
+            =& ((\Lambda(v)) \circ T^\prime)(\varphi) \\
+            =& \Lambda(v)(T^\prime(\varphi)) \\
+            =& \Lambda(v)(\varphi \circ T) \\ 
+            =& (\varphi \circ T)(v) \\
+            =& \varphi (T(v)) \\
+            =& \Lambda(T(v))(\varphi) \\
+            =& (\Lambda \circ T)(v)(\varphi)
+          \end{align*}
+    \item Suppose $\Lambda(v) = \Lambda(w)$, that is, $\Lambda(v)(\varphi) = \varphi(v) = \varphi(w) = \Lambda(w)(\varphi)$ for all $\varphi \in \V^\prime$.
+          Let $\join{\varphi}{m - 1}$ the dual basis of some basis of $V$,
+          then $v = \varphi_0(v)v_0 + \cdots + \varphi_{m - 1}(v)v_{m - 1} = \varphi_0(w)v_0 + \cdots + \varphi_{m - 1}(w)v_{m - 1} = w$.
+          Therefore $\Lambda$ is injective, thus surjective and isomorphism since $\dim V = \dim V^{\prime\prime}$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $U \subseteq V$ a subspace and $\pi : V \rightarrow V/U$ the quotient map, then $\pi^\prime \in \LT((V/U)^\prime, V^\prime)$.
+  \begin{enumerate}
+    \item Show that $\pi^\prime$ is injective.
+    \item Show that $\rangev \pi^\prime = U^0$.
+    \item Conclude that $\pi^\prime$ is an isomorphism between $(V/U)^\prime$ and $U^0$.
+  \end{enumerate}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $\pi$ is surjective, therefore $\pi^\prime$ is injective. The statement is true
+          even $V$ or $V/U$ may be infinite, cause the proof about surjective-implies-epimorphism
+          doesn't require that the codomain is finite but epimorphism-implies-surjective does.
+
+          We may prove those theorem again, but with weaker assumption.
+          For any $\pi^\prime(\varphi) = \pi^\prime(\psi)$, we have $\varphi \circ \pi = \psi \circ \pi$.
+          For any $v + U \in V/U$, there is $v \in V$ such that $\pi(v) = v + U$ since $\pi$ is surjective.
+          Therefore $\varphi(\pi(v)) = \psi(\pi(v))$ for all $\pi(v) = v + U \in V/U$,thus $\varphi = \psi$.
+
+          Therefore $\pi^\prime$ is injective.
+    \item $\rangev \pi^\prime = (\nullv \pi)^0 = U^0$.
+    \item Trivial.
+  \end{itemize}
+\end{proof}
+
 \end{document}
