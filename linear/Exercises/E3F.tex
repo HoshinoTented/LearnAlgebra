@@ -1,0 +1,166 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{3}
+
+\begin{document}
+
+\begin{exercise}
+  Explain why a linear functional is either surjective or $0$.
+\end{exercise}
+\begin{proof}
+  Cause $\dim F = 1$.
+\end{proof}
+
+\setcounter{exercise}{5}
+\begin{exercise}
+  Let $\varphi, \beta \in V^\prime$, show that $\nullv \varphi \subseteq \nullv \beta \iff \exists c \in F, \beta = c \varphi$.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ For any $v \notin \nullv \beta$, we have $\beta(v) = \beta(v)\inv{(\varphi(v))}\varphi(v)$
+          we claim that $\beta = \beta(v)\inv{(\varphi(v))}\varphi$. We may denote $\beta(v)\inv{(\varphi(v))}$ by $c$.
+          For any $v, w \notin \nullv \beta$, we have $\beta(v) = a\varphi(v)$  and $\beta(w) = b\varphi(w)$,
+          we want to show that $a = b$, which can be proven by:
+          \begin{align*}
+            a & = b \\
+            \frac{\beta(v)}{\varphi(v)} & = \frac{\beta(w)}{\varphi(w)} \\
+            \beta(v)\varphi(w) & = \beta(w)\varphi(v) \\
+            \beta(\varphi(w) v) & = \beta(\varphi(v) w) \\
+          \end{align*}
+          which is equivalent to $\varphi(w) v - \varphi(v) w \in \nullv \beta$, then:
+          \begin{align*}
+             & \varphi(\varphi(w) v - \varphi(v) w) \\
+            =& \varphi(\varphi(w) v) - \varphi(\varphi(v) w) \\
+            =& \varphi(w) \varphi(v) - \varphi(v) \varphi(w) \\
+            =& 0
+          \end{align*}
+          therefore $\varphi(w) v - \varphi(v) w \in \nullv \varphi \subseteq \nullv \beta$,
+          thus $a = b$.
+
+          The case $v \in \nullv \beta$ is trivial.
+    \item $(\Leftarrow)$ For any $v \in \nullv \varphi$, $\beta(v) = c \varphi(v) = 0$,
+          therefore $v \in \nullv \beta$, thus $\nullv \varphi \subseteq \nullv \beta$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $\join{V}{m - 1}$ are vector spaces, show that $\Times{V^\prime}{m - 1}$ and
+  $(\Times{V}{m - 1})^\prime$ are isomorphic.
+\end{exercise}
+\begin{proof}
+  Define $\psi(\varphi) = v_0 \mapsto \varphi(v_0, 0, \cdots), \cdots, v_{m - 1} \mapsto \varphi(\cdots, 0, v_{m - 1})$
+  and \\
+  $\inv{\psi}(\join{\varphi}{m - 1}) = (\join{v}{m - 1}) \mapsto \varphi_0(v_0) + \cdots + \varphi_{m - 1}(v_{m - 1})$.
+
+  For any $\alpha, \beta \in (\Times{V}{m - 1})^\prime$ and $\lambda \in F$,
+  we have
+  \begin{align*}
+     & \psi(\alpha + \beta)_i \\
+    =& v_i \mapsto (\alpha + \beta)(\cdots, v_i, \cdots) \\
+    =& v_i \mapsto \alpha(\cdots, v_i, \cdots) + \beta(\cdots, v_i, \cdots) \\
+    =& (v_i \mapsto \alpha(\cdots, v_i, \cdots)) + (v_i \mapsto \beta(\cdots, v_i, \cdots)) \\
+    =& \psi(\alpha)_i + \psi(\beta)_i
+  \end{align*}
+  and $(\lambda \psi(\alpha))_i = \lambda (v_i \mapsto \alpha(v_i)) = v_i \mapsto \lambda \alpha(v_i) = \psi(\lambda \alpha)_i$
+  Therefore $\psi$ is a linear map.
+
+  For any $\alpha, \beta \in \Times{V^\prime}{m - 1}$ and $\lambda \in F$,
+  we have:
+  \begin{align*}
+   & \inv{\psi}(\alpha + \beta) \\
+  =& (\join{v}{m - 1}) \mapsto (\alpha + \beta)(v_0) + \cdots + (\alpha + \beta)(v_{m - 1}) \\
+  =& (\join{v}{m - 1}) \mapsto \alpha(v_0) + \beta(v_0) + \cdots \\
+  =& ((\join{v}{m - 1}) \mapsto \alpha(v_0) + \cdots) + ((\join{v}{m - 1}) \mapsto \beta(v_0) + \cdots) \\
+  =& \inv{\psi}(\alpha) + \inv{\psi}(\beta)
+  \end{align*}
+  and
+  \begin{align*}
+     & \lambda\inv{\psi}(\alpha) \\
+    =& \lambda ((\join{v}{m - 1}) \mapsto \alpha(v_0) + \cdots) \\
+    =& (\join{v}{m - 1}) \mapsto \lambda (\alpha(v_0) + \cdots) \\
+    =& (\join{v}{m - 1}) \mapsto (\lambda \alpha(v_0)) + \cdots \\
+    =& \inv{\psi}(\lambda \alpha)
+  \end{align*}
+  thus $\inv{\psi}$ is a linear map.
+  
+  We will show that $\inv{\psi}$ is the inverse of $\psi$ then $\psi$ is an isomorphism.
+  For any $\varphi \in (\Times{V}{m - 1})^\prime$,
+  \begin{align*}
+    & \inv{\psi}(\psi(\varphi))\\
+   =& \join{v}{m - 1} \mapsto \psi(\varphi)_0(v_0) + \cdots \\
+   =& \join{v}{m - 1} \mapsto \varphi(v_0, 0, \cdots) + \cdots + \varphi(\cdots, 0, v_{m - 1}) \\
+   =& \join{v}{m - 1} \mapsto \varphi(\join{v}{m - 1}) \\
+   =& \varphi
+  \end{align*}
+  and for any $\varphi \in \Times{V^\prime}{m - 1}$,
+  \begin{align*}
+     & \psi(\inv{\psi}(\varphi)) \\
+    =& v_0 \mapsto \inv{\psi}(\varphi)(v_0, 0, \cdots), \cdots \\
+    =& v_0 \mapsto \varphi_0(v_0) , \cdots \\
+    =& \join{\varphi}{m - 1} \\
+    =& \varphi
+  \end{align*}
+\end{proof}
+
+\setcounter{exercise}{15}
+\begin{exercise}
+  Let $W$ a finite vector space, $T \in \LT(V, W)$, show that
+  \[
+  T^\prime = 0 \iff T = 0
+  \]
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ Suppose $T \neq 0$, then we can always find $\varphi \in \LT(W, F)$
+          which $\varphi(\rangev T) \neq 0$, then $\varphi \circ T \neq 0$.
+    \item $(\Leftarrow)$ Trivial.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $V, W$ are finite vector spaces, $T \in \LT(V, W)$. Show that 
+  $T$ is invertible $\iff$ $T^\prime$ is invertible.
+\end{exercise}
+\begin{proof}
+  Since $T$ is invertible, then $T$ is injective, therefore $T^\prime$ is surjective.
+  Similarly, $T^\prime$ is injective since $T$ is surjective.
+  Therefore $T^\prime$ is invertible.
+\end{proof}
+
+\begin{exercise}
+  Let $V, W$ are finite vector spaces, show that the mapping \\ 
+  $\varphi(T) = T^\prime$ is an isomorphism between $\LT(V, W)$ and $\LT(W^\prime, V^\prime)$.
+\end{exercise}
+\begin{proof}
+  Since $V$ and $W$ are finite, we only need to show that $\varphi$ is injective or surjective.
+  We will show that $\varphi$ is injective.
+
+  For any $\varphi(T) = T^\prime \in \LT(W^\prime, V^\prime)$, we know $T = 0 \iff T^\prime = 0$,
+  therefore $\nullv \varphi = \0$, thus $\varphi$ is injective.
+
+  I was wonder if I can prove this by $\varphi(S)(\mathrm{id}) = \varphi(T)(\mathrm{id}) \implies S = T$.
+  This may work if the codomain restriction doesn't lose information, i.e. only restrict to a superset of its range, therefore the restriction is one-to-one.
+\end{proof}
+
+\setcounter{exercise}{20}
+\begin{exercise}
+  Let $V$ finite and $U, W \subseteq V$ are subspaces.
+  \begin{enumerate}
+    \item Show that $W^0 \subseteq U^0 \iff U \subseteq W$
+    \item Show that $W^0 = U^0 \iff U = W$
+  \end{enumerate}
+\end{exercise}
+\begin{proof}
+  The second statement can be easy proved by the first one.
+  \begin{itemize}
+    \item $(\Rightarrow)$ We can always find a $f \in \LT(W, F)$ such that $\nullv f = W$,
+          then $f(U) = \0$ since $f \in W^0 \subseteq U^0$, therefore $U \subseteq \nullv f = W$.
+    \item $(\Leftarrow)$ For any $\varphi \in W^0$, we know $W \subseteq \nullv \varphi$,
+          then $U \subseteq W \subseteq \nullv \varphi$, therefore $\varphi in U^0$,
+          thus $W^0 \subseteq U^0$.
+  \end{itemize}
+\end{proof}
+
+\end{document}

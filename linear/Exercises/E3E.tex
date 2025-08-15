@@ -1,0 +1,214 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\setcounter{section}{3}
+\setcounter{exercise}{0}
+
+\begin{exercise}
+  Let $T : V \rightarrow W$, the \textit{graph} of $T$ is a subset of $V \times W$
+  such that
+  \[
+  \text{graph of } T = \set{(v, Tv)}{v \in V}
+  \].
+
+  Show that $T$ is a linear mapping $\iff$ the graph of $T$ is a subspace.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(0, T0) \in \text{graph of } T$. $(v, Tv) + (w + Tw) = (v + w, Tv + Tw) = (v + w, T (v + w))$.
+          $\lambda (v, Tv) = (\lambda v, \lambda Tv) = (\lambda v, T(\lambda v))$
+    \item $(v, Tv) + (w + Tw) = (v + w, T (v + w))$ since the graph of $T$ is a subspace, therefore
+          $Tv + Tw = T (v + w)$. Similarly, $\lambda Tv = T (\lambda v)$.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{2}
+\begin{exercise}
+  Let $V_i$ are vector spaces, show that $\LT(\Times{V}{m - 1}, W) \simeq \LT(V_0, W) \times \cdots \times \LT(V_{m - 1}, W)$.
+\end{exercise}
+\begin{proof}
+  This can be proven by $A \times B$ is a categorical product, so we will show that
+  for any $A, B$ are vector spaces, $A \times B$ is a product.
+
+  In order to show that $A \times B$ is a product, or more specificly,
+  $A \times B$ equipped with linear mappings
+  \begin{align*}
+    \pi_0(a, b) & = a \\
+    \pi_1(a, b) & = b
+  \end{align*}
+  is a product, we have to show that for any $C$, $s \in \LT(C, A)$ and $t \in \LT(C, B)$,
+  there is a unique $u \in \LT(C, A \times B)$ such that $s = \pi_0 \circ u$ and $t = \pi_1 \circ u$.
+  
+  Define $u(c) = (sc, tc) : C \rightarrow A \times B$, we will show that $u$ is a linear
+  mapping.
+  \begin{itemize}
+    \item For all $v, w \in C$, $u(v) + u(w) = (sv, tv) + (sw, tw) = (sv + sw, tv + tw) = (s(v + w), t(v + w)) = u(v + w)$
+    \item For all $c \in C$ and $\lambda \in F$, $\lambda u(c) = \lambda (sc, tc) = (\lambda sc, \lambda tc) = (s (\lambda c), t (\lambda c)) = u(\lambda c)$.
+  \end{itemize}
+
+  Then we can see $\pi_0 (u(c)) = \pi_0 (sc, tc) = sc$ and $\pi_1(u(c)) = \pi_1 (sc, tc) = tc$.
+  Now we have to show that $u$ is unique (which is trivial, I don't want to prove this, sorry).
+\end{proof}
+
+\setcounter{exercise}{4}
+\begin{exercise}
+  Let $m$ a positive number, define $V^m = \underbrace{V \times \cdots \times V}_{m}$,
+  show that $V^m \simeq \LT(F^m, V)$.
+\end{exercise}
+\begin{proof}
+  Define $\varphi(\join{v}{m -  1}) = \join{i}{m - 1} \mapsto \joinp[+]{i}{v}{m - 1}$
+  which accept a list of vector and a list of coefficients then produce a linear combination.
+
+  For any $T \in \LT(F^m, V)$, $T$ is completely determined by $T(1, \cdots, 1) = \join[+]{v}{m - 1}$,
+  therefore $\varphi(\join{v}{m - 1}) = T$ and thus $\varphi$ is surjective.
+
+  For any $(\join{v}{m - 1}), (\join{w}{m - 1}) \in V^m$ such that $\varphi(\join{v}{m - 1}) = \varphi(\join{w}{m - 1})$,
+  then $w_0 = \varphi(\join{v}{m - 1})(1, 0, \cdots, 0) = \varphi(\join{v}{m - 1})(1, 0, \cdots, 0) = v_0$,
+  same for other $v_i$ and $w_i$, so $(\join{v}{m - 1}) = (\join{w}{m - 1})$,
+  therefore $\varphi$ is injective.
+\end{proof}
+
+\begin{exercise}
+  Let $v, x \in V$ and $U, W \subseteq V$ are subspaces such that $v + U = x + W$.
+  Show that $U = W$.
+\end{exercise}
+\begin{proof}
+  We know $v = x + w_0$ for some $w_0 \in W$ since $v + U = x + W$ and $v \in v + U$,
+  then for any $u \in U$, we have $v + u = x + w$ for some $w \in W$,
+  then $(x + w_0) + u = x + w$ therefore $u = x + w - x - w_0 = w - w_0 \in W$
+  thus $U \subseteq W$.
+  Similarly $W \subseteq U$.
+\end{proof}
+
+\begin{exercise}
+  Let $U = \set{(x, y, z) \in R^3}{2x + 3y + 5z = 0}$ and $A \subseteq R^3$.
+  Show that $A$ is a translate of $U$ (that is $A = a + U$) $\iff$
+  there is $c$ such that $A = \set{(x, y, z) \in R^3}{2x + 3y + 5z = c}$.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ For any $(a_0, a_1, a_2) + (x, y, z) \in a + U$,
+          we have $2(a_0 + x) + 3(a_1 + y) + 5(a_2 + z) = 2a_0 + 3a_1 + 5a_2$,
+          therefore $c = 2a_0 + 3a_1 + 5a_2$.
+    \item $(\Leftarrow)$ We can see $2$, $3$ and $5$ are coprime to each other,
+          therefore there is $2a_0 + 3a_1 + 5a_2 = 1$ (I am not sure if this is true
+          in generalized case, I just extends the theorem "$as + bt = 1 \iff \text{a coprime to b}$" to three elements case without checking),
+          in this case we have $2(1) + 3(-2) + 5(1) = 1$,
+          then for any $2x + 3y + 5z = c$, we have $2x + 3y + 5z = 2(ca_0) + 3(ca_1) + 5(ca_2)$,
+          then $2(x - ca_0) + 3(y - ca_1) + 5(z - ca_2) = 0$,
+          therefore $A = ((-c) (a_0, a_1, a_2)) + U$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $T \in \LT(V, W)$ and $c \in W$, show that $\set{v \in V}{Tv = c}$ is an empty set
+  or a translate of $\nullv T$. Then explain why the solutions of a system of linear equations
+  is either an empty set or a translate of some subspace of $F^n$.
+\end{exercise}
+\begin{proof}
+  Let $Ta = c$ for some $a \in V$, if no such $a$, then $\set{v \in V}{Tv = c} = \varnothing$.
+  We claim $\set{v \in V}{Tv = c} = a + \nullv T$.
+  For any $v \in V$ such that $Tv = c$, then $v = a + v - a$ and
+  $T(v - a) = Tv - Ta = c - c = 0$, therefore $v - a \in \nullv T$,
+  thus $v \in a + \nullv T$.
+  In another direction, for any $a + v \in a + \nullv T$, we have $T(a + v) = Ta + Tv = c + 0 = c$.
+\end{proof}
+
+\begin{exercise}
+  Let $A \subseteq V$ a non-empty subset.
+  Show that $A$ is a translate of some subspace of $V$ $\iff$
+  $\lambda v + (1 - \lambda) w  \in A$ for any $v, w \in A$ and $\lambda \in F$.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ Suppose $A = a + U$ for some subspace $U \subseteq V$.
+    \item $(\Leftarrow)$ Let $w \in A$, we will show that $(-w) + A$ is a subspace of $V$.
+    
+          For any $a - w, b - w \in (- w) + A$, we need to show that $a - w + b - w = (a + b - w) - w \in (-w) + A$
+          or equivalently $a + b - w \in A$. We found that the property $\lambda v + (1 - \lambda) w \in A$
+          gives us the ability to construct something like $v - w$. Since $2v + (1 - 2)w = 2v - w$,
+          we just let $w = v + a$ then $2v - (v + a) = v - a$. Therefore, we let $\lambda = 2$, $v = a + b$ and $w = a + b + w$,
+          and now $2(a + b) - (a + b + w) = a + b - w \in A$, so $a + b - w - w \in (-w) + A$.
+
+          For any $a - w \in (- w) + A$ and $\lambda \in F$, we need to show that
+          $\lambda (a - w) \in (- w) + A$.
+          $\lambda (a - w) = \lambda a - \lambda w = \lambda a - (\lambda - 1) w - w$.
+          We let $\lambda = (- 1) (\lambda - 1) = (1 - \lambda)$, $v = w$ and $w = a$
+          in $\lambda v + (1 - \lambda w) \in A$, then $(1 - \lambda) w + (1 - (1 - \lambda)) a = (-1) (\lambda - 1) w + \lambda a = \lambda a - (\lambda - 1) w \in A$,
+          therefore $\lambda a - (\lambda - 1) w - w = \lambda a - \lambda w \in (- w) + A$.
+
+          Therefore $(- w) + A$ is a subapce of $V$ and $w + (- w) + A$ is a translate.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $A = a + U$ and $B = b + W$ where $a, b \in V$, $U, W \subseteq V$ are subspaces.
+  Show that $A \cap B$ is either a translate of some subspace of $V$ or an empty space.
+\end{exercise}
+\begin{proof}
+  Suppose $A \cap B \neq \varnothing$, we claim that $A \cap B$ is a translate of $U \cap W$,
+  more specificly, for any $a + u_0 = b + w_0 \in A \cap B$, we claim that
+  $A \cap B = (a + u_0) + U \cap W$.
+
+  For any $u = w \in U \cap W$, we have $(a + u_0) + u = a + (u_0 + u) \in a + U$,
+  similarly, we have $(b + w_0) + w = b + (w_0 + w) \in b + W$, therefore
+  $(a + u_0) + (U \cap W) \ subseteq A \cap B$.
+
+  For any $a + u = b + w \in A \cap B$, we have $a + u - (a + u_0) = u - u_0 \in U$
+  and $b + w - (b + w_0) = w - w_0 \in W$, therefore $A \cap B \subseteq (a + u_0) + (U \cap W)$.
+\end{proof}
+
+\setcounter{exercise}{11}
+\begin{exercise}
+  Let $\join{v}{m - 1} \in V$ and
+  \[
+  A = \set{\joinp[+]{\lambda}{v}{m - 1}}{ \lambda_i \in F \text{ and } \join[+]{\lambda}{i} = 1}
+  \]
+
+  \begin{enumerate}
+    \item Show that $A$ is a translate of a subspace of $V$.
+    \item If $B$ a translate of a subspace of $V$ such that $\join{v}{m - 1} \in B$, show that $A \subseteq B$.
+    \item Base on (1), show that the dimension of such subspace is less then $m$.
+  \end{enumerate}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item If $A$ is a translate of a subspace of $V$, say $B$, then for any $a \in A$,
+          we have $A = a + B$. Therefore $B = (- a) + A$, we may pick $a = v_0$,
+           we find that for any $b \in B$, it is in form $(-1)(v_0) + \joinp[+]{\lambda}{v}{m - 1}$
+           where $\join[+]{\lambda}{m - 1} = 1$, which implies $(-1) + \join[+]{\lambda}{m - 1} = 0$.
+           Then we claim $B = \set{\joinp[+]{\lambda}{v}{m - 1}}{\join[+]{\lambda}{m - 1} = 0}$
+           is a subspace and $A = v_0s + B$.
+    \item 
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{15}
+\begin{exercise}
+  Let $\varphi \in \LT(V, F)$ where $\varphi \neq 0$, show that $\dim (V / (\nullv \varphi)) = 1$.
+\end{exercise}
+\begin{proof}
+  For any non-zero $v + \nullv \varphi, w + \nullv \varphi \in V / (\nullv \varphi)$
+  (existence is guaranteed since $\varphi \neq 0$),
+  since $\varphi(w) \in F$, then there is some $\lambda$ such that $\lambda \varphi(w) = \varphi(v)$
+  cause $\varphi(v)$ and $\varphi(w)$ are non-zero, then $\varphi(\lambda w) = \varphi(v)$,
+  which means $v + \nullv T = (\lambda w) + \nullv T$, therefore $\dim (V / \nullv \varphi)$
+  cause any two (non-zero) vectors are linear dependent.
+\end{proof}
+
+\begin{exercise}
+  Let $U \subseteq V$ a subspace such that $\dim (V / U) = 1$. Show that
+  there is $\varphi \in \LT(V, F)$ such that $\nullv \varphi = U$.
+\end{exercise}
+\begin{proof}
+  We know there is an isomorphism $i \in \LT(V / U, F)$ since $\dim (V / U) = \dim F = 1$,
+  then $\varphi = i \circ \pi$ where $\pi \in \LT(V, V / U)$. Since $i$ is injective,
+  $\nullv \varphi = \nullv \pi = U$.
+\end{proof}
+
+\end{document}

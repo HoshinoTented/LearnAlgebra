@@ -1,0 +1,134 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\setcounter{section}{3}
+\setcounter{theorem}{94}
+
+\begin{definition}[Notation: $v + U$]
+  Let $v \in V$ and $U \subseteq V$, then $v + U = \set{v + u}{u \in U}$.
+\end{definition}
+
+Such sets also called \textit{coset} in group theory.
+
+\setcounter{definition}{96}
+\begin{definition}[Translate]
+  Let $v \in V$ and $U \subseteq V$, we say $v + U$ is a translate of $U$.
+\end{definition}
+
+\begin{definition}[Quotient Space]
+  Let $U \subseteq V$ a subspace, then the quotient space $V/U$ is a
+  set with translates of $U$, that is:
+  \[
+  V/U = \set{v + U}{v \in V}
+  \]
+\end{definition}
+
+\setcounter{theorem}{100}
+\begin{theorem}
+  Let $U \subseteq V$ a subspace and $v, w \in V$, then the following statements
+  are equivalent.
+  \begin{enumerate}
+    \item $v - w \in U$
+    \item $v + U = w + U$
+    \item $(v + U) \cap (w + U) \neq \varnothing$
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item If $v - w \in U$, for any $v + u \in v + U$, we have
+          $v + u = v + (v - w) - (v - w) + u = v - w + w + u = w + (v - w) + u \in w + U$
+          since $v - w \in U$. Similarly, for any $w + u \in w + U$, we have
+          $w + u = w + (v - w) - (v - w) + u = v - v + w + u = v - (v - w) + u = v + (- (v - w) + u) \in v + U$.
+    \item If $v + U = w + U$, then $v = w + u$ since $v \in v + U$, therefore $v - w = u \in U$.
+    \item if $v + U = w + U$, then $(v + U) \cap (w + U) = v + U = w + U \neq \varnothing$
+    \item If $(v + U) \cap (w + U) \neq \varnothing$, then for any $v + u_0 = w + u_1 \in (v + U) \cap (w + U)$,
+          we have $(v - w) + (u0 - u_1) = 0$ and then $v - w = u_1 - u_0 \in U$,
+          so $v + U = w + U$.
+  \end{itemize}
+\end{proof}
+
+\setcounter{definition}{101}
+\begin{definition}
+  Let $U \subseteq V$, then addition and scalar multiplication on $V/U$ is defined by:
+  \begin{align*}
+    (v + U) + (w + U) & = (v + w) + U \\
+    \lambda (v + U) & = (\lambda v) + U
+  \end{align*}
+\end{definition}
+
+\setcounter{theorem}{102}
+\begin{theorem}
+  Let $U \subseteq V$ a subspace, then $V/U$ is a vector space with addition and scalar
+  multiplication we defined in previous definition.
+\end{theorem}
+\begin{proof}
+  We must first show that the addition and the sclar multiplication we introduce
+  are functions.
+
+  For any $a, b, c, d \in V$, we will show $(a + b) + U = (c + d) + U$ if
+  $a + U = c + U$ and $b + U = d + U$.
+  We can show $(a + b) - (c + d) \in U$ by $a - c \in U$ and $b - d \in U$.
+
+  For any $v, w \in V$ and $\lambda \in F$, we will show $(\lambda v) + U = (\lambda w) + U$
+  if $v + U = w + U$.
+  We know $v - w \in U$, then $\lambda (v - w) = \lambda v - \lambda w \in U$,
+  therefore $(\lambda v) + U = (\lambda w) + U$.
+
+  We have identity of addition $0 + U$ and inverse of addition $(- v) + U$ for all $v \in V$.
+\end{proof}
+
+\setcounter{definition}{103}
+\begin{definition}
+  Let $U \subseteq V$ a subspace, the quotient map $\pi : V \rightarrow V/U$
+  is a linear mapping defined by:
+  \[
+  \pi(v) = v + U
+  \]
+\end{definition}
+\begin{proof}
+  We will show $\pi$ is a linear mapping, $\pi(v + w) = (v + w) + U = v + U + w + U = \pi(v) + \pi(w)$
+  and $\lambda \pi(v) = \lambda (v + U) = (\lambda v) + U = \pi(\lambda v)$.
+\end{proof}
+
+\setcounter{theorem}{\value{definition}}
+\begin{theorem}
+  Let $V$ finite and $U \subseteq V$ a subspace, show that $\dim (V / U) = \dim V - \dim U$.
+\end{theorem}
+\begin{proof}
+  We can rewrite the equation as $\dim V = \dim (V / U) + \dim U$,
+  and it is easy to see that $\rangev \pi = \dim (V / U)$ and $\nullv \pi = \dim U$.
+\end{proof}
+
+\setcounter{definition}{\value{theorem}}
+\begin{definition}
+  Let $T \in \LT(V, W)$, define $\tilde{T} : V / (\nullv T) \rightarrow W$ by
+  $\tilde{T}(v + \nullv T) = Tv$.
+\end{definition}
+
+\setcounter{theorem}{\value{definition}}
+\begin{theorem}
+  Let $T \in \LT(V, W)$, then:
+  \begin{enumerate}
+    \item $\tilde{T} \circ \pi = T$
+    \item $\tilde{T}$ is injective
+    \item $\rangev \tilde{T} = \rangev T$
+    \item $V / (\nullv T) \cong \rangev T$
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{enumerate}
+    \item For all $v \in V$, $\tilde{T}(\pi(v)) = \tilde{T}(v + \nullv T) = Tv$
+    \item If $\tilde{T}(v + \nullv T) = \tilde{T}(w + \nullv T)$, then $T(v - w) = 0$,
+          which means $v - w \in \nullv T$, therefore $v + \nullv T = w + \nullv T$.
+    \item For any $Tv \in \rangev T$, we have $\tilde{T}(v + \nullv T) \in \rangev \tilde{T}$.
+          For any $\tilde{T}(v + \nullv T) = Tv \in \rangev \tilde{T}$, we have $Tv \in \rangev T$.
+    \item Restrict the range of $\tilde{T}$ on $\rangev T$, say $\varphi(v + \nullv T) = \tilde{T}(v + \nullv T) : V / (\nullv T) \rightarrow \rangev T$,
+          then $\varphi$ is injective since (2) and surjective since (3),
+          therefore $\varphi$ is an isomorphism, thus $V / (\nullv T) \simeq \rangev T$.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

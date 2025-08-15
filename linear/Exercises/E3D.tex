@@ -1,0 +1,98 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{3}
+
+\begin{document}
+
+\setcounter{exercise}{3}
+\begin{exercise}
+  Let $V$ a finite vector space with $\dim V > 1$,
+  show that $S = \set{T \text{ is singular}}{T \in \LT(V)}$ is \textbf{NOT}
+  a subspace of $\LT(V)$.
+\end{exercise}
+\begin{proof}
+  If $S$ is a subspace of $\LT(V)$, then it is an ideal of $\LT(V)$ since
+  for any $A \in S$ and $B \in \LT(V)$, $AB$ and $BA$ are singular,
+  therefore $AB, BA \in S$.
+  However, we know the only two ideals of $\LT(V)$ is $\0$ and $\LT(V)$,
+  none of them is $S$.
+\end{proof}
+
+\setcounter{exercise}{10}
+\begin{exercise}
+  \label{E3D.11}
+  Let $V$ finite vector space, and $S, T \in \LT(V)$, show that
+  \[
+  ST \text{ is invertible} \iff S \text{ and } T \text{ are invertible}
+  \]
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ Suppose $STW = WST = I$,
+          then $S(TW) = (TW)S = I$ since $\dim V = \dim V$, therefore $\inv{S} = TW$,
+          also $(WS)T = T(WS) = I$ since $\dim V = \dim V$, therefore $\inv{T} = WS$.
+    \item $(\Leftarrow)$ Trivial.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $V$ finite vector space, and $S, T, U \in \LT(V)$ such that $STU = I$,
+  Show that $\inv{T} = US$.
+\end{exercise}
+\begin{proof}
+  Since $STU = I$ we know $U$ is invertible (since $STU$ is invertible), then $ST = \inv{U}$.
+  Since $\inv{U}$ is invertible, we know $S$ and $T$ are invertible therefore $T = \inv{S}\inv{U}$
+  and $\inv{T} = US$.
+\end{proof}
+
+\begin{exercise}
+  Show that the conclusion of previous exercise can be false if $V$ is not finite.
+\end{exercise}
+\begin{proof}
+  Let $S(x_0, x_1, \dots) = (x_1, \dots)$ the backward-shift mapping
+  and $U(x_0, x_1, \dots) = (0, x_0, x_1, \dots)$ the forward-shift mapping
+  and $T = I$ the identity mapping.
+
+  We have $SU = I$ and $US \neq I$, $T$ is clearly inveritble with $\inv{T} = I$,
+  but we know $US \neq I$, so $\inv{T} = US \neq I$.
+
+  In fact, this also disprove the infinite version of \ref{E3D.11} since $SU$ is invertible but neither
+  $S$ nor $U$ is invertible.
+\end{proof}
+
+\setcounter{exercise}{16}
+\begin{exercise}
+  Let $V$ a finite vector space, $S \in \LT(V)$, define $\mathcal{A} \in \LT(\LT(V))$
+  by $\mathcal{A}(T) = ST$, show that:
+  \begin{enumerate}
+    \item $\dim \nullv \mathcal{A} = (\dim V) (\dim \nullv S)$
+    \item $\dim \rangev \mathcal{A} = (\dim V) (\dim \rangev S)$
+  \end{enumerate}
+\end{exercise}
+\begin{proof}
+  Since $\mathcal{A} \in \LT(\LT(V))$, we know $\dim \LT(V) = \dim \nullv \mathcal{A} + \dim \rangev \mathcal{A}$,
+  also, $\dim \LT(V) = (\dim V)^2$ and $\dim V = \dim \nullv S + \dim \rangev S$.
+  Therefore we have $\dim \nullv A + \dim \rangev A = (\dim V)(\dim \nullv S + \dim \rangev S)$,
+  which means we only need to prove one of (1) and (2).
+
+  We will show that $\dim \nullv \mathcal{A} = (\dim V)(\dim \nullv S)$.
+  We found that \\
+  $\dim \LT(V, \nullv S) = (\dim V)(\dim \nullv S)$, so it would be nice
+  if $\nullv \mathcal{A} = \LT(V, \nullv S)$.
+  For any $T \in \nullv \mathcal{A}$, we have $ST = 0$, which means $\rangev T \subseteq \nullv S$,
+  therefore $T \in \LT(V, \nullv S)$. For any $T \in \LT(V, \nullv S)$,
+  we have $ST = 0$ since $\rangev T \subseteq \nullv S$, so $T \in \nullv \mathcal{A}$,
+  therefore $\nullv \mathcal{A} = \LT(V, \nullv S)$, thus $\dim \nullv A = (\dim V)(\dim \nullv S)$.
+\end{proof}
+
+\begin{exercise}
+  Show that $V$ and $\LT(F, V)$ are isomorphic.
+\end{exercise}
+\begin{proof}
+  This can be proven by $\dim V = \dim \LT(F, V) = 1 (\dim V)$,
+  but we can find $\varphi(v) = x \mapsto xv$ an isomorphism.
+  For any $T \in \LT(F, V)$, $T$ is determined by $T(1)$.
+\end{proof}
+
+\end{document}

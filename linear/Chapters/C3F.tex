@@ -1,0 +1,146 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{3}
+
+\begin{document}
+
+\setcounter{definition}{109}
+\begin{definition}[Dual Space]
+  Let $V$ a vector space, then we denote $V^\prime$ the dual space of $V$, where
+  \[
+  V^\prime = \LT(V, F)
+  \]
+\end{definition}
+
+\setcounter{theorem}{\value{definition}}
+\begin{theorem}
+  Let $V$ a finite vector space, then $\dim V^\prime = \dim V$
+\end{theorem}
+\begin{proof}
+  $\dim V^\prime = \dim \LT(V, F) = (\dim V)(\dim F) = \dim V$
+\end{proof}
+
+\setcounter{definition}{\value{theorem}}
+\begin{definition}[Dual Basis]
+  Let $\join{v}{m - 1}$ a basis of $V$, then the dual basis of $\join{v}{m - 1}$
+  is $\join{\varphi}{m - 1}$ such that:
+  \[
+  \varphi_i(v_j) = \begin{cases}
+    1 \quad & \text{ if i = j} \\
+    0 \quad & \text{ otherwise}
+  \end{cases}
+  \]
+  holes for any $0 \le i, j < m$.
+\end{definition}
+
+We can see that the basis the dual basis extracts the coefficients of
+any vector in $V$.
+
+\setcounter{theorem}{\value{definition}}
+\begin{theorem}
+  Let $\join{v}{m - 1}$ a basis of $V$, and dual basis $\join{\varphi}{m - 1}$ of which.
+  Then for any $v \in V$,
+  \[
+  v = \varphi_0(v)v_0 + \cdots + \varphi_{m - 1}(v)v_{m - 1}
+  \]
+\end{theorem}
+\begin{proof}
+  For any $i$, $\varphi_i(v) = \varphi_i(\joinp[+]{\lambda}{v}{m - 1}) = \varphi_i(\lambda_iv_i) = \lambda_i\varphi_i(v_i) = \lambda_i \times 1$.
+\end{proof}
+
+\setcounter{theorem}{115}
+\begin{theorem}
+  Let $V$ a finite space, then the dual basis of basis of $V$ is a basis of $V^\prime$.
+\end{theorem}
+\begin{proof}
+  Let $\join{v}{m - 1}$ a basis of $V$, then its dual basis has the same length,
+  therefore we only need to show its dual basis is linear independent.
+
+  Suppose $\joinp[+]{\lambda}{\varphi}{m - 1} = 0$, then for any $0 \le i < m$, $(\joinp[+]{\lambda}{\varphi}{m - 1})(v_i) = \lambda_i = 0$,
+  therefore the dual basis is linear independent.
+\end{proof}
+
+\setcounter{definition}{117}
+\begin{definition}[Dual Map]
+  Let $T \in \LT(V, W)$. A dual map of $T$ is a linear map $T^\prime \in \LT(W^\prime, V^\prime)$, such that
+  for any $\varphi \in W^\prime$:
+  \[
+  T^\prime(\varphi) = \varphi \circ T
+  \]
+\end{definition}
+
+\setcounter{theorem}{127}
+\begin{theorem}
+  Let $V, W$ are finite spaces and $T \in \LT(V, W)$. Show that:
+  \begin{enumerate}
+    \item $\nullv T^\prime = (\rangev T)^0$
+    \item $\dim \nullv T^\prime = \dim \nullv T + \dim W - \dim V$
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $\nullv T^\prime$ is a space $\set{\varphi \in \LT(W, F)}{\varphi \circ T = 0}$,
+          which means $\rangev T \subseteq \nullv \varphi$.
+          $(\rangev T)^0$ is a space $\set{\varphi \in \LT(W, F)}{\varphi(\rangev T) = \0}$,
+          which means $\rangev T \subseteq \nullv \varphi$.
+          Therefore $\nullv T^\prime = (\rangev T)^0$
+    \item $\dim (\rangev T)^0 = \dim W - \dim \rangev T = \dim W - (\dim V - \dim \nullv T)$
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}
+  Let $V, W$ are finite spaces and $T \in \LT(V, W)$. Show that
+  \[
+  T \text{ is surjective} \iff T^\prime \text{ is injective}
+  \]
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item Suppose $T$ is surjective, then for any $T^\prime(\varphi) = T^\prime(\psi)$,
+          we have $\varphi \circ T = \psi \circ T$. Since $T$ is surjective, then $T$
+          is an epimorphism (we proved this in \textnormal{E2B}),
+          therefore $\varphi = \psi$.
+
+    \item Suppose $T^\prime$ is injective, then for any $\varphi, \psi \in \LT(W, F)$
+          such that $\varphi \circ T = \psi \circ T$, we have $\varphi = \psi$
+          since $T^\prime$ is injective. Therefore $T$ is epimorphism, thus surjective.
+  \end{itemize}
+\end{proof}
+
+The last theorem is obviously true in category theory, but we haven't show that
+$T^\prime$ is a morphism in $\textnormal{Vect}^\prime$ where $\textnormal{Vect}^\prime \simeq \textnormal{Vect}^{\textnormal{op}}$.
+
+\begin{theorem}
+  Let $V, W$ are finite and $T \in \LT(V, W)$, show that:
+  \begin{enumerate}
+    \item $\dim \rangev T^\prime = \dim \rangev T$
+    \item $\rangev T^\prime = (\nullv T)^0$
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $\dim \rangev T^\prime = \dim W^\prime - \dim \nullv T^\prime = \dim W^\prime - (\dim \nullv T + \dim W - \dim V) = \dim V - \dim \nullv T = \dim \rangev T$
+    \item For any $\varphi \circ T \in \rangev T^\prime$, $(\varphi \circ T)(\nullv T) = \varphi(\0) = \0$, therefore $\rangev T^\prime \subseteq (\nullv T)^0$.
+          Since $\dim (\nullv T)^0 = \dim V - \dim \nullv T = \dim \rangev T \ dim \rangev T^\prime$,
+          therefore $\rangev T^\prime = (\nullv T)^0$ since both of them are finite and $\rangev T^\prime \subseteq (\nullv T)^0$.
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}
+  Let $V, W$ are finite spaces and $T \in \LT(V, W)$. Show
+  \[
+  T \text{ is injective} \iff T^\prime \text{ is surjective}
+  \]
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $\dim \rangev T^\prime = \dim \rangev T = \dim V = \dim V^\prime$ since $T$ is injective, therefore $T^\prime$ is surjective.
+    \item $\dim \rangev T = \dim \rangev T^\prime = \dim V^\prime = \dim V$ therefore $T$ is injective.
+  \end{itemize}
+\end{proof}
+
+\end{document}
