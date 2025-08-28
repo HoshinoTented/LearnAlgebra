@@ -1,0 +1,35 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{4}
+
+\begin{document}
+
+This chapter is much like a note, I will record some idea about polynomial and linear algebra.
+
+One relationship is that a polynomial is a linear combination of the standard basis
+of $\mathcal{P}(F)$, that is, $1, x, x^2, \cdots$.
+This is important when we apply $p$ to an operator of a vector space, say $T \in \LT(V)$
+and $p(T) = c_0I + c_1T + c_2T^2 + \cdots$. If we apply $p(T)$ to some $v \in V$,
+it becomes a linear combination of $v, Tv, T^2v, \cdots$.
+
+\setcounter{theorem}{15}
+\begin{theorem}
+  Let $p \in \mathcal{P}(\mathbb{R})$ is not constant, then $p$ can be factorized into:
+  \[
+  p(x) = c(x - \lambda_1) \cdots (x - \lambda_m)(x^2 + b_1x + c_1) \cdots (x^2 + b_Mx + c_M)
+  \]
+  where $c, \lambda_1, \cdots, \lambda_m, b_1, \cdots, b_M, c_1, \cdots, c_M \in \mathbb{R}$
+  and for any $1 \le k \le M$, $b^2_k < 4 c_k$.
+\end{theorem}
+
+I won't paste the proof here, but the statement can be considered as:
+any non-constant, real $p$ can be factorized into:
+\[
+  p(x) = c(x - \lambda_1) \cdots (x - \lambda_m) (x - \lambda_{m + 1}) \cdots (x - \lambda_{m + M})
+\]
+where $c, \lambda_1, \cdots, \lambda_1 \in \mathbb{R}$ and $\lambda_{m + 1}, \cdots, \lambda_{m + M} \in \mathbb{C}$.
+Those $\lambda$ are zeros of $p$, however some are real, some are complex.
+This re-expression makes the statement more understandable.
+Note that $\lambda_{m + k}$ is paired, since both $\lambda_{m + k}$ and $\bar{\lambda_{m + k}}$ are
+zeros of $p$.
+\end{document}

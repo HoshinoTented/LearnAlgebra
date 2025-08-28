@@ -6,3 +6,5 @@
 *.thm
 *.out
 *.xdv
+.envrc
+.direnv/

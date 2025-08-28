@@ -1,0 +1,24 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{4}
+
+\begin{document}
+
+\setcounter{exercise}{6}
+\begin{exercise}
+  Let $m$ a non-negative integer and $\join{z}{m} \in F$ are different to each others,
+  $\join{w}{m} \in F$, show that there is a unique $p \in \mathcal{P}_m(F)$
+  such that $p(z_k) = w_k$ holds for all $0 \le k \le m$.
+\end{exercise}
+\begin{proof}
+  Define $\Gamma(p) = (p(z_0), \cdots, p(z_m)) : \mathcal{P}_m(F) \rightarrow F^{m + 1}$, we will show that $\Gamma$ is injective,
+  therefore an isomorphism.
+
+  Suppose $\Gamma(p) = \Gamma(q)$, then $p(z_k) = q(z_k)$ for all $k$,
+  therefore $(p - q)(z_k) = 0$ for all $k$. This means $p - q$ has $m + 1$ zeros
+  but $\deg (p - q) \le m$, therefore $p - q = 0$ and $p = q$.
+
+  Then there is a unique $p \in \mathcal{P}_m(F)$ such that $\Gamma(p) = (\join{w}{m})$.
+\end{proof}
+
+\end{document}

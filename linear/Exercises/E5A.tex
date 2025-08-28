@@ -1,0 +1,377 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{5}
+
+\begin{document}
+
+\setcounter{exercise}{8}
+\begin{exercise}
+  Let $P \in \LT(V)$, such that $P^2 = P$. Suppose $\lambda$
+  an eigenvalue of $P$, show that $\lambda = 0$ or $\lambda = 1$.
+\end{exercise}
+\begin{proof}
+  Suppose $P(v) = \lambda v$ for some non-zero $v \in V$,
+  then $P(v) = PP(v) = P(\lambda v)$, therefore $P((\lambda - 1) v) = 0$.
+  thus $(\lambda - 1) v \in \nullv P$. We may suppose $\lambda \neq 1$,
+  then $(\frac{1}{\lambda - 1}) (\lambda - 1) v = v \in \nullv P$, therefore $P(v) = 0$,
+  thus $\lambda = 0$ cause $v \neq 0$.
+\end{proof}
+
+\begin{exercise}
+  Let $T(p) = p^\prime : \mathcal{P}(\mathbb{R}) \rightarrow \mathcal{P}(\mathbb{R})$.
+  Find all eigenvalues and eigenvectors of $T$.
+\end{exercise}
+\begin{proof}
+  Suppose $T(p) = p^\prime = \lambda p$, then $\deg p = 0$, otherwise the degree doesn't match.
+  For any $p \in \mathcal{P}(\mathbb{R})$ such that $\deg p = 0$, we have
+  $p^\prime = 0 = 0p$.
+\end{proof}
+
+\setcounter{exercise}{11}
+\begin{exercise}
+  Let $V = U \oplus W$ where $U$ and $W$ are non-zero subspaces.
+  Define $P(u + w) = u$ for all $u \in U$ and $w \in W$.
+  Find all eigenvalue and eigenvector of $P$.
+\end{exercise}
+\begin{proof}
+  We can see $P^2 = P$, since for any $u + w \in V$, we have $P(P(u + w)) = P(u) = u = P(u + w)$,
+  therefore $\lambda = 0$ and $\lambda = 1$ are eigenvalues of $P$
+  , $P(u) = 1u$ and $P(w) = 0w$ are eigenvectors of $P$.
+\end{proof}
+
+\begin{exercise}
+  Let $T \in \LT(V)$ and $S \in \LT(V)$, where $S$ is invertible.
+  \begin{itemize}
+    \item Show that $T$ has the same eigenvalue of $\inv{S}TS$.
+    \item What is the relationship between the eigenvector of $T$ and the eigenvector of $\inv{S}TS$.
+  \end{itemize}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item For any $T(v) = \lambda v$ where $v \in V$ and $\lambda \in F$,
+          let $S(w) = v$, then $\inv{S}TS(w) = \inv{S}(T(Sw)) = \inv{S}(\lambda v) = \lambda \inv{S}(v) = \lambda w$,
+          thus $\lambda$ is an eigenvalue of $\inv{S}TS$.
+    \item $S(w) = v$ where $v$ is an eigenvector of $T$ and $w$ is the corresponding eigenvector of $\inv{S}TS$.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{14}
+\begin{exercise}
+  Let $V$ finite, $T \in \LT(V)$, $\lambda \in F$.
+  Show that $\lambda$ is an eigenvalue of $T$ $\iff$ $\lambda$ is an eigenvalue of $T^\prime$.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ Suppose $Tv = \lambda v$, we will show $T^\prime - \lambda I$
+          is not surjective (Note that $I \in \LT(V^\prime)$).
+
+          For any $\varphi \in V^\prime$, we have:
+          \begin{align*}
+             & (T^\prime - \lambda I)(\varphi) \\
+            =& T^\prime(\varphi) - \lambda \varphi \\
+            =& \varphi \circ T - \lambda \varphi
+          \end{align*}
+          then
+          \begin{align*}
+             & (\varphi \circ T - \lambda \varphi)(v) \\
+            =& (\varphi \circ T)(v) - (\lambda \varphi)(v) \\
+            =& \varphi (Tv) - \lambda (\varphi (v)) \\
+            =& \varphi (\lambda v) - \lambda (\varphi (v)) \\
+            =& 0
+          \end{align*}
+
+          This means $\rangev T^\prime \neq V^\prime$ cause any $\psi \in V^\prime$
+          where $\psi(v) \neq 0$ is not in $\rangev T^\prime$. Therefore $\lambda$
+          is an eigenvalue of $T^\prime$.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{21}
+\begin{exercise}
+  Let $T \in \LT(V)$ and non-zero $v, w \in V$ such that
+  \[
+  Tu = 3w \quad \text{and} \quad Tw = 3u
+  \].
+
+  Show that $3$ or $-3$ is the eigenvalue of $T$.
+\end{exercise}
+\begin{proof}
+  Since $v$ and $w$ are non-zero, then one of $u + w$ and $u - w$
+  is non-zero.
+
+  We have $T(u + w) = 3w + 3u = 3(u + w)$ and $T(u - w) = 3w - (3u) = (-3)(u - w)$.
+\end{proof}
+
+\begin{exercise}
+  Let $V$ finite, and $S, T \in \LT(V)$, show that $ST$ and $TS$ have the same
+  eigenvalues.
+\end{exercise}
+\begin{proof}
+  For any $ST(v) = \lambda v$ where $v \neq 0$, we have $TST(v) = T(\lambda v)$
+  then $TS(Tv) = \lambda (Tv)$.
+  \begin{itemize}
+    \item If $Tv = 0$, then $STv = 0 = \lambda v$, thus $\lambda = 0$ since $v \neq 0$.
+          then $\lambda$ is an eigenvalue of $TS$ since $\nullv TS \neq 0$
+          ($\nullv T \neq 0$, and $S$ is an operator of $V$, therefore, 
+          $S$ is injective or not doesn't affect our conclusion).
+
+          If $Tv \neq 0$, then $TS(Tv) = \lambda (Tv)$.
+    \item Ditto.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{25}
+\begin{exercise}
+  Let $T \in \LT(V)$ and any non-zero $v \in V$ we have $Tv = cv$ for some $c$.
+  Show that $T = \lambda I$.
+\end{exercise}
+\begin{proof}
+  Let non-zero $v, w \in V$, we have $Tv = sv$ and $Tw = tw$,
+  then $T(v + w) = \lambda (v + w) = \lambda v + \lambda w = sv + tw = T(v) + T(w)$.
+  Then $\lambda v + \lambda w - tw = sv$.
+  \begin{itemize}
+    \item If $w \in \spanv(v)$, then $w = cv$, therefore $Tw = T(cv) = tcv = cTv = csv$,
+          thus $t = s$.
+    \item If $w \notin \spanv(v)$, then $\lambda = t$ (otherwise $\lambda v + (\lambda - t)w = sv$),
+          therefore $\lambda v = sv$ and $\lambda = s$, thus $s = t$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $V$ finite and $1 \le k \le \dim V - 1$. Let $T \in \LT(V)$
+  such that any subspace of $V$ with $k$ dimension is invariant under $T$.
+  Show that $T = \lambda I$ for some $\lambda$.
+\end{exercise}
+\begin{proof}
+  For any $v \in V$, we have $Tv = w$ where $w \in \spanv(v)$.
+  \begin{itemize}
+    \item If $w = 0$, then $Tv = 0v$.
+    \item If $w \neq 0$, then $w = \lambda v$ since $w \in \spanv(v)$,
+          then $Tv = \lambda v$.
+  \end{itemize}
+  Thus $T = \lambda I$ by the previous exercise.
+\end{proof}
+
+\setcounter{exercise}{29}
+\begin{exercise}
+  Let $T \in \LT(V)$ and $(T - 2I)(T - 3I)(T - 4I) = 0$.
+  Show that $2$ or $3$ or $4$ is the eigenvalue of $T$.
+\end{exercise}
+\begin{proof}
+  Suppose $2$ is not an eigenvalue of $T$, then $(T - 2I)$ is injective,
+  thus $(T - 3T)(T - 4I)$ must map all $v \in V$ to $0$.
+  Similarly, we can show that $(T - 4I) = 0$ if $3$ is not an eigenvalue of $T$.
+\end{proof}
+
+\begin{exercise}
+  Find $T \in \LT(\mathcal{R}^2)$ such that $T^4 = -I$.
+\end{exercise}
+\begin{proof}
+  We may treat $-I$ as rotating the vector 180 degrees, then $T$
+  rotates a vector 45 degrees, which matrix is:
+  \[
+  \mathcal{M}(T) =
+  \frac{\sqrt{2}}{2}
+  \begin{bmatrix}
+     1 & 1 \\
+    -1 & 1 \\
+  \end{bmatrix}
+  \]
+\end{proof}
+
+\begin{exercise}
+  Let $T \in \LT(V)$ with no eigenvalue and $T^4 = I$.
+  Show that $T^2 = - I$.
+\end{exercise}
+\begin{proof}
+  % We will show a lemma: Let $T \in \LT(V)$, $T^2 = I$ and $Tv \neq v$ for any non-zero $v \in V$,
+  % show that $T = -I$.
+  
+  % For any $v \in V$, we have $T(Tv + v) = T^2(v) + Tv = v + Tv = Tv + v$,
+  % thus $Tv + v = 0$.
+  % Therefore for any $Tv + v = 0$ thus $(T + I)v = 0v$ and $T = -I$.
+
+  We will show that $T^2(v) = -v$ for any $v \in V$.
+  Consider $T^2(T^2(v) + v) = v + T^2(v)$, we will show that $T^2(v) + v = 0$.
+  Suppose $w \in V$ and $T^2(w) = w$, we may let $T(w) = u$, then
+  $T^2(w) = Tu = w$. Consider $T(w + u) = T(w) + T(u) = u + w$,
+  then $w + u = 0$ since $T$ has no eigenvalue,
+  therefore $u = -w$ and $T(w) = -w$. Again $w = 0$ since $T$ has no eigenvalue.
+  Therefore $T^2(w) = w$ implies $w = 0$, thus $T^2(v) + v = 0$
+  and $T^2(v) = -v$ for any $v \in V$.
+\end{proof}
+
+\begin{exercise}
+  Let $T \in \LT(V)$ and $m \in \mathbb{N}^+$.
+  \begin{enumerate}
+    \item Show that $T$ is injective $\iff$ $T^m$ is injective
+    \item Show that $T$ is surjective $\iff$ $T^m$ is surjective.
+  \end{enumerate}
+\end{exercise}
+\begin{proof}
+  Recall that $T^0 = I$.
+  \begin{itemize}
+    \item $(\Rightarrow)$ For any $T^m(v) = T^m(w)$ we have $T^{m - 1}(v) = T^{m - 1}(w)$
+          and so on, we will get $v = w$.
+
+          $(\Leftarrow)$ For any $T(v) = T(w)$, we have $T^{m - 1}(T(v)) = T^{m - 1}(T(w))$,
+          then $T^m(v) = T^m(w)$ and $v = w$.
+    \item $(\Rightarrow)$ For any $w \in V$, we have $T(v) = w$,
+          then we have $T(u) = v$ and now $T(T(u)) = w$, continue this progress
+          until we get $T^{m}(r) = w$.
+
+          $(\Leftarrow)$ For any $w \in V$, we have $T^{m}(v) = w$,
+          therefore $T(T^{m - 1}(v)) = w$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $V$ finite and $\join{v}{m - 1} \in V$.
+  Show that $\join{v}{m - 1}$ is linear independent $\iff$
+  there is $T \in \LT(V)$ such that $\join{v}{m - 1}$
+  are eigenvectors of distinct eigenvalues of $T$.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ Consider $\join{v}{k - 1}$ a basis of $V$,
+          then $T(\joinp[+]{\lambda}{v}{k - 1}) = 1\lambda_0v_0 + 2\lambda_1v_1 + \cdots + m\lambda_{m - 1}v_{m - 1}$
+          where $T(v_i) = (i + 1)v_i$.
+    \item $(\Leftarrow)$ Trivial, since eigenvectors of distinct eigenvalues are linear independent.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{36}
+\begin{exercise}
+  Let $V$ finite and $T \in \LT(V)$. Define $\mathcal{A}(S) = TS : \LT(V) \rightarrow \LT(V)$.
+  Show that $T$ has the same eigenvalues as $\mathcal{A}$.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\subseteq)$ For any eigenvalue $\lambda$ of $T$, we can find $S \in \LT(V)$
+          such that $\rangev S = \set{v \in V}{Tv = \lambda v}$ (it is easy to show that
+          such set is a subspace).
+          Then for any $v \in V$, $(TS)v = T(Sv) = \lambda (Sv) = (\lambda S) v$
+          thus $\mathcal{A}(S) = TS = \lambda S$.
+    \item $(\supseteq)$ For any eigenvalue $\lambda$ of $\mathcal{A}$,
+          then we have $\mathcal{A}(S) = \lambda S$ for some non-zero $S \in \LT(V)$.
+          Then there is $v \in V$ such that $Sv \neq 0$, and $T(Sv) = (TS)v = (\lambda S)(v) = \lambda (Sv)$,
+          thus $\lambda$ is an eigenvalue of $T$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $V$ finite and $T \in \LT(V)$ and $U \subseteq V$ is
+  invariant under $T$. A quotient operator $T/U \in \LT(V/U)$ is defined by:
+  \[
+    (T/U)(v + U) = Tv + U
+  \]
+  for any $v \in V$.
+
+  \begin{enumerate}
+    \item Show that $T/U$ is well-defined and $T/U$ is an operator over $V/U$.
+    \item Show that each eigenvalue of $T/U$ is also an eigenvalue of $T$.
+  \end{enumerate}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item Suppose $v + U = w + U$, then $(T/U)(v + U) = Tv + U$ and $(T/U)(w + U) = Tw + U$,
+          we will show that $Tv - Tw \in U$.
+          Note that $v + U = w + U$ implies $v - w \in U$, then $T(v - w) \in U$ since $U$
+          is invariant under $T$, that is, for any $u \in U$, $Tu \in U$.
+          Thus $Tv + U = Tw + U$.
+
+          Now we will show that $T/U$ is a linear map, we can see:
+          \begin{align*}
+             & (T/U)(v + U) + (T/U)(w + U) \\
+            =& (Tv + U) + (Tw + U) \\
+            =& (Tv + Tw) + U \\
+            =& T(v + w) + U \\
+            =& (T/U)((v + w) + U)
+          \end{align*}
+          and
+          \begin{align*}
+             & \lambda (T/U)(v + U) \\
+            =& \lambda (Tv + U) \\
+            =& (\lambda (Tv)) + U \\
+            =& T(\lambda v) + U \\
+            =& (T/U)((\lambda v) + U) \\
+            =& (T/U)(\lambda (v + U))
+          \end{align*}
+    \item Suppose $(T/U)(v + U) = Tv + U = \lambda v + U$ where $v \notin U$, consider $T - \lambda I$,
+          we will show that $T - \lambda I$ is not injective.
+          We can see $U$ is invariant under $T - \lambda I$,
+          $Tu - \lambda u \in U$ cause $U$ is invariant under $T$.
+          We may suppose $T$ is injective (thus surjective and invertible) on $U$
+          (in other words, $T(U) = U$),
+          otherwise the proof is complete.
+          Then consider $(T - \lambda I)(v) = Tv - \lambda v \in U$ where $v \notin U$,
+          thus $T - \lambda I$ is not injective.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $V$ finite and $T \in \LT(V)$. Show that $T$ has an eigenvalue $\iff$
+  there is a subspace of $V$ with dimension $\dim V - 1$ which is invariant under $T$.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item This part is hinted by AI.
+          Suppose $Tv = \lambda v$, then consider $T - \lambda I$,
+          we know $\rangev (T - \lambda I)$ is invariant under $T$,
+          since for any $Tw - \lambda w$, we have 
+          $T(Tw - \lambda w) = T(Tw) - T(\lambda w) = T(Tw) - \lambda (Tw)$.
+          Then $\dim \rangev (T - \lambda I) \le \dim V - 1$ since $w \in \nullv T - \lambda I$.
+          Then consider $\nullv (T - \lambda I) = \spanv(v) \oplus W$,
+          we have $\rangev (T - \lambda I) \oplus W$ a subspace which is invariant under $T$.
+
+          The key is finding a smaller invariant subspace and expand it with null space,
+          as any vector in null space always maps to $0$, thus preserve the property of invariant.
+    \item Suppose $U$ is a subspace of $V$ of dimension $\dim V - 1$ 
+          such that $U$ is invariant under $T$,
+          then $V = U \oplus \spanv(v)$ for some $v \notin U$.
+          We may suppose $T$ is injective on $U$, otherwise the proof is complete ($\nullv T \neq 0$).
+          Consider $T(v)$, there are three cases:
+          \begin{itemize}
+            \item $T(v) = \lambda v + 0u$, then the proof is complete.
+            \item $T(v) = 0v + u$, then $T$ is not injective since there is $Tw = u$ where $w \in U$.
+            \item $T(v) = \lambda v + u$, then consider $T - \lambda I$. We have $U$ is invariant under $T - \lambda I$
+                  cause $Tu - \lambda u \in U$ by $Tu \in U$.
+                  Again, if $T - \lambda I$ is not injective on $U$, the proof is complete.
+                  Then $(T - \lambda I)v = Tv - \lambda v \in U = \lambda v + u - \lambda v = u \in U$,
+                  thus $T - \lambda I$ is not injective and $\lambda$ is an eigenvalue of $T$.
+          \end{itemize}
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{41}
+\begin{exercise}
+  Let $T \in \LT(F^n)$ defined by $T(x_1, x_2, \cdots, x_n) = (x_1, 2 x_2, \cdots, n x_n)$.
+  \begin{enumerate}
+    \item Find all eigenvalues and eigenvectors of $T$.
+    \item Find all subspace of $F^n$ which is invariant under $T$.
+  \end{enumerate}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $1, 2, \cdots, n$ and $(x_1, 0, \cdots), (0, x_2, 0, \cdots), \cdots$
+    \item We claim any subspace that is invariant under $T$ is a direct sum of some
+          spaces that spans by the standard basis, say $\spanv(x_0) \oplus \cdots \oplus \spanv(x_k)$.
+
+          Let $U$ a subspace that is invariant under $T$ and $u \in U$,
+          we have $T(u) = T(\lambda_1 x_1, \cdots, \lambda_n x_n) = (\lambda_1 x_1, \cdots, n \lambda_n x_n)$,
+          then $T(u) - iu = ((1 - i) (\lambda_1 x_1), (2 - i) (\lambda_2 x_2), \cdots, (n - 1) (\lambda_i x_i)) \in U$
+          is a vector that is a linear combination of standard basis except $x_i$.
+          Repeat this progress by apply $T - jI$ to $(T - iI)(u)$ with a different $j$,
+          we can finally get a vector that is a scalar multiple of $x_k$.
+          Thus $x_i \in U$ as long as there is $u \in U$ that the $i$th scalar of the linear combination of standard basis is not zero.
+  \end{itemize}
+\end{proof}
+
+\end{document}
