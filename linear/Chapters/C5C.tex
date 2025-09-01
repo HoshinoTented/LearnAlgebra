@@ -1,0 +1,109 @@
+\documentclass[../main.tex]{subfiles}
+
+\usepackage{graphicx}
+\graphicspath{ {../resources/} }
+
+\setcounter{section}{5}
+
+\begin{document}
+
+\setcounter{theorem}{38}
+\begin{theorem}
+  \label{T5.39}
+  Let $T \in \LT(V)$ and $\join{v}{n - 1}$ a basis of $V$, then the following
+  statements are equivalent to each others.
+  \begin{itemize}
+    \item $\mathcal{M}(T)$ about $\join{v}{n - 1}$ is upper-triangular matrix
+    \item For any $k = 1, \cdots, n$, $\spanv(\join{v}{k - 1})$ is invariant under $T$.
+    \item For any $k = 1, \cdots, n$, $Tv_{k - 1} \in \spanv(\join{v}{k - 1})$.
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(1) \Rightarrow (2)$ Induction on $k$. In breif, first $k$ columns
+          are in $\spanv(\join{v}{k - 1})$, therefore $\spanv(\join{v}{k - 1})$
+          is invariant under $T$.
+    \item $(2) \Rightarrow (3)$ Trivial, $v_{k - 1} \in \spanv(\join{v}{k - 1})$ which is invariant under $T$.
+    \item $(3) \Rightarrow (1)$ Basically the definition of upper-triangular matrix, $Tv_{k - 1} \in \spanv(\join{v}{k - 1})$
+          means the $k$-th column of $\mathcal{M}(T)$ consists of first $k$ number (the coefficients of $Tv_{k - 1}$) and $0$s.
+  \end{itemize}
+\end{proof}
+
+\begin{theorem}
+  \label{T5.40}
+  Let $T \in \LT(V)$ and $\join{v}{n - 1}$ a basis of $V$, such that $\mathcal{M}(T)$
+  is upper-triangular matrix, and $\join{\lambda}{n - 1}$ are
+  the numbers of its diagonal. Show that
+  \[
+  (T - \lambda_0 I) \cdots (T - \lambda_{n - 1}I) = 0
+  \]
+\end{theorem}
+\begin{proof}
+  All numbers since $i$ of $(T - \lambda_i I)v$ are $0$ if numbers after $i$ of $v$ are $0$.
+  Thus $(T - \lambda_0 I) \cdots (T - \lambda_{n - 1}I)$ makes $n - 1$-th number $0$,
+  then $n - 2$-th number and so on.
+\end{proof}
+
+\begin{theorem}
+  \label{T5.41}
+  Let $T \in \LT(V)$ and $\mathcal{M}(T)$ about some basis of $V$ is upper-triangular matrix.
+  Show that the eigenvalues of $T$ are the numbers in the diagonal.
+\end{theorem}
+\begin{proof}
+  Let $\join{v}{n - 1}$ a basis of $V$ and $\mathcal{M}(T)$ about this basis is upper-triangular matrix.
+  For $\lambda_i$ where $i = 0, \cdots, n - 1$, we will show that $T - \lambda_i I$ is
+  not invertible.
+
+  We will see first $i$ columns of $T - \lambda_i I$ is linear dependent,
+  since they have at most $i - 1$ non-zero numbers while the list they form has length $i$.
+
+  Another part of proof follows the book.
+  Let $q(z) = (z - \lambda_0) \cdots (z - \lambda_{n - 1})$, then $q(T) = 0$
+  by \ref{T5.40}, thus $q$ is polynomial multiple of the minimal polynomial of $T$,
+  thus any zero of the minimal polynomial of $T$ is also a zero of $q$, which means
+  it belongs to the list $\join{\lambda}{n - 1}$.
+\end{proof}
+
+\setcounter{theorem}{43}
+\begin{theorem}
+  Let $V$ finite and $T \in \LT(V)$. Show that $\mathcal{M}(T)$ is upper-triangular matrix
+  about some basis of $V$ $\iff$ the minimal polynomial of $T$ is in form of $(z - \lambda_0)\cdots(z - \lambda_{n - 1})$
+  where $\lambda_i \in F$.
+\end{theorem}
+\begin{proof}
+  This proof comes from the book.
+
+  The $(\Rightarrow)$ part follows \ref{T5.41}, $(z - \lambda_0) \cdots (z - \lambda_{m - 1})$
+  ($\join{\lambda}{m - 1}$ are the numbers in the diagonal) is polynomial multiple of 
+  the minimal polynomial of $T$, then the minimal polynomial of $T$
+  must in a similar form.
+
+  For $(\Leftarrow)$, we will induction on $n$.
+  \begin{itemize}
+    \item Base($n = 0$), the minimal polynomial of $T$ is in form $(z - \lambda_0)$,
+          thus $T = \lambda_0 I$.
+    \item Ind($n = n + 1$), the minimal polynomial of $T$ is in form $p(z) = (z - \lambda_0) \cdots (z - \lambda_{n + 1 - 1})$.
+          Consider $T - \lambda_nI$, there is non-zero $v \in V$ such that $(T - \lambda_nI)v = 0$
+          since $\lambda_n$ is a zero of $p$ therefore an eigenvalue of $T$.
+          We define $U = \rangev (T - \lambda_n I)$, consider $q(z) = (z - \lambda_0)\cdots(z - \lambda_{n - 1})$
+          and then $q(T\big|_U) = 0$, recall that $U = \rangev (T - \lambda_n I)$, therefore for any $v \in U$, there is $u$ such that $(T - \lambda_nI)u = v$.
+          Thus $q(T\big|_U)u = q(T)(T - \lambda_n I)v = p(T)v = 0$ where $u = (T - \lambda_n I) v$ and $u, v \in U$.
+          Thus the matrix of $T\big|_U$ is upper-triangular.
+
+          Then we consider $\join{u}{k - 1}$ a basis of $U$, we will expand $\join{u}{k - 1}$
+          to a basis of $V$, say $\join{u}{k - 1}\join{v}{m - 1}$.
+          Then for any $v_i$ where $i $, we have $Tv_i = Tv_i - \lambda_nv_i + \lambda_n v_i = (T - \lambda_n I)v_i + \lambda_n v_i$,
+          where $(T - \lambda_n) v_i \in U$ (recall the definition of $U$),
+          thus $Tv_i \in \spanv(\join{u}{k - 1}, \join{v}{i})$, then by \ref{T5.39},
+          we know $\mathcal{M}(T)$ is an upper-triangular matrix about
+          the basis $\join{u}{k - 1}, \join{v}{m - 1}$.
+
+          One may confused that the "length" of $u_i$ is greater than the size of $\mathcal{M}(T\big|_U) = \dim U$
+          (thus it won't be a square matrix but tall and thin),
+          however, these two things are unrelated, a matrix only represents how to combine
+          the basis, and doesn't care what the basis looks like.
+  \end{itemize}
+\end{proof}
+
+\end{document}

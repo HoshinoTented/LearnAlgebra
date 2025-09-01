@@ -1,0 +1,214 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{5}
+
+\begin{document}
+
+\begin{exercise}
+  Prove or disprove: $T \in \LT(V)$ and $\mathcal{M}(T^2)$ is upper-triangular for some basis of $V$,
+  then $\mathcal{M}(T)$ is upper-triangular for some basis of $V$ (not necessary the same as the $\mathcal{M}(T^2)$ one).
+\end{exercise}
+\begin{proof}
+  WoBuHui.
+\end{proof}
+
+\begin{exercise}
+  Let $A, B$ are upper-triangular matrices with same size,
+  the diagonal of $A$ is $\join{\alpha}{n - 1}$
+  and the diagonal of $B$ is $\join{\beta}{n - 1}$.
+  Show that
+  \begin{itemize}
+    \item $A + B$ is upper-triangular and the diagonal is $\alpha_0 + \beta_0, \cdots, \alpha_{n - 1} + \beta_{n - 1}$.
+    \item $AB$ is upper-triangular and the diagonal is $\alpha_0\beta_0, \cdots, \alpha_{n - 1}\beta_{n - 1}$.
+  \end{itemize}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item Trivial.
+    \item Take the standard basis of $F^n$, we have $Bv_i \in \spanv(\join{v}{i})$
+          and then $A(Bv_i) \in \spanv(\join{v}{i})$ since both $A$ and $B$
+          are upper-triangular, thus $AB$ is upper-triangular.
+          For the diagonal, we know $AB_{i, i} = A_{i, -} B_{-, i}$,
+          however, components before $i$-th of $A_{i, -}$ are $0$ and componetns since $i-th$ of $B_{-, i}$ are $0$,
+          therefore $AB_{i, i} = A_{i, i} B_{i, i} = \alpha_i \beta_i$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $T \in \LT(V)$ invertible, and $\mathcal{M}(T)$ with respect to the basis $\join{v}{n - 1}$ of $V$
+  is upper-triangular, while the diagonal is $\join{\lambda}{n - 1}$.
+  Show that $\mathcal{M}(\inv{T})$ with respect to that basis is also upper-triangular,
+  and the diagonal is $\frac{1}{\lambda_0}, \cdots, \frac{1}{\lambda_{n - 1}}$.
+\end{exercise}
+\begin{proof}
+  For any $i = 1, \cdots, n$, $\spanv(\join{v}{i - 1})$ is invariant under $T$, thus it is invariant under $\inv{T}$
+  since $\inv{T}$ is the inverse of $T$.
+
+  For the diagonal, $T\inv{T} = I$, which diagonal is $1, \cdots, 1$, which
+  is equal to $\lambda_0 \beta_0, \cdots, \lambda_{n - 1} \beta_{n - 1}$
+  where $\beta_i$ is the diagonal of $\inv{T}$.
+  Thus $\beta_i = \frac{1}{\lambda_i}$.
+\end{proof}
+
+\begin{exercise}
+  Give an example that $T$ an invertible operator, where the diagonal of $\mathcal{M}(T)$ is all $0$.
+\end{exercise}
+\begin{proof}
+  \[
+  \begin{bmatrix}
+    0 & 1 \\
+    1 & 0 \\
+  \end{bmatrix}
+  \]
+\end{proof}
+
+\begin{exercise}
+  Give an example that $T$ an singular operator, where the diagonal of $\mathcal{M}(T)$ is all non-zero.
+\end{exercise}
+\begin{proof}
+  \[
+  \begin{bmatrix}
+    1 & 1 \\
+    1 & 1 \\
+  \end{bmatrix}
+  \]
+\end{proof}
+
+\begin{exercise}
+  Let $F = C$ and $V$ finite, and $T \in \LT(V)$. Show that $k = 1, \cdots, \dim V$,
+  then there is a $k$-dimension subspace of $V$ that is invariant under $T$.
+\end{exercise}
+\begin{proof}
+  If $F = C$, then $\mathcal{M}(T)$ is upper-triangular for some basis of $V$.
+  Thus $\spanv(\join{v}{k - 1})$ is invariant under $T$ where $v_i$ is such basis.
+\end{proof}
+
+\begin{exercise}
+  Let $V$ finite and $T \in \LT(V)$ and $v \in V$. Show that:
+  \begin{itemize}
+    \item There is a unique monic polymonial $p_v$ with minimal degree such that $p_v(T)v = 0$
+    \item Show that the minimal polymonial of $T$ is polymonial multiple of $p_v$.
+  \end{itemize}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $p(T)v = 0$, therefore we only need to show the uniqueness.
+          Let $s, t$ a monic polymonial with minimal degree such that $s(T)v = t(T)v = 0$,
+          then $(s - t)(T)v = 0$, therefore $s = t$, otherwise there is a polymonial $s - t$ with lower degree such that $(s - t)(T)v = 0$.
+    \item We divide $p$ by $p_v$, then $p = s p_v + r$ where $s, r \in \mathcal{P}(F)$
+          and $\deg r < \deg p_v$. Therefore $r = 0$, otherwise $r$ is a lower polymonial
+          such that $r(T)v = 0$, which contradict the property of $p_v$.
+          Thus $p = sp_v$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $V$ finite and $T \in \LT(V)$, and non-zero $v \in V$ such that $T^2 + 2Tv + 2v = 0$.
+  Show that
+  \begin{itemize}
+    \item If $F = R$, then $\mathcal{M}(T)$ is \textbf{NOT} upper-triangular for all basis of $V$.
+    \item If $F = C$, then the diagonal of upper-triangular $\mathcal{M}(T)$ contains $-1 + i$ and $-1 - i$.
+  \end{itemize}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item Note that $p_v(z) = z^2 + 2z + 2$ is a minimal polymonial of $Tv$,
+          it is minimal since $p_v$ has no zero, therefore cannot have lower degree.
+
+          Then the minimal polymonial $p$ of $T$ is a polymonial multiple of $p_v$,
+          thus $p$ is \textbf{NOT} in form of $(z - \lambda_0) \cdots (z - \lambda_{n - 1})$
+          since $p_v$ has no zero, thus there is no upper-triangular matrix for $T$ for any basis of $V$.
+    \item $- 1 + i$ and $- 1 - i$ are two zeros of $p_v$, thus are zeros of $p$, therefore are
+          in the diagonal.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $B$ square matrix with complex elements. Show that there is a square matrix $A$
+  with complex elements such that $\inv{A}BA$ is a upper-triangular matrix.
+\end{exercise}
+\begin{proof}
+  We can find an operator $T$ such that its matrix is $B$ with respect to the standard basis.
+  Then we can find a basis such that $\mathcal{M}(T)$ with respect to such basis is upper-triangular
+  since $B$ is complex.
+  Then \\ $A = \mathcal{M}(I, \text{standard basis}, \text{upper-trianguler basis})$,
+  and $\inv{A}BA$ is upper-triangular, this is the change-of-basis formula.
+\end{proof}
+
+\begin{exercise}
+  Let $T \in \LT(V)$ and $\join{v}{n - 1}$ a basis of $V$, show that the following statements
+  are equivalent:
+  \begin{itemize}
+    \item the matrix of $T$ with respect to $\join{v}{n - 1}$ is lower-triangular.
+    \item For any $k = 1, \cdots, n$, $\spanv(v_{k - 1}, \cdots, v_{n - 1})$ is invariant under $T$.
+    \item For any $k = 1, \cdots, n$, $Tv_{k - 1} \in \spanv(v_{k - 1}, \cdots, v_{n - 1})$.
+  \end{itemize}
+\end{exercise}
+\begin{proof}
+  The proof is similar to the upper-triangular one.
+
+  \begin{itemize}
+    \item $(1) \Rightarrow (2)$ For any $i \le j$,
+          $Tv_{j - 1} \in \spanv(v_{j - 1}, \cdots, v_{n - 1}) \subseteq \spanv(v_{i - 1}, \cdots, v_{n - 1})$,
+          thus $\spanv(v_{k - 1}, \cdots, v_{n - 1})$ is invariant under $T$.
+    \item $(2) \Rightarrow (3)$ Tirival.
+    \item $(3) \Rightarrow (1)$ Basically the definition.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $F = C$ and $V$ finite. Show that $T \in \LT(V)$, then $\mathcal{M}(T)$ is
+  lower-triangular with respect to some basis of $V$.
+\end{exercise}
+\begin{proof}
+  Consider the dual map $T^\prime$, we know there is a basis of $V^\prime$
+  such that $\mathcal{M}(T^\prime)$ is upper-triangular, then $\mathcal{M}(T^\prime) = \mathcal{M}(T)^T$
+  which means $\mathcal{M}(T)^T$ is a upper-triangular, thus $(\mathcal{M}(T)^T)^T = \mathcal{M}(T)$
+  is lower-triangular.
+\end{proof}
+
+\begin{exercise}
+  Let $V$ finite and the matrix of $T \in \LT(V)$ is upper-triangular with respect to some basis of $V$,
+  and $U \subseteq V$ is invariant under $T$.
+  Show that
+  \begin{itemize}
+    \item The matrix of $T\big|_U$ is upper-triangular with respect to some basis of $U$.
+    \item The matrix of $T/U$ is upper-triangular with respect to some basis of $V/U$.
+  \end{itemize}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item Since $\mathcal{M}(T)$ is upper-triangular, then the minimal polymonial of $T$
+          is in form of $p(z) = (z - \lambda_0) \cdots (z - \lambda_{n - 1})$.
+          Then $p(T\big|_U) = 0$, thus $p$ is polymonial multiple of the minimal polymonial $q$ of $T\big|_U$.
+          therefore $q$ is also in form of $(z - \lambda_0) \cdots (z - \lambda_{k - 1})$.
+          Thus there is a basis of $U$ such that the matrix of $T\big|_U$ is upper-triangular.
+    \item Let $q$ the minimal polymonial of $T/U$, and $p$ the minimal polymonial of $T$, 
+          then $p$ is polymonial multiple of $q$ (see Exercise 5.25 in E5B).
+          Then follow the same step as last proof.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $V$ finite, $T \in \LT(V)$, $U \subseteq V$ invariant under $T$,
+  $\mathcal{M}(T\big|_U)$ is upper-triangular for some basis of $U$,
+  $\mathcal{M}(T/U)$ is upper-triangular for some basis of $V/U$.
+  Show that $\mathcal{M}(T)$ is upper-triangular for some basis of $V$.
+\end{exercise}
+\begin{proof}
+  We will use the conclusion of Exercise 5.25 in E5B: 
+  \[
+  st = (\text{the minimal polymonial of } T\big|_U) \times (\text{the minimal polymonial of } T/U)
+  \]
+  is a polymonial multiple of the minimal polymonial $p$ of $T$.
+  Thus $st$ is in form of $(z - \lambda_0) \cdots (z - \lambda_{n - 1})$
+  since both $\mathcal{M}(T\big|_U)$ and $\mathcal{M}(T/U)$ are upper-triangular
+  for some basis, therefore $p$ is also in form of $(z - \lambda_0) \cdots (z - \lambda_{k - 1})$,
+  hence $\mathcal{M}(T)$ is upper-triangular for some basis of $V$.
+\end{proof}
+
+\end{document}
