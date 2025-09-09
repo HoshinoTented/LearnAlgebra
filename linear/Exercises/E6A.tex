@@ -1,0 +1,113 @@
+\documentclass[../main.tex]{subfiles}
+
+
+\begin{document}
+
+\setcounter{section}{6}
+\externaldocument{../Chapter/C6A.tex}
+
+\begin{exercise}
+  Prove or disprove: If $\join{v}{n - 1} \in V$, then:
+  \[
+  \sum_{j = 0}^{n - 1}\sum_{k = 0}^{n - 1} \ip{v_j}{v_k} \ge 0
+  \]
+\end{exercise}
+\begin{proof}
+  For any $j$, we have $\sum_{k = 0}^{n - 1} \ip{v_j}{v_k} = \ip{v_j}{\join[+]{v}{n - 1}}$,
+  thus the equation is now $\ip{\join[+]{v}{n - 1}}{\join[+]{v}{n - 1}} \ge 0$,
+  which is trivial by definition.
+\end{proof}
+
+\begin{exercise}
+  Let $S \in \LT(V)$. Define $\ip{\cdot}{\cdot}_1$ by
+  \[
+  \ip{u}{v}_1 = \ip{Su}{Sv}
+  \]
+  for all $u, v \in V$.
+  Show that $\ip{\cdot}{\cdot}_1$ is an inner product over $V$
+  $\iff$ $S$ is injective.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item Try to prove $\langle \cdot, \cdot \rangle_1$ is a inner product and see where we stuck without injective.
+          We find that $\langle v, v \rangle_1 = 0 \iff v = 0$ stuck, as if
+          $S$ is not injective, then we have $\ip{u - v}{u - v}_1 = \ip{S(u - v)}{S(u - v)} = \ip{0}{0} = 0$
+          where $u - v \neq 0$ and $Su = Sv$.
+          Therefore $S$ must be injective.
+
+          Although the proof is not *constructive*, it help us to find a constructive proof:
+          Suppose $Su = Sv$, then $\ip{u - v}{u - v}_1 = \ip{Su - Sv}{Su - Sv} = 0$, thus $u - v = 0$, therefore $u = v$.
+    \item Positivity, Additivity, Homogeneity holds cause $S$ is a linear map and $\ip{\cdot}{\cdot}$ is an inner product,
+          and Conjugate Symmetry holds cause $\ip{\cdot}{\cdot}$ is an inner product.
+          For Definiteness, $\ip{v}{v}_1 = \ip{Sv}{Sv} = 0$ implies $v = 0$ cause $S$ injective,
+          and $\ip{0}{0}_1 = \ip{S0}{S0} = \ip{0}{0} = 0$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  ~
+  \begin{itemize}
+    \item Show that $f((a, b), (c, d)) = |ac| + |bd|$ is not an inner product over $\mathbb{R}^2$.
+    \item Show that $f((a, b, c), (x, y, z)) = ax + cz$ is not an inner product over $\mathbb{R}^3$.
+  \end{itemize}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $f((1, 1), (1, 1)) = 1 + 1$ and $f((-1, -1), (1, 1)) = 1 + 1$, then $f((1, 1) + (-1, -1), (1, 1)) = f((0, 0), (1, 1)) = 0 + 0 = 0$
+          while $f((1, 1) + (-1, -1), (1, 1)) = f((1, 1), (1, 1)) + f((-1, -1), (1, 1)) = 2 + 2 = 4$.
+    \item $f((0, 1, 0), (0, 1, 0)) = 0$ but $(0, 1, 0) \neq 0$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $T \in \LT(V)$ and $\norm{Tv} \le \norm{v}$ for all $v \in V$.
+  Show that $T - \sqrt{2}I$ is injective.
+\end{exercise}
+\begin{proof}
+  Suppose $T - \sqrt{2}$ is not injective, then $Tv = \sqrt{2}v$ for some $v$,
+  then $\norm{Tv} = \norm{\sqrt{2}v} = |\sqrt{2}|\norm{v} \ge \norm{v}$.
+  Basically any eigenvalue with absolute value greater than $1$ can make it.
+\end{proof}
+
+\begin{exercise}
+  Let $V$ an inner product space over $\mathbb{R}$.
+  \begin{itemize}
+    \item Show that $\ip{u + v}{u - v} = \norm{u}^2 - \norm{v}^2$.
+    \item Show that $u + v \perp u - v$ if $\norm{u} = \norm{v}$.
+    \item Use last conclusion to show that the diagonal of 菱形 are orthogonal.
+  \end{itemize}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $\ip{u + v}{u - v} = \ip{u}{u} + \ip{v}{u} - \ip{u}{v} - \ip{v}{v}$,
+          note that $\ip{v}{u} = \ip{u}{v}$ since $V$ over $\mathbb{R}$,
+          thus $\ip{u + v}{u - v} = \ip{u}{u} - \ip{v}{v} = \norm{u}^2 - \norm{v}^2$.
+    \item By $\Uparrow$.
+    \item We know 菱形 is a parallelogram that four sides have same length,
+          thus $\norm{u} = \norm{v}$ and $u + v \perp u - v$, where $u + v$ and $u - v$
+          are two diagonal of 菱形.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $u, v \in V$. Show that $\ip{u}{v} = 0$ $\iff$ $\norm{u} \le \norm{u + av}$ for any $a \in F$.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ We will show that $\norm{u} \le \norm{u + av}$ by $\norm{u}^2 \le \norm{u + av}^2$
+          (recall that norm is always non-negative).
+          $\norm{u + av}^2 = \norm{u}^2 + (a\norm{v})^2$
+    \item $(\Leftarrow)$ If $v = 0$, then $0 \perp u$ and the proof is complete, we assume $v \neq 0$. Let $w \in V$ such that $cv + w = u$ and $v \perp w$,
+          then $\norm{u}^2 = \norm{cv + w}^2 = \norm{cv}^2 + \norm{w}^2$ (see \cref{T6.13}), thus $\norm{u}^2 \ge \norm{w}^2$,
+          therefore $\norm{u} \ge \norm{w}$ where $w = u - cv$, therefore $\norm{w} \le \norm{w}$,
+          hence $\norm{u} = \norm{w}$.
+          Then $\norm{u}^2 = \norm{cv}^2 = \norm{w}^2$ is now $\norm{cv}^2 = 0$, therefore $c = 0$ or $v = 0$, but $v \neq 0$,
+          thus $c = \displaystyle \frac{\ip{u}{v}}{\norm{v}^2} = 0$ then $\ip{u}{v} = 0$ and $u \perp v$.
+  \end{itemize}
+\end{proof}
+
+\end{document}

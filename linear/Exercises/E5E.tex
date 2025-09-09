@@ -1,0 +1,148 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{5}
+
+\begin{document}
+
+\begin{exercise}
+  Give an example that $S, T \in \LT(F^4)$, such that there is a subspace
+  that is invariant under $S$ but not $T$, and another subspace that is invariant under $T$ but not $S$.
+\end{exercise}
+\begin{proof}
+  $S(a, b, c, d) = (a, b, d, -c)$ and $T(a, c, -b, d)$,
+  then $U = \spanv((0, 0, 1, 0), (0, 0, 0, 1))$ and $W = \spanv((0, 0, 1, 0), (0, 1, 0, 0))$,
+  obviously $U$ is invariant under $S$ and $W$ is invariant under $T$,
+  and $T(0, 0, 1, 1) = (0, 1, -0, 1) \notin U$ and $S(0, 1, 1, 0) = (0, 1, 0, -1) \notin W$.
+\end{proof}
+
+\setcounter{exercise}{2}
+\begin{exercise}
+  Let $S, T \in \LT(V)$ and $S, T$ commute. Let $p \in \mathcal{P}(F)$.
+  \begin{itemize}
+    \item Show that $\nullv p(S)$ is invariant under $T$.
+    \item Show that $\rangev p(S)$ is invariant under $T$.
+  \end{itemize}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item For any $v \in \nullv p(S)$, we have $p(S)(Tv) = T(p(S)v) = T0 = 0$ (cause $S, T$ commute),
+          thus $Tv \in \nullv p(S)$.
+    \item For any $v \in \rangev p(S)$, we have $Tv = T(p(S)w) = p(S)(Tw) \in \rangev p(S)$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Prove or disporve: Let $A$ diagonal matrix and $B$ upper-triangular matrix with same size as $A$,
+  then $A, B$ is commute.
+\end{exercise}
+\begin{proof}
+  This can be disprove by Exercise 5.13 in E5D: $A, B$ commute means $B$
+  is diagonal matrix, as long as elements in the diagonal $A$ are distinct.
+\end{proof}
+
+\begin{exercise}
+  Show that a pair of operators in a finite vector space
+  are commute $\iff$ their dual operators are commute.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{align*}
+    ST = TS & \iff \M(S)\M(T) = \M(T)\M(S) \\
+            & \iff (\M(T)^T\M(S)^T)^T = (\M(S)^T\M(T)^T)^T \\
+            & \iff \M(T)^T\M(S)^T = \M(S)^T\M(T)^T \\
+            & \iff \M(T^\prime)\M(S^\prime) = \M(S^\prime)\M(T^\prime) \\
+            & \iff T^\prime S^\prime = S^\prime T^\prime
+  \end{align*}
+\end{proof}
+
+\begin{exercise}
+  Let $V$ a non-zero, finite, complex vector space, and $S, T \in \LT(V)$
+  are commute. Show that there is $\alpha, \lambda \in F$
+  such that
+  \[
+  \rangev(S - \alpha I) + \rangev(T - \lambda I) \neq V
+  \]
+\end{exercise}
+\begin{proof}
+  The goal is find a common eigenvector of $S, T$, fortunately,
+  there is common eigenvector for commute operators of non-zero, finite,
+  complex vector. Thus $\alpha, \lambda$ are the eigenvalues of that common
+  eigenvector.
+\end{proof}
+
+\begin{exercise}
+  Let $V$ complex vector space, $S \in \LT(V)$ is diagonalizable,
+  and $T \in \LT(V)$ commutes with $S$.
+  Show that there is a basis of $V$ such that
+  $\M(S)$ is diagonal and $\M(T)$ is upper-triangular.
+\end{exercise}
+\begin{proof}
+  I guess $V$ is finite. This proof basically a modified proof from book We induction on $\dim V$.
+  \begin{itemize}
+    \item Base($\dim V = 1$), trivial.
+    \item Base($\dim V = n + 1$): We know $S$ have at least one eigenvalue,
+          then $V = \spanv(v) \oplus W$ for some $W$.
+
+          Define $P(\alpha v + \beta w) = \beta w$ and $\hat{S}(w) = P(S(w))$ and
+          $\hat{T}(w) = P(T(w))$ two operators in $\LT(W)$. We will
+          show that $\hat{S}, \hat{T}$ commute.
+          $\hat{S}(\hat{T}w) = \hat{S}(P(Tw)) = \hat{S}(Tw - \alpha v) = P(STw - \alpha Sv) = P(TSw) - 0$,
+          similarly, $\hat{T}(\hat{S}w) = P(STw)$, thus $\hat{S}\hat{T} = \hat{T}\hat{S}$.
+
+          We then will show that $\hat{S}$ is diagonalizable,
+          suppose $v \in E(\lambda_0, S)$, then
+          $V = E(\lambda_0, S) \oplus E(\lambda_1, S) \oplus \cdots \oplus E(\lambda_{m - 1}, S)$,
+          where $E(\lambda_0, S) = \spanv(v) \oplus \spanv(w) \oplus \cdots$,
+          where $v, w, \cdots$ are basis of $E(\lambda_0, S)$,
+          thus we have $W = (\spanv(w) \oplus \cdots) \oplus E(\lambda_1, S) \oplus \cdots$.
+          For any vector in $E(\lambda_k, S)$ is also an eigenvector of $\hat{S}$,
+          and for any $v \in \spanv(w) \oplus \cdots$, $\hat{S}(w + \cdots) = S(w + \cdots) = \lambda w + \cdots = \lambda (w + \cdots) \in \spanv(w) \oplus \cdots$.
+
+          Then by induction hypothesis, there is a basis of $V$, say $v_1, \cdots, v_{n - 1}$
+          that $\hat{S}$ is diagonal and $\hat{T}$ is upper-triangular.
+          Then $v, v_1, \cdots, v_{n - 1}$ is a basis of $V$ where they are
+          eigenvectors of $S$ cause $\M(\hat{S})$ is diagonal and $v$ is an eigenvector of $S$.
+          Also we have $Tv = \lambda v$ as $v$ is also an eigenvector of $T$, and $Tv_k = \hat{T}(v_k) \in \spanv(v_1, \cdots, v_k) \subseteq \spanv(v, v_1, \cdots, v_k)$.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{8}
+\begin{exercise}
+  Let $V$ finite, non-zero, complex vector space and $\mathcal{E} \subseteq \LT(V)$,
+  such that any pair in $\mathcal{E}$ is commute.
+  \begin{itemize}
+    \item Show that there is a vector in $v$ such that it is eigenvector for all element in $\mathcal{E}$.
+    \item Show that there is a basis of $V$ such that any element in $\mathcal{E}$ is upper-triangular with respect to that basis.
+  \end{itemize}
+
+  Note that $\mathcal{E}$ can be infinite.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item Take any two element in $\mathcal{E}$, say $S, T$, we know there is a common eigenvector $v$ of $S$ and $T$.
+          Then $\spanv(v)$ is invariant under all element of $\mathcal{E}$, and
+          any element that restrict to $\spanv(v)$ have an eigenvector, therefore
+          $v$ is the common eigenvector for all element in $\mathcal{E}$.
+    \item Induction on $\dim V$:
+    
+          Base($\dim V = 1$): trivial. \\
+          Ind($\dim V = n + 1$): Let $v_0$ the common eigenvector of all element of $\mathcal{E}$,
+          then $V = \spanv(v_0) \oplus W$ for some $W$.
+          Define $P(\alpha v_0 + w) = w$, and $\hat{T_i}(w) = P(T_i(w))$ for all
+          $T_i \in \mathcal{E}$.
+          For any $T_i, T_j \in \mathcal{E}$, we have
+          $\hat{T_i}\hat{T_j}(w) = \hat{T_i}(P(T_j)w) = \hat{T_i}(T_jw - \alpha v_0) = P(T_iT_jw - \alpha T_i v_0)$,
+          recall that $v_0$ is the common eigenvector of all $T_k \in \mathcal{E}$,
+          thus $P(T_iT_jw - \alpha T_i v_0) = P(T_iT_jw)$,
+          similarly $\hat{T_j}\hat{T_i}w = P(T_jT_iw)$, therefore $\hat{T_i}, \hat{T_j}$ commute.
+
+          By induction hypothesis, we know there is a basis of $W$ such
+          that $\hat{T_i}$ is upper-triangular, say $v_1, \cdots, v_{n - 1}$.
+          Then the basis $\join{v}{n - 1}$ makes all $T_i$ upper-triangular,
+          cause $T_iv_0 \in \spanv(v_0)$ and $T_iv_j \in \spanv(v_1, \cdots, v_{n - 1}) \subseteq \spanv(\join{v}{n - 1})$ for any $j = 1, \cdots, n - 1$.
+  \end{itemize}
+\end{proof}
+
+\end{document}

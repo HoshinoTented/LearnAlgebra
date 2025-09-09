@@ -1,0 +1,113 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+\setcounter{section}{6}
+
+\setcounter{definition}{1}
+\begin{definition}
+  A \textbf{inner product} of a vector space $V$
+  is a function that maps $u, v \in V$ to $\langle u,v \rangle \in F$,
+  and it satisfies:
+  \begin{itemize}
+    \item Positivity: $\langle v, v \rangle \ge 0$.
+    \item Definiteness: $\langle v, v \rangle = 0 \iff v = 0$.
+    \item Additivity: $\langle u + v, w \rangle = \langle u, w \rangle + \langle v, w \rangle$
+    \item Homogeneity: $\langle \lambda v, w \rangle = \lambda \langle v, w \rangle$.
+    \item Conjugate Symmetry: $\langle u, v \rangle = \overline{\langle v, u \rangle}$
+  \end{itemize}
+\end{definition}
+
+\setcounter{definition}{3}
+\begin{definition}
+  A vector space equipped with an inner product is called an \textbf{inner product space}.
+\end{definition}
+
+We assume vector spaces $V, W$ are inner product space for the rest of chapter.
+
+\setcounter{theorem}{5}
+\begin{theorem}
+  Properties of inner product:
+  \begin{itemize}
+    \item Let $v \in V$, then $\langle -, v \rangle$ is a linear map $V \rightarrow F$.
+    \item For any $v \in V$, we have $\langle 0, v \rangle = \langle v, 0 \rangle = 0$.
+    \item For any $u, v, w \in V$, $\langle u, v + w \rangle = \langle u, v \rangle + \langle u, w \rangle$.
+    \item For any $v, w \in V$ and $\lambda \in F$, $\langle u, \lambda v \rangle = \overline{\lambda} \langle u, v \rangle$.
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item Trivial from the definition.
+    \item First, $\langle 0, v \rangle = 0$ since $\langle -, v\rangle$ is a linear map, thus maps $0$ to $0$.
+          Then $\langle v, 0 \rangle = \overline{\langle 0, v \rangle} = \overline{0} = 0$.
+    \item $\langle u, v + w \rangle = \overline{\langle v + w, u \rangle} = \overline{\langle v, u \rangle + \langle w, u \rangle} = \overline{\langle v, u \rangle} + \overline{\langle w, u \rangle} = \langle u, v \rangle + \langle u, w \rangle$.
+    \item $\langle u, \lambda v \rangle = \overline{\langle \lambda v, u \rangle} = \overline{\lambda \langle v, u \rangle} = \overline{\lambda} \overline{\langle v, u \rangle} = \overline{\lambda} \langle u, v \rangle$
+  \end{itemize}
+\end{proof}
+
+\setcounter{definition}{6}
+\begin{definition}
+  For any $v \in V$, the \textbf{norm} of $v$ is denoted by $\norm{v}$,
+  and is defined by:
+  \[
+  \norm{v} = \sqrt{\ip{v}{v}}
+  \]
+\end{definition}
+
+\setcounter{theorem}{8}
+\begin{theorem}
+  Let $v \in V$,
+  \begin{itemize}
+    \item $\norm{v} = 0 \iff v = 0$.
+    \item For any $\lambda \in F$, $\norm{\lambda v} = |\lambda| \norm{v}$.
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item Trivial by the definition of inner product.
+    \item $\norm{\lambda v} = \ip{\lambda v}{\lambda v} = \sqrt{\lambda \overline{\lambda}} \ip{v}{v} = |\lambda| \norm{v}$.
+  \end{itemize}
+\end{proof}
+
+\setcounter{definition}{9}
+\begin{definition}
+  Let $u, v \in V$, $u$ and $v$ are \textbf{orthogonal} $\iff$ $\ip{u}{v} = 0$
+\end{definition}
+
+\setcounter{theorem}{10}
+\begin{theorem}
+  ~
+  \begin{itemize}
+    \item $0$ is orthogonal to any $v \in V$.
+    \item $0$ is the only vector that orthogonal to itself.
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+  Both trivial by the definition, $(1)$ is equivalent to $\langle 0, v \rangle = 0$ and
+  $(2)$ is equivalent to $\langle v, v \rangle = 0 \iff v = 0$.
+\end{proof}
+
+\begin{theorem}[勾股定理]
+  Let $u, v \in V$, if $u$ is orthogonal to $v$, then
+  $\norm{u + v}^2 = \norm{u}^2 + \norm{v}^2$.
+\end{theorem}
+\begin{proof}
+  \begin{align*}
+    \norm{u + w}^2 &= \ip{u + w}{u + w} \\
+    &= \ip{u}{u + w} + \ip{w}{u + w} \\
+    &= \ip{u}{u} + \ip{u}{w} + \ip{w}{u} + \ip{w}{w} \\
+    &= \ip{u}{u} + \ip{w}{w}
+  \end{align*}
+  The last equation is by $\ip{u}{w} = \ip{w}{u} = 0$ cause $u, w$ are orthogonal.
+\end{proof}
+
+\begin{theorem}[One Orthogonal Factorization]\label{T6.13}
+  Let $u, v \in V$ and $v \neq 0$. Let $c = \displaystyle \frac{\ip{u}{v}}{\norm{v}^2}$
+  and $w = u - cv$, then $u = cv + w$ and $w \perp v$.
+\end{theorem}
+\begin{proof}
+  嗯算。
+\end{proof}
+
+\end{document}

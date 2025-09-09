@@ -1,0 +1,468 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{5}
+
+\begin{document}
+
+\begin{exercise}
+  Let $V$ a vector space over $\mathbb{C}$ and $T \in \LT(V)$.
+  Show that
+  \begin{itemize}
+    \item $T^4 = I$ implies $T$ is diagonalizable.
+    \item $T^4 = T$ implies $T$ is diagonalizable.
+    \item Give an example that $T \in \LT(C^2)$ such that $T^4 = T^2$ while $T$ is not diagonalizable.
+  \end{itemize}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $T^4 = I$ implies $p(z) = z^4 - 1$ and $p(T) = 0$, then $p(z) = (z + i)(z - i)(z + 1)(z - 1)$
+          where $i, -i, 1, -1$ are distinct to each others, and $p$ is polynomial multiple of the minimal polynomial of $T$,
+          thus $T$ is diagonalizable.
+    \item $T^4 = T$ implies $p(z) = z^4 - z$ and $p(T) = 0$,
+          then $p(z) = (z - 0)(z^3 - 1) = (z - 0)(z - (\cos(120^\circ) + i \sin(120^\circ)))(z - (\cos(120^\circ - i \sin(120^\circ))))(z - 1)$,
+          thus $T$ is diagonalizable.
+    \item Maybe $\begin{bmatrix}
+      0 & 0 \\
+      1 & 0 \\
+    \end{bmatrix}$? I have no idea why $C^2$.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{2}
+\begin{exercise}
+  Let $V$ finite and $T \in \LT(V)$ Show that $T$ is diagonalizable, then $V = \nullv T \oplus \rangev T$.
+\end{exercise}
+\begin{proof}
+  Let $v \in \nullv T \cap \rangev T$,
+  then $Tv = 0$ and $Tv = T(\lb{c}{v}{n - 1}) = \lambda_0 c_0 v_0 + \cdots + \lambda_{n - 1}c_{n - 1}v_{n - 1}$
+  where $\lambda_i$ are the numbers in the diagonal of the matrix of $T$.
+  Since $\join{v}{n - 1}$ is linear independent, then $\joinp{\lambda}{c}{n - 1}$
+  is all zero, if $\join{\lambda}{n - 1}$ is not all zero, then $v = 0$,
+  which means $\nullv T + \rangev T$  is a direct sum and $\dim V = \nullv T + \rangev T$,
+  thus $V = \nullv T \oplus \rangev T$.
+  If $\join{\lambda}{n - 1}$ is all zero, then $T = 0$, thus $V = \nullv T \oplus \0$.
+\end{proof}
+
+\setcounter{exercise}{4}
+\begin{exercise}
+  Let $V$ finite vector space over $\mathbb{C}$ and $T \in \LT(V)$.
+  Show that $T$ is diagonalizable $\iff$ $V = \nullv (T - \lambda I) \oplus \rangev (T - \lambda I)$
+  for any $\lambda \in \mathbb{C}$.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item For any $\lambda \in \mathbb{C}$, $T - \lambda I$ is also diagonalizable since both $T$ and $- \lambda I$ are diagonalizable,
+          thus $V = \nullv (T - \lambda I) \oplus \rangev (T - \lambda I)$.
+    \item We induction on the dimension of $V$
+
+          Base($\dim V = 1$): Clearly $T$ is diagonalizable.
+
+          Ind($\dim V = n + 1$): Since $T$ is an operator of finite complex vector space, then there is $\lambda \in \mathbb{C}$
+          an eigenvalue of $T$, thus $\nullv (T - \lambda I) = E(\lambda, T)$,
+          also we have $\rangev (T - \lambda I)$ is invariant under $T$ 
+          (since $\rangev p(T)$ is invariant under $T$ for any $p \in \mathcal{P}(F)$).
+          We may define $U = \rangev (T - \lambda I)$, then $T\big|_U$ is an opeartor
+          on $U$, which has lower dimension.
+          Furthermore, for any $\alpha \in \mathbb{C}$, $\nullv (T\big|_U - \alpha I) \subseteq \nullv (T - \alpha I)$
+          and $\rangev (T\big|_U - \alpha I) \subseteq \rangev (T - \alpha I)$,
+          also $\nullv (T - \alpha I) \cap \rangev (T - \alpha I) = \0$,
+          thus $\nullv (T\big|_U - \alpha I) \cap \rangev (T\big|_U - \alpha I) = \0$,
+          therefore $U = \nullv (T\big|_U - \alpha I) \oplus \rangev (T\big|_U - \alpha I)$.
+          Hence $T\big|_U$ is diagonalizable by the induction hypothesis,
+          then $U = E(\lambda_1, T\big|_U) \oplus \cdots \oplus E(\lambda_{n - 1}, T\big|_U)$
+          where $E(\lambda_i, T\big|_U) \subseteq E(\lambda_i, T)$,
+          also, $V = E(\lambda, T) \oplus U$, therefore $E(\lambda_i, T\big|_U) = E(\lambda_i, T)$
+          otherwise the dimension doesn't match.
+
+          Now, $V = E(\lambda, T) \oplus E(\lambda_1, T) \oplus \cdots \oplus E(\lambda_{n - 1}, T)$,
+          thus $T$ is diagonalizable.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $T \in \LT(F^5)$ and $\dim E(8, T) = 4$, show that $T - 2I$ or $T - 6I$ is invertible.
+\end{exercise}
+\begin{proof}
+  Basically it says that $\dim F^5 = 5$ and $\dim E(8, T) = 4$, therefore $T$
+  can only have one another eigenvalue, thus $T$ can not have both eigenvalue $2$ and $6$,
+  therefore one of $T - 2I$ and $T - 6I$ is invertible.
+\end{proof}
+
+\begin{exercise}
+  Let $T \in \LT(V)$ and $T$ inveritble. Show that
+  \[
+  E(\lambda, T) = E(\frac{1}{\lambda}, \inv{T})
+  \]
+  for all $\lambda \in F$ where $\lambda \neq 0$.
+\end{exercise}
+\begin{proof}
+  For any $\lambda \in F$ where $\lambda \neq 0$, if
+  \begin{itemize}
+    \item $\lambda$ is an eigenvalue of $T$, then $\frac{1}{\lambda}$ is an eigenvalue of $\inv{T}$.
+          For any $v \in E(\lambda, T)$, then $\inv{T}v = \inv{T}(\frac{1}{\lambda}Tv) = \frac{1}{\lambda}\inv{T}(Tv) = \frac{1}{\lambda}v$
+          and vice versa
+    \item $\lambda$ is not an eigenvalue of $T$, then $\frac{1}{\lambda}$ is not an eigenvalue of $\inv{T}$,
+          therefore $E(\lambda, T) = E(\frac{1}{\lambda}, \inv{T}) = \0$.
+  \end{itemize}
+\end{proof}
+
+\setcounter{exercise}{9}
+\begin{exercise}
+  Find $R, T \in \LT(F^4)$ with eigenvalues $2, 6, 7$ only, that
+  there is no $S \in \LT(F^4)$ such that $R = \inv{S}TS$.
+\end{exercise}
+\begin{proof}
+  Let $R \in \LT(F^4)$ such that $\dim E(2, R) = 2$ and $R \in \LT(F^4)$ such that $\dim E(6, R) = 2$.
+  Then for any $S \in \LT(F^4)$ such that $R = \inv{S}TS$, we have
+  $R - 2 I = \inv{S}TS - 2I = \inv{S}TS - 2\inv{S}IS = \inv{S}(T - 2I)S$.
+  Then $\nullv R - 2I = E(2, R) = \nullv (\inv{S}(T - 2I)S)$, it is easy
+  to see that $\dim \nullv (\inv{S}(T - 2I)(S)) = \dim E(2, T)$,
+  however $\dim E(2, T) = 1$ and $\dim E(2, R) = 2$, therefore no such $S$.
+\end{proof}
+
+\begin{exercise}
+  Find $T \in \LT(\mathbb{C}^3)$ such that
+  $6, 7$ are eigenvalues of $T$,
+  and $T$ is not diagonalizable.
+\end{exercise}
+\begin{proof}
+  That means we need to find a $T$ such that which minimal polynomial is
+  $p(z) = (z - 6)(z - 7)^2$ or $(z - 6)^2(z - 7)$, we will find one
+  for the former one. The formula reminds us that there is $w \in \mathbb{C}^3$
+  such that $(T - 7I)w \neq 0$ but $(T - 7I)^2w = 0$, which means $(T - 7I)w \in E(7, T)$.
+  We may let $w = (0, 0, 1)$ and $(T - 7I)w = (0, 1, 0)$, which is much simple.
+  Then $T(0, 0, 1) - (0, 0, 7) = (0, 1, 0)$ gives us $T(0, 0, 1) = (0, 1, 7)$
+  and we can get:
+  \[
+  \M(T) = \begin{bmatrix}
+    6 &   &   \\
+      & 7 & 1 \\
+      &   & 7 \\
+  \end{bmatrix}
+  \]
+  with respect to the standard basis of $\mathbb{C}^3$.
+
+  Clearly for $p(z) = (z - 6)(z - 7)^2$, we have $p(T) = 0$, and $6, 7$ are eigenvalues
+  of $T$, thus we only need to show that $q(z) = (z - 6)(z - 7)$ doesn't make $q(T) = 0$
+  (cause $\deg p = 3$ and $\deg q = 2$, where the minimal polynomial is a polynomial multiple of $q$).
+  Then $(T - 6I)(T - 7I)(0, 0, 1) = (T - 6I)(0, 1, 0) \neq 0$ since $(0, 1, 0) \notin E(6, T)$.
+  Thus $T$ has eigenvalue $6, 7$ and cannot be diagonalized.
+\end{proof}
+
+\begin{exercise}
+  Let $T \in \LT(\mathbb{C}^3)$ such that $6, 7$ are eigenvalues of $T$,
+  and $T$ is not diagonalizable. Show that there is $(z_0, z_1, z_2) \in \mathbb{C}^3$
+  such that $T(\join{z}{2}) = (6 + 8z_0, 7 + 8z_1, 13 + 8z_2)$.
+\end{exercise}
+\begin{proof}
+  Before proving, we can verify the previous proof, we can see:
+  $T(-3, -7, -20)$ holds (by solving equation like $6 + 8z_0 = 6z_0$).
+
+  And I can't prove it (maybe i can, but 2 complicate.)
+\end{proof}
+
+\begin{exercise}
+  Let $A$ is diagonal matrix with distinct element in diagonal, and matrix $B$
+  has the same size as $A$.
+  Show that $AB = BA$ $\iff$ $B$ is diagonal matrix.
+\end{exercise}
+\begin{proof}
+  $(\Leftarrow)$ is trivial, since elements in a field is communitive on multiplication.
+
+  We can see $i$-th line of $AB$ is $\alpha_i$ times $i$-th line of $B$,
+  and the $i$-th column of $BA$ is $\alpha_i$ times $i$-th column of $B$.
+
+  Thus for any $i, j = 0, \cdots, n - 1$, we have $(AB)_{i, j} = \alpha_i B_{i, j}$
+  and $(BA)_{i, j} = \alpha_j B_{i, j}$, thus $\alpha_i B_{i, j} = \alpha_j B_{i, j}$.
+  If $B_{i, j} = 0$, then the proof is complete, otherwise $\alpha_i = \alpha_j$,
+  while the elements in diagonal of $A$ are distinct, thus $i = j$.
+
+  Therefore, elements that is not in the diagonal of $B$ is $0$, hence $B$ is a diagonal matrix.
+\end{proof}
+
+\begin{exercise}
+  \begin{itemize}
+    \item Find $V$ a finite vector space over $\mathbb{C}$ and $T \in \LT(V)$, such that $T^2$ is diagonalizable but $T$ isn't.
+    \item Let $F = \mathbb{C}$ and $k$ a positive integer, show that $T$ is diagonalizable $\iff$ $T^k$ is diagonalizable.
+  \end{itemize}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $V = \mathbb{C}^2$ and $T(x, y) = (y, 0)$, which matrix is (with respect to the standard basis):
+          \[
+          \begin{bmatrix}
+            0 & 1 \\
+            0 & 0 \\
+          \end{bmatrix}
+          \]
+          and $p(T) = T^2 = 0$ is the minimal polynomial of $T$.
+    \item $(\Rightarrow)$ if $T$ is diagonalizable obviously $T^k$ is diagonalizable.
+          
+          $(\Leftarrow)$ if $T^k$ is diagonalizable, let $p$ the minimal polynomial of $T^k$.
+          Then let $q(z) = (z^k - \lambda_0) \cdots (z^k - \lambda_{m - 1})$
+          where $\join{\lambda}{m - 1}$ are distinct elements in the diagonal of $T^k$,
+          therefore $q(T) = (T^k - \lambda_0) \cdots (T^k - \lambda_{m - 1}) = 0$,
+          hence $q$ is polynomial multiple of the minimal polynomial of $T$.
+
+          Note that for complex number $c$, $z^k - c$ have $k$ different zeros,
+          then $q(z)$ consists of $k^k$ term like $z - \lambda_i$ where $\lambda_i$
+          are distinct to each others. Thus
+          the minimal polynomial of $T$ is also in a similar form
+          such that $T$ is diagonalizable.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $V$ finite vector space over $\mathbb{C}$, $T \in \LT(V)$,
+  and $p$ is the minimal polynomial of $T$.
+  Show that the following statements are equivalent:
+  \begin{itemize}
+    \item $T$ is diagonalizable
+    \item There is no $\lambda \in \mathbb{C}$ such that $p$ is polynomial multiple of $(z - \lambda)^2$.
+    \item $p$ and $p^\prime$ share no zero.
+    \item The greatest common divisor (gcd) of $p$ and $p^\prime$ is $1$ (in other words, they are coprime).
+  \end{itemize}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(1) \Rightarrow (2)$ Trivial, since $p$ must in form of $(z - \lambda_0) \cdots (z - \lambda_{n - 1})$ where $\join{\lambda}{n - 1}$ are distinct.
+    \item One idea is that $p$ and $p^\prime$ share the same zero means $z - \lambda$ in both $p$ and $p^\prime$,
+          thus there must be $(z - \lambda)^2$ or higher in $p$ so that $(z - \lambda)$ in $p^\prime$.
+          But I can't give a formal prove, maybe FIXME later.
+    \item $(3) \Rightarrow (2)$ If $p$ is polynomial multiple of $(z - \lambda)^2$, then $p(z) = (z - \lambda)^2q(z)$,
+          thus $p^\prime(z) = (z - \lambda)^2q^\prime(z) + 2(z - \lambda)q(z)$, thus $\lambda$ is zero of $p$ and $p^\prime$,
+          which contradict our assumption.
+    \item $(3) \Rightarrow (4)$ Let $d$ is the common divisor of $p$ and $p^\prime$.
+          The zero of $d$ is also the zero of $p$ and $p^\prime$, however,
+          we know there is no zero for $d$ since our assumption (since our vector space is finite and over $\mathbb{C}$).
+          That means $\deg d = 1$, also, $p$ is monic polynomial, and $d(z)$ is the gcd of
+          the first coefficient of $p$ and $p^\prime$, which is $\gcd(1, \lambda) = 1$.
+
+          In fact $(3) \iff (4)$, $(3) \Leftarrow (4)$ is much trivial.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $T \in \LT(V)$ diagonalizable, $\join{\lambda}{n - 1}$ are distinct
+  eigenvalues of $T$. Show that $U \subseteq V$ a subspace is invariant under $T$
+  $\iff$ there is $\join{U}{n - 1} \subseteq V$ such that $U_{k - 1} \subseteq E(\lambda_{k - 1}, T)$
+  and $U = \Oplus{U}{n - 1}$.
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ We can see $T\big|_U$ is an operator on $U$, consider the minimal polynomial $p$
+          of $T$, then $p(T\big|_U) = 0$, therefore $p$ is polynomial multiple of the minimal polynomial of $T\big|_U$,
+          also $p$ is in form of $(z - \lambda_0) \cdots (z - \lambda_{n - 1})$ where $\lambda_i$ are distinct,
+          thus the minimal polynomial of $T\big|_U$ is in a similar form, therefore $T\big|_U$
+          is diagonalizable with eigenvalues $\join{\lambda}{m - 1}$, note that $T\big|_U$ may have less eigenvalues.
+          Then $U = E(\lambda_0, T\big|_U) \oplus \cdots \oplus E(\lambda_{m - 1}, T\big|_U) \oplus E(\lambda_m, T\big|_U) \oplus \cdots \oplus E(\lambda_{n - 1}, T\big|_U)$
+          where $E(\lambda_{i - 1}, T\big|_U) \subseteq E(\lambda_{i - 1}, T)$ for all $i = 1, \cdots, m$
+          and $E(\lambda_{m + i - 1}, T\big|_U) = \0 \subseteq E(\lambda_{m + i - 1}, T)$ for all $i = 1, \cdots, n - m$.
+    \item Trivial, for any $u \in U_{k - 1} \subseteq E(\lambda_{k - 1}, T)$, we have $Tu = \lambda_{k - 1} u$,
+          thus $U_{k - 1}$ is invariant under $T$, therefore $U$ is invariant under $T$,
+          where $U = \Oplus{U}{n - 1}$
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $V$ finite, show that there is a basis which consists of
+  diagonalizable operators for $\LT(V)$.
+\end{exercise}
+\begin{proof}
+  Let $\join{v}{n - 1}$ a basis of $V$, then
+  define $T_{i - 1}(v) = \varphi_i(v)v_i$ where $\varphi_i$ is dual basis of $\join{v}{n - 1}$.
+  Then $\join{T}{n - 1}$ is linear independent with length $n$,
+  therefore it is a basis of $\LT(V)$.
+
+  $T_i$ is diagonalizable since $p(z) = (z - 0)(z - 1)$ and $p(T) = 0$.
+\end{proof}
+
+\begin{exercise}
+  Let $T \in \LT(V)$ is diagonalizable, and $U \subseteq V$ is invariant under $T$.
+  Show that $T/U$ is diagonalizable.
+\end{exercise}
+\begin{proof}
+  The minimal polynomial of $T$ is polynomial multiple of the minimal polynomial of $T/U$.
+\end{proof}
+
+\begin{exercise}
+  Prove or disprove: Let $T \in \LT(V)$ and $U$ is invariant under $T$, $T\big|_U$ and $T/U$ is diagonalizable
+  show that $T$ is diagonalizable.
+\end{exercise}
+\begin{proof}
+  Unlike a similar statement about upper-triangular (see Exercise 5.13 in E5C),
+  diagonalizable matrix requires that which minimal polynomial has no factor like $(z - \lambda)^2$.
+
+  Consider $T(x, y) = (x, x + y)$, which matrix is:
+  \[
+  \begin{bmatrix}
+    1 & 1 \\
+    0 & 1 \\
+  \end{bmatrix}
+  \].
+
+  Let $U = \spanv((1, 0)) = E(1, T)$, then $T\big|_U$ and $T/U$ is diagonalizable since
+  $U$ and $V/U$ have dimension $1$, however $T$ is not diagonalizable since $p(z) = (z - 1)^2$
+  is the minimal polynomial of $T$, we have $(T - I)(0, 1) = (1, 1) - (0, 1) = (1, 0)$.
+\end{proof}
+
+\begin{exercise}
+  Let $V$ finite and $T \in \LT(V)$. Show that $T$ is diagonalizable $\iff$ $T^\prime$
+  is diagonalizable
+\end{exercise}
+\begin{proof}
+  $T$ and $T^\prime$ have the same minimal polynomial.
+\end{proof}
+
+\begin{exercise}
+  A fibonacci sequence $F_0, F_1, F_2, \cdots$ is defined by:
+  \[
+  F_0 = 0, F_1 = 1 \quad \text{and} \quad F_n = F_{n - 2} + F_{n - 1} \quad \forall n \ge 2.
+  \].
+
+  Define $T \in \LT(\mathbb{R}^2)$ by $T(x, y) = (y, x + y)$.
+  \begin{enumerate}
+    \item Show that $T^n(0, 1) = (F_n, F_{n + 1})$ for any non-negative $n$.
+    \item Find the eigenvalues of $T$.
+    \item Find a basis of $R^2$ which consists of eigenvectors of $T$.
+    \item Use $(3)$ to calculate $T^n(0, 1)$ and conclude that:
+          \[
+          F_n = \frac{1}{\sqrt{5}}\Big[ \Big(\frac{1 + \sqrt{5}}{2}\Big)^n - \Big(\frac{1 - \sqrt{5}}{2}\Big)^n \Big]
+          \]
+          for any non-negative $n$.
+    \item Use $(4)$ to conclude that $F^n$ is an integer that nearest to $\frac{1}{\sqrt{5}}(\frac{1 + \sqrt{5}}{2})^n$
+          for any non-positive $n$.
+  \end{enumerate}
+\end{exercise}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item Induction on $n$.
+    
+          Base($n = 0$): $T^0(0, 1) = (0, 1) = (F_0, F_1)$.
+
+          Base($n = 1$): $T^1(0, 1) = (1, 1) = (F_1, F_2)$.
+
+          Ind($n = n + 1$): $T^{n + 1}(0, 1) = T(T^n(0, 1)) = T(F_n, F_{n + 1}) = (F_{n + 1}, F_n + F_{n + 1}) = (F_{n + 1}, F_{n + 2})$.
+    \item Suppose $F(x, y) = (y, x + y) = \lambda (x, y)$ where $(x, y) \neq 0$, then:
+          \begin{align*}
+            \lambda x & = y \\
+            \lambda y & = x + y \\
+          \end{align*}
+          therefore
+          \begin{align*}
+            \lambda^2 x &= x + \lambda x
+          \end{align*}
+          we may suppose $x \neq 0$, otherwise $x = y = 0$ then $(x, y) = 0$ gives us $\bot$,
+          therefore
+          \begin{align*}
+            \lambda^2 = \lambda + 1
+          \end{align*}
+          has solution $\lambda = \frac{1 \pm \sqrt{5}}{2}$.
+    \item We denote $\frac{1 + \sqrt{5}}{2}$ by $\lambda_0$ and $\frac{1 - \sqrt{5}}{2}$ by $\lambda_1$.
+          Thus we have $E(\lambda_0, T) = \spanv((1, \lambda_0), T)$ and $E(\lambda_1, T) = \spanv((1, \lambda_1))$.
+    \item First, by the change-of-basis formula, we have:
+          \[
+            \M(T) = \begin{bmatrix}
+              1 & 1 \\
+              \lambda_0 & \lambda_1 \\
+            \end{bmatrix}
+            \begin{bmatrix}
+              \lambda_0 & \\
+              & \lambda_1 \\
+            \end{bmatrix}
+            \frac{1}{\sqrt{5}}
+            \begin{bmatrix}
+              \lambda_1 & 1 \\
+              - \lambda_1 & - 1 \\
+            \end{bmatrix}
+          \]
+          therefore
+          \begin{align*}
+            \M(T^n(0, 1)) &=
+            \begin{bmatrix}
+                1 & 1 \\
+                \lambda_0 & \lambda_1 \\
+            \end{bmatrix}
+            \begin{bmatrix}
+              \lambda_0 & 0 \\
+              0 & \lambda_1 \\
+            \end{bmatrix}^n
+            \frac{1}{\sqrt{5}}
+            \begin{bmatrix}
+              \lambda_1 & 1 \\
+              - \lambda_1 & - 1 \\
+            \end{bmatrix}
+            \begin{bmatrix}
+              0 \\ 1
+            \end{bmatrix} \\
+            &=
+            \begin{bmatrix}
+              1 & 1 \\
+              \lambda_0 & \lambda_1 \\
+            \end{bmatrix}
+            \begin{bmatrix}
+              \lambda_0^n & 0 \\
+              0 & \lambda_1^n \\
+            \end{bmatrix}
+            \frac{1}{\sqrt{5}}
+            \begin{bmatrix}
+              1 \\ -1
+            \end{bmatrix} \\
+            &=
+            \frac{1}{\sqrt{5}}
+            \begin{bmatrix}
+              1 & 1 \\
+              \lambda_0 & \lambda_1 \\
+            \end{bmatrix}
+            \begin{bmatrix}
+              \lambda_0^n \\ - \lambda_1^n
+            \end{bmatrix} \\
+            &=
+            \frac{1}{\sqrt{5}}
+            \begin{bmatrix}
+              \lambda_0^n - \lambda_1^n \\
+              \lambda_0^{n + 1} - \lambda_1^{n + 1} \\
+            \end{bmatrix}
+          \end{align*}
+          where the first component is $F_n$ and the second component is $F_{n - 1}$,
+          therefore:
+          \[
+          F^n = \frac{1}{\sqrt{5}}(\lambda_0^n - \lambda_1^n)
+          \]
+          where $\lambda = \frac{1 \pm \sqrt{5}}{2}$.
+    \item We want to show that $F^n$ is the nearest integer to $\frac{1}{\sqrt{5}}(\frac{1 + \sqrt{5}}{2})^n$,
+          that means we need to show:
+          \begin{align*}
+            \big|\frac{1}{\sqrt{5}}(\frac{1 - \sqrt{5}}{2})^n\big| & \le \frac{1}{2}
+          \end{align*}
+          Then $\big|\frac{1 - \sqrt{5}}{2}\big| \le 1$, thus we only need to show:
+          \begin{align*}
+            \big|\frac{1}{\sqrt{5}}(\frac{1 - \sqrt{5}}{2})\big| & \le \frac{1}{2} \\
+            \big|\frac{1 - \sqrt{5}}{\sqrt{5}}\big| & \le 1 \\
+            \big|1 - \sqrt{5}\big| & \le \sqrt{5} \\
+          \end{align*}
+          Obviously $\sqrt{5} > 2$ and $|1 - \sqrt{5}| < 2$.
+  \end{itemize}
+\end{proof}
+
+\begin{exercise}
+  Let $T \in \LT(V)$ and $A$ is an $n \times n$ matrix of $T$ with respect to some basis of $V$.
+  Show that
+  \[
+  |A_{j, j}| > \sum^{n}_{\substack{k = 1 \\ k \neq j}} |A_{j, k}|
+  \]
+  implies $T$ is invertible.
+\end{exercise}
+\begin{proof}
+  Gershgroin disk theorem says that any eigenvalue of $T$ is in some gershgroin disk,
+  therefore we can see $0$ is not an eigenvalue of $T$, otherwise the inequality above
+  becomes $\ge$.
+\end{proof}
+
+\end{document}

@@ -1,13 +1,16 @@
 \documentclass[14pt]{extarticle}
 
+\usepackage{graphicx}
+\usepackage{subfiles}
+
 \usepackage[T1]{fontenc}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsthm,amsmath,amssymb}
+\usepackage{xr}
 \usepackage{varioref}
 \usepackage{hyperref}
 \usepackage{cleveref}
-
-\usepackage{subfiles}
+\usepackage{xeCJK}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}{Lemma}[section]
@@ -36,6 +39,8 @@
 \newcommand{\M}{\mathcal{M}}
 \newcommand{\poly}[2][x]{#2[#1]}
 \newcommand{\Poly}[1][]{\mathcal{P}#1(\mathbb{R})}
+\newcommand{\norm}[1]{\left\Vert #1 \right\Vert}
+\newcommand{\ip}[2]{\langle #1 , #2\rangle}
 
 % Vector Spaces
 \newcommand{\U}{\mathnormal{V}}
@@ -44,6 +49,7 @@
 
 % Linear Transformations
 \newcommand{\LT}{\mathcal{L}}
+\newcommand{\lb}[3]{\joinp[+]{#1}{#2}{#3}}
 
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\spanv}{span}
@@ -57,6 +63,9 @@
 \subfile{./Chapters/C3F.tex}
 \subfile{./Chapters/C4.tex}
 \subfile{./Chapters/C5C.tex}
+\subfile{./Chapters/C5D.tex}
+\subfile{./Chapters/C5E.tex}
+\subfile{./Chapters/C6A.tex}
 \subfile{./Exercises/E3A.tex}
 \subfile{./Exercises/E3B.tex}
 \subfile{./Exercises/E3C.tex}
@@ -67,5 +76,8 @@
 \subfile{./Exercises/E5A.tex}
 \subfile{./Exercises/E5B.tex}
 \subfile{./Exercises/E5C.tex}
+\subfile{./Exercises/E5D.tex}
+\subfile{./Exercises/E5E.tex}
+\subfile{./Exercises/E6A.tex}
 
 \end{document}

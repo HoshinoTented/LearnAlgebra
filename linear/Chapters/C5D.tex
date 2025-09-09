@@ -1,0 +1,44 @@
+\documentclass[../main.tex]{subfiles}
+
+\setcounter{section}{5}
+
+\begin{document}
+
+\setcounter{theorem}{61}
+
+\begin{theorem}
+  Let $V$ finite, $T \in \LT(V)$. Show that $T$ is diagonalizable
+  $\iff$ the minimal polynomial of $T$
+  is in form of $(z - \lambda_0) \cdots (z - \lambda_{n - 1})$
+  where $\join{\lambda}{n - 1} \in F$ are distinct to each others.
+\end{theorem}
+\begin{proof}
+  ~
+  \begin{itemize}
+    \item $(\Rightarrow)$ Let $p(z) = (z - \lambda_0) \cdots (z - \lambda_{n - 1})$
+          where $\join{\lambda}{n - 1}$ are distinct numbers in the diagonal of $\mathcal{M}(T)$.
+          Then $p(T)v_i = (T - \lambda_0) \cdots (T - \lambda_i) (T - \lambda_{i + 1}) \cdots (T - \lambda_{n - 1})v_i$,
+          we can see $(T - \lambda_k)v = (\lambda_i - \lambda_k)v \neq 0$, therefore $(T - \lambda_i)(\lambda v) = 0$
+          where $\lambda v = (T - \lambda_{i + 1}) \cdots (T - \lambda_{n - 1})v_i$.
+          In breif, $T - \lambda_k$ eliminates all vector with eigenvalue $\lambda_k$ in basis in vector $v = \lb{\lambda}{v}{n - 1}$.
+          therefore $p(T)$ eliminates all $v_k$ of a vector $v \in V$, thus $p(T) = 0$
+
+          $p(T)v = p(T)(\lb{\lambda}{v}{n - 1}) = \lambda_0 p(T)v_0 + \cdots + \lambda_{n - 1}p(T)v_{n - 1} = 0 + \cdots + 0 = 0$.
+    \item $(\Leftarrow)$ Induction on $n$.
+
+          Base($n = 1$): $p(T) = (T - \lambda_0I)$, then $T = \lambda_0 I$, which is diagonal matrix.
+
+          Ind($n = n + 1$): Consider $T - \lambda_{n + 1 - 1}$ and define $U = \rangev (T - \lambda_n)$.
+          It is easy to verify that $U$ is invariant under $T$.
+          Then $q(T\big|_U) = (T - \lambda_0) \cdots (T - \lambda_{n - 1}) = 0$,
+          therefore $U$ is diagonalizable.
+          Thus $U = E(\lambda_0, T\big|_U) \oplus \cdots \oplus E(\lambda_{n - 1}, T\big|_U)$,
+          note that $\dim V = \dim \nullv T + \dim \rangev T = \dim E(\lambda_n, T) + \dim U$,
+          thus we need to show that $U + E(\lambda_n, T)$ is a direct sum, which is
+          immediately holds by the property of eigenspace.
+          Thus $V = U \oplus E(\lambda_n), T$, which is a direct sum of eigenspace
+          while $\join{\lambda}{n}$ are all distinct eigenvalue of $T$ (since they are zeros of the minimal polynomial of $T$).
+  \end{itemize}
+\end{proof}
+
+\end{document}

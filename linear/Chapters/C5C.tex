@@ -8,8 +8,7 @@
 \begin{document}
 
 \setcounter{theorem}{38}
-\begin{theorem}
-  \label{T5.39}
+\begin{theorem}\label{T5.39}
   Let $T \in \LT(V)$ and $\join{v}{n - 1}$ a basis of $V$, then the following
   statements are equivalent to each others.
   \begin{itemize}
@@ -31,7 +30,7 @@
 \end{proof}
 
 \begin{theorem}
-  \label{T5.40}
+  \label{a}
   Let $T \in \LT(V)$ and $\join{v}{n - 1}$ a basis of $V$, such that $\mathcal{M}(T)$
   is upper-triangular matrix, and $\join{\lambda}{n - 1}$ are
   the numbers of its diagonal. Show that
@@ -60,7 +59,7 @@
 
   Another part of proof follows the book.
   Let $q(z) = (z - \lambda_0) \cdots (z - \lambda_{n - 1})$, then $q(T) = 0$
-  by \ref{T5.40}, thus $q$ is polynomial multiple of the minimal polynomial of $T$,
+  by \ref{a}, thus $q$ is polynomial multiple of the minimal polynomial of $T$,
   thus any zero of the minimal polynomial of $T$ is also a zero of $q$, which means
   it belongs to the list $\join{\lambda}{n - 1}$.
 \end{proof}
@@ -74,7 +73,7 @@
 \begin{proof}
   This proof comes from the book.
 
-  The $(\Rightarrow)$ part follows \ref{T5.41}, $(z - \lambda_0) \cdots (z - \lambda_{m - 1})$
+  The $(\Rightarrow)$ part follows \cref{T5.41}, $(z - \lambda_0) \cdots (z - \lambda_{m - 1})$
   ($\join{\lambda}{m - 1}$ are the numbers in the diagonal) is polynomial multiple of 
   the minimal polynomial of $T$, then the minimal polynomial of $T$
   must in a similar form.

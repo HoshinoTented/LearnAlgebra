@@ -10,6 +10,7 @@ pkgs.mkShellNoCC {
         scheme-medium
         cleveref
         subfiles
+        xecjk
         ;
     })
   ];

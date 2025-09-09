@@ -87,18 +87,18 @@
 \begin{exercise}
   Let $V$ finite and $T \in \LT(V)$ and $v \in V$. Show that:
   \begin{itemize}
-    \item There is a unique monic polymonial $p_v$ with minimal degree such that $p_v(T)v = 0$
-    \item Show that the minimal polymonial of $T$ is polymonial multiple of $p_v$.
+    \item There is a unique monic polynomial $p_v$ with minimal degree such that $p_v(T)v = 0$
+    \item Show that the minimal polynomial of $T$ is polynomial multiple of $p_v$.
   \end{itemize}
 \end{exercise}
 \begin{proof}
   ~
   \begin{itemize}
     \item $p(T)v = 0$, therefore we only need to show the uniqueness.
-          Let $s, t$ a monic polymonial with minimal degree such that $s(T)v = t(T)v = 0$,
-          then $(s - t)(T)v = 0$, therefore $s = t$, otherwise there is a polymonial $s - t$ with lower degree such that $(s - t)(T)v = 0$.
+          Let $s, t$ a monic polynomial with minimal degree such that $s(T)v = t(T)v = 0$,
+          then $(s - t)(T)v = 0$, therefore $s = t$, otherwise there is a polynomial $s - t$ with lower degree such that $(s - t)(T)v = 0$.
     \item We divide $p$ by $p_v$, then $p = s p_v + r$ where $s, r \in \mathcal{P}(F)$
-          and $\deg r < \deg p_v$. Therefore $r = 0$, otherwise $r$ is a lower polymonial
+          and $\deg r < \deg p_v$. Therefore $r = 0$, otherwise $r$ is a lower polynomial
           such that $r(T)v = 0$, which contradict the property of $p_v$.
           Thus $p = sp_v$.
   \end{itemize}
@@ -115,10 +115,10 @@
 \begin{proof}
   ~
   \begin{itemize}
-    \item Note that $p_v(z) = z^2 + 2z + 2$ is a minimal polymonial of $Tv$,
+    \item Note that $p_v(z) = z^2 + 2z + 2$ is a minimal polynomial of $Tv$,
           it is minimal since $p_v$ has no zero, therefore cannot have lower degree.
 
-          Then the minimal polymonial $p$ of $T$ is a polymonial multiple of $p_v$,
+          Then the minimal polynomial $p$ of $T$ is a polynomial multiple of $p_v$,
           thus $p$ is \textbf{NOT} in form of $(z - \lambda_0) \cdots (z - \lambda_{n - 1})$
           since $p_v$ has no zero, thus there is no upper-triangular matrix for $T$ for any basis of $V$.
     \item $- 1 + i$ and $- 1 - i$ are two zeros of $p_v$, thus are zeros of $p$, therefore are
@@ -182,13 +182,13 @@
 \begin{proof}
   ~
   \begin{itemize}
-    \item Since $\mathcal{M}(T)$ is upper-triangular, then the minimal polymonial of $T$
+    \item Since $\mathcal{M}(T)$ is upper-triangular, then the minimal polynomial of $T$
           is in form of $p(z) = (z - \lambda_0) \cdots (z - \lambda_{n - 1})$.
-          Then $p(T\big|_U) = 0$, thus $p$ is polymonial multiple of the minimal polymonial $q$ of $T\big|_U$.
+          Then $p(T\big|_U) = 0$, thus $p$ is polynomial multiple of the minimal polynomial $q$ of $T\big|_U$.
           therefore $q$ is also in form of $(z - \lambda_0) \cdots (z - \lambda_{k - 1})$.
           Thus there is a basis of $U$ such that the matrix of $T\big|_U$ is upper-triangular.
-    \item Let $q$ the minimal polymonial of $T/U$, and $p$ the minimal polymonial of $T$, 
-          then $p$ is polymonial multiple of $q$ (see Exercise 5.25 in E5B).
+    \item Let $q$ the minimal polynomial of $T/U$, and $p$ the minimal polynomial of $T$, 
+          then $p$ is polynomial multiple of $q$ (see Exercise 5.25 in E5B).
           Then follow the same step as last proof.
   \end{itemize}
 \end{proof}
@@ -202,9 +202,9 @@
 \begin{proof}
   We will use the conclusion of Exercise 5.25 in E5B: 
   \[
-  st = (\text{the minimal polymonial of } T\big|_U) \times (\text{the minimal polymonial of } T/U)
+  st = (\text{the minimal polynomial of } T\big|_U) \times (\text{the minimal polynomial of } T/U)
   \]
-  is a polymonial multiple of the minimal polymonial $p$ of $T$.
+  is a polynomial multiple of the minimal polynomial $p$ of $T$.
   Thus $st$ is in form of $(z - \lambda_0) \cdots (z - \lambda_{n - 1})$
   since both $\mathcal{M}(T\big|_U)$ and $\mathcal{M}(T/U)$ are upper-triangular
   for some basis, therefore $p$ is also in form of $(z - \lambda_0) \cdots (z - \lambda_{k - 1})$,
